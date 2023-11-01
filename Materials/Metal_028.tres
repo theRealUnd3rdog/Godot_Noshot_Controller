@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dp2iwbk6t6n6n"]
+
+[ext_resource type="Texture2D" uid="uid://xocsyu6ex0n7" path="res://Textures/Metal028_2K-PNG/Metal028_2K_Color.png" id="1_p6sks"]
+[ext_resource type="Texture2D" uid="uid://xdr7c7dr4bwt" path="res://Textures/Metal028_2K-PNG/Metal028_2K_Metalness.png" id="2_8cwhf"]
+[ext_resource type="Texture2D" uid="uid://b8o5w7tvcxxcf" path="res://Textures/Metal028_2K-PNG/Metal028_2K_NormalGL.png" id="3_jef3s"]
+[ext_resource type="Texture2D" uid="uid://chw67gmf05qbn" path="res://Textures/Metal028_2K-PNG/Metal028_2K_Roughness.png" id="4_wlwle"]
+
+[resource]
+albedo_texture = ExtResource("1_p6sks")
+metallic = 1.0
+metallic_texture = ExtResource("2_8cwhf")
+metallic_texture_channel = 4
+roughness = 0.8
+roughness_texture = ExtResource("4_wlwle")
+normal_enabled = true
+normal_texture = ExtResource("3_jef3s")
+clearcoat_enabled = true
+clearcoat = 0.8
+clearcoat_roughness = 0.47
+anisotropy_enabled = true
+anisotropy = 0.65
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true

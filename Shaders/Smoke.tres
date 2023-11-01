@@ -1,0 +1,43 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://f3v2njei81eu"]
+
+[ext_resource type="Script" path="res://addons/vs_plugin/utility/flipbook.gd" id="1_0w6co"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_6gb6j"]
+parameter_name = "Flipbook_Texture"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_q435n"]
+source = 5
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_jjr5v"]
+default_input_values = [1, 1.0]
+initialized = true
+script = ExtResource("1_0w6co")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D Flipbook_Texture : source_color;
+
+
+
+void fragment() {
+	vec4 n_out4p0;
+// Texture2D:4
+	n_out4p0 = texture(Flipbook_Texture, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out4p0.xyz);
+
+
+}
+"
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_6gb6j")
+nodes/fragment/3/position = Vector2(-440, 220)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_q435n")
+nodes/fragment/4/position = Vector2(60, 100)
+nodes/fragment/5/node = SubResource("VisualShaderNodeCustom_jjr5v")
+nodes/fragment/5/position = Vector2(-440, 80)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 2, 4, 0, 0, 0)

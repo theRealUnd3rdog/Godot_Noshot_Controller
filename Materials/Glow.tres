@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c0f7k2fxpbhru"]
+
+[resource]
+albedo_color = Color(1, 0.313726, 0.247059, 1)
+roughness = 0.47
+emission_enabled = true
+emission = Color(0.94902, 0.584314, 0.376471, 1)
+emission_energy_multiplier = 2.1
+subsurf_scatter_skin_mode = true

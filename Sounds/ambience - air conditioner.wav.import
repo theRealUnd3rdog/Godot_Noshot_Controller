@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cfqac1mv8tg20"
+path="res://.godot/imported/ambience - air conditioner.wav-356689dd4a8395024340105ff75fc55b.sample"
+
+[deps]
+
+source_file="res://Sounds/ambience - air conditioner.wav"
+dest_files=["res://.godot/imported/ambience - air conditioner.wav-356689dd4a8395024340105ff75fc55b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b8kyxrphv01xn"
+path.s3tc="res://.godot/imported/MetalPlates008_2K_NormalDX.jpg-c73ab94558a2acda153f539dacecc151.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_NormalDX.jpg"
+dest_files=["res://.godot/imported/MetalPlates008_2K_NormalDX.jpg-c73ab94558a2acda153f539dacecc151.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_NormalDX.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

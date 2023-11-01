@@ -1,0 +1,26 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://fdx6yjtfayq3"]
+
+[ext_resource type="Texture2D" uid="uid://c1lgvw5k6b7a5" path="res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Color.jpg" id="1_1dsj6"]
+[ext_resource type="Texture2D" uid="uid://x8ewwiff1xea" path="res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Metalness.jpg" id="2_5sbk8"]
+[ext_resource type="Texture2D" uid="uid://koneccwxy6cu" path="res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_NormalGL.jpg" id="3_7hktm"]
+[ext_resource type="Texture2D" uid="uid://bpodlkyjcltr4" path="res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Roughness.jpg" id="4_j1wbd"]
+
+[resource]
+albedo_color = Color(0.588235, 0.588235, 0.588235, 1)
+albedo_texture = ExtResource("1_1dsj6")
+metallic = 1.0
+metallic_specular = 0.25
+metallic_texture = ExtResource("2_5sbk8")
+metallic_texture_channel = 4
+roughness = 0.66
+roughness_texture = ExtResource("4_j1wbd")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("3_7hktm")
+clearcoat_enabled = true
+clearcoat_roughness = 0.39
+anisotropy_enabled = true
+anisotropy = 0.21
+ao_light_affect = 1.0
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true

@@ -1,0 +1,11 @@
+[gd_resource type="Sky" load_steps=3 format=3 uid="uid://bb73jaefiwfku"]
+
+[ext_resource type="Texture2D" uid="uid://1n026oyti3ia" path="res://assets/hdris/sunflowers_puresky_4k.hdr" id="1_1j3w1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1i6yd"]
+panorama = ExtResource("1_1j3w1")
+filter = false
+
+[resource]
+sky_material = SubResource("PanoramaSkyMaterial_1i6yd")
+process_mode = 3
