@@ -7,8 +7,6 @@ This controller is also featured on my Youtube channel [Underdog](https://www.yo
 
 ## System Features
 
-![Alt text](docs/Movement.gif?raw=true)
-
 - Standard First Person Movement mechanics
 - Snappy and smooth
 - Can Crouch, Sprint and Slide
