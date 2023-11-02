@@ -14,6 +14,8 @@ This controller is also featured on my Youtube channel [Underdog](https://www.yo
 - Written in clean C#
 ---
 
+## Graphics
+
 ![Alt text](docs/Graphics.png?raw=true)
 
 - Utilizes Godot 4.1's SDFGI for lighting
