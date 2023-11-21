@@ -22,6 +22,8 @@ public enum CameraState
 
 public partial class PlayerMovement : CharacterBody3D
 {
+	protected FiniteStateMachine fsm = new FiniteStateMachine();
+
 	private Node3D _head;
 	private Node3D _neck;
 	private Node3D _eyes;
@@ -79,8 +81,8 @@ public partial class PlayerMovement : CharacterBody3D
 
 
 	[ExportSubgroup("Sliding")]
-	[Export] private float _slideTimerMax = 1.0f;
-	[Export] private float _slideSpeed = 10.0f;
+	[Export] public float _slideTimerMax = 1.0f;
+	[Export] public float _slideSpeed = 10.0f;
 	public float slideTimer = 0.0f;
 	private Vector2 _slideVector = Vector2.Zero;
 	private Basis _slideBasis;
@@ -134,6 +136,14 @@ public partial class PlayerMovement : CharacterBody3D
 
     public override void _Ready()
     {
+		// Initialize Finite State Machine
+		fsm.Add("Idle", new PlayerIdle(this));
+		fsm.Add("Walking", new PlayerWalking(this));
+		fsm.Add("InAir", new PlayerAir(this));
+		fsm.Add("Sprinting", new PlayerSprinting(this));
+		fsm.Add("Crouching", new PlayerCrouching(this));
+		fsm.Add("Sliding", new PlayerSliding(this));
+
 		_head = GetNode<Node3D>("Mesh/Neck/Head");
 		_eyes = GetNode<Node3D>("Mesh/Neck/Head/Eyes");
 		_neck = GetNode<Node3D>("Mesh/Neck");
@@ -147,11 +157,6 @@ public partial class PlayerMovement : CharacterBody3D
 
 		// Make the mouse confined and within the center of the screen
         Input.MouseMode = Input.MouseModeEnum.Captured;
-    }
-
-    public override void _ExitTree()
-    {
-
     }
 
     public override void _Input(InputEvent @event)
@@ -197,6 +202,8 @@ public partial class PlayerMovement : CharacterBody3D
 
     public override void _Process(double delta)
     {
+		fsm.ExecuteProcess((float)delta);
+
 		HandleRotation((float)delta);
 
 		if (Input.IsKeyPressed(Key.R) && _resetPosition != null)
@@ -269,6 +276,8 @@ public partial class PlayerMovement : CharacterBody3D
 				_animationLabel.Text = "ANIMATION: " + node.GetCurrentNode();
 			}
 		}
+
+		fsm.ExecuteStatePhysics((float)delta);
 
 		// Crouching
 		if ((Input.IsActionPressed("crouch") || moveState == MovementState.Sliding) && IsOnFloor())

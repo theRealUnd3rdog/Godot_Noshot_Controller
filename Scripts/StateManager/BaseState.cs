@@ -1,19 +1,13 @@
 using Godot;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
-public abstract class BaseState<EState> where EState : Enum
+public class BaseState
 {
-    public BaseState(EState key)
-    {
-        StateKey = key;
-    }
-
-    public EState StateKey {get; private set;}
-
-    public abstract void EnterState();
-    public abstract void ExitState();
-    public abstract void UpdateState();
-    public abstract EState GetNextState();
+    public FiniteStateMachine fsm;
+    
+    public virtual void Enter(BaseState previous = null) {}
+    public virtual void Exit() {}
+    public virtual void Process(float delta) {}
+    public virtual void PhysicsProcess(float delta) {}
+    public virtual void InputProcess(InputEvent @event) {}
 }
