@@ -22,6 +22,7 @@ public enum CameraState
 
 public partial class PlayerMovement : CharacterBody3D
 {
+	public GodotParadiseFiniteStateMachine FSM;
 	private Node3D _head;
 	private Node3D _neck;
 	private Node3D _eyes;
@@ -134,6 +135,8 @@ public partial class PlayerMovement : CharacterBody3D
 
     public override void _Ready()
     {
+		FSM = GetNode<GodotParadiseFiniteStateMachine>("FSM");
+
 		_head = GetNode<Node3D>("Mesh/Neck/Head");
 		_eyes = GetNode<Node3D>("Mesh/Neck/Head/Eyes");
 		_neck = GetNode<Node3D>("Mesh/Neck");
@@ -149,11 +152,6 @@ public partial class PlayerMovement : CharacterBody3D
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
 
-    public override void _ExitTree()
-    {
-
-    }
-
     public override void _Input(InputEvent @event)
     {
 		// Mouse movement on camera
@@ -163,41 +161,24 @@ public partial class PlayerMovement : CharacterBody3D
 			{
 				if (moveState == MovementState.Sliding)
 				{
-					// DO SOME ADDITIONAL CLAMPS LATER IN THE FUTURE
-					RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.X * mouseSensitivityX));
-
-					_rotationX += Mathf.DegToRad(-eventMouseMotion.Relative.Y * mouseSensitivityY);
-					_rotationX = Mathf.Clamp(_rotationX, Mathf.DegToRad(-89f), Mathf.DegToRad(89f));
-
-					_rotationZ += Mathf.DegToRad(eventMouseMotion.Relative.X * mouseSensitivityX);
-					_rotationZ = Mathf.Clamp(_rotationZ, Mathf.DegToRad(-5f), Mathf.DegToRad(5f));
+					RotatePlayer(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y);
 				}
 				else
 				{
-					_neck.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.X * mouseSensitivityX));
-
-					float neckClampedRotation = Mathf.Clamp(_neck.Rotation.Y, Mathf.DegToRad(-120f), Mathf.DegToRad(120));
-					Vector3 neckRotation = new Vector3(_neck.Rotation.X, neckClampedRotation, _neck.Rotation.Z);
-					_neck.Rotation = neckRotation;
+					FreeLookRotation(eventMouseMotion.Relative.X);
 				}
 			}
 			// Rotate player like normal
 			else
 			{
-				RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.X * mouseSensitivityX));
-
-				_rotationX += Mathf.DegToRad(-eventMouseMotion.Relative.Y * mouseSensitivityY);
-				_rotationX = Mathf.Clamp(_rotationX, Mathf.DegToRad(-89f), Mathf.DegToRad(89f));
-
-				_rotationZ += Mathf.DegToRad(eventMouseMotion.Relative.X * mouseSensitivityX * inputDirection.Length());
-				_rotationZ = Mathf.Clamp(_rotationZ, Mathf.DegToRad(-_zClamp), Mathf.DegToRad(_zClamp));
+				RotatePlayer(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y);
 			}
 		}
     }
 
     public override void _Process(double delta)
     {
-		HandleRotation((float)delta);
+		HandleZRotation((float)delta);
 
 		if (Input.IsKeyPressed(Key.R) && _resetPosition != null)
 			GlobalPosition = _resetPosition.GlobalPosition;
@@ -234,7 +215,27 @@ public partial class PlayerMovement : CharacterBody3D
 		_stateLabel.Text = $"STATE: {moveState}";
     }
 
-	private void HandleRotation(float delta)
+	private void RotatePlayer(float mouseX, float mouseY)
+	{
+		RotateY(Mathf.DegToRad(-mouseX * mouseSensitivityX));
+
+		_rotationX += Mathf.DegToRad(-mouseY * mouseSensitivityY);
+		_rotationX = Mathf.Clamp(_rotationX, Mathf.DegToRad(-89f), Mathf.DegToRad(89f));
+
+		_rotationZ += Mathf.DegToRad(mouseX * mouseSensitivityX * inputDirection.Length());
+		_rotationZ = Mathf.Clamp(_rotationZ, Mathf.DegToRad(-_zClamp), Mathf.DegToRad(_zClamp));
+	}
+
+	private void FreeLookRotation(float mouseX)
+	{
+		_neck.RotateY(Mathf.DegToRad(-mouseX * mouseSensitivityX));
+
+		float neckClampedRotation = Mathf.Clamp(_neck.Rotation.Y, Mathf.DegToRad(-120f), Mathf.DegToRad(120));
+		Vector3 neckRotation = new Vector3(_neck.Rotation.X, neckClampedRotation, _neck.Rotation.Z);
+		_neck.Rotation = neckRotation;
+	}
+
+	private void HandleZRotation(float delta)
 	{
 		_rotationZ = Mathf.Lerp(_rotationZ, 0f, delta * _zRotationLerp);
 
@@ -244,7 +245,7 @@ public partial class PlayerMovement : CharacterBody3D
 
 		_head.RotateObjectLocal(Vector3.Right, _rotationX);
 		_head.RotateObjectLocal(Vector3.Forward, _rotationZ);
-	}   
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{

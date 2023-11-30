@@ -14,6 +14,9 @@ res://Shaders/ChromaticAbberation.gdshader
 res://Shaders/RadialBlur.gdshader
 res://Shaders/Smoke.tres
 res://addons/vs_plugin/utility/flipbook.gdshader
+res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs
+res://addons/finite_state_machine/GodotParadiseFSMPlugin.cs
+res://addons/finite_state_machine/GodotParadiseState.cs
 res://addons/GDMEC/Timing.cs
 res://Scripts/AudioConditionPlayer.cs
 res://Scripts/AudioGroupPlayer.cs
@@ -25,6 +28,13 @@ res://Scripts/LensFlareCheck.cs
 res://Scripts/MotionBlur.cs
 res://Scripts/NewStepper.cs
 res://Scripts/PlayerMovement.cs
+res://Scripts/PlayerMovementStates/PlayerAir.cs
+res://Scripts/PlayerMovementStates/PlayerCrouch.cs
+res://Scripts/PlayerMovementStates/PlayerIdle.cs
+res://Scripts/PlayerMovementStates/PlayerMovementState.cs
+res://Scripts/PlayerMovementStates/PlayerSlide.cs
+res://Scripts/PlayerMovementStates/PlayerSprint.cs
+res://Scripts/PlayerMovementStates/PlayerWalk.cs
 res://Scripts/PlayerParticles.cs
 res://Scripts/PlayerPostProcessing.cs
 res://Scripts/PlayerShaker.cs

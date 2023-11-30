@@ -31,6 +31,10 @@ window/screen_space_roughness_limiter/enabled=false
 
 project/assembly_name="FirstGodotProject"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/finite_state_machine/plugin.cfg")
+
 [input]
 
 forward={

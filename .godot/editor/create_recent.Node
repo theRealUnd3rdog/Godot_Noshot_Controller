@@ -1,3 +1,11 @@
+PlayerSlide
+PlayerCrouch
+PlayerAir
+PlayerIdle
+PlayerSprint
+PlayerWalk
+GodotParadiseFiniteStateMachine
+Node
 RayCast3D
 CSGBox3D
 Node3D
@@ -23,10 +31,3 @@ AudioStreamPlayer2D
 AudioListener3D
 SpotLight3D
 Label3D
-Sprite3D
-Label
-RichTextLabel
-Panel
-CyclopsBlocks
-AnimationPlayer
-Camera3D

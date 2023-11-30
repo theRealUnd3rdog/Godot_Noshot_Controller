@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=3 uid="uid://k0g8l20jpn5l"]
+[gd_scene load_steps=163 format=3 uid="uid://k0g8l20jpn5l"]
 
 [ext_resource type="Material" uid="uid://ntptsm338blc" path="res://Materials/Brick_023.tres" id="1_0udfd"]
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="2_buung"]
@@ -21,14 +21,21 @@
 [ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3" id="12_t4b2k"]
 [ext_resource type="AudioStream" uid="uid://b8r2advmi4wgo" path="res://Sounds/Sliding_Start.wav" id="14_emvrv"]
 [ext_resource type="Script" path="res://Scripts/PlayerAudio.cs" id="14_qnrjr"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="15_1073p"]
 [ext_resource type="AudioStream" uid="uid://dkomonpu17na4" path="res://Sounds/Footsteps/Step_Concrete_01.wav" id="15_t83vw"]
 [ext_resource type="AudioStream" uid="uid://c33tjboynwb3v" path="res://Sounds/Sliding_Loop.wav" id="15_uhtwc"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerIdle.cs" id="16_ih01m"]
 [ext_resource type="Script" path="res://Scripts/AudioConditionPlayer.cs" id="16_usjuj"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWalk.cs" id="17_kvekw"]
 [ext_resource type="Script" path="res://Scripts/MotionBlur.cs" id="17_m4qlm"]
 [ext_resource type="AudioStream" uid="uid://crltxvt02ial0" path="res://Sounds/Footsteps/Step_Concrete_03.wav" id="17_xklfo"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSprint.cs" id="18_gq383"]
 [ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="18_ubo3h"]
 [ext_resource type="AudioStream" uid="uid://br4q8mftvwkcm" path="res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3" id="19_0mout"]
 [ext_resource type="Script" path="res://Scripts/AudioGroupPlayer.cs" id="19_3nwiw"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerAir.cs" id="19_ouu2s"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="20_defkf"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="21_fwljj"]
 [ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="22_bhw4s"]
 [ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="23_jghgi"]
 [ext_resource type="Script" path="res://Scripts/PlayerShaker.cs" id="23_wh8u3"]
@@ -138,6 +145,7 @@ shader_parameter/linear_velocity = null
 
 [sub_resource type="SystemFont" id="SystemFont_f244o"]
 font_names = PackedStringArray("Evil Empire")
+subpixel_positioning = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q80lt"]
 
@@ -2063,6 +2071,7 @@ material = SubResource("FogMaterial_d1576")
 [node name="ResetPos" type="Node3D" parent="."]
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "_ceilingRay", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00932312, 0, 0.212681)
 collision_mask = 15
 floor_max_angle = 1.13446
@@ -2089,6 +2098,28 @@ _speedLabel = NodePath("../UI/PostProcessingManager/UI/Velocity")
 _momentumLabel = NodePath("../UI/PostProcessingManager/UI/Momentum")
 _stateLabel = NodePath("../UI/PostProcessingManager/UI/State")
 _animationLabel = NodePath("../UI/PostProcessingManager/UI/Animation")
+
+[node name="FSM" type="Node" parent="Player" node_paths=PackedStringArray("CurrentState")]
+script = ExtResource("15_1073p")
+CurrentState = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" type="Node" parent="Player/FSM"]
+script = ExtResource("16_ih01m")
+
+[node name="PlayerWalk" type="Node" parent="Player/FSM"]
+script = ExtResource("17_kvekw")
+
+[node name="PlayerSprint" type="Node" parent="Player/FSM"]
+script = ExtResource("18_gq383")
+
+[node name="PlayerAir" type="Node" parent="Player/FSM"]
+script = ExtResource("19_ouu2s")
+
+[node name="PlayerCrouch" type="Node" parent="Player/FSM"]
+script = ExtResource("20_defkf")
+
+[node name="PlayerSlide" type="Node" parent="Player/FSM"]
+script = ExtResource("21_fwljj")
 
 [node name="Standing_collision_shape" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -2134,6 +2165,7 @@ _smoothSpeed = 50.0
 
 [node name="Motion_Blur" type="MeshInstance3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D/PostProcessing"]
 transform = Transform3D(0.970132, 0, 0, 0, -2.0539e-08, -0.469877, 0, 0.469877, -2.0539e-08, 0, -0.00364721, -0.145425)
+visible = false
 material_override = SubResource("ShaderMaterial_xog28")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_ws75k")
