@@ -35,25 +35,26 @@ public partial class PlayerAudio : Node3D
 
     public override void _Ready()
     {
-		PlayerMovement.LastVelocityChangeLanded += PlayAudioLandCondition;
+		CollisionChecker.OnGroupChange += GetStepGroup;
+		PlayerAir.LastVelocityChangeLanded += PlayAudioLandCondition;
 
-		PlayerMovement.SlideStartChange += PlaySlideSound;
-		PlayerMovement.SlideCurrentChange += PlaySlideLoop;
+		PlayerSlide.SlideStartChange += PlaySlideSound;
+		PlayerSlide.SlideCurrentChange += PlaySlideLoop;
 
 		PlayerMovement.VelocityChange += PlayWindVelocity;
 		
-		CollisionChecker.OnGroupChange += GetStepGroup;
+		
     }
 
     public override void _ExitTree()
     {
-        PlayerMovement.LastVelocityChangeLanded -= PlayAudioLandCondition;
-		PlayerMovement.SlideStartChange -= PlaySlideSound;
-		PlayerMovement.SlideCurrentChange -= PlaySlideLoop;
+		CollisionChecker.OnGroupChange -= GetStepGroup;
+
+        PlayerAir.LastVelocityChangeLanded -= PlayAudioLandCondition;
+		PlayerSlide.SlideStartChange -= PlaySlideSound;
+		PlayerSlide.SlideCurrentChange -= PlaySlideLoop;
 
 		PlayerMovement.VelocityChange -= PlayWindVelocity;
-
-		CollisionChecker.OnGroupChange -= GetStepGroup;
     }
 
     public override void _Process(double delta)
@@ -165,9 +166,6 @@ public partial class PlayerAudio : Node3D
 
 	private void PlayAudioLandCondition(Vector3 lastVelocity)
 	{
-		if (_land.Playing)
-			return;
-
 		foreach (AudioConditionPlayer player in _landPlayers)
 		{
 			if (Mathf.Abs(lastVelocity.Y) > player.value)

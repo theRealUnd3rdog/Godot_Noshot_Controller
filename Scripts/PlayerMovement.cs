@@ -4,16 +4,6 @@ using MEC;
 using System;
 using System.Diagnostics;
 
-public enum MovementState
-{
-	Idle,
-	Walking,
-	InAir,
-	Sprinting,
-	Crouching,
-	Sliding,
-}
-
 public enum CameraState
 {
 	Normal,
@@ -34,27 +24,23 @@ public partial class PlayerMovement : CharacterBody3D
 	[Export] private AnimationTree _animator;
 	[Export] private bool _physicsInterpolate = true;
 
-	// States
-	public MovementState moveState;
-	public MovementState movementState;
 	public CameraState camState;
 
 	[ExportCategory("Movement")]
-	[Export] private float _walkingSpeed = 5.0f;
-	[Export] private float _sprintingSpeed = 8.0f;
+	[Export] public float walkingSpeed {private set; get;} = 5.0f;
+	[Export] public float sprintingSpeed {private set; get;} = 8.0f;
 	
 	[Export] private float _jumpVelocity = 4.5f;
-	[Export] private float _lerpSpeed = 10.0f; // Gradually changes a value. (Adding smoothing to values)
+	[Export] public float lerpSpeed {private set; get;} = 10.0f; // Gradually changes a value. (Adding smoothing to values)
 	[Export] private float _airLerpSpeed = 3.0f;
 
 	// private movements
 	public float currentSpeed = 5.0f;
-	private float _momentum = 0.0f;
+	public float momentum {set; get;} = 0.0f;
 	public float airTime = 0.0f;
 	public Vector3 direction = Vector3.Zero;
-	public Vector3 _lastVelocity = Vector3.Zero;
 	public Vector2 inputDirection = Vector2.Zero;
-	private Array<StringName> _groups = new Array<StringName>();
+	public Vector3 lastVelocity = Vector3.Zero;
 
 	// private rotations
 	private float _rotationX = 0f;
@@ -65,27 +51,24 @@ public partial class PlayerMovement : CharacterBody3D
 	[Export] private float _zClamp = 5f;
 
 	// Events
-	public static event Action<Vector3> LastVelocityChangeLanded; // Event that keeps track of the last velocity when landed
-	public static event Action SlideStartChange; // Event that fires whenever a slide has started
-	public static event Action<float> SlideCurrentChange; // Event that constantly fires returning the timer
 	public static event Action<Vector3> VelocityChange; // Event that constantly fires when velocity changes
 
 
 	[ExportSubgroup("Crouching")]
 	[Export] private CollisionShape3D _crouchingCollider;
 	[Export] private RayCast3D _ceilingRay;
-	[Export] private float _crouchingSpeed = 3.0f;
+	[Export] public float crouchingSpeed {private set; get;} = 3.0f;
 	[Export(PropertyHint.Range, "0.25f, 0.75f")] private float _crouchingDepth = 0.5f;
 	private float _initialDepth;
 
 
 	[ExportSubgroup("Sliding")]
-	[Export] private float _slideTimerMax = 1.0f;
-	[Export] private float _slideSpeed = 10.0f;
+	[Export] public float slideTimerMax {private set; get;} = 1.0f;
+	[Export] public float slideSpeed  {private set; get;}= 10.0f;
 	public float slideTimer = 0.0f;
-	private Vector2 _slideVector = Vector2.Zero;
-	private Basis _slideBasis;
-	private float _initialRotationY;
+	public Vector2 slideVector = Vector2.Zero;
+	public Basis slideBasis;
+	public float initialRotationY;
 
 
 	[ExportSubgroup("Head Bobbing")]
@@ -124,9 +107,11 @@ public partial class PlayerMovement : CharacterBody3D
 	[Export] private Label _momentumLabel;
 	[Export] private Label _stateLabel;
 	[Export] private Label _animationLabel;
+	[Export] private Label _desiredSpeedLabel;
+	[Export] private Label _previousStateLabel;
 
 	// inputs
-	private bool _sprintAction;
+	public bool sprintAction {private set; get;}
 	private bool _previousSprintAction;
 
 
@@ -159,7 +144,7 @@ public partial class PlayerMovement : CharacterBody3D
 		{
 			if (camState == CameraState.Freelooking)
 			{
-				if (moveState == MovementState.Sliding)
+				if (FSM.CurrentState is PlayerSlide)
 				{
 					RotatePlayer(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y);
 				}
@@ -211,8 +196,10 @@ public partial class PlayerMovement : CharacterBody3D
 			return;
 
 		_speedLabel.Text = $"VELOCITY: {Mathf.Round(Velocity.Length())}";
-		_momentumLabel.Text = $"MOMENTUM: {Mathf.Round(_momentum)}";
-		_stateLabel.Text = $"STATE: {moveState}";
+		_momentumLabel.Text = $"MOMENTUM: {Mathf.Round(momentum)}";
+		_stateLabel.Text = $"STATE: {FSM.CurrentState.Name}";
+		_desiredSpeedLabel.Text = $"DESIRED SPEED: {Mathf.Round(currentSpeed)}";
+		_previousStateLabel.Text = $"PREVIOUS STATE: {FSM.PreviousState.Name}";
     }
 
 	private void RotatePlayer(float mouseX, float mouseY)
@@ -247,6 +234,25 @@ public partial class PlayerMovement : CharacterBody3D
 		_head.RotateObjectLocal(Vector3.Forward, _rotationZ);
 	}
 
+	private void HandleAnimation()
+	{
+		if (_animator != null)
+		{
+			_animator.Set("parameters/moveState/conditions/idle", FSM.CurrentState is PlayerIdle || inputDirection.Length() <= 0.1f);
+			_animator.Set("parameters/moveState/conditions/moving", IsOnFloor() && (FSM.CurrentState is PlayerWalk 
+						|| FSM.CurrentState is PlayerSprint || FSM.CurrentState is PlayerCrouch) && Velocity.Length() > 0.1f);
+			
+			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && IsOnFloor() && !_ceilingRay.IsColliding());
+			_animator.Set("parameters/moveState/conditions/inAir", FSM.CurrentState is PlayerAir);
+
+			if (_animationLabel != null)
+			{
+				AnimationNodeStateMachinePlayback node = (AnimationNodeStateMachinePlayback)_animator.Get("parameters/moveState/playback");
+				_animationLabel.Text = "ANIMATION: " + node.GetCurrentNode();
+			}
+		}
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 depth;
@@ -255,53 +261,16 @@ public partial class PlayerMovement : CharacterBody3D
 
 		VelocityChange?.Invoke(Velocity);
 
-		if (_animator != null)
-		{
-			_animator.Set("parameters/moveState/conditions/idle", moveState == MovementState.Idle || inputDirection.Length() <= 0.1f);
-			_animator.Set("parameters/moveState/conditions/moving", IsOnFloor() && (moveState == MovementState.Walking 
-						|| moveState == MovementState.Sprinting || moveState == MovementState.Crouching) && Velocity.Length() > 0.1f);
-			
-			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && IsOnFloor() && !_ceilingRay.IsColliding());
-			_animator.Set("parameters/moveState/conditions/inAir", moveState == MovementState.InAir);
-
-			if (_animationLabel != null)
-			{
-				AnimationNodeStateMachinePlayback node = (AnimationNodeStateMachinePlayback)_animator.Get("parameters/moveState/playback");
-				_animationLabel.Text = "ANIMATION: " + node.GetCurrentNode();
-			}
-		}
+		HandleAnimation();
 
 		// Crouching
-		if ((Input.IsActionPressed("crouch") || moveState == MovementState.Sliding) && IsOnFloor())
+		if ((FSM.CurrentState is PlayerCrouch || FSM.CurrentState is PlayerSlide) && IsOnFloor())
 		{
 			_standingCollider.Disabled = true;
 			_crouchingCollider.Disabled = false;
 
-			currentSpeed = Mathf.Lerp(currentSpeed, _crouchingSpeed, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
 			depth = new Vector3(_head.Position.X, _initialDepth - _crouchingDepth, _head.Position.Z);
-			_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
-
-			// Sliding
-			if ((moveState == MovementState.Sprinting || moveState == MovementState.InAir && _previousSprintAction) && inputDir != Vector2.Zero && IsOnFloor())
-			{
-				moveState = MovementState.Sliding;
-				camState = CameraState.Freelooking;
-
-				SlideStartChange?.Invoke();
-
-				_slideVector = inputDir;
-				_slideBasis = Transform.Basis;
-				_initialRotationY = Rotation.Y;
-
-				// Get slide momentum
-				_momentum = Velocity.Length();
-
-				slideTimer = _slideTimerMax;
-			}
-			else if (slideTimer <= 0f)
-			{
-				moveState = MovementState.Crouching;
-			}
+			_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 		}
 
 		// Standing
@@ -311,51 +280,29 @@ public partial class PlayerMovement : CharacterBody3D
 			_crouchingCollider.Disabled = true;
 
 			depth = new Vector3(_head.Position.X, _initialDepth, _head.Position.Z);
-			_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
+			_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 
 			// reduce momentum here and place momentum on top of sprintingSpeed
-			if (moveState != MovementState.Sliding && _momentum >= 0)
-				_momentum -= (float)delta * (_slideSpeed);
+			if (FSM.CurrentState is not PlayerSlide && momentum >= 0)
+				momentum -= (float)delta * (slideSpeed);
 
-			_sprintAction = _previousSprintAction;
+			sprintAction = _previousSprintAction;
 
 			if (IsOnFloor())
-				_sprintAction = Input.IsActionPressed("sprint");
-
-			// Sprinting
-			if (_sprintAction)
-			{
-				currentSpeed = Mathf.Lerp(currentSpeed, _sprintingSpeed + (_momentum / 2), 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
-
-				if (IsOnFloor())
-					moveState = MovementState.Sprinting;
-			}
-			//Walking
-			else
-			{
-				currentSpeed = Mathf.Lerp(currentSpeed, _walkingSpeed, 1.0f - Mathf.Pow(0.5f, (float)delta *  _lerpSpeed));
-
-				if (IsOnFloor())
-				{
-					if (inputDir != Vector2.Zero)
-						moveState = MovementState.Walking;
-					else
-						moveState = MovementState.Idle;
-				}
-			}
+				sprintAction = Input.IsActionPressed("sprint");
 		}
 
 		// Handle free looking
-		if (Input.IsActionPressed("free_look") || moveState == MovementState.Sliding)
+		if (Input.IsActionPressed("free_look") || FSM.CurrentState is PlayerSlide)
 		{
 			camState = CameraState.Freelooking;
 
 			// Slide Tilt
-			if (moveState == MovementState.Sliding)
+			if (FSM.CurrentState is PlayerSlide)
 			{
 				Vector3 eyeRotation = _eyes.Rotation;
 				eyeRotation.Z = -Mathf.DegToRad(7f);
-				_eyes.Rotation = _eyes.Rotation.Lerp(eyeRotation, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
+				_eyes.Rotation = _eyes.Rotation.Lerp(eyeRotation, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 			}
 			else
 			{
@@ -370,42 +317,26 @@ public partial class PlayerMovement : CharacterBody3D
 			camState = CameraState.Normal;
 
 			Vector3 neckRot = new Vector3(_neck.Rotation.X, 0f, _neck.Rotation.Z);
-			_neck.Rotation = _neck.Rotation.Lerp(neckRot, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
+			_neck.Rotation = _neck.Rotation.Lerp(neckRot, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 
 			Vector3 eyeRot = new Vector3(_eyes.Rotation.X, _eyes.Rotation.Y, 0f);
-			_eyes.Rotation = _eyes.Rotation.Lerp(eyeRot, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
-		}
-
-		// Handle slide timer
-		if (moveState == MovementState.Sliding)
-		{
-			// Get the extra momentum from the slide
-			slideTimer -= (float)delta;
-
-			if (slideTimer <= 0f || !IsOnFloor())
-			{
-				slideTimer = 0f;
-
-				camState = CameraState.Normal;
-			}
-
-			SlideCurrentChange?.Invoke(slideTimer);
+			_eyes.Rotation = _eyes.Rotation.Lerp(eyeRot, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 		}
 
 		// Handle head bob
-		switch (moveState)
+		switch (FSM.CurrentState)
 		{
-			case MovementState.Walking:
+			case PlayerWalk:
 				_headBobCurrentIntensity = _headBobWalkIntensity;
 				_headBobIndex += _headBobWalkingSpeed * (float)delta;
 				break;
 			
-			case MovementState.Sprinting:
+			case PlayerSprint:
 				_headBobCurrentIntensity = _headBobSprintIntensity;
 				_headBobIndex += _headBobSprintSpeed * (float)delta;
 				break;
 			
-			case MovementState.Crouching:
+			case PlayerCrouch:
 				_headBobCurrentIntensity = _headBobCrouchIntensity;
 				_headBobIndex += _headBobCrouchSpeed* (float)delta;
 				break;
@@ -414,7 +345,7 @@ public partial class PlayerMovement : CharacterBody3D
 				break;
 		}
 
-		if (IsOnFloor() && moveState != MovementState.Sliding && inputDir != Vector2.Zero)
+		if (IsOnFloor() && FSM.CurrentState is not PlayerSlide && inputDir != Vector2.Zero)
 		{
 			Vector2 headBob;
 
@@ -424,28 +355,17 @@ public partial class PlayerMovement : CharacterBody3D
 			_headBobVector = headBob;
 			
 			Vector3 eyes = _eyes.Position;
-
-			/* float targetY = _headBobVector.Y * (_headBobCurrentIntensity / 2.0f);
-
-			// Define a threshold for proximity check
-			float threshold = 0.01f; // Adjust this threshold as needed
 			
-
-			if (Mathf.Abs(eyes.Y) > targetY - threshold)
-			{
-    			// Trigger your action when eyes.Y is approximately equal to targetY
-			} */
-			
-			eyes.Y = Mathf.Lerp(eyes.Y, _headBobVector.Y * (_headBobCurrentIntensity / 2.0f), 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
-			eyes.X = Mathf.Lerp(eyes.X, _headBobVector.X * _headBobCurrentIntensity, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
+			eyes.Y = Mathf.Lerp(eyes.Y, _headBobVector.Y * (_headBobCurrentIntensity / 2.0f), 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+			eyes.X = Mathf.Lerp(eyes.X, _headBobVector.X * _headBobCurrentIntensity, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 
 			_eyes.Position = eyes;
 		}
 		else
 		{
 			Vector3 eyes = _eyes.Position;
-			eyes.Y = Mathf.Lerp(eyes.Y, 0.0f, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
-			eyes.X = Mathf.Lerp(eyes.X, 0.0f, 1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
+			eyes.Y = Mathf.Lerp(eyes.Y, 0.0f, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+			eyes.X = Mathf.Lerp(eyes.X, 0.0f, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 
 			_eyes.Position = eyes;
 		}
@@ -456,37 +376,10 @@ public partial class PlayerMovement : CharacterBody3D
 		if (!IsOnFloor())
 			velocity.Y -= gravity * (float)delta;
 
-		// Change movement state to inAir and increase airtime
-		if (!IsOnFloor() && Mathf.Abs(Velocity.Y) > 0.1f)
-		{
-			moveState = MovementState.InAir;
-			airTime += (float)delta;
-		}	
-
 		// Handle Jump.
 		if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_ceilingRay.IsColliding())
 		{
 			velocity.Y = _jumpVelocity;
-
-			// Reset slide timer
-			slideTimer = 0f;
-
-			if (_animator != null)
-			{
-				
-				//_animator.Play("jump");
-			}
-		}
-
-		// Handle landing
-		if (IsOnFloor())
-		{
-			airTime = 0f;
-
-			if (Mathf.Abs(_lastVelocity.Y) > 0.1f)
-			{
-				LastVelocityChangeLanded?.Invoke(_lastVelocity);
-			}
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -495,7 +388,7 @@ public partial class PlayerMovement : CharacterBody3D
 		if (IsOnFloor())
 		{
 			direction = direction.Lerp((Transform.Basis * new Vector3(inputDir.X, 0f, inputDir.Y)).Normalized(), 
-				1.0f - Mathf.Pow(0.5f, (float)delta * _lerpSpeed));
+				1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 		}
 		else
 		{
@@ -506,15 +399,6 @@ public partial class PlayerMovement : CharacterBody3D
 				direction = direction.Lerp((Transform.Basis * new Vector3(inputDir.X, 0f, inputDir.Y)).Normalized(), 
 					1.0f - Mathf.Pow(0.5f, (float)delta * _airLerpSpeed));
 			}
-		}
-
-
-		if (moveState == MovementState.Sliding)
-		{
-			direction = (_slideBasis * new Vector3(_slideVector.X, 0f, _slideVector.Y)).Normalized();
-
-			currentSpeed = (slideTimer + 0.1f) * _slideSpeed;
-			currentSpeed = (slideTimer + 0.1f) * _slideSpeed;
 		}
 
 		if (direction != Vector3.Zero)
@@ -531,9 +415,9 @@ public partial class PlayerMovement : CharacterBody3D
 		Velocity = velocity;
 
 		_lastPhysicsPos = GlobalTransform.Origin;
-
-		_lastVelocity = velocity;
-		_previousSprintAction = _sprintAction;
+		lastVelocity = velocity;
+		
+		_previousSprintAction = sprintAction;
 		MoveAndSlide();
 	}
 }

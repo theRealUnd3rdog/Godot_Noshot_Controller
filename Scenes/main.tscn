@@ -14,7 +14,7 @@
 [ext_resource type="Shader" path="res://Shaders/CustomMotionBlur.gdshader" id="7_8eu1m"]
 [ext_resource type="Texture2D" uid="uid://ca74vr1r8xb2" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png" id="8_6mld0"]
 [ext_resource type="Script" path="res://Scripts/ScreenShake/CamShake.cs" id="8_8jcbx"]
-[ext_resource type="Texture2D" uid="uid://0by3punu7v0y" path="res://Underdog_logo.png" id="8_vhddd"]
+[ext_resource type="Texture2D" uid="uid://0by3punu7v0y" path="res://defaults/Underdog_logo.png" id="8_hsa46"]
 [ext_resource type="Texture2D" uid="uid://dd53cr7ij30yd" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png" id="9_6kb7u"]
 [ext_resource type="Script" path="res://Scripts/Stats.cs" id="10_6u0gq"]
 [ext_resource type="Texture2D" uid="uid://bopb2fir8dyh7" path="res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png" id="10_a7dfo"]
@@ -605,7 +605,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ni3y"]
 priority = 3
 advance_mode = 2
-advance_expression = "abs(_lastVelocity.y) > 0.1 && is_on_floor()"
+advance_expression = "abs(lastVelocity.y) > 0.1 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ypmx6"]
 switch_mode = 2
@@ -613,7 +613,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rnysl"]
 advance_mode = 2
-advance_expression = "abs(_lastVelocity.y) > 10 && is_on_floor()"
+advance_expression = "abs(lastVelocity.y) > 10 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbk3i"]
 switch_mode = 2
@@ -622,7 +622,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4il3p"]
 priority = 2
 advance_mode = 2
-advance_expression = "abs(_lastVelocity.y) > 7 && is_on_floor()"
+advance_expression = "abs(lastVelocity.y) > 7 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_adj0t"]
 switch_mode = 2
@@ -804,10 +804,10 @@ states/move/position = Vector2(403, 81)
 states/sliding/node = SubResource("AnimationNodeStateMachine_m7npm")
 states/sliding/position = Vector2(187, -44)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku")]
-graph_offset = Vector2(-40, -193)
+graph_offset = Vector2(-59, -194)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_osdti"]
-graph_offset = Vector2(-286.1, 132.4)
+graph_offset = Vector2(-352, 170)
 nodes/moveState/node = SubResource("AnimationNodeStateMachine_4ibcj")
 nodes/moveState/position = Vector2(-220, 120)
 node_connections = [&"output", 0, &"moveState"]
@@ -1988,7 +1988,7 @@ autoplay = true
 [node name="NOSHOT" type="Decal" parent="Stage/Decals"]
 transform = Transform3D(1.90673, 0, 0, 0, -8.33457e-08, -1.90673, 0, 1.90673, -8.33457e-08, -23.6581, -0.191527, -13.9022)
 size = Vector3(8, 2, 2)
-texture_albedo = ExtResource("8_vhddd")
+texture_albedo = ExtResource("8_hsa46")
 emission_energy = 17.15
 modulate = Color(0.27451, 0.27451, 0.27451, 1)
 albedo_mix = 0.75
@@ -2070,7 +2070,7 @@ material = SubResource("FogMaterial_d1576")
 
 [node name="ResetPos" type="Node3D" parent="."]
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "_ceilingRay", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel")]
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "_ceilingRay", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00932312, 0, 0.212681)
 collision_mask = 15
@@ -2080,12 +2080,13 @@ script = ExtResource("7_6oseo")
 _resetPosition = NodePath("../ResetPos")
 _standingCollider = NodePath("Standing_collision_shape")
 _animator = NodePath("AnimationTree")
-_sprintingSpeed = 11.0
+sprintingSpeed = 11.0
 _jumpVelocity = 5.7
-_zClamp = 3.0
+_zRotationLerp = 0.0
+_zClamp = 0.0
 _crouchingCollider = NodePath("Crouching_collision_shape")
 _ceilingRay = NodePath("CeilingRay")
-_slideSpeed = 20.0
+slideSpeed = 20.0
 mouseSensitivityX = 0.25
 mouseSensitivityY = 0.2
 _freeLookTilt = 8.0
@@ -2098,6 +2099,8 @@ _speedLabel = NodePath("../UI/PostProcessingManager/UI/Velocity")
 _momentumLabel = NodePath("../UI/PostProcessingManager/UI/Momentum")
 _stateLabel = NodePath("../UI/PostProcessingManager/UI/State")
 _animationLabel = NodePath("../UI/PostProcessingManager/UI/Animation")
+_desiredSpeedLabel = NodePath("../UI/PostProcessingManager/UI/Desired Speed")
+_previousStateLabel = NodePath("../UI/PostProcessingManager/UI/Previous State")
 
 [node name="FSM" type="Node" parent="Player" node_paths=PackedStringArray("CurrentState")]
 script = ExtResource("15_1073p")
@@ -2207,7 +2210,7 @@ collision_mask = 14
 script = ExtResource("24_m1w80")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CollisionChecker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293706, 0)
 shape = SubResource("BoxShape3D_dct41")
 
 [node name="PlayerAudio" type="Node3D" parent="Player" node_paths=PackedStringArray("_windRun", "_slideIn", "_slideLoop", "_land", "_step")]
@@ -2243,7 +2246,8 @@ emission_angle_filter_attenuation_db = -9.5
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="Landed" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-volume_db = -18.158
+stream = ExtResource("15_t83vw")
+volume_db = -18.0
 unit_size = 5.0
 bus = &"Movement"
 emission_angle_filter_attenuation_db = -9.5
@@ -2329,7 +2333,7 @@ script = ExtResource("39_4d2yq")
 _stepperRay = NodePath("Stepper_Ray")
 _characterBody = NodePath("..")
 _playerMovement = NodePath("..")
-_projectionMaxDistance = 0.3
+_projectionMaxDistance = 0.4
 _stepHeight = 1.0
 _maxElevation = 0.1
 _smoothingSpeed = 25.0
@@ -2342,6 +2346,7 @@ collision_mask = 10
 debug_shape_custom_color = Color(1, 0.94902, 0, 1)
 
 [node name="Stepper_Ray" type="RayCast3D" parent="Player/Stepper"]
+target_position = Vector3(0, -2, 0)
 collision_mask = 10
 debug_shape_custom_color = Color(1, 0.94902, 0, 1)
 
@@ -2453,36 +2458,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Velocity" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 42.0
-offset_right = 176.0
-offset_bottom = 93.0
-scale = Vector2(0.5, 0.5)
-text = "VELOCITY:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Momentum" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 68.0
-offset_right = 220.0
-offset_bottom = 119.0
-scale = Vector2(0.5, 0.5)
-text = "MOMENTUM:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Animation" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 94.0
-offset_right = 220.0
-offset_bottom = 145.0
-scale = Vector2(0.5, 0.5)
-text = "ANIMATION:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
 [node name="State" type="Label" parent="UI/PostProcessingManager/UI"]
 offset_left = 19.0
 offset_top = 16.0
@@ -2490,5 +2465,55 @@ offset_right = 176.0
 offset_bottom = 67.0
 scale = Vector2(0.5, 0.5)
 text = "STATE:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Previous State" type="Label" parent="UI/PostProcessingManager/UI"]
+offset_left = 19.0
+offset_top = 40.0
+offset_right = 176.0
+offset_bottom = 91.0
+scale = Vector2(0.5, 0.5)
+text = "PREVIOUS STATE:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Desired Speed" type="Label" parent="UI/PostProcessingManager/UI"]
+offset_left = 19.0
+offset_top = 66.0
+offset_right = 176.0
+offset_bottom = 117.0
+scale = Vector2(0.5, 0.5)
+text = "DESIRED VELOCITY:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Velocity" type="Label" parent="UI/PostProcessingManager/UI"]
+offset_left = 19.0
+offset_top = 92.0
+offset_right = 176.0
+offset_bottom = 143.0
+scale = Vector2(0.5, 0.5)
+text = "VELOCITY:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Momentum" type="Label" parent="UI/PostProcessingManager/UI"]
+offset_left = 19.0
+offset_top = 118.0
+offset_right = 220.0
+offset_bottom = 169.0
+scale = Vector2(0.5, 0.5)
+text = "MOMENTUM:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Animation" type="Label" parent="UI/PostProcessingManager/UI"]
+offset_left = 19.0
+offset_top = 144.0
+offset_right = 220.0
+offset_bottom = 195.0
+scale = Vector2(0.5, 0.5)
+text = "ANIMATION:"
 label_settings = SubResource("LabelSettings_oj2fi")
 uppercase = true

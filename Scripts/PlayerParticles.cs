@@ -14,9 +14,9 @@ public partial class PlayerParticles : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PlayerMovement.LastVelocityChangeLanded += PlayLandParticles;
-		PlayerMovement.SlideStartChange += PlaySlideParticles;
-		PlayerMovement.SlideCurrentChange += ChangeSlideParticles;
+		PlayerAir.LastVelocityChangeLanded += PlayLandParticles;
+		PlayerSlide.SlideStartChange += PlaySlideParticles;
+		PlayerSlide.SlideCurrentChange += ChangeSlideParticles;
 
 		_minVelSlide = (float)_slideParticles.ProcessMaterial.Get("initial_velocity_min");
 		_maxVelSlide = (float)_slideParticles.ProcessMaterial.Get("initial_velocity_max");
@@ -24,9 +24,9 @@ public partial class PlayerParticles : Node3D
 
     public override void _ExitTree()
     {
-		PlayerMovement.LastVelocityChangeLanded -= PlayLandParticles;
-		PlayerMovement.SlideStartChange -= PlaySlideParticles;
-		PlayerMovement.SlideCurrentChange -= ChangeSlideParticles;
+		PlayerAir.LastVelocityChangeLanded -= PlayLandParticles;
+		PlayerSlide.SlideStartChange -= PlaySlideParticles;
+		PlayerSlide.SlideCurrentChange -= ChangeSlideParticles;
     }
 
 	private void PlayLandParticles(Vector3 velocity)

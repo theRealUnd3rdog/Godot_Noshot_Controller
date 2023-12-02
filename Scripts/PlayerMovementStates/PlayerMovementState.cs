@@ -1,6 +1,6 @@
 public partial class PlayerMovementState : GodotParadiseState
 {
-    public PlayerMovement Movement;
+    protected PlayerMovement Movement;
 
     public override void Enter()
     {

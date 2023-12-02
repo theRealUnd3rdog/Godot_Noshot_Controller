@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg0e0lx7l6ivx"
-path="res://.godot/imported/channels4_profile.jpg-107dda53b7a365d50fed586cfc20b429.ctex"
+uid="uid://0by3punu7v0y"
+path="res://.godot/imported/Underdog_logo.png-7a923182c53fd90afa1a2112c7961429.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://channels4_profile.jpg"
-dest_files=["res://.godot/imported/channels4_profile.jpg-107dda53b7a365d50fed586cfc20b429.ctex"]
+source_file="res://defaults/Underdog_logo.png"
+dest_files=["res://.godot/imported/Underdog_logo.png-7a923182c53fd90afa1a2112c7961429.ctex"]
 
 [params]
 

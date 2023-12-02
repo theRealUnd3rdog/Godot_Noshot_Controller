@@ -15,9 +15,13 @@ config/tags=PackedStringArray("controller")
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="res://Underdog_logo.png"
+boot_splash/image="res://defaults/Underdog_logo.png"
 boot_splash/fullsize=false
-config/icon="res://channels4_profile.jpg"
+config/icon="res://defaults/channels4_profile.jpg"
+
+[audio]
+
+buses/default_bus_layout="res://defaults/default_bus_layout.tres"
 
 [display]
 

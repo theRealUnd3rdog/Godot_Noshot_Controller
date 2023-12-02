@@ -14,13 +14,13 @@ public partial class CollisionChecker : Godot.Area3D
         BodyEntered += StartRepeatCall;
         AreaEntered += StartRepeatCall;
         
-        OnGroupChange += DebugBruh;
+        OnGroupChange += DebugGroup;
 
         BodyExited += StopRepeatCall;
         AreaExited += StopRepeatCall;
     }
 
-    private void DebugBruh(string group)
+    private void DebugGroup(string group)
     {
         //GD.Print(group);
     }
@@ -30,7 +30,7 @@ public partial class CollisionChecker : Godot.Area3D
         BodyEntered -= StartRepeatCall;
         AreaEntered -= StartRepeatCall;
 
-        OnGroupChange -= DebugBruh;
+        OnGroupChange -= DebugGroup;
 
         BodyExited -= StopRepeatCall;
         AreaExited -= StopRepeatCall;
@@ -44,28 +44,8 @@ public partial class CollisionChecker : Godot.Area3D
 		group = body.GetGroups().ToString();
         group = group.Trim(trimArr);
 
-        // GD.Print(group);
         return group;
-        
-        //OnGroupChange?.Invoke(group);
 	}
-
-    /* public override void _Process(double delta)
-    {
-        char[] trimArr = {'"', '[', '&', ']'};
-
-        foreach (Node3D body in _touchingBodies)
-        {
-            MyBodyEntered(body);
-
-            string group = string.Empty;
-
-		    group = body.GetGroups().ToString();
-            group = group.Trim(trimArr);
-
-            GD.Print(group);
-        }
-    } */
 
     private void StartRepeatCall(Node3D body)
     {

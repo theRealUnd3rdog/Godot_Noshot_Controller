@@ -26,6 +26,9 @@ public partial class GodotParadiseFiniteStateMachine : Node
 
     [Export]
     public GodotParadiseState CurrentState;
+
+    public GodotParadiseState PreviousState;
+
     [Export]
     public int StackCapacity = 3;
     [Export]
@@ -86,6 +89,8 @@ public partial class GodotParadiseFiniteStateMachine : Node
 
         PushStateToStack(CurrentState);
         EmitSignal(SignalName.StateChanged, CurrentState, newState);
+
+        PreviousState = CurrentState;
 
         CurrentState = newState;
         CurrentState.parameters = parameters;

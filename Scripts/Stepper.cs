@@ -37,8 +37,7 @@ public partial class Stepper : Node3D
 		Vector3 stepOffset = default(Vector3);
 		bool step = false;
 
-		if (grounded)
-			step = FindStep(out stepOffset, velocity);
+		step = FindStep(out stepOffset, velocity);
 
 		if (step)
 		{

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0by3punu7v0y"
-path="res://.godot/imported/Underdog_logo.png-02726d7a79b46d8e02db8f40d4ab9574.ctex"
+uid="uid://blln0hat4oakr"
+path="res://.godot/imported/icon.svg-5ffdfa78f521682c39e102b3270f8a6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Underdog_logo.png"
-dest_files=["res://.godot/imported/Underdog_logo.png-02726d7a79b46d8e02db8f40d4ab9574.ctex"]
+source_file="res://defaults/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-5ffdfa78f521682c39e102b3270f8a6a.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

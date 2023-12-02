@@ -23,12 +23,12 @@ public partial class PlayerShaker : Node
 
         ResetAllInfluences();
 
-        PlayerMovement.LastVelocityChangeLanded += ShakeWhenLanded;
+        PlayerAir.LastVelocityChangeLanded += ShakeWhenLanded;
     }
 
     public override void _ExitTree()
     {
-        PlayerMovement.LastVelocityChangeLanded -= ShakeWhenLanded;
+        PlayerAir.LastVelocityChangeLanded -= ShakeWhenLanded;
     }
 
     private void ShakeWhenLanded(Vector3 lastVelocity)
@@ -42,29 +42,29 @@ public partial class PlayerShaker : Node
         if (_movement == null)
             return;
 
-        switch (_movement.moveState)
+        switch (_movement.FSM.CurrentState)
         {
-            case MovementState.Idle:
+            case PlayerIdle:
                 ChangeShakeInfluence(_idleShake);
                 break;
 
-            case MovementState.InAir:
+            case PlayerAir:
                 ChangeShakeInfluence(_inAirShake);
                 break;
 
-            case MovementState.Walking:
+            case PlayerWalk:
                 ChangeShakeInfluence(_walkShake);
                 break;
 
-            case MovementState.Crouching:
+            case PlayerCrouch:
                 ChangeShakeInfluence(_walkShake);
                 break;
 
-            case MovementState.Sprinting:
+            case PlayerSprint:
                 ChangeShakeInfluence(_sprintShake);
                 break;
             
-            case MovementState.Sliding:
+            case PlayerSlide:
                 ChangeShakeInfluence(_slideShake);
                 break;
 
