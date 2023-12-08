@@ -2,7 +2,9 @@ using Godot;
 using Godot.Collections;
 using MEC;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+
 
 public enum CameraState
 {
@@ -29,18 +31,24 @@ public partial class PlayerMovement : CharacterBody3D
 	[ExportCategory("Movement")]
 	[Export] public float walkingSpeed {private set; get;} = 5.0f;
 	[Export] public float sprintingSpeed {private set; get;} = 8.0f;
-	
-	[Export] private float _jumpVelocity = 4.5f;
+	[Export] public float maxSpeed {private set; get;} = 12f;
+	[Export] public float accelerationRate {private set; get;} = 1.0f;
 	[Export] public float lerpSpeed {private set; get;} = 10.0f; // Gradually changes a value. (Adding smoothing to values)
 	[Export] private float _airLerpSpeed = 3.0f;
 
-	// private movements
+	[ExportCategory("Jumping")]
+	[Export] private float _jumpVelocity = 4.5f;
+	[Export] private float _coyoteTime = 0.5f;
+	[Export] private int _jumps = 1;
+	private int _jumpsDone = 0;
+
 	public float currentSpeed = 5.0f;
 	public float momentum {set; get;} = 0.0f;
 	public float airTime = 0.0f;
 	public Vector3 direction = Vector3.Zero;
 	public Vector2 inputDirection = Vector2.Zero;
 	public Vector3 lastVelocity = Vector3.Zero;
+	private Vector3 _playerVelocity = Vector3.Zero;
 
 	// private rotations
 	private float _rotationX = 0f;
@@ -56,7 +64,7 @@ public partial class PlayerMovement : CharacterBody3D
 
 	[ExportSubgroup("Crouching")]
 	[Export] private CollisionShape3D _crouchingCollider;
-	[Export] private RayCast3D _ceilingRay;
+	[Export] public RayCast3D ceilingRay {private set; get;}
 	[Export] public float crouchingSpeed {private set; get;} = 3.0f;
 	[Export(PropertyHint.Range, "0.25f, 0.75f")] private float _crouchingDepth = 0.5f;
 	private float _initialDepth;
@@ -69,6 +77,16 @@ public partial class PlayerMovement : CharacterBody3D
 	public Vector2 slideVector = Vector2.Zero;
 	public Basis slideBasis;
 	public float initialRotationY;
+
+	[ExportSubgroup("Vaulting")]
+	[Export] private RayCast3D _vaultRay;
+	[Export] private ShapeCast3D _vaultCast;
+	[Export] private ShapeCast3D _stepCast;
+    [Export] private MeshInstance3D _vaultGizmo;
+    [Export] public float vaultMomentum {private set; get;}
+	[Export] public float vaultJumpVelocity {private set; get;}
+	private Vector3 _vaultProjection = Vector3.Zero;
+	private Vector3 _vaultPoint = Vector3.Zero;
 
 
 	[ExportSubgroup("Head Bobbing")]
@@ -111,7 +129,7 @@ public partial class PlayerMovement : CharacterBody3D
 	[Export] private Label _previousStateLabel;
 
 	// inputs
-	public bool sprintAction {private set; get;}
+	public bool sprintAction {private set; get;} = false;
 	private bool _previousSprintAction;
 
 
@@ -135,6 +153,14 @@ public partial class PlayerMovement : CharacterBody3D
 
 		// Make the mouse confined and within the center of the screen
         Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		// Events
+		PlayerAir.PlayerLanded += ResetJumps;
+    }
+
+    public override void _ExitTree()
+    {
+        PlayerAir.PlayerLanded -= ResetJumps;
     }
 
     public override void _Input(InputEvent @event)
@@ -168,38 +194,11 @@ public partial class PlayerMovement : CharacterBody3D
 		if (Input.IsKeyPressed(Key.R) && _resetPosition != null)
 			GlobalPosition = _resetPosition.GlobalPosition;
 
-		if (_physicsInterpolate)
-		{
-			double fraction = Engine.GetPhysicsInterpolationFraction();
-		
-			Transform3D modifiedTransform = _mesh.GlobalTransform;
-			modifiedTransform.Origin = _lastPhysicsPos.Lerp(GlobalTransform.Origin, (float)fraction);
+		PhysicsInterpolation();
 
-			_mesh.GlobalTransform = modifiedTransform;
-		}
-        
-		if (_camera != null)
-		{
-			Vector3 playerVelocity = Velocity;
+		HandleFOV(delta);
 
-			float velocityMagnitude = playerVelocity.Length() / _maxPlayerVelocity;
-			float velocityScale = Mathf.Pow(velocityMagnitude, _velocityExponent);
-
-			float desiredFOV = Mathf.Lerp(_minFov, _maxFov, velocityScale);
-
-			desiredFOV = Mathf.Clamp(desiredFOV, _minFov, _maxFov);
-
-			_camera.Fov = Mathf.Lerp(_camera.Fov, desiredFOV, _fovLerpSpeed * (float)delta);
-		}
-
-		if (_speedLabel == null)
-			return;
-
-		_speedLabel.Text = $"VELOCITY: {Mathf.Round(Velocity.Length())}";
-		_momentumLabel.Text = $"MOMENTUM: {Mathf.Round(momentum)}";
-		_stateLabel.Text = $"STATE: {FSM.CurrentState.Name}";
-		_desiredSpeedLabel.Text = $"DESIRED SPEED: {Mathf.Round(currentSpeed)}";
-		_previousStateLabel.Text = $"PREVIOUS STATE: {FSM.PreviousState.Name}";
+		HandleLabels();
     }
 
 	private void RotatePlayer(float mouseX, float mouseY)
@@ -222,6 +221,37 @@ public partial class PlayerMovement : CharacterBody3D
 		_neck.Rotation = neckRotation;
 	}
 
+	private void PhysicsInterpolation()
+	{
+		if (_physicsInterpolate)
+		{
+			double fraction = Engine.GetPhysicsInterpolationFraction();
+		
+			Transform3D modifiedTransform = _mesh.GlobalTransform;
+			modifiedTransform.Origin = _lastPhysicsPos.Lerp(GlobalTransform.Origin, (float)fraction);
+
+			_mesh.GlobalTransform = modifiedTransform;
+		}
+	}
+
+	private void HandleFOV(double delta)
+	{
+		if (_camera != null)
+		{
+			Vector3 playerVelocity = Velocity;
+
+			float velocityMagnitude = playerVelocity.Length() / _maxPlayerVelocity;
+			float velocityScale = Mathf.Pow(velocityMagnitude, _velocityExponent);
+
+			float desiredFOV = Mathf.Lerp(_minFov, _maxFov, velocityScale);
+
+			desiredFOV = Mathf.Clamp(desiredFOV, _minFov, _maxFov);
+
+			_camera.Fov = Mathf.Lerp(_camera.Fov, desiredFOV, _fovLerpSpeed * (float)delta);
+		}
+
+	}
+
 	private void HandleZRotation(float delta)
 	{
 		_rotationZ = Mathf.Lerp(_rotationZ, 0f, delta * _zRotationLerp);
@@ -234,6 +264,18 @@ public partial class PlayerMovement : CharacterBody3D
 		_head.RotateObjectLocal(Vector3.Forward, _rotationZ);
 	}
 
+	private void HandleLabels()
+	{
+		if (_speedLabel == null)
+			return;
+
+		_speedLabel.Text = $"VELOCITY: {Mathf.Round(Velocity.Length())}";
+		_momentumLabel.Text = $"MOMENTUM: {Mathf.Round(momentum)}";
+		_stateLabel.Text = $"STATE: {FSM.CurrentState.Name}";
+		_desiredSpeedLabel.Text = $"DESIRED SPEED: {Mathf.Round(currentSpeed)}";
+		_previousStateLabel.Text = $"PREVIOUS STATE: {FSM.PreviousState.Name}";
+	}
+
 	private void HandleAnimation()
 	{
 		if (_animator != null)
@@ -242,8 +284,9 @@ public partial class PlayerMovement : CharacterBody3D
 			_animator.Set("parameters/moveState/conditions/moving", IsOnFloor() && (FSM.CurrentState is PlayerWalk 
 						|| FSM.CurrentState is PlayerSprint || FSM.CurrentState is PlayerCrouch) && Velocity.Length() > 0.1f);
 			
-			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && IsOnFloor() && !_ceilingRay.IsColliding());
+			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && airTime < _coyoteTime && _jumpsDone < _jumps && !ceilingRay.IsColliding());
 			_animator.Set("parameters/moveState/conditions/inAir", FSM.CurrentState is PlayerAir);
+			_animator.Set("parameters/moveState/conditions/vault", FSM.CurrentState is PlayerVault);
 
 			if (_animationLabel != null)
 			{
@@ -253,44 +296,130 @@ public partial class PlayerMovement : CharacterBody3D
 		}
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public void Crouch(double delta)
 	{
 		Vector3 depth;
+
+		// Crouching
+		_standingCollider.Disabled = true;
+		_crouchingCollider.Disabled = false;
+
+		depth = new Vector3(_head.Position.X, _initialDepth - _crouchingDepth, _head.Position.Z);
+		_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+	}
+
+	public void Stand(double delta)
+	{
+		Vector3 depth;
+
+		_standingCollider.Disabled = false;
+		_crouchingCollider.Disabled = true;
+
+		depth = new Vector3(_head.Position.X, _initialDepth, _head.Position.Z);
+		_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+
+		// reduce momentum here and place momentum on top of sprintingSpeed
+		if (FSM.CurrentState is not PlayerSlide && momentum >= 0)
+			momentum -= (float)delta * (slideSpeed / 2);
+	}
+
+	public bool CheckVault(double delta, out Vector3 vaultPoint)
+	{
+		vaultPoint = default(Vector3);
+
+		// Get the raw input direction and smooth it out
+		Vector3 rawProjectedXZ = new Vector3(inputDirection.X, 0f,inputDirection.Y);
+		_vaultProjection = _vaultProjection.Lerp(rawProjectedXZ, 25f * (float)delta);
+
+		// Get the projected point based on input
+		Vector3 inputProjectionPoint = 2f * _vaultProjection;
+
+		_vaultRay.Position = new Vector3(inputProjectionPoint.X, _vaultRay.Position.Y, inputProjectionPoint.Z);
+
+		if (_vaultRay.IsColliding())
+		{
+			_vaultPoint = _vaultRay.GetCollisionPoint();
+			_vaultCast.Enabled = true;
+		}
+		else
+		{
+			_vaultCast.Enabled = false;
+		}
+
+		_vaultCast.GlobalPosition = _vaultPoint;
+
+		if (_vaultCast.IsColliding() && inputDirection.Y < 0f && !ceilingRay.IsColliding() 
+			&& !_stepCast.IsColliding())
+		{
+			vaultPoint = _vaultPoint;
+
+			return true;
+		}
+
+		return false;
+	}
+
+	private void ResetJumps() => _jumpsDone = 0;
+
+	public bool IsRunningUpSlope()
+	{
+		float dot = GetFloorNormal().Dot(-Transform.Basis.Z);
+
+		if (dot < 0f)
+			return true;
+		else 
+			return false;
+	}
+
+	private void HandleJump(float jumpSpeed)
+	{
+		// Handle Jump (Must refactor)
+		if (Input.IsActionJustPressed("jump") && ((IsOnFloor() && !ceilingRay.IsColliding()) || airTime < _coyoteTime))
+		{
+			// Jump
+			if (_jumpsDone < _jumps)
+			{
+				Jump(jumpSpeed);
+			}
+		}
+		else if (Input.IsActionJustPressed("jump") && _jumpsDone > 0 && _jumpsDone < _jumps)
+		{
+			// Jump
+			Jump(jumpSpeed);
+		}
+	}
+
+	public void Jump(float jumpSpeed)
+	{
+		if (FSM.CurrentState is PlayerVault)
+		{
+			Vector3 velocity = Velocity;
+
+			velocity.Y = jumpSpeed;
+
+			Velocity = velocity;
+		}
+		else
+		{
+			_playerVelocity.Y = jumpSpeed;
+		}
+		
+		_jumpsDone++;
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
 		Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
 		inputDirection = inputDir;
 
-		VelocityChange?.Invoke(Velocity);
+		VelocityChange?.Invoke(Velocity); // Invoke change in velocity event
 
 		HandleAnimation();
 
-		// Crouching
-		if ((FSM.CurrentState is PlayerCrouch || FSM.CurrentState is PlayerSlide) && IsOnFloor())
-		{
-			_standingCollider.Disabled = true;
-			_crouchingCollider.Disabled = false;
+		sprintAction = _previousSprintAction;
 
-			depth = new Vector3(_head.Position.X, _initialDepth - _crouchingDepth, _head.Position.Z);
-			_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
-		}
-
-		// Standing
-		else if (!_ceilingRay.IsColliding())
-		{
-			_standingCollider.Disabled = false;
-			_crouchingCollider.Disabled = true;
-
-			depth = new Vector3(_head.Position.X, _initialDepth, _head.Position.Z);
-			_head.Position = _head.Position.Lerp(depth, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
-
-			// reduce momentum here and place momentum on top of sprintingSpeed
-			if (FSM.CurrentState is not PlayerSlide && momentum >= 0)
-				momentum -= (float)delta * (slideSpeed);
-
-			sprintAction = _previousSprintAction;
-
-			if (IsOnFloor())
-				sprintAction = Input.IsActionPressed("sprint");
-		}
+		if (IsOnFloor())
+			sprintAction = !Input.IsActionPressed("sprint");
 
 		// Handle free looking
 		if (Input.IsActionPressed("free_look") || FSM.CurrentState is PlayerSlide)
@@ -370,20 +499,11 @@ public partial class PlayerMovement : CharacterBody3D
 			_eyes.Position = eyes;
 		}
 
-		Vector3 velocity = Velocity;
+		 _playerVelocity = Velocity;
 
 		// Add the gravity.
 		if (!IsOnFloor())
-			velocity.Y -= gravity * (float)delta;
-
-		// Handle Jump.
-		if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_ceilingRay.IsColliding())
-		{
-			velocity.Y = _jumpVelocity;
-		}
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
+			_playerVelocity.Y -= gravity * (float)delta;
 
 		if (IsOnFloor())
 		{
@@ -401,21 +521,24 @@ public partial class PlayerMovement : CharacterBody3D
 			}
 		}
 
+		if (FSM.CurrentState is not PlayerVault)
+			HandleJump(_jumpVelocity);
+
 		if (direction != Vector3.Zero)
 		{
-			velocity.X = direction.X * currentSpeed;
-			velocity.Z = direction.Z * currentSpeed;
+			_playerVelocity.X = direction.X * currentSpeed;
+			_playerVelocity.Z = direction.Z * currentSpeed;
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, currentSpeed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, currentSpeed);
+			_playerVelocity.X = Mathf.MoveToward(Velocity.X, 0, currentSpeed);
+			_playerVelocity.Z = Mathf.MoveToward(Velocity.Z, 0, currentSpeed);
 		}
 
-		Velocity = velocity;
+		Velocity = _playerVelocity;
 
 		_lastPhysicsPos = GlobalTransform.Origin;
-		lastVelocity = velocity;
+		lastVelocity = _playerVelocity;
 		
 		_previousSprintAction = sprintAction;
 		MoveAndSlide();

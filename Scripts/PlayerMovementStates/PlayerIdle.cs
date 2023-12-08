@@ -11,6 +11,10 @@ public partial class PlayerIdle : PlayerMovementState
 
     public override void PhysicsUpdate(double delta)
     {
+        Movement.Stand(delta);
+        Movement.currentSpeed = Mathf.Lerp(Movement.currentSpeed, Movement.walkingSpeed, 
+                            1.0f - Mathf.Pow(0.5f, (float)delta *  Movement.lerpSpeed));
+
         if (Input.IsActionPressed("crouch"))
         {
             EmitSignal(SignalName.StateFinished, "PlayerCrouch", new());

@@ -27,7 +27,7 @@ buses/default_bus_layout="res://defaults/default_bus_layout.tres"
 
 window/size/viewport_width=1366
 window/size/viewport_height=720
-window/size/resizable=false
+window/size/mode=4
 window/vsync/vsync_mode=0
 window/screen_space_roughness_limiter/enabled=false
 
@@ -106,5 +106,4 @@ common/physics_jitter_fix=5.0
 [rendering]
 
 anti_aliasing/quality/use_taa=true
-anti_aliasing/quality/use_debanding=true
 occlusion_culling/use_occlusion_culling=true

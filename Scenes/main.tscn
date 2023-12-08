@@ -1,4 +1,4 @@
-[gd_scene load_steps=163 format=3 uid="uid://k0g8l20jpn5l"]
+[gd_scene load_steps=177 format=3 uid="uid://k0g8l20jpn5l"]
 
 [ext_resource type="Material" uid="uid://ntptsm338blc" path="res://Materials/Brick_023.tres" id="1_0udfd"]
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="2_buung"]
@@ -37,12 +37,14 @@
 [ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="20_defkf"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="21_fwljj"]
 [ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="22_bhw4s"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerVault.cs" id="22_k672s"]
 [ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="23_jghgi"]
 [ext_resource type="Script" path="res://Scripts/PlayerShaker.cs" id="23_wh8u3"]
 [ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="24_30l64"]
 [ext_resource type="Script" path="res://Scripts/CollisionChecker.cs" id="24_m1w80"]
 [ext_resource type="AudioStream" uid="uid://c128rhd8ppi73" path="res://Sounds/Wind_Run.wav" id="24_rjr40"]
 [ext_resource type="AudioStream" uid="uid://bsgtpiyabtbj2" path="res://Sounds/Landing_03.wav" id="25_s6jt8"]
+[ext_resource type="AudioStream" uid="uid://52qihh8ag6yp" path="res://Sounds/vault_02.wav" id="29_rh81q"]
 [ext_resource type="AudioStream" uid="uid://cvntjafcyfp7m" path="res://Sounds/Footsteps/Step_Water_02.wav" id="29_wo0ou"]
 [ext_resource type="AudioStream" uid="uid://hp3v8gjhbn05" path="res://Sounds/Footsteps/Step_Water_03.wav" id="30_g0clo"]
 [ext_resource type="Script" path="res://Scripts/PlayerParticles.cs" id="35_7x0ov"]
@@ -52,6 +54,7 @@
 [ext_resource type="Script" path="res://Scripts/LensFlareCheck.cs" id="40_0em2u"]
 [ext_resource type="Shader" path="res://Shaders/lensFlare.gdshader" id="41_mld4v"]
 [ext_resource type="Script" path="res://Scripts/LensFlare.cs" id="42_nmr1d"]
+[ext_resource type="AudioStream" uid="uid://02ti7sdyv444" path="res://Sounds/Jump_04.wav" id="43_d2kc4"]
 [ext_resource type="Script" path="res://Scripts/PostProcessingManager.cs" id="44_ovq4q"]
 [ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="45_kwnku"]
 [ext_resource type="Script" path="res://Scripts/Vignette.cs" id="46_p1q4e"]
@@ -82,10 +85,11 @@ ssao_enabled = true
 ssao_radius = 1.13
 ssao_intensity = 4.95
 ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_bounce_feedback = 1.62
 sdfgi_min_cell_size = 0.4
+sdfgi_cascade0_distance = 25.6
+sdfgi_max_distance = 409.6
 sdfgi_energy = 1.395
 sdfgi_normal_bias = 1.595
 glow_enabled = true
@@ -122,9 +126,11 @@ albedo = Color(0.137255, 0.188235, 0.196078, 1)
 edge_fade = 1.77531
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih85"]
+custom_solver_bias = 0.1
 radius = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_45p4n"]
+custom_solver_bias = 0.1
 radius = 0.2
 height = 1.2
 
@@ -132,6 +138,15 @@ height = 1.2
 cull_mode = 2
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_02y88"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u1e10"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvuuw"]
+albedo_color = Color(1, 0, 0.129412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v8w6w"]
+material = SubResource("StandardMaterial3D_kvuuw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xog28"]
 render_priority = -1
@@ -381,6 +396,22 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_odk61"]
+resource_name = "vault"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamHead:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 0.517632, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.261799, 0, -0.0523599), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bqt7j"]
 resource_name = "walk"
 loop_mode = 1
@@ -433,6 +464,7 @@ _data = {
 "slideIn": SubResource("Animation_s1caf"),
 "slideLoop": SubResource("Animation_8fbkp"),
 "sprint": SubResource("Animation_3fs13"),
+"vault": SubResource("Animation_odk61"),
 "walk": SubResource("Animation_bqt7j")
 }
 
@@ -465,7 +497,7 @@ stream = ExtResource("25_s6jt8")
 
 [sub_resource type="Resource" id="Resource_mcu8n"]
 script = ExtResource("16_usjuj")
-value = 10.0
+value = 50.0
 groups = PackedStringArray("Concrete", "Metal", "Water")
 stream = ExtResource("19_0mout")
 
@@ -612,7 +644,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rnysl"]
-advance_mode = 2
+advance_mode = 0
 advance_expression = "abs(lastVelocity.y) > 10 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbk3i"]
@@ -658,12 +690,12 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5movq"]
 advance_mode = 2
-advance_expression = "abs(currentSpeed) >= 9f"
+advance_expression = "abs(currentSpeed) >= 6f"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iygv1"]
 reset = false
 advance_mode = 2
-advance_expression = "abs(currentSpeed) < 7.5f"
+advance_expression = "abs(currentSpeed) < 5.5f"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gayc6"]
 states/sprint/node = SubResource("AnimationNodeAnimation_inxpx")
@@ -699,6 +731,9 @@ states/slideLoop/node = SubResource("AnimationNodeAnimation_unu2p")
 states/slideLoop/position = Vector2(629, 91)
 transitions = ["Start", "slideIn", SubResource("AnimationNodeStateMachineTransition_fbfwc"), "slideIn", "slideLoop", SubResource("AnimationNodeStateMachineTransition_h0qug"), "slideLoop", "End", SubResource("AnimationNodeStateMachineTransition_cncgq")]
 graph_offset = Vector2(84, -45)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rht2b"]
+animation = &"vault"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohbtc"]
 advance_mode = 2
@@ -739,8 +774,10 @@ advance_mode = 2
 advance_condition = &"jump"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0e8h0"]
+priority = 2
 switch_mode = 2
 advance_mode = 2
+advance_condition = &"inAir"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jqjf7"]
 advance_mode = 2
@@ -769,6 +806,7 @@ advance_mode = 2
 advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bysxd"]
+priority = 3
 advance_mode = 2
 advance_condition = &"inAir"
 
@@ -783,6 +821,7 @@ advance_mode = 2
 advance_expression = "slideTimer > 0.1f"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2wr2a"]
+priority = 2
 advance_mode = 2
 advance_condition = &"moving"
 advance_expression = "abs(velocity.length()) > 1f"
@@ -791,10 +830,36 @@ advance_expression = "abs(velocity.length()) > 1f"
 advance_mode = 2
 advance_condition = &"jump"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pl3ga"]
+advance_mode = 2
+advance_condition = &"vault"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u4wft"]
+advance_mode = 2
+advance_condition = &"vault"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ljx6"]
+advance_mode = 2
+advance_condition = &"vault"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iep2u"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6105d"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"inAir"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_up3li"]
+advance_mode = 2
+advance_condition = &"vault"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4ibcj"]
 states/Start/position = Vector2(820, -52)
 states/air/node = SubResource("AnimationNodeStateMachine_i7tfk")
-states/air/position = Vector2(403, -172)
+states/air/position = Vector2(403, -247)
 states/idle/node = SubResource("AnimationNodeAnimation_hh0uo")
 states/idle/position = Vector2(672, -52)
 states/jump/node = SubResource("AnimationNodeAnimation_te1gy")
@@ -802,12 +867,14 @@ states/jump/position = Vector2(520, -44)
 states/move/node = SubResource("AnimationNodeStateMachine_gayc6")
 states/move/position = Vector2(403, 81)
 states/sliding/node = SubResource("AnimationNodeStateMachine_m7npm")
-states/sliding/position = Vector2(187, -44)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku")]
-graph_offset = Vector2(-59, -194)
+states/sliding/position = Vector2(7, -44)
+states/vault/node = SubResource("AnimationNodeAnimation_rht2b")
+states/vault/position = Vector2(301, -90)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku"), "air", "vault", SubResource("AnimationNodeStateMachineTransition_pl3ga"), "sliding", "vault", SubResource("AnimationNodeStateMachineTransition_u4wft"), "move", "vault", SubResource("AnimationNodeStateMachineTransition_5ljx6"), "vault", "move", SubResource("AnimationNodeStateMachineTransition_iep2u"), "vault", "air", SubResource("AnimationNodeStateMachineTransition_6105d"), "jump", "vault", SubResource("AnimationNodeStateMachineTransition_up3li")]
+graph_offset = Vector2(-129, -199)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_osdti"]
-graph_offset = Vector2(-352, 170)
+graph_offset = Vector2(-330, 141)
 nodes/moveState/node = SubResource("AnimationNodeStateMachine_4ibcj")
 nodes/moveState/position = Vector2(-220, 120)
 node_connections = [&"output", 0, &"moveState"]
@@ -897,6 +964,128 @@ use_collision = true
 collision_layer = 2
 size = Vector3(20, 1, 1)
 
+[node name="Node3D7" type="Node3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.351, -18.4101, -139.77)
+
+[node name="ConcreteCSGBox3D" type="CSGBox3D" parent="Stage/Node3D7" groups=["Concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
+material_override = ExtResource("1_0udfd")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 90, 20)
+
+[node name="ConcreteCSGBox3D2" type="CSGBox3D" parent="Stage/Node3D7" groups=["Concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50, 0.0201721)
+material_override = ExtResource("2_buung")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 20)
+
+[node name="MetalCSGBox3D3" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50.05, 10.5202)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D4" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50.05, -10.4798)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D5" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, -10.399, 50.05, -0.0298274)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D6" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, 10.601, 50.05, -0.0298284)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="Pole" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, 8.9483, 0.443821, 32.6031)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole2" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -8.27073, 0.443821, 32.6665)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole3" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, 8.98329, -3.55618, 42.1031)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole4" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -8.23575, -3.55618, 42.1665)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole5" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, 8.88754, 7.69382, 16.1032)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole6" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -8.3315, 7.69382, 16.1667)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole7" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, 8.92252, 3.69382, 25.6032)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="Pole8" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -8.29651, 3.69382, 25.6666)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(80, 0.6, 0.6)
+
+[node name="MetalCSGBox3D9" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(1.37614e-07, 3.84995e-08, -1, -0.44494, 1.008, -1.74998e-08, 1.01843, 0.440384, 1.27478e-07, 9.86968, 40.547, 32.25)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(42.615, 1, 1)
+
+[node name="MetalCSGBox3D10" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(1.37614e-07, 3.84995e-08, -1, -0.44494, 1.008, -1.74998e-08, 1.01843, 0.440384, 1.27478e-07, -9.184, 40.547, 32.25)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(42.615, 1, 1)
+
+[node name="RampCSGBox3" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+transform = Transform3D(-1, 3.49996e-08, -8.0111e-08, 0, 0.916362, 0.400349, 8.74228e-08, 0.400349, -0.916363, 0.352699, 40.657, 32.3338)
+material_override = ExtResource("5_ewlxh")
+use_collision = true
+collision_layer = 2
+size = Vector3(19.0202, 0.81, 47)
+
 [node name="Node3D6" type="Node3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.649, -44.5, -80.0202)
 
@@ -942,12 +1131,82 @@ use_collision = true
 collision_layer = 2
 size = Vector3(20, 1, 1)
 
+[node name="MetalCSGBox3D7" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(-0.882258, 0.668753, -0.0143402, 0.675752, 0.873305, -0.000849737, 0.0120789, -0.0103332, -0.999897, -15.6559, 53.7583, 2.29281)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(11.85, 0.5, 0.5)
+
+[node name="MetalCSGBox3D8" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(-0.882258, 0.668753, -0.0143402, 0.675752, 0.873305, -0.000849737, 0.0120789, -0.0103332, -0.999897, -15.7232, 53.7543, -2.3967)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(11.85, 0.5, 0.5)
+
 [node name="RampCSGBox2" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
 transform = Transform3D(-0.0143402, 0.607957, 0.79384, -0.000849767, 0.793913, -0.608029, -0.999897, -0.00939385, -0.0108683, -14.3503, 52.5511, -0.0896988)
 material_override = ExtResource("5_ewlxh")
 use_collision = true
 collision_layer = 2
 size = Vector3(5, 0.81, 16.795)
+
+[node name="Pole9" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -19.694, 26.5337, 2.09117)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole10" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -17.194, 24.7837, 2.08197)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole11" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -14.694, 22.7837, 2.07276)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole12" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -12.4441, 21.0337, 2.06448)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole13" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -19.7097, 26.5337, -2.1588)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole14" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -17.2097, 24.7837, -2.168)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole15" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -14.7097, 22.7837, -2.17721)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
+
+[node name="Pole16" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+transform = Transform3D(4.37111e-08, 0.999993, -0.00368269, 1, -4.37114e-08, -6.34274e-15, -1.60975e-10, -0.00368269, -0.999993, -12.4597, 21.0337, -2.18549)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(60, 0.3, 0.3)
 
 [node name="Node3D8" type="Node3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.136, -37.11, -80.02)
@@ -1341,6 +1600,27 @@ material_override = ExtResource("4_ltx8g")
 use_collision = true
 collision_layer = 2
 size = Vector3(2, 1.2, 2)
+
+[node name="MetalCSGBox3D72" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 51.5, 6.25)
+material_override = ExtResource("4_ltx8g")
+use_collision = true
+collision_layer = 2
+size = Vector3(2, 2, 2)
+
+[node name="MetalCSGBox3D73" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 51.75, 1.75)
+material_override = ExtResource("4_ltx8g")
+use_collision = true
+collision_layer = 2
+size = Vector3(2, 2.5, 2)
+
+[node name="MetalCSGBox3D74" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 52.5, -2.75)
+material_override = ExtResource("4_ltx8g")
+use_collision = true
+collision_layer = 2
+size = Vector3(2, 4, 2)
 
 [node name="MetalCSGBox3D8" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.351038, 49.9783, -19.9798)
@@ -2056,7 +2336,7 @@ spot_angle = 13.49
 
 [node name="MainLight" type="DirectionalLight3D" parent="Env"]
 unique_name_in_owner = true
-transform = Transform3D(0.737441, -0.465323, -0.489546, 0.674274, 0.46515, 0.573576, -0.0391859, -0.753067, 0.656776, 0, 4.64027, 3.57474)
+transform = Transform3D(0.737441, -0.465323, -0.489546, 0.674274, 0.46515, 0.573577, -0.0391859, -0.753067, 0.656776, 0, 4.64027, 3.57474)
 light_color = Color(0.966428, 0.88712, 0.75687, 1)
 light_energy = 6.756
 light_indirect_energy = 5.517
@@ -2070,9 +2350,9 @@ material = SubResource("FogMaterial_d1576")
 
 [node name="ResetPos" type="Node3D" parent="."]
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "_ceilingRay", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "ceilingRay", "_vaultRay", "_vaultCast", "_stepCast", "_vaultGizmo", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00932312, 0, 0.212681)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7845, 32.0904, -140.763)
 collision_mask = 15
 floor_max_angle = 1.13446
 floor_snap_length = 0.3
@@ -2080,13 +2360,19 @@ script = ExtResource("7_6oseo")
 _resetPosition = NodePath("../ResetPos")
 _standingCollider = NodePath("Standing_collision_shape")
 _animator = NodePath("AnimationTree")
-sprintingSpeed = 11.0
 _jumpVelocity = 5.7
-_zRotationLerp = 0.0
-_zClamp = 0.0
+_coyoteTime = 0.25
+_zRotationLerp = 2.0
+_zClamp = 2.0
 _crouchingCollider = NodePath("Crouching_collision_shape")
-_ceilingRay = NodePath("CeilingRay")
+ceilingRay = NodePath("CeilingRay")
 slideSpeed = 20.0
+_vaultRay = NodePath("Vaulter/VaultRay")
+_vaultCast = NodePath("Vaulter/VaultRay/VaultCast")
+_stepCast = NodePath("Vaulter/StepCast")
+_vaultGizmo = NodePath("Vaulter/VaultRay/VaultCast/VaultGizmo")
+vaultMomentum = 12.0
+vaultJumpVelocity = 5.0
 mouseSensitivityX = 0.25
 mouseSensitivityY = 0.2
 _freeLookTilt = 8.0
@@ -2124,6 +2410,9 @@ script = ExtResource("20_defkf")
 [node name="PlayerSlide" type="Node" parent="Player/FSM"]
 script = ExtResource("21_fwljj")
 
+[node name="PlayerVault" type="Node" parent="Player/FSM"]
+script = ExtResource("22_k672s")
+
 [node name="Standing_collision_shape" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_yih85")
@@ -2138,6 +2427,31 @@ transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_bhevj")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_02y88")
+
+[node name="Vaulter" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99505, -0.34816)
+
+[node name="VaultRay" type="RayCast3D" parent="Player/Vaulter"]
+collision_mask = 2
+debug_shape_custom_color = Color(0.976471, 0, 0.396078, 1)
+debug_shape_thickness = 1
+
+[node name="VaultCast" type="ShapeCast3D" parent="Player/Vaulter/VaultRay"]
+shape = SubResource("SphereShape3D_u1e10")
+target_position = Vector3(0, 0, 0)
+collision_mask = 2
+debug_shape_custom_color = Color(0, 1, 0.160784, 1)
+
+[node name="VaultGizmo" type="MeshInstance3D" parent="Player/Vaulter/VaultRay/VaultCast"]
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+mesh = SubResource("SphereMesh_v8w6w")
+skeleton = NodePath("../..")
+
+[node name="StepCast" type="ShapeCast3D" parent="Player/Vaulter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.66592, -0.02211)
+shape = SubResource("SphereShape3D_u1e10")
+target_position = Vector3(0, 0, 0)
+collision_mask = 8
 
 [node name="CeilingRay" type="RayCast3D" parent="Player"]
 target_position = Vector3(0, 2, 0)
@@ -2213,7 +2527,7 @@ script = ExtResource("24_m1w80")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293706, 0)
 shape = SubResource("BoxShape3D_dct41")
 
-[node name="PlayerAudio" type="Node3D" parent="Player" node_paths=PackedStringArray("_windRun", "_slideIn", "_slideLoop", "_land", "_step")]
+[node name="PlayerAudio" type="Node3D" parent="Player" node_paths=PackedStringArray("_windRun", "_slideIn", "_slideLoop", "_land", "_step", "_vaultIn", "_vaultOut")]
 script = ExtResource("14_qnrjr")
 _windRun = NodePath("Run_Wind")
 _maxWindVolume = -10.0
@@ -2228,6 +2542,8 @@ _land = NodePath("Landed")
 _landPlayers = Array[Object]([SubResource("Resource_8pc76"), SubResource("Resource_jblmc"), SubResource("Resource_yks4n"), SubResource("Resource_svp0c"), SubResource("Resource_mcu8n")])
 _step = NodePath("Step")
 _stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resource_in3s0"), SubResource("Resource_haxqx")])
+_vaultIn = NodePath("Vault")
+_vaultOut = NodePath("VaultEnd")
 
 [node name="Step" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
 volume_db = -18.158
@@ -2239,6 +2555,24 @@ attenuation_filter_cutoff_hz = 20000.0
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
 volume_db = -18.158
+unit_size = 5.0
+max_polyphony = 3
+bus = &"Movement"
+emission_angle_filter_attenuation_db = -9.5
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="Vault" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
+stream = ExtResource("29_rh81q")
+volume_db = -20.0
+unit_size = 5.0
+max_polyphony = 3
+bus = &"Movement"
+emission_angle_filter_attenuation_db = -9.5
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="VaultEnd" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
+stream = ExtResource("43_d2kc4")
+volume_db = -20.0
 unit_size = 5.0
 max_polyphony = 3
 bus = &"Movement"
@@ -2329,6 +2663,7 @@ _blurExponent = 7.0
 _blurSpeed = 4.0
 
 [node name="Stepper" type="Node3D" parent="Player" node_paths=PackedStringArray("_stepperRay", "_characterBody", "_playerMovement", "_pointGizmo")]
+visible = false
 script = ExtResource("39_4d2yq")
 _stepperRay = NodePath("Stepper_Ray")
 _characterBody = NodePath("..")
@@ -2356,6 +2691,11 @@ visible = false
 material_override = SubResource("StandardMaterial3D_055na")
 mesh = SubResource("SphereMesh_kv8y1")
 
+[node name="LensFlareCheck" type="Marker3D" parent="Player" node_paths=PackedStringArray("_lensFlare")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80323, -0.0818026)
+script = ExtResource("40_0em2u")
+_lensFlare = NodePath("../../UI/PostProcessingManager/LensFlare/LensFlare")
+
 [node name="AnimationTree" type="AnimationTree" parent="Player"]
 tree_root = SubResource("AnimationNodeBlendTree_osdti")
 anim_player = NodePath("../Mesh/Neck/Head/Eyes/AnimationPlayer")
@@ -2365,11 +2705,7 @@ parameters/moveState/conditions/idle = true
 parameters/moveState/conditions/inAir = false
 parameters/moveState/conditions/jump = false
 parameters/moveState/conditions/moving = false
-
-[node name="LensFlareCheck" type="Marker3D" parent="Player" node_paths=PackedStringArray("_lensFlare")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80323, -0.0818026)
-script = ExtResource("40_0em2u")
-_lensFlare = NodePath("../../UI/PostProcessingManager/LensFlare/LensFlare")
+parameters/moveState/conditions/vault = false
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_fpsLabel")]
 layout_mode = 3

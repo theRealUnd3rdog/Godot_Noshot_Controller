@@ -11,10 +11,16 @@ public partial class PlayerSprint : PlayerMovementState
 
     public override void PhysicsUpdate(double delta)
     {
-        Movement.currentSpeed = Mathf.Lerp(Movement.currentSpeed, Movement.sprintingSpeed + (Movement.momentum / 2), 
-                            1.0f - Mathf.Pow(0.5f, (float)delta * Movement.lerpSpeed));
+        Movement.Stand(delta);
 
-        if (Input.IsActionPressed("crouch") && !Movement.IsOnWall())
+        float desiredSpeed = Movement.Velocity.Length() * Movement.currentSpeed;
+
+        Movement.currentSpeed = Mathf.MoveToward(Movement.currentSpeed, desiredSpeed, Movement.accelerationRate * (float)delta);
+
+        Movement.currentSpeed = Mathf.Clamp(Movement.currentSpeed, Movement.sprintingSpeed, Movement.maxSpeed + Movement.momentum);
+
+        if (Input.IsActionPressed("crouch") && !Movement.IsOnWall() && !Movement.IsRunningUpSlope()
+                && Movement.Velocity.Length() >= (Movement.sprintingSpeed - 1) && Movement.inputDirection.Y < 0f)
         {
             EmitSignal(SignalName.StateFinished, "PlayerSlide", new());
         }
@@ -24,9 +30,17 @@ public partial class PlayerSprint : PlayerMovementState
             EmitSignal(SignalName.StateFinished, "PlayerWalk", new());
         }
 
+        if (Movement.inputDirection == Vector2.Zero)
+            EmitSignal(SignalName.StateFinished, "PlayerIdle", new());
+
         if (!Movement.IsOnFloor() && Mathf.Abs(Movement.Velocity.Y) > 0.1f)
 		{
 			EmitSignal(SignalName.StateFinished, "PlayerAir", new());
 		}
+
+        if (Movement.CheckVault(delta, out Vector3 vaultPoint) && Input.IsActionJustPressed("jump"))
+        {
+            EmitSignal(SignalName.StateFinished, "PlayerVault", new());
+        }
     }
 }

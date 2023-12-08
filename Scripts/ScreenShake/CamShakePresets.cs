@@ -83,4 +83,14 @@ public static class CamShakePresets
             return c;
         }
     }
+
+    public static CamShakeInstance Vault
+    {
+        get
+        {
+            CamShakeInstance c = new CamShakeInstance(0.2f, 0.5f, 25f, 0.8f, 0.5f);
+
+            return c;
+        }
+    }
 }

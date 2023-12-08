@@ -33,6 +33,10 @@ public partial class PlayerAudio : Node3D
 	[Export] private Array<AudioGroupPlayer> _stepPlayers;
 	private string _currentGroup;
 
+	[ExportSubgroup("Vaulting")]
+	[Export] private AudioStreamPlayer3D _vaultIn;
+	[Export] private AudioStreamPlayer3D _vaultOut;
+
     public override void _Ready()
     {
 		CollisionChecker.OnGroupChange += GetStepGroup;
@@ -42,8 +46,9 @@ public partial class PlayerAudio : Node3D
 		PlayerSlide.SlideCurrentChange += PlaySlideLoop;
 
 		PlayerMovement.VelocityChange += PlayWindVelocity;
-		
-		
+
+		PlayerVault.PlayerVaulted += PlayVaultIn;
+		PlayerVault.PlayerVaultEnded += PlayVaultOut;
     }
 
     public override void _ExitTree()
@@ -55,6 +60,9 @@ public partial class PlayerAudio : Node3D
 		PlayerSlide.SlideCurrentChange -= PlaySlideLoop;
 
 		PlayerMovement.VelocityChange -= PlayWindVelocity;
+
+		PlayerVault.PlayerVaulted -= PlayVaultIn;
+		PlayerVault.PlayerVaultEnded -= PlayVaultOut;
     }
 
     public override void _Process(double delta)
@@ -74,6 +82,17 @@ public partial class PlayerAudio : Node3D
 		_windRun.PitchScale = Mathf.Lerp(_windRun.PitchScale, desiredPitch, _windLerpSpeed * (float)delta);
     }
     
+	private void PlayVaultIn()
+	{
+		_vaultIn.PitchScale = _rng.RandfRange(0.9f, 1.1f);
+		_vaultIn.Play();
+	}
+
+	private void PlayVaultOut()
+	{
+		_vaultOut.PitchScale = _rng.RandfRange(0.9f, 1.1f);
+		_vaultOut.Play();
+	}
 
 	private void GetStepGroup(string curGroup)
 	{
