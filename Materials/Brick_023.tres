@@ -19,5 +19,3 @@ ao_light_affect = 1.0
 ao_texture = ExtResource("2_khqtl")
 uv1_scale = Vector3(0.15, 0.15, 0.15)
 uv1_triplanar = true
-grow = true
-grow_amount = -0.375

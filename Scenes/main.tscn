@@ -1,76 +1,23 @@
-[gd_scene load_steps=177 format=3 uid="uid://k0g8l20jpn5l"]
+[gd_scene load_steps=26 format=3 uid="uid://k0g8l20jpn5l"]
 
 [ext_resource type="Material" uid="uid://ntptsm338blc" path="res://Materials/Brick_023.tres" id="1_0udfd"]
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="2_buung"]
 [ext_resource type="Sky" uid="uid://bb73jaefiwfku" path="res://Skys/CloudySkyStatic.tres" id="2_fb8vh"]
 [ext_resource type="Material" uid="uid://fdx6yjtfayq3" path="res://Materials/MetalPlates_008.tres" id="3_kljmn"]
-[ext_resource type="Script" path="res://Scripts/SmoothFollow.cs" id="4_3qx10"]
+[ext_resource type="Script" path="res://Scripts/RotateNode.cs" id="3_le5wj"]
 [ext_resource type="Material" uid="uid://c8xcc3vmdmxbn" path="res://Materials/MetalPlates_001.tres" id="4_ltx8g"]
 [ext_resource type="Material" uid="uid://dp2iwbk6t6n6n" path="res://Materials/Metal_028.tres" id="5_ewlxh"]
 [ext_resource type="AudioStream" uid="uid://d2vbmwo1pkv42" path="res://Sounds/ambience-forest-birds-wind-trees.mp3" id="5_ut7sm"]
 [ext_resource type="AudioStream" uid="uid://cfqac1mv8tg20" path="res://Sounds/ambience - air conditioner.wav" id="6_gcwv2"]
 [ext_resource type="Script" path="res://Scripts/SkyRotation.cs" id="6_y41ai"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovement.cs" id="7_6oseo"]
-[ext_resource type="Shader" path="res://Shaders/CustomMotionBlur.gdshader" id="7_8eu1m"]
+[ext_resource type="Material" uid="uid://c5aucr6b2khpp" path="res://Materials/Porcelain_001.tres" id="7_2ofnj"]
 [ext_resource type="Texture2D" uid="uid://ca74vr1r8xb2" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png" id="8_6mld0"]
-[ext_resource type="Script" path="res://Scripts/ScreenShake/CamShake.cs" id="8_8jcbx"]
 [ext_resource type="Texture2D" uid="uid://0by3punu7v0y" path="res://defaults/Underdog_logo.png" id="8_hsa46"]
+[ext_resource type="Material" uid="uid://db0hox3jwesrf" path="res://Materials/Tiles_072.tres" id="9_1aeek"]
 [ext_resource type="Texture2D" uid="uid://dd53cr7ij30yd" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png" id="9_6kb7u"]
 [ext_resource type="Script" path="res://Scripts/Stats.cs" id="10_6u0gq"]
 [ext_resource type="Texture2D" uid="uid://bopb2fir8dyh7" path="res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png" id="10_a7dfo"]
-[ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3" id="12_t4b2k"]
-[ext_resource type="AudioStream" uid="uid://b8r2advmi4wgo" path="res://Sounds/Sliding_Start.wav" id="14_emvrv"]
-[ext_resource type="Script" path="res://Scripts/PlayerAudio.cs" id="14_qnrjr"]
-[ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="15_1073p"]
-[ext_resource type="AudioStream" uid="uid://dkomonpu17na4" path="res://Sounds/Footsteps/Step_Concrete_01.wav" id="15_t83vw"]
-[ext_resource type="AudioStream" uid="uid://c33tjboynwb3v" path="res://Sounds/Sliding_Loop.wav" id="15_uhtwc"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerIdle.cs" id="16_ih01m"]
-[ext_resource type="Script" path="res://Scripts/AudioConditionPlayer.cs" id="16_usjuj"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWalk.cs" id="17_kvekw"]
-[ext_resource type="Script" path="res://Scripts/MotionBlur.cs" id="17_m4qlm"]
-[ext_resource type="AudioStream" uid="uid://crltxvt02ial0" path="res://Sounds/Footsteps/Step_Concrete_03.wav" id="17_xklfo"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSprint.cs" id="18_gq383"]
-[ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="18_ubo3h"]
-[ext_resource type="AudioStream" uid="uid://br4q8mftvwkcm" path="res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3" id="19_0mout"]
-[ext_resource type="Script" path="res://Scripts/AudioGroupPlayer.cs" id="19_3nwiw"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerAir.cs" id="19_ouu2s"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="20_defkf"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="21_fwljj"]
-[ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="22_bhw4s"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerVault.cs" id="22_k672s"]
-[ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="23_jghgi"]
-[ext_resource type="Script" path="res://Scripts/PlayerShaker.cs" id="23_wh8u3"]
-[ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="24_30l64"]
-[ext_resource type="Script" path="res://Scripts/CollisionChecker.cs" id="24_m1w80"]
-[ext_resource type="AudioStream" uid="uid://c128rhd8ppi73" path="res://Sounds/Wind_Run.wav" id="24_rjr40"]
-[ext_resource type="AudioStream" uid="uid://bsgtpiyabtbj2" path="res://Sounds/Landing_03.wav" id="25_s6jt8"]
-[ext_resource type="AudioStream" uid="uid://52qihh8ag6yp" path="res://Sounds/vault_02.wav" id="29_rh81q"]
-[ext_resource type="AudioStream" uid="uid://cvntjafcyfp7m" path="res://Sounds/Footsteps/Step_Water_02.wav" id="29_wo0ou"]
-[ext_resource type="AudioStream" uid="uid://hp3v8gjhbn05" path="res://Sounds/Footsteps/Step_Water_03.wav" id="30_g0clo"]
-[ext_resource type="Script" path="res://Scripts/PlayerParticles.cs" id="35_7x0ov"]
-[ext_resource type="Texture2D" uid="uid://b0kly854epj2c" path="res://Textures/Smoke/smoke_01.png" id="37_qfjmx"]
-[ext_resource type="Script" path="res://Scripts/PlayerPostProcessing.cs" id="39_1mow7"]
-[ext_resource type="Script" path="res://Scripts/NewStepper.cs" id="39_4d2yq"]
-[ext_resource type="Script" path="res://Scripts/LensFlareCheck.cs" id="40_0em2u"]
-[ext_resource type="Shader" path="res://Shaders/lensFlare.gdshader" id="41_mld4v"]
-[ext_resource type="Script" path="res://Scripts/LensFlare.cs" id="42_nmr1d"]
-[ext_resource type="AudioStream" uid="uid://02ti7sdyv444" path="res://Sounds/Jump_04.wav" id="43_d2kc4"]
-[ext_resource type="Script" path="res://Scripts/PostProcessingManager.cs" id="44_ovq4q"]
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="45_kwnku"]
-[ext_resource type="Script" path="res://Scripts/Vignette.cs" id="46_p1q4e"]
-[ext_resource type="Shader" path="res://Shaders/LensDistortion.gdshader" id="48_55lm8"]
-[ext_resource type="Script" path="res://Scripts/LensDistortion.cs" id="49_rylpy"]
-[ext_resource type="Shader" path="res://Shaders/ChromaticAbberation.gdshader" id="50_hpxmw"]
-[ext_resource type="Texture2D" uid="uid://bf081vhyrhce0" path="res://Shaders/CCOffset.png" id="51_p4la4"]
-[ext_resource type="Script" path="res://Scripts/ChromaticAbberation.cs" id="52_ndng6"]
-[ext_resource type="Shader" path="res://Shaders/RadialBlur.gdshader" id="53_nv0ba"]
-[ext_resource type="Script" path="res://Scripts/RadialBlur.cs" id="54_wo8ct"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vh4uj"]
-size = Vector3(14.795, 1, 7.7)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qhwn0"]
-size = Vector3(14.36, 1, 10.975)
+[ext_resource type="PackedScene" uid="uid://ddp62lqxgj3c2" path="res://Scenes/PlayerController/player.tscn" id="14_qv7ho"]
 
 [sub_resource type="Environment" id="Environment_2lvxy"]
 background_mode = 2
@@ -125,788 +72,6 @@ auto_exposure_max_sensitivity = 1500.0
 albedo = Color(0.137255, 0.188235, 0.196078, 1)
 edge_fade = 1.77531
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih85"]
-custom_solver_bias = 0.1
-radius = 0.2
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_45p4n"]
-custom_solver_bias = 0.1
-radius = 0.2
-height = 1.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhevj"]
-cull_mode = 2
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_02y88"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_u1e10"]
-radius = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvuuw"]
-albedo_color = Color(1, 0, 0.129412, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_v8w6w"]
-material = SubResource("StandardMaterial3D_kvuuw")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xog28"]
-render_priority = -1
-shader = ExtResource("7_8eu1m")
-shader_parameter/motion_blur_strength = 0.8
-shader_parameter/num_samples = 25
-shader_parameter/angular_velocity = Vector3(0, 0, 0)
-shader_parameter/linear_velocity = null
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ws75k"]
-
-[sub_resource type="SystemFont" id="SystemFont_f244o"]
-font_names = PackedStringArray("Evil Empire")
-subpixel_positioning = 0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_q80lt"]
-
-[sub_resource type="Animation" id="Animation_cnodb"]
-resource_name = "idle"
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_fyquc"]
-resource_name = "inAir"
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_s6r41"]
-resource_name = "jump"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CamHead:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.0872665, 0, 0.0523599), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CamHead:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.2, 0), Vector3(0, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../PlayerAudio")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [NodePath("Jump"), ExtResource("18_ubo3h")],
-"method": &"PlayAnyAudio"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_mv1ru"]
-resource_name = "landing"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CamHead:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.0523599, 0, 0.0349066), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CamHead:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.2, 0), Vector3(0, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../PlayerAudio")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Quaternion(0, 0, 0, 1)],
-"method": &"PlayAudioCondition"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_fyqsm"]
-resource_name = "landing_2"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CamHead:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.10472, 0, 0.0349066), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CamHead:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.3, 0), Vector3(0, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../../../PlayerAudio")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [Quaternion(0, 0, 0, 1)],
-"method": &"PlayAudioCondition"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_2rrkf"]
-resource_name = "roll"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CamHead:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.45),
-"transitions": PackedFloat32Array(1, 1.68179, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-3.14159, 0, -0.0872665), Vector3(-6.28319, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CamHead:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.45),
-"transitions": PackedFloat32Array(1, 1.68179, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_t5xc0"]
-resource_name = "slideEnd"
-length = 0.1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../PlayerAudio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [NodePath("Slide_Loop")],
-"method": &"StopCurrentAudio"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_s1caf"]
-resource_name = "slideIn"
-length = 0.15
-
-[sub_resource type="Animation" id="Animation_8fbkp"]
-resource_name = "slideLoop"
-length = 0.5
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_3fs13"]
-resource_name = "sprint"
-length = 0.48
-loop_mode = 1
-step = 0.05
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("../../../../PlayerAudio/Step")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 0.2744,
-"start_offset": 0.0,
-"stream": ExtResource("12_t4b2k")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("12_t4b2k")
-}],
-"times": PackedFloat32Array(0.1, 0.34)
-}
-tracks/0/use_blend = true
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../PlayerAudio")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.34),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"PlayStepSound"
-}, {
-"args": [],
-"method": &"PlayStepSound"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_odk61"]
-resource_name = "vault"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CamHead:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.8),
-"transitions": PackedFloat32Array(1, 0.517632, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.261799, 0, -0.0523599), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_bqt7j"]
-resource_name = "walk"
-loop_mode = 1
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("../../../../PlayerAudio/Step")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 0.157791,
-"start_offset": 0.0,
-"stream": ExtResource("12_t4b2k")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("12_t4b2k")
-}],
-"times": PackedFloat32Array(0.1, 0.6)
-}
-tracks/0/use_blend = true
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../PlayerAudio")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"PlayStepSound"
-}, {
-"args": [],
-"method": &"PlayStepSound"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nnwjw"]
-_data = {
-"idle": SubResource("Animation_cnodb"),
-"inAir": SubResource("Animation_fyquc"),
-"jump": SubResource("Animation_s6r41"),
-"landing": SubResource("Animation_mv1ru"),
-"landing_2": SubResource("Animation_fyqsm"),
-"roll": SubResource("Animation_2rrkf"),
-"slideEnd": SubResource("Animation_t5xc0"),
-"slideIn": SubResource("Animation_s1caf"),
-"slideLoop": SubResource("Animation_8fbkp"),
-"sprint": SubResource("Animation_3fs13"),
-"vault": SubResource("Animation_odk61"),
-"walk": SubResource("Animation_bqt7j")
-}
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dct41"]
-size = Vector3(0.25, 1.005, 0.25)
-
-[sub_resource type="Resource" id="Resource_8pc76"]
-script = ExtResource("16_usjuj")
-value = 0.1
-groups = PackedStringArray("Concrete")
-stream = ExtResource("15_t83vw")
-
-[sub_resource type="Resource" id="Resource_jblmc"]
-script = ExtResource("16_usjuj")
-value = 0.1
-groups = PackedStringArray("Metal")
-stream = ExtResource("22_bhw4s")
-
-[sub_resource type="Resource" id="Resource_yks4n"]
-script = ExtResource("16_usjuj")
-value = 0.1
-groups = PackedStringArray("Water")
-stream = ExtResource("24_30l64")
-
-[sub_resource type="Resource" id="Resource_svp0c"]
-script = ExtResource("16_usjuj")
-value = 7.0
-groups = PackedStringArray("Concrete", "Metal", "Water")
-stream = ExtResource("25_s6jt8")
-
-[sub_resource type="Resource" id="Resource_mcu8n"]
-script = ExtResource("16_usjuj")
-value = 50.0
-groups = PackedStringArray("Concrete", "Metal", "Water")
-stream = ExtResource("19_0mout")
-
-[sub_resource type="Resource" id="Resource_p2n1p"]
-script = ExtResource("19_3nwiw")
-groups = PackedStringArray("Concrete")
-streams = Array[AudioStream]([ExtResource("15_t83vw"), ExtResource("17_xklfo")])
-
-[sub_resource type="Resource" id="Resource_in3s0"]
-script = ExtResource("19_3nwiw")
-groups = PackedStringArray("Metal")
-streams = Array[AudioStream]([ExtResource("22_bhw4s"), ExtResource("23_jghgi")])
-
-[sub_resource type="Resource" id="Resource_haxqx"]
-script = ExtResource("19_3nwiw")
-groups = PackedStringArray("Water")
-streams = Array[AudioStream]([ExtResource("24_30l64"), ExtResource("29_wo0ou"), ExtResource("30_g0clo")])
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sp35n"]
-render_priority = 2
-blend_mode = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("37_qfjmx")
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-proximity_fade_enabled = true
-
-[sub_resource type="Gradient" id="Gradient_53s43"]
-offsets = PackedFloat32Array(0, 0.033557, 1)
-colors = PackedColorArray(0.2, 0.2, 0.2, 0, 0.176471, 0.176471, 0.176471, 0.0941176, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cvkwj"]
-gradient = SubResource("Gradient_53s43")
-use_hdr = true
-
-[sub_resource type="Curve" id="Curve_6f520"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.306991, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.294737), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_f1t1n"]
-curve = SubResource("Curve_6f520")
-
-[sub_resource type="Curve" id="Curve_sa8hl"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.457002, 0.694737), 1.82606, 1.82606, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_cc8b5"]
-curve = SubResource("Curve_sa8hl")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q7j5n"]
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0.1, 1, 0.1)
-angular_velocity_min = -85.49
-angular_velocity_max = 60.0
-angle_min = -136.0
-angle_max = 57.0
-scale_min = 3.0
-scale_max = 4.0
-scale_curve = SubResource("CurveTexture_f1t1n")
-color_ramp = SubResource("GradientTexture1D_cvkwj")
-hue_variation_min = -0.02
-hue_variation_max = 0.01
-turbulence_enabled = true
-turbulence_noise_scale = 1.0
-turbulence_noise_speed_random = 0.55
-turbulence_influence_min = 0.01
-turbulence_influence_max = 0.03
-turbulence_influence_over_life = SubResource("CurveTexture_cc8b5")
-anim_speed_max = 7.37
-anim_offset_max = 0.5674
-
-[sub_resource type="QuadMesh" id="QuadMesh_s1a8d"]
-
-[sub_resource type="Curve" id="Curve_qx1js"]
-max_value = 2.0
-_data = [Vector2(0, 0.778947), 0.0, 0.0, 0, 0, Vector2(0.477204, 1.01053), 1.61077, 1.61077, 0, 0, Vector2(1, 1.85263), -0.71039, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_tauu7"]
-curve = SubResource("Curve_qx1js")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kolqo"]
-direction = Vector3(0, 0, 0.76)
-spread = 0.0
-gravity = Vector3(0, 0.035, 0.1)
-initial_velocity_min = 1.5
-initial_velocity_max = 2.0
-angular_velocity_min = -85.49
-angular_velocity_max = 60.0
-angle_min = -136.0
-angle_max = 57.0
-scale_min = 0.0
-scale_max = 3.0
-scale_curve = SubResource("CurveTexture_tauu7")
-color_ramp = SubResource("GradientTexture1D_cvkwj")
-hue_variation_min = -0.02
-hue_variation_max = 0.01
-turbulence_enabled = true
-turbulence_noise_strength = 0.32
-turbulence_noise_scale = 0.6
-turbulence_noise_speed_random = 0.55
-turbulence_influence_min = 0.01
-turbulence_influence_max = 0.03
-turbulence_influence_over_life = SubResource("CurveTexture_cc8b5")
-anim_speed_max = 7.37
-anim_offset_max = 0.5674
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kvqnj"]
-radius = 0.225
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_055na"]
-shading_mode = 0
-albedo_color = Color(0.160784, 1, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_kv8y1"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8mn46"]
-animation = &"inAir"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1qrv"]
-animation = &"landing"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yfss1"]
-animation = &"landing_2"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5nbb8"]
-animation = &"roll"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w7vnc"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ni3y"]
-priority = 3
-advance_mode = 2
-advance_expression = "abs(lastVelocity.y) > 0.1 && is_on_floor()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ypmx6"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rnysl"]
-advance_mode = 0
-advance_expression = "abs(lastVelocity.y) > 10 && is_on_floor()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbk3i"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4il3p"]
-priority = 2
-advance_mode = 2
-advance_expression = "abs(lastVelocity.y) > 7 && is_on_floor()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_adj0t"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i7tfk"]
-states/End/position = Vector2(906, 100)
-states/inAir/node = SubResource("AnimationNodeAnimation_8mn46")
-states/inAir/position = Vector2(427, 166)
-states/landing/node = SubResource("AnimationNodeAnimation_i1qrv")
-states/landing/position = Vector2(649, 212)
-states/landing_2/node = SubResource("AnimationNodeAnimation_yfss1")
-states/landing_2/position = Vector2(636, 142)
-states/roll/node = SubResource("AnimationNodeAnimation_5nbb8")
-states/roll/position = Vector2(649, 73)
-transitions = ["Start", "inAir", SubResource("AnimationNodeStateMachineTransition_w7vnc"), "inAir", "landing", SubResource("AnimationNodeStateMachineTransition_5ni3y"), "landing", "End", SubResource("AnimationNodeStateMachineTransition_ypmx6"), "inAir", "roll", SubResource("AnimationNodeStateMachineTransition_rnysl"), "roll", "End", SubResource("AnimationNodeStateMachineTransition_sbk3i"), "inAir", "landing_2", SubResource("AnimationNodeStateMachineTransition_4il3p"), "landing_2", "End", SubResource("AnimationNodeStateMachineTransition_adj0t")]
-graph_offset = Vector2(116, 29)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hh0uo"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_te1gy"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_inxpx"]
-animation = &"sprint"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lw5tv"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sjibs"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5movq"]
-advance_mode = 2
-advance_expression = "abs(currentSpeed) >= 6f"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iygv1"]
-reset = false
-advance_mode = 2
-advance_expression = "abs(currentSpeed) < 5.5f"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gayc6"]
-states/sprint/node = SubResource("AnimationNodeAnimation_inxpx")
-states/sprint/position = Vector2(502, 3)
-states/walk/node = SubResource("AnimationNodeAnimation_lw5tv")
-states/walk/position = Vector2(502, 107)
-transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_sjibs"), "walk", "sprint", SubResource("AnimationNodeStateMachineTransition_5movq"), "sprint", "walk", SubResource("AnimationNodeStateMachineTransition_iygv1")]
-graph_offset = Vector2(135, -57)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xj4o0"]
-animation = &"slideIn"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_unu2p"]
-animation = &"slideLoop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fbfwc"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h0qug"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cncgq"]
-advance_mode = 2
-advance_expression = "slideTimer < 0.1f"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m7npm"]
-states/End/position = Vector2(872, 91)
-states/Start/position = Vector2(199, 91)
-states/slideIn/node = SubResource("AnimationNodeAnimation_xj4o0")
-states/slideIn/position = Vector2(388, 91)
-states/slideLoop/node = SubResource("AnimationNodeAnimation_unu2p")
-states/slideLoop/position = Vector2(629, 91)
-transitions = ["Start", "slideIn", SubResource("AnimationNodeStateMachineTransition_fbfwc"), "slideIn", "slideLoop", SubResource("AnimationNodeStateMachineTransition_h0qug"), "slideLoop", "End", SubResource("AnimationNodeStateMachineTransition_cncgq")]
-graph_offset = Vector2(84, -45)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rht2b"]
-animation = &"vault"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohbtc"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_58yxs"]
-advance_mode = 2
-advance_condition = &"moving"
-advance_expression = "abs(velocity.length()) > 1f
-
-
-"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ok72i"]
-advance_mode = 2
-advance_condition = &"idle"
-advance_expression = "
-
-
-
-
-
-
-
-
-
-
-
-
-
-"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_onf81"]
-advance_mode = 2
-advance_condition = &"jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g16to"]
-advance_mode = 2
-advance_condition = &"jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0e8h0"]
-priority = 2
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"inAir"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jqjf7"]
-advance_mode = 2
-advance_condition = &"inAir"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_osb1d"]
-advance_mode = 2
-advance_condition = &"inAir"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nuq7q"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"moving"
-advance_expression = "
-"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k00lm"]
-advance_mode = 2
-advance_condition = &"jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kbohn"]
-xfade_time = 0.2
-priority = 2
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bysxd"]
-priority = 3
-advance_mode = 2
-advance_condition = &"inAir"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fuksl"]
-xfade_time = 0.15
-switch_mode = 2
-advance_mode = 2
-advance_expression = "slideTimer > 0.1f"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x8jey"]
-advance_mode = 2
-advance_expression = "slideTimer > 0.1f"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2wr2a"]
-priority = 2
-advance_mode = 2
-advance_condition = &"moving"
-advance_expression = "abs(velocity.length()) > 1f"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8wsku"]
-advance_mode = 2
-advance_condition = &"jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pl3ga"]
-advance_mode = 2
-advance_condition = &"vault"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u4wft"]
-advance_mode = 2
-advance_condition = &"vault"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ljx6"]
-advance_mode = 2
-advance_condition = &"vault"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iep2u"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6105d"]
-priority = 2
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"inAir"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_up3li"]
-advance_mode = 2
-advance_condition = &"vault"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4ibcj"]
-states/Start/position = Vector2(820, -52)
-states/air/node = SubResource("AnimationNodeStateMachine_i7tfk")
-states/air/position = Vector2(403, -247)
-states/idle/node = SubResource("AnimationNodeAnimation_hh0uo")
-states/idle/position = Vector2(672, -52)
-states/jump/node = SubResource("AnimationNodeAnimation_te1gy")
-states/jump/position = Vector2(520, -44)
-states/move/node = SubResource("AnimationNodeStateMachine_gayc6")
-states/move/position = Vector2(403, 81)
-states/sliding/node = SubResource("AnimationNodeStateMachine_m7npm")
-states/sliding/position = Vector2(7, -44)
-states/vault/node = SubResource("AnimationNodeAnimation_rht2b")
-states/vault/position = Vector2(301, -90)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku"), "air", "vault", SubResource("AnimationNodeStateMachineTransition_pl3ga"), "sliding", "vault", SubResource("AnimationNodeStateMachineTransition_u4wft"), "move", "vault", SubResource("AnimationNodeStateMachineTransition_5ljx6"), "vault", "move", SubResource("AnimationNodeStateMachineTransition_iep2u"), "vault", "air", SubResource("AnimationNodeStateMachineTransition_6105d"), "jump", "vault", SubResource("AnimationNodeStateMachineTransition_up3li")]
-graph_offset = Vector2(-129, -199)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_osdti"]
-graph_offset = Vector2(-330, 141)
-nodes/moveState/node = SubResource("AnimationNodeStateMachine_4ibcj")
-nodes/moveState/position = Vector2(-220, 120)
-node_connections = [&"output", 0, &"moveState"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1ov6"]
-shader = ExtResource("41_mld4v")
-shader_parameter/sun_position = Vector2(0, 0)
-shader_parameter/tint = Vector3(1.4, 1.2, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3222"]
-shader = ExtResource("45_kwnku")
-shader_parameter/vignette_intensity = 0.56
-shader_parameter/vignette_opacity = 0.1
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8p74"]
-shader = ExtResource("48_55lm8")
-shader_parameter/zoom = 25.0
-shader_parameter/pDir = false
-shader_parameter/noWrap = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnhql"]
-shader = ExtResource("50_hpxmw")
-shader_parameter/strength = 0.0
-shader_parameter/offset_image = ExtResource("51_p4la4")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l06ac"]
-shader = ExtResource("53_nv0ba")
-shader_parameter/blur_center = Vector2(0.5, 0.5)
-shader_parameter/blur_power = 0.0
-shader_parameter/sampling_count = 6
-
 [sub_resource type="SystemFont" id="SystemFont_36c0q"]
 font_names = PackedStringArray("Evil Empire")
 
@@ -915,7 +80,71 @@ font = SubResource("SystemFont_36c0q")
 font_size = 45
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vh4uj"]
+size = Vector3(14.795, 1, 7.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhwn0"]
+size = Vector3(14.36, 1, 10.975)
+
 [node name="World" type="Node3D"]
+
+[node name="Env" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_2lvxy")
+camera_attributes = SubResource("CameraAttributesPractical_12m36")
+script = ExtResource("6_y41ai")
+_skyRotationSpeed = 5.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Env"]
+transform = Transform3D(0.670322, -0.49063, -0.556732, 0.731733, 0.561811, 0.385922, 0.123433, -0.666071, 0.735604, -440.325, 303.127, 575.868)
+visible = false
+light_color = Color(1, 0.792157, 0.623529, 1)
+light_energy = 113.83
+light_volumetric_fog_energy = 149.895
+spot_range = 4096.0
+spot_angle = 13.49
+
+[node name="MainLight" type="DirectionalLight3D" parent="Env"]
+unique_name_in_owner = true
+transform = Transform3D(0.737441, -0.465323, -0.489546, 0.674274, 0.46515, 0.573577, -0.0391859, -0.753067, 0.656776, 0, 4.64027, 3.57474)
+light_color = Color(0.966428, 0.88712, 0.75687, 1)
+light_energy = 6.756
+light_indirect_energy = 5.517
+shadow_enabled = true
+shadow_reverse_cull_face = true
+script = ExtResource("3_le5wj")
+_rotationSpeed = 0.005
+
+[node name="FogVolume" type="FogVolume" parent="Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66663, -37.8649, -32.0982)
+size = Vector3(1000, 30, 1000)
+material = SubResource("FogMaterial_d1576")
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_fpsLabel")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_6u0gq")
+_fpsLabel = NodePath("Stats/UI/FPS")
+
+[node name="Stats" type="CanvasGroup" parent="UI"]
+
+[node name="UI" type="CanvasLayer" parent="UI/Stats"]
+layer = 2
+
+[node name="FPS" type="Label" parent="UI/Stats/UI"]
+layout_direction = 3
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 78.0
+offset_bottom = 58.0
+text = "FPS:"
+label_settings = SubResource("LabelSettings_oj2fi")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="Stage" type="Node3D" parent="."]
 
@@ -963,6 +192,289 @@ material_override = ExtResource("3_kljmn")
 use_collision = true
 collision_layer = 2
 size = Vector3(20, 1, 1)
+
+[node name="Node3D9" type="Node3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.149, -50.5, 0.979828)
+
+[node name="ConcreteCSGBox3D" type="CSGBox3D" parent="Stage/Node3D9" groups=["Concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5603, 24.625, -14.4135)
+material_override = ExtResource("1_0udfd")
+use_collision = true
+collision_layer = 2
+size = Vector3(33.1206, 50.25, 50.8128)
+
+[node name="ConcreteCSGBox3D2" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50, -14.9798)
+material_override = ExtResource("7_2ofnj")
+use_collision = true
+collision_layer = 2
+size = Vector3(20.9341, 1, 50.5787)
+
+[node name="ConcreteCSGBox3D3" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -0.291092, 55.3673, 10.3813)
+material_override = ExtResource("5_ewlxh")
+use_collision = true
+collision_layer = 2
+size = Vector3(10.1996, 1, 20.7944)
+
+[node name="ConcreteCSGBox3D17" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -0.38167, 60.398, 10.3668)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(0.441013, 1.18091, 20.7051)
+
+[node name="ConcreteCSGBox3D5" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 16.561, 53.0175, 10.4262)
+material_override = ExtResource("9_1aeek")
+use_collision = true
+collision_layer = 2
+size = Vector3(6.5, 0.910156, 13.4985)
+
+[node name="ConcreteCSGBox3D18" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 16.5617, 56.4668, 10.3983)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(0.39856, 0.965942, 13.5)
+
+[node name="ConcreteCSGBox3D4" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 16.682, 52.892, -9.50711)
+material_override = ExtResource("5_ewlxh")
+use_collision = true
+collision_layer = 2
+size = Vector3(6.5, 13.1079, 39.75)
+
+[node name="ConcreteCSGBox3D16" type="CSGBox3D" parent="Stage/Node3D9" groups=["Concrete"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 16.611, 56.2237, -9.80231)
+material_override = ExtResource("2_buung")
+use_collision = true
+collision_layer = 2
+size = Vector3(0.663574, 13.25, 39.5)
+
+[node name="ConcreteCSGBox3D6" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 16.6651, 51.3248, -34.8967)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.75, 13, 11.75)
+
+[node name="ConcreteCSGBox3D7" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 16.7139, 51.3248, -43.8731)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.75, 4.95282, 6.20264)
+
+[node name="ConcreteCSGBox3D12" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.9875, 27.524, -45.9047)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.5, 0.5)
+
+[node name="ConcreteCSGBox3D19" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.8625, 31.274, -50.2797)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.1, 0.25)
+
+[node name="ConcreteCSGBox3D20" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.8625, 31.274, -57.5297)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.1, 0.25)
+
+[node name="ConcreteCSGBox3D23" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 13.1482, 54.024, -57.5297)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.63513, 0.1, 0.25)
+
+[node name="ConcreteCSGBox3D24" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 11.3982, 30.9011, -57.5297)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(46.3809, 0.19, 0.35)
+
+[node name="ConcreteCSGBox3D25" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 13.1482, 54.024, -50.2797)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.63513, 0.1, 0.25)
+
+[node name="ConcreteCSGBox3D26" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 11.3982, 30.9011, -50.2797)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(46.3809, 0.19, 0.35)
+
+[node name="ConcreteCSGBox3D27" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, 0, 8.74228e-08, -7.64274e-15, -1, 20.6482, 54.024, -55.0297)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.63513, 0.1, 0.25)
+
+[node name="ConcreteCSGBox3D28" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-1.31134e-07, -1, 8.74228e-08, -1, 1.31134e-07, 0, -1.14641e-14, -8.74228e-08, -1, 22.3982, 30.9011, -55.0297)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(46.3809, 0.19, 0.35)
+
+[node name="ConcreteCSGBox3D29" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, -8.74228e-08, -1, 0, 8.74228e-08, -7.64274e-15, -1, 20.6482, 54.024, -62.2797)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.63513, 0.1, 0.25)
+
+[node name="ConcreteCSGBox3D30" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-1.31134e-07, -1, 8.74228e-08, -1, 1.31134e-07, 0, -1.14641e-14, -8.74228e-08, -1, 22.3982, 30.9011, -62.2797)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(46.3809, 0.19, 0.35)
+
+[node name="ConcreteCSGBox3D21" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.8625, 31.274, -54.2797)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.13, 0.25)
+
+[node name="ConcreteCSGBox3D22" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.8625, 31.274, -61.5297)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.13, 0.25)
+
+[node name="ConcreteCSGBox3D13" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.4875, 27.524, -45.9047)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.5, 0.5)
+
+[node name="ConcreteCSGBox3D14" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.9875, 27.524, -41.6547)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.5, 0.5)
+
+[node name="ConcreteCSGBox3D15" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.4875, 27.524, -41.6547)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(44.2065, 0.5, 0.5)
+
+[node name="ConcreteCSGBox3D8" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 14.9014, 55.0748, -53.8759)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(3.75, 0.25, 11.5)
+
+[node name="ConcreteCSGBox3D9" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 18.8625, 55.6998, -58.1259)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(5, 0.25, 11.5)
+
+[node name="ConcreteCSGBox3D10" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 17.6054, 52.1998, -79.6259)
+material_override = ExtResource("7_2ofnj")
+use_collision = true
+collision_layer = 2
+size = Vector3(11, 0.53891, 11.5)
+
+[node name="ConcreteCSGBox3D35" type="CSGBox3D" parent="Stage/Node3D9" groups=["Tile"]]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 17.6054, 21.5943, -79.6259)
+material_override = ExtResource("1_0udfd")
+use_collision = true
+collision_layer = 2
+size = Vector3(11, 60.75, 11.5)
+
+[node name="ConcreteCSGBox3D31" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 17.5058, 52.2163, -74.0009)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(11.1992, 0.571777, 0.75)
+
+[node name="ConcreteCSGBox3D33" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 17.5058, 52.2163, -85.0009)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(11.1992, 0.571777, 0.75)
+
+[node name="ConcreteCSGBox3D32" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, 4.65882e-22, 1, 1.06581e-14, 1, 0, -1, 1.06581e-14, -4.37114e-08, 23.1054, 52.2417, -79.5289)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(11.8928, 0.622681, 0.75)
+
+[node name="ConcreteCSGBox3D34" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, 4.65882e-22, 1, 1.06581e-14, 1, 0, -1, 1.06581e-14, -4.37114e-08, 11.8554, 52.2417, -79.5289)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(11.8928, 0.622681, 0.75)
+
+[node name="MetalCSGBox3D3" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50.05, 10.5202)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D7" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9814, 50.05, 10.5202)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(12.7607, 1, 1)
+
+[node name="MetalCSGBox3D4" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50.05, -40.1659)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D5" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, -10.399, 50.05, -14.7798)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(46.6631, 1, 1)
+
+[node name="MetalCSGBox3D6" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, 10.351, 50.05, -14.8284)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(46.5757, 1, 1)
+
+[node name="MetalCSGBox3D75" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.49996, 51, -36.25)
+material_override = ExtResource("4_ltx8g")
+use_collision = true
+collision_layer = 2
+size = Vector3(2, 1.2, 2)
 
 [node name="Node3D7" type="Node3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.351, -18.4101, -139.77)
@@ -1079,7 +591,7 @@ use_collision = true
 collision_layer = 2
 size = Vector3(42.615, 1, 1)
 
-[node name="RampCSGBox3" type="CSGBox3D" parent="Stage/Node3D7" groups=["Metal"]]
+[node name="RampCSGBox3" type="CSGBox3D" parent="Stage/Node3D7" groups=["Tile"]]
 transform = Transform3D(-1, 3.49996e-08, -8.0111e-08, 0, 0.916362, 0.400349, 8.74228e-08, 0.400349, -0.916363, 0.352699, 40.657, 32.3338)
 material_override = ExtResource("5_ewlxh")
 use_collision = true
@@ -1145,7 +657,7 @@ use_collision = true
 collision_layer = 2
 size = Vector3(11.85, 0.5, 0.5)
 
-[node name="RampCSGBox2" type="CSGBox3D" parent="Stage/Node3D6" groups=["Metal"]]
+[node name="RampCSGBox2" type="CSGBox3D" parent="Stage/Node3D6" groups=["Tile"]]
 transform = Transform3D(-0.0143402, 0.607957, 0.79384, -0.000849767, 0.793913, -0.608029, -0.999897, -0.00939385, -0.0108683, -14.3503, 52.5511, -0.0896988)
 material_override = ExtResource("5_ewlxh")
 use_collision = true
@@ -2317,539 +1829,4 @@ monitoring = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96046e-08, -0.75, -1.8746)
 shape = SubResource("BoxShape3D_qhwn0")
 
-[node name="Env" type="Node3D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
-environment = SubResource("Environment_2lvxy")
-camera_attributes = SubResource("CameraAttributesPractical_12m36")
-script = ExtResource("6_y41ai")
-_skyRotationSpeed = 5.0
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Env"]
-transform = Transform3D(0.670322, -0.49063, -0.556732, 0.731733, 0.561811, 0.385922, 0.123433, -0.666071, 0.735604, -440.325, 303.127, 575.868)
-visible = false
-light_color = Color(1, 0.792157, 0.623529, 1)
-light_energy = 113.83
-light_volumetric_fog_energy = 149.895
-spot_range = 4096.0
-spot_angle = 13.49
-
-[node name="MainLight" type="DirectionalLight3D" parent="Env"]
-unique_name_in_owner = true
-transform = Transform3D(0.737441, -0.465323, -0.489546, 0.674274, 0.46515, 0.573577, -0.0391859, -0.753067, 0.656776, 0, 4.64027, 3.57474)
-light_color = Color(0.966428, 0.88712, 0.75687, 1)
-light_energy = 6.756
-light_indirect_energy = 5.517
-shadow_enabled = true
-shadow_reverse_cull_face = true
-
-[node name="FogVolume" type="FogVolume" parent="Env"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66663, -37.8649, -32.0982)
-size = Vector3(1000, 30, 1000)
-material = SubResource("FogMaterial_d1576")
-
-[node name="ResetPos" type="Node3D" parent="."]
-
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "ceilingRay", "_vaultRay", "_vaultCast", "_stepCast", "_vaultGizmo", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7845, 32.0904, -140.763)
-collision_mask = 15
-floor_max_angle = 1.13446
-floor_snap_length = 0.3
-script = ExtResource("7_6oseo")
-_resetPosition = NodePath("../ResetPos")
-_standingCollider = NodePath("Standing_collision_shape")
-_animator = NodePath("AnimationTree")
-_jumpVelocity = 5.7
-_coyoteTime = 0.25
-_zRotationLerp = 2.0
-_zClamp = 2.0
-_crouchingCollider = NodePath("Crouching_collision_shape")
-ceilingRay = NodePath("CeilingRay")
-slideSpeed = 20.0
-_vaultRay = NodePath("Vaulter/VaultRay")
-_vaultCast = NodePath("Vaulter/VaultRay/VaultCast")
-_stepCast = NodePath("Vaulter/StepCast")
-_vaultGizmo = NodePath("Vaulter/VaultRay/VaultCast/VaultGizmo")
-vaultMomentum = 12.0
-vaultJumpVelocity = 5.0
-mouseSensitivityX = 0.25
-mouseSensitivityY = 0.2
-_freeLookTilt = 8.0
-_camera = NodePath("Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D")
-_maxFov = 120.0
-_velocityExponent = 5.0
-_maxPlayerVelocity = 17.0
-_fovLerpSpeed = 3.0
-_speedLabel = NodePath("../UI/PostProcessingManager/UI/Velocity")
-_momentumLabel = NodePath("../UI/PostProcessingManager/UI/Momentum")
-_stateLabel = NodePath("../UI/PostProcessingManager/UI/State")
-_animationLabel = NodePath("../UI/PostProcessingManager/UI/Animation")
-_desiredSpeedLabel = NodePath("../UI/PostProcessingManager/UI/Desired Speed")
-_previousStateLabel = NodePath("../UI/PostProcessingManager/UI/Previous State")
-
-[node name="FSM" type="Node" parent="Player" node_paths=PackedStringArray("CurrentState")]
-script = ExtResource("15_1073p")
-CurrentState = NodePath("PlayerIdle")
-
-[node name="PlayerIdle" type="Node" parent="Player/FSM"]
-script = ExtResource("16_ih01m")
-
-[node name="PlayerWalk" type="Node" parent="Player/FSM"]
-script = ExtResource("17_kvekw")
-
-[node name="PlayerSprint" type="Node" parent="Player/FSM"]
-script = ExtResource("18_gq383")
-
-[node name="PlayerAir" type="Node" parent="Player/FSM"]
-script = ExtResource("19_ouu2s")
-
-[node name="PlayerCrouch" type="Node" parent="Player/FSM"]
-script = ExtResource("20_defkf")
-
-[node name="PlayerSlide" type="Node" parent="Player/FSM"]
-script = ExtResource("21_fwljj")
-
-[node name="PlayerVault" type="Node" parent="Player/FSM"]
-script = ExtResource("22_k672s")
-
-[node name="Standing_collision_shape" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_yih85")
-
-[node name="Crouching_collision_shape" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("CapsuleShape3D_45p4n")
-disabled = true
-
-[node name="CapsuleMesh" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_bhevj")
-cast_shadow = 3
-mesh = SubResource("CapsuleMesh_02y88")
-
-[node name="Vaulter" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99505, -0.34816)
-
-[node name="VaultRay" type="RayCast3D" parent="Player/Vaulter"]
-collision_mask = 2
-debug_shape_custom_color = Color(0.976471, 0, 0.396078, 1)
-debug_shape_thickness = 1
-
-[node name="VaultCast" type="ShapeCast3D" parent="Player/Vaulter/VaultRay"]
-shape = SubResource("SphereShape3D_u1e10")
-target_position = Vector3(0, 0, 0)
-collision_mask = 2
-debug_shape_custom_color = Color(0, 1, 0.160784, 1)
-
-[node name="VaultGizmo" type="MeshInstance3D" parent="Player/Vaulter/VaultRay/VaultCast"]
-transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
-mesh = SubResource("SphereMesh_v8w6w")
-skeleton = NodePath("../..")
-
-[node name="StepCast" type="ShapeCast3D" parent="Player/Vaulter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.66592, -0.02211)
-shape = SubResource("SphereShape3D_u1e10")
-target_position = Vector3(0, 0, 0)
-collision_mask = 8
-
-[node name="CeilingRay" type="RayCast3D" parent="Player"]
-target_position = Vector3(0, 2, 0)
-collision_mask = 2
-
-[node name="Mesh" type="Node3D" parent="Player"]
-
-[node name="Neck" type="Node3D" parent="Player/Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-
-[node name="Head" type="Node3D" parent="Player/Mesh/Neck"]
-
-[node name="Eyes" type="Node3D" parent="Player/Mesh/Neck/Head"]
-
-[node name="CamHead" type="Node3D" parent="Player/Mesh/Neck/Head/Eyes"]
-
-[node name="CameraShaker" type="Area3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead"]
-script = ExtResource("8_8jcbx")
-
-[node name="Camera3D" type="Camera3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker"]
-unique_name_in_owner = true
-current = true
-fov = 92.0
-script = ExtResource("4_3qx10")
-_smoothSpeed = 50.0
-
-[node name="PostProcessing" type="Node3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D"]
-
-[node name="Motion_Blur" type="MeshInstance3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D/PostProcessing"]
-transform = Transform3D(0.970132, 0, 0, 0, -2.0539e-08, -0.469877, 0, 0.469877, -2.0539e-08, 0, -0.00364721, -0.145425)
-visible = false
-material_override = SubResource("ShaderMaterial_xog28")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_ws75k")
-skeleton = NodePath("")
-script = ExtResource("17_m4qlm")
-
-[node name="UI" type="Node3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
-visible = false
-
-[node name="Label3D" type="Label3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D/UI"]
-transform = Transform3D(0.204795, 0, 0.00917431, 0, 0.205, 0, -0.00917431, 0, 0.204795, -1.6109, 2.71061, -0.928886)
-layers = 2
-double_sided = false
-no_depth_test = true
-fixed_size = true
-render_priority = 2
-outline_render_priority = 2
-outline_modulate = Color(0.0196078, 0.0196078, 0.0196078, 1)
-text = "FPS:"
-font = SubResource("SystemFont_f244o")
-font_size = 82
-outline_size = 7
-uppercase = true
-
-[node name="AudioListener3D" type="AudioListener3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D"]
-current = true
-
-[node name="ShakeCollider" type="CollisionShape3D" parent="Player/Mesh/Neck/Head/Eyes/CamHead/CameraShaker"]
-shape = SubResource("SphereShape3D_q80lt")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Mesh/Neck/Head/Eyes"]
-libraries = {
-"": SubResource("AnimationLibrary_nnwjw")
-}
-
-[node name="CollisionChecker" type="Area3D" parent="Player"]
-collision_mask = 14
-script = ExtResource("24_m1w80")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CollisionChecker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293706, 0)
-shape = SubResource("BoxShape3D_dct41")
-
-[node name="PlayerAudio" type="Node3D" parent="Player" node_paths=PackedStringArray("_windRun", "_slideIn", "_slideLoop", "_land", "_step", "_vaultIn", "_vaultOut")]
-script = ExtResource("14_qnrjr")
-_windRun = NodePath("Run_Wind")
-_maxWindVolume = -10.0
-_minWindPitch = 0.9
-_maxwindPitch = 1.35
-_maxPlayerVelocity = 12.0
-_windLerpSpeed = 1.0
-_velocityExponent = 5.0
-_slideIn = NodePath("Slide_Start")
-_slideLoop = NodePath("Slide_Loop")
-_land = NodePath("Landed")
-_landPlayers = Array[Object]([SubResource("Resource_8pc76"), SubResource("Resource_jblmc"), SubResource("Resource_yks4n"), SubResource("Resource_svp0c"), SubResource("Resource_mcu8n")])
-_step = NodePath("Step")
-_stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resource_in3s0"), SubResource("Resource_haxqx")])
-_vaultIn = NodePath("Vault")
-_vaultOut = NodePath("VaultEnd")
-
-[node name="Step" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-volume_db = -18.158
-unit_size = 5.0
-max_polyphony = 3
-bus = &"Movement"
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20000.0
-
-[node name="Jump" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-volume_db = -18.158
-unit_size = 5.0
-max_polyphony = 3
-bus = &"Movement"
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="Vault" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-stream = ExtResource("29_rh81q")
-volume_db = -20.0
-unit_size = 5.0
-max_polyphony = 3
-bus = &"Movement"
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="VaultEnd" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-stream = ExtResource("43_d2kc4")
-volume_db = -20.0
-unit_size = 5.0
-max_polyphony = 3
-bus = &"Movement"
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="Landed" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-stream = ExtResource("15_t83vw")
-volume_db = -18.0
-unit_size = 5.0
-bus = &"Movement"
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="Run_Wind" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-stream = ExtResource("24_rjr40")
-volume_db = -80.0
-autoplay = true
-
-[node name="InAir" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-
-[node name="Slide_Start" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-stream = ExtResource("14_emvrv")
-volume_db = -18.158
-unit_size = 5.0
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="Slide_Loop" type="AudioStreamPlayer3D" parent="Player/PlayerAudio"]
-stream = ExtResource("15_uhtwc")
-volume_db = -18.158
-unit_size = 5.0
-bus = &"Movement"
-emission_angle_filter_attenuation_db = -9.5
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="PlayerShaker" type="Node3D" parent="Player" node_paths=PackedStringArray("_movement")]
-script = ExtResource("23_wh8u3")
-_movement = NodePath("..")
-
-[node name="PlayerParticles" type="Node3D" parent="Player" node_paths=PackedStringArray("_landParticles", "_slideParticles")]
-script = ExtResource("35_7x0ov")
-_landParticles = NodePath("SmokeLand")
-_slideParticles = NodePath("SmokeSlide")
-
-[node name="SmokeLand" type="GPUParticles3D" parent="Player/PlayerParticles"]
-material_override = SubResource("StandardMaterial3D_sp35n")
-emitting = false
-amount = 15
-lifetime = 2.0
-one_shot = true
-speed_scale = 3.0
-explosiveness = 0.8
-randomness = 0.14
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_q7j5n")
-draw_pass_1 = SubResource("QuadMesh_s1a8d")
-
-[node name="SmokeSlide" type="GPUParticles3D" parent="Player/PlayerParticles"]
-transform = Transform3D(0.999979, 0.00353316, -0.00540428, -0.00360628, 0.999901, -0.0135786, 0.00535576, 0.0135978, 0.999893, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_sp35n")
-emitting = false
-amount = 195
-lifetime = 2.0
-speed_scale = 4.0
-randomness = 0.14
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_kolqo")
-draw_pass_1 = SubResource("QuadMesh_s1a8d")
-
-[node name="PlayerPostProcessing" type="Node3D" parent="Player"]
-script = ExtResource("39_1mow7")
-_maxVelocity = 15.0
-_pingPongDuration = 0.4
-_pingPongSpeed = 50.0
-_minVgIntensity = 0.1
-_vgExponent = 8.0
-_vgSpeed = 2.5
-_minLdZoom = 15.0
-_maxLdZoom = 300.0
-_ldExponent = 8.0
-_ldSpeed = 4.0
-_maxCaStrength = 0.5
-_caExponent = 8.0
-_caSpeed = 2.5
-_maxBlurPower = 0.026
-_blurExponent = 7.0
-_blurSpeed = 4.0
-
-[node name="Stepper" type="Node3D" parent="Player" node_paths=PackedStringArray("_stepperRay", "_characterBody", "_playerMovement", "_pointGizmo")]
-visible = false
-script = ExtResource("39_4d2yq")
-_stepperRay = NodePath("Stepper_Ray")
-_characterBody = NodePath("..")
-_playerMovement = NodePath("..")
-_projectionMaxDistance = 0.4
-_stepHeight = 1.0
-_maxElevation = 0.1
-_smoothingSpeed = 25.0
-_pointGizmo = NodePath("Step_point_Gizmo")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="Player/Stepper"]
-visible = false
-shape = SubResource("CapsuleShape3D_kvqnj")
-collision_mask = 10
-debug_shape_custom_color = Color(1, 0.94902, 0, 1)
-
-[node name="Stepper_Ray" type="RayCast3D" parent="Player/Stepper"]
-target_position = Vector3(0, -2, 0)
-collision_mask = 10
-debug_shape_custom_color = Color(1, 0.94902, 0, 1)
-
-[node name="Step_point_Gizmo" type="MeshInstance3D" parent="Player/Stepper"]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, 0, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_055na")
-mesh = SubResource("SphereMesh_kv8y1")
-
-[node name="LensFlareCheck" type="Marker3D" parent="Player" node_paths=PackedStringArray("_lensFlare")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80323, -0.0818026)
-script = ExtResource("40_0em2u")
-_lensFlare = NodePath("../../UI/PostProcessingManager/LensFlare/LensFlare")
-
-[node name="AnimationTree" type="AnimationTree" parent="Player"]
-tree_root = SubResource("AnimationNodeBlendTree_osdti")
-anim_player = NodePath("../Mesh/Neck/Head/Eyes/AnimationPlayer")
-advance_expression_base_node = NodePath("..")
-active = true
-parameters/moveState/conditions/idle = true
-parameters/moveState/conditions/inAir = false
-parameters/moveState/conditions/jump = false
-parameters/moveState/conditions/moving = false
-parameters/moveState/conditions/vault = false
-
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_fpsLabel")]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("10_6u0gq")
-_fpsLabel = NodePath("PostProcessingManager/UI/FPS")
-
-[node name="PostProcessingManager" type="CanvasGroup" parent="UI" node_paths=PackedStringArray("lensFlare", "vignette", "lensDistortion", "chromaticAbberation", "radialBlur")]
-script = ExtResource("44_ovq4q")
-lensFlare = NodePath("LensFlare/LensFlare")
-vignette = NodePath("Vignette/Vignette")
-lensDistortion = NodePath("Lens_Distortion/LensDistortion")
-chromaticAbberation = NodePath("Chromatic_Abberation/CA")
-radialBlur = NodePath("Radial_Blur/RadialBlur")
-
-[node name="LensFlare" type="CanvasLayer" parent="UI/PostProcessingManager"]
-
-[node name="LensFlare" type="ColorRect" parent="UI/PostProcessingManager/LensFlare"]
-material = SubResource("ShaderMaterial_l1ov6")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("42_nmr1d")
-
-[node name="Vignette" type="CanvasLayer" parent="UI/PostProcessingManager"]
-layer = 0
-
-[node name="Vignette" type="ColorRect" parent="UI/PostProcessingManager/Vignette"]
-material = SubResource("ShaderMaterial_c3222")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("46_p1q4e")
-
-[node name="Lens_Distortion" type="CanvasLayer" parent="UI/PostProcessingManager"]
-
-[node name="LensDistortion" type="ColorRect" parent="UI/PostProcessingManager/Lens_Distortion"]
-material = SubResource("ShaderMaterial_x8p74")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("49_rylpy")
-zoom = 50.0
-
-[node name="Chromatic_Abberation" type="CanvasLayer" parent="UI/PostProcessingManager"]
-
-[node name="CA" type="ColorRect" parent="UI/PostProcessingManager/Chromatic_Abberation"]
-material = SubResource("ShaderMaterial_qnhql")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("52_ndng6")
-
-[node name="Radial_Blur" type="CanvasLayer" parent="UI/PostProcessingManager"]
-
-[node name="RadialBlur" type="ColorRect" parent="UI/PostProcessingManager/Radial_Blur"]
-material = SubResource("ShaderMaterial_l06ac")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("54_wo8ct")
-
-[node name="UI" type="CanvasLayer" parent="UI/PostProcessingManager"]
-
-[node name="FPS" type="Label" parent="UI/PostProcessingManager/UI"]
-layout_direction = 3
-offset_left = 12.0
-offset_top = 7.0
-offset_right = 78.0
-offset_bottom = 58.0
-text = "FPS:"
-label_settings = SubResource("LabelSettings_oj2fi")
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="State" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 16.0
-offset_right = 176.0
-offset_bottom = 67.0
-scale = Vector2(0.5, 0.5)
-text = "STATE:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Previous State" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 40.0
-offset_right = 176.0
-offset_bottom = 91.0
-scale = Vector2(0.5, 0.5)
-text = "PREVIOUS STATE:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Desired Speed" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 66.0
-offset_right = 176.0
-offset_bottom = 117.0
-scale = Vector2(0.5, 0.5)
-text = "DESIRED VELOCITY:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Velocity" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 92.0
-offset_right = 176.0
-offset_bottom = 143.0
-scale = Vector2(0.5, 0.5)
-text = "VELOCITY:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Momentum" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 118.0
-offset_right = 220.0
-offset_bottom = 169.0
-scale = Vector2(0.5, 0.5)
-text = "MOMENTUM:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
-
-[node name="Animation" type="Label" parent="UI/PostProcessingManager/UI"]
-offset_left = 19.0
-offset_top = 144.0
-offset_right = 220.0
-offset_bottom = 195.0
-scale = Vector2(0.5, 0.5)
-text = "ANIMATION:"
-label_settings = SubResource("LabelSettings_oj2fi")
-uppercase = true
+[node name="Player" parent="." instance=ExtResource("14_qv7ho")]

@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dq83dj18xp644"
-path.s3tc="res://.godot/imported/Bricks023_2K-JPG_NormalGL.jpg-831bf340347a2e560eb8258160aff3b3.s3tc.ctex"
+path="res://.godot/imported/Bricks023_2K-JPG_NormalGL.jpg-831bf340347a2e560eb8258160aff3b3.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_NormalGL.jpg"
-dest_files=["res://.godot/imported/Bricks023_2K-JPG_NormalGL.jpg-831bf340347a2e560eb8258160aff3b3.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bricks023_2K-JPG_NormalGL.jpg-831bf340347a2e560eb8258160aff3b3.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

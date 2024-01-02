@@ -1,0 +1,120 @@
+[gd_scene load_steps=19 format=3 uid="uid://b3jrhrytrsbxi"]
+
+[ext_resource type="Script" path="res://Scripts/PostProcessingManager.cs" id="1_kgm8g"]
+[ext_resource type="Shader" path="res://Shaders/lensFlare.gdshader" id="2_hagg4"]
+[ext_resource type="Script" path="res://Scripts/LensFlare.cs" id="3_cg0db"]
+[ext_resource type="Script" path="res://Scripts/LensFlareCheck.cs" id="4_eh1n0"]
+[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="4_nt8gm"]
+[ext_resource type="Script" path="res://Scripts/Vignette.cs" id="5_p1pwv"]
+[ext_resource type="Shader" path="res://Shaders/LensDistortion.gdshader" id="6_rhde4"]
+[ext_resource type="Script" path="res://Scripts/LensDistortion.cs" id="7_krdyq"]
+[ext_resource type="Shader" path="res://Shaders/ChromaticAbberation.gdshader" id="8_seycv"]
+[ext_resource type="Texture2D" uid="uid://bf081vhyrhce0" path="res://Shaders/CCOffset.png" id="9_5sld4"]
+[ext_resource type="Script" path="res://Scripts/ChromaticAbberation.cs" id="10_h1jgi"]
+[ext_resource type="Shader" path="res://Shaders/RadialBlur.gdshader" id="11_na7qy"]
+[ext_resource type="Script" path="res://Scripts/RadialBlur.cs" id="12_u66uo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1ov6"]
+shader = ExtResource("2_hagg4")
+shader_parameter/sun_position = Vector2(0, 0)
+shader_parameter/tint = Vector3(1.4, 1.2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3222"]
+shader = ExtResource("4_nt8gm")
+shader_parameter/vignette_intensity = 0.56
+shader_parameter/vignette_opacity = 0.1
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8p74"]
+shader = ExtResource("6_rhde4")
+shader_parameter/zoom = 25.0
+shader_parameter/pDir = false
+shader_parameter/noWrap = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnhql"]
+shader = ExtResource("8_seycv")
+shader_parameter/strength = 0.0
+shader_parameter/offset_image = ExtResource("9_5sld4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l06ac"]
+shader = ExtResource("11_na7qy")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/blur_power = 0.0
+shader_parameter/sampling_count = 6
+
+[node name="PostProcessor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PostProcessingManager" type="CanvasGroup" parent="." node_paths=PackedStringArray("lensFlare", "vignette", "lensDistortion", "chromaticAbberation", "radialBlur")]
+script = ExtResource("1_kgm8g")
+lensFlare = NodePath("LensFlare/LensFlare")
+vignette = NodePath("Vignette/Vignette")
+lensDistortion = NodePath("Lens_Distortion/LensDistortion")
+chromaticAbberation = NodePath("Chromatic_Abberation/CA")
+radialBlur = NodePath("Radial_Blur/RadialBlur")
+
+[node name="LensFlare" type="CanvasLayer" parent="PostProcessingManager"]
+
+[node name="LensFlare" type="ColorRect" parent="PostProcessingManager/LensFlare"]
+material = SubResource("ShaderMaterial_l1ov6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_cg0db")
+
+[node name="LensFlareCheck" type="Marker3D" parent="PostProcessingManager/LensFlare"]
+script = ExtResource("4_eh1n0")
+
+[node name="Vignette" type="CanvasLayer" parent="PostProcessingManager"]
+layer = 0
+
+[node name="Vignette" type="ColorRect" parent="PostProcessingManager/Vignette"]
+material = SubResource("ShaderMaterial_c3222")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_p1pwv")
+vIntensity = 0.56
+vOpacity = 0.1
+vColor = Color(0, 0, 0, 1)
+
+[node name="Lens_Distortion" type="CanvasLayer" parent="PostProcessingManager"]
+
+[node name="LensDistortion" type="ColorRect" parent="PostProcessingManager/Lens_Distortion"]
+material = SubResource("ShaderMaterial_x8p74")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_krdyq")
+zoom = 25.0
+
+[node name="Chromatic_Abberation" type="CanvasLayer" parent="PostProcessingManager"]
+
+[node name="CA" type="ColorRect" parent="PostProcessingManager/Chromatic_Abberation"]
+material = SubResource("ShaderMaterial_qnhql")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_h1jgi")
+
+[node name="Radial_Blur" type="CanvasLayer" parent="PostProcessingManager"]
+
+[node name="RadialBlur" type="ColorRect" parent="PostProcessingManager/Radial_Blur"]
+material = SubResource("ShaderMaterial_l06ac")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_u66uo")

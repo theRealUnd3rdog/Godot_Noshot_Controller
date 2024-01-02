@@ -81,12 +81,16 @@ public partial class PlayerMovement : CharacterBody3D
 	[ExportSubgroup("Vaulting")]
 	[Export] private RayCast3D _vaultRay;
 	[Export] private ShapeCast3D _vaultCast;
-	[Export] private ShapeCast3D _stepCast;
+	[Export] public ShapeCast3D stepCast;
     [Export] private MeshInstance3D _vaultGizmo;
     [Export] public float vaultMomentum {private set; get;}
 	[Export] public float vaultJumpVelocity {private set; get;}
 	private Vector3 _vaultProjection = Vector3.Zero;
 	private Vector3 _vaultPoint = Vector3.Zero;
+
+	[ExportSubgroup("Wall running")]
+	[Export] private float _wallrunTimer;
+	[Export] private float _wallrunMomentum;
 
 
 	[ExportSubgroup("Head Bobbing")]
@@ -284,9 +288,10 @@ public partial class PlayerMovement : CharacterBody3D
 			_animator.Set("parameters/moveState/conditions/moving", IsOnFloor() && (FSM.CurrentState is PlayerWalk 
 						|| FSM.CurrentState is PlayerSprint || FSM.CurrentState is PlayerCrouch) && Velocity.Length() > 0.1f);
 			
-			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && airTime < _coyoteTime && _jumpsDone < _jumps && !ceilingRay.IsColliding());
+			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && airTime < _coyoteTime && _jumpsDone < _jumps && !ceilingRay.IsColliding() && (!stepCast.IsColliding() || FSM.CurrentState is PlayerIdle));
 			_animator.Set("parameters/moveState/conditions/inAir", FSM.CurrentState is PlayerAir);
 			_animator.Set("parameters/moveState/conditions/vault", FSM.CurrentState is PlayerVault);
+
 
 			if (_animationLabel != null)
 			{
@@ -333,12 +338,20 @@ public partial class PlayerMovement : CharacterBody3D
 
 		// Get the projected point based on input
 		Vector3 inputProjectionPoint = 2f * _vaultProjection;
+		Vector3 vaultNormal = default(Vector3);
+
+		float vaultElevation = 0f;
+		float minElevation = 0.25f; // Value that decides how much elevation needed to vault
 
 		_vaultRay.Position = new Vector3(inputProjectionPoint.X, _vaultRay.Position.Y, inputProjectionPoint.Z);
 
 		if (_vaultRay.IsColliding())
 		{
 			_vaultPoint = _vaultRay.GetCollisionPoint();
+			vaultNormal = _vaultRay.GetCollisionNormal();
+
+			vaultElevation = Math.Abs((_vaultPoint - this.GlobalPosition).Y);
+
 			_vaultCast.Enabled = true;
 		}
 		else
@@ -349,7 +362,7 @@ public partial class PlayerMovement : CharacterBody3D
 		_vaultCast.GlobalPosition = _vaultPoint;
 
 		if (_vaultCast.IsColliding() && inputDirection.Y < 0f && !ceilingRay.IsColliding() 
-			&& !_stepCast.IsColliding())
+			&& !stepCast.IsColliding() && vaultElevation > minElevation && vaultNormal.Y >= 0.99f)
 		{
 			vaultPoint = _vaultPoint;
 
@@ -374,7 +387,8 @@ public partial class PlayerMovement : CharacterBody3D
 	private void HandleJump(float jumpSpeed)
 	{
 		// Handle Jump (Must refactor)
-		if (Input.IsActionJustPressed("jump") && ((IsOnFloor() && !ceilingRay.IsColliding()) || airTime < _coyoteTime))
+		if (Input.IsActionJustPressed("jump") && ((IsOnFloor() && !ceilingRay.IsColliding()) || airTime < _coyoteTime)
+			&& (!stepCast.IsColliding() || FSM.CurrentState is PlayerIdle))
 		{
 			// Jump
 			if (_jumpsDone < _jumps)
@@ -415,6 +429,17 @@ public partial class PlayerMovement : CharacterBody3D
 		VelocityChange?.Invoke(Velocity); // Invoke change in velocity event
 
 		HandleAnimation();
+
+		if (GetLastSlideCollision() != null)
+		{
+			float slideCollisionValue = Mathf.Abs(GetLastSlideCollision().GetNormal().Dot(Vector3.Up));
+
+			if (slideCollisionValue < 0.1f)
+			{
+				GD.Print("Can wall run");
+				GD.Print($"Dot product: {slideCollisionValue}");
+			}
+		}
 
 		sprintAction = _previousSprintAction;
 

@@ -2,13 +2,13 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Godot.SourceGenerators/4.1.1": {
+      "Godot.SourceGenerators/4.2.1": {
         "type": "package",
         "build": {
           "build/Godot.SourceGenerators.props": {}
         }
       },
-      "GodotSharp/4.1.1": {
+      "GodotSharp/4.2.1": {
         "type": "package",
         "compile": {
           "lib/net6.0/GodotSharp.dll": {
@@ -21,10 +21,10 @@
           }
         }
       },
-      "GodotSharpEditor/4.1.1": {
+      "GodotSharpEditor/4.2.1": {
         "type": "package",
         "dependencies": {
-          "GodotSharp": "4.1.1"
+          "GodotSharp": "4.2.1"
         },
         "compile": {
           "lib/net6.0/GodotSharpEditor.dll": {
@@ -40,40 +40,40 @@
     }
   },
   "libraries": {
-    "Godot.SourceGenerators/4.1.1": {
-      "sha512": "Kti3AjqGFT/myqAg87ykwoGAMrSUZkQaLdpZRWqvO0w2VhDtwUgEEKZk5HK94GzlWHOHZx2UW2fO88G7h56VgA==",
+    "Godot.SourceGenerators/4.2.1": {
+      "sha512": "MdLFzDZEMUbXRLH4bLX8o9Blk76M7Op76RyobZ1zyKgcIkgPqG+p53jgLFLSHpBGFKKaW3kB0w6om+wYauwHbw==",
       "type": "package",
-      "path": "godot.sourcegenerators/4.1.1",
+      "path": "godot.sourcegenerators/4.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "analyzers/dotnet/cs/Godot.SourceGenerators.dll",
         "build/Godot.SourceGenerators.props",
-        "godot.sourcegenerators.4.1.1.nupkg.sha512",
+        "godot.sourcegenerators.4.2.1.nupkg.sha512",
         "godot.sourcegenerators.nuspec"
       ]
     },
-    "GodotSharp/4.1.1": {
-      "sha512": "r07Z+O82m5dAqeJMYHDJCGdD0p1gb8vNVi+kIFYGjDNk39Ys3fgsm+x7ZpHEfNSW2oHTn62SCuCE38UAVy17MA==",
+    "GodotSharp/4.2.1": {
+      "sha512": "6a/GML0jXcwT6LxDBtRx+hpPBUFGAmK7GVb/ehKP53nx0AHA+Yc//B7anXY4U4WCMB+ckgsouWpd8rAeupNfbw==",
       "type": "package",
-      "path": "godotsharp/4.1.1",
+      "path": "godotsharp/4.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "godotsharp.4.1.1.nupkg.sha512",
+        "godotsharp.4.2.1.nupkg.sha512",
         "godotsharp.nuspec",
         "lib/net6.0/GodotSharp.dll",
         "lib/net6.0/GodotSharp.xml"
       ]
     },
-    "GodotSharpEditor/4.1.1": {
-      "sha512": "t29ltWPBHhWDKncK2XFXmHx29jGOqtsR9PFdkjIcRWG5+PdcCJNrCng5cls/H+zGtluGF5L6rNBFbFlBBvTgkA==",
+    "GodotSharpEditor/4.2.1": {
+      "sha512": "wibPQq4Gj43T/zlhwogJRnRSxfvfIqGCvnPEz1nSp6aPx4CTu1gZW7gDYx/MRQ9LX2SwKh4N6QXkFp7PhB33Tw==",
       "type": "package",
-      "path": "godotsharpeditor/4.1.1",
+      "path": "godotsharpeditor/4.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "godotsharpeditor.4.1.1.nupkg.sha512",
+        "godotsharpeditor.4.2.1.nupkg.sha512",
         "godotsharpeditor.nuspec",
         "lib/net6.0/GodotSharpEditor.dll",
         "lib/net6.0/GodotSharpEditor.xml"
@@ -82,9 +82,9 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Godot.SourceGenerators >= 4.1.1",
-      "GodotSharp >= 4.1.1",
-      "GodotSharpEditor >= 4.1.1"
+      "Godot.SourceGenerators >= 4.2.1",
+      "GodotSharp >= 4.2.1",
+      "GodotSharpEditor >= 4.2.1"
     ]
   },
   "packageFolders": {
@@ -128,15 +128,15 @@
         "dependencies": {
           "Godot.SourceGenerators": {
             "target": "Package",
-            "version": "[4.1.1, )"
+            "version": "[4.2.1, )"
           },
           "GodotSharp": {
             "target": "Package",
-            "version": "[4.1.1, )"
+            "version": "[4.2.1, )"
           },
           "GodotSharpEditor": {
             "target": "Package",
-            "version": "[4.1.1, )"
+            "version": "[4.2.1, )"
           }
         },
         "imports": [

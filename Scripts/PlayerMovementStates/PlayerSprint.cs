@@ -19,7 +19,7 @@ public partial class PlayerSprint : PlayerMovementState
 
         Movement.currentSpeed = Mathf.Clamp(Movement.currentSpeed, Movement.sprintingSpeed, Movement.maxSpeed + Movement.momentum);
 
-        if (Input.IsActionPressed("crouch") && !Movement.IsOnWall() && !Movement.IsRunningUpSlope()
+        if (Input.IsActionPressed("crouch") && !Movement.IsOnWall() && !Movement.IsRunningUpSlope() && !Movement.stepCast.IsColliding()
                 && Movement.Velocity.Length() >= (Movement.sprintingSpeed - 1) && Movement.inputDirection.Y < 0f)
         {
             EmitSignal(SignalName.StateFinished, "PlayerSlide", new());

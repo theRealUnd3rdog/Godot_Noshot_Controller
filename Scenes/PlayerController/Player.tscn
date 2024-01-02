@@ -1,46 +1,52 @@
-[gd_scene load_steps=125 format=3 uid="uid://celg7e1hi0dr7"]
+[gd_scene load_steps=143 format=3 uid="uid://ddp62lqxgj3c2"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerMovement.cs" id="1_5xxt4"]
-[ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="2_y5fti"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerIdle.cs" id="3_8njn8"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWalk.cs" id="4_tmj1q"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSprint.cs" id="5_d7mjn"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerAir.cs" id="6_vphjw"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="7_ufkh0"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="8_gc75h"]
-[ext_resource type="Script" path="res://Scripts/ScreenShake/CamShake.cs" id="9_por22"]
-[ext_resource type="Script" path="res://Scripts/SmoothFollow.cs" id="10_r4gil"]
-[ext_resource type="Shader" path="res://Shaders/CustomMotionBlur.gdshader" id="11_e76cg"]
-[ext_resource type="Script" path="res://Scripts/MotionBlur.cs" id="12_aq12y"]
-[ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="13_12s1c"]
-[ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3" id="14_4tvqv"]
-[ext_resource type="Script" path="res://Scripts/CollisionChecker.cs" id="15_370t8"]
-[ext_resource type="Script" path="res://Scripts/PlayerAudio.cs" id="16_314di"]
-[ext_resource type="Script" path="res://Scripts/AudioConditionPlayer.cs" id="17_tab67"]
-[ext_resource type="AudioStream" uid="uid://dkomonpu17na4" path="res://Sounds/Footsteps/Step_Concrete_01.wav" id="18_huovx"]
-[ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="19_8in7y"]
-[ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="20_fawe6"]
-[ext_resource type="AudioStream" uid="uid://bsgtpiyabtbj2" path="res://Sounds/Landing_03.wav" id="21_nors6"]
-[ext_resource type="AudioStream" uid="uid://br4q8mftvwkcm" path="res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3" id="22_kjy3i"]
-[ext_resource type="Script" path="res://Scripts/AudioGroupPlayer.cs" id="23_ks31y"]
-[ext_resource type="AudioStream" uid="uid://crltxvt02ial0" path="res://Sounds/Footsteps/Step_Concrete_03.wav" id="24_k3ail"]
-[ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="25_jsbeb"]
-[ext_resource type="AudioStream" uid="uid://cvntjafcyfp7m" path="res://Sounds/Footsteps/Step_Water_02.wav" id="26_mlxnt"]
-[ext_resource type="AudioStream" uid="uid://hp3v8gjhbn05" path="res://Sounds/Footsteps/Step_Water_03.wav" id="27_faw1b"]
-[ext_resource type="AudioStream" uid="uid://c128rhd8ppi73" path="res://Sounds/Wind_Run.wav" id="28_5skbm"]
-[ext_resource type="AudioStream" uid="uid://b8r2advmi4wgo" path="res://Sounds/Sliding_Start.wav" id="29_ixwj3"]
-[ext_resource type="AudioStream" uid="uid://c33tjboynwb3v" path="res://Sounds/Sliding_Loop.wav" id="30_65dcr"]
-[ext_resource type="Script" path="res://Scripts/PlayerShaker.cs" id="31_fyyhm"]
-[ext_resource type="Script" path="res://Scripts/PlayerParticles.cs" id="32_e28gw"]
-[ext_resource type="Texture2D" uid="uid://b0kly854epj2c" path="res://Textures/Smoke/smoke_01.png" id="33_maqri"]
-[ext_resource type="Script" path="res://Scripts/PlayerPostProcessing.cs" id="34_3j242"]
-[ext_resource type="Script" path="res://Scripts/NewStepper.cs" id="35_iholh"]
-[ext_resource type="Script" path="res://Scripts/LensFlareCheck.cs" id="36_qx12e"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.cs" id="1_1x2u3"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="2_gl0jx"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerIdle.cs" id="3_f012q"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWalk.cs" id="4_rxdow"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSprint.cs" id="5_j53fe"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerAir.cs" id="6_8fbnu"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="7_1bjap"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="8_fe2ly"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerVault.cs" id="9_dv1bo"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWallrun.cs" id="10_1d7ad"]
+[ext_resource type="Script" path="res://Scripts/ScreenShake/CamShake.cs" id="10_4skf1"]
+[ext_resource type="Script" path="res://Scripts/SmoothFollow.cs" id="11_kqg4n"]
+[ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="14_qsgh0"]
+[ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3" id="15_iq4pg"]
+[ext_resource type="Script" path="res://Scripts/CollisionChecker.cs" id="16_e6y67"]
+[ext_resource type="Script" path="res://Scripts/PlayerAudio.cs" id="17_881ph"]
+[ext_resource type="Script" path="res://Scripts/AudioConditionPlayer.cs" id="18_hbmcm"]
+[ext_resource type="AudioStream" uid="uid://dkomonpu17na4" path="res://Sounds/Footsteps/Step_Concrete_01.wav" id="19_1k74e"]
+[ext_resource type="AudioStream" uid="uid://bqqhy63c4hmvj" path="res://Sounds/Landing_05.wav" id="20_iht5u"]
+[ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="20_rrevo"]
+[ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="21_7h2gc"]
+[ext_resource type="AudioStream" uid="uid://br4q8mftvwkcm" path="res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3" id="23_emayh"]
+[ext_resource type="Script" path="res://Scripts/AudioGroupPlayer.cs" id="24_0sqa6"]
+[ext_resource type="AudioStream" uid="uid://crltxvt02ial0" path="res://Sounds/Footsteps/Step_Concrete_03.wav" id="25_t1f3i"]
+[ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="26_1ar2x"]
+[ext_resource type="AudioStream" uid="uid://cd7wfdhqlk73" path="res://Sounds/Footsteps/Step_Tile_01.wav" id="27_7yn3y"]
+[ext_resource type="AudioStream" uid="uid://cvntjafcyfp7m" path="res://Sounds/Footsteps/Step_Water_02.wav" id="27_q3hsv"]
+[ext_resource type="AudioStream" uid="uid://hp3v8gjhbn05" path="res://Sounds/Footsteps/Step_Water_03.wav" id="28_eu6j0"]
+[ext_resource type="AudioStream" uid="uid://52qihh8ag6yp" path="res://Sounds/vault_02.wav" id="29_elxjk"]
+[ext_resource type="AudioStream" uid="uid://d2lycoo63he6r" path="res://Sounds/Footsteps/Step_Tile_04.wav" id="29_vufjb"]
+[ext_resource type="AudioStream" uid="uid://02ti7sdyv444" path="res://Sounds/Jump_04.wav" id="30_n01wa"]
+[ext_resource type="AudioStream" uid="uid://ogh7udqk2i5q" path="res://Sounds/Footsteps/Step_Tile_06.wav" id="31_dqg0f"]
+[ext_resource type="AudioStream" uid="uid://c128rhd8ppi73" path="res://Sounds/Wind_Run.wav" id="31_pndtl"]
+[ext_resource type="AudioStream" uid="uid://b8r2advmi4wgo" path="res://Sounds/Sliding_Start.wav" id="32_acw0p"]
+[ext_resource type="AudioStream" uid="uid://c33tjboynwb3v" path="res://Sounds/Sliding_Loop.wav" id="33_4p3ts"]
+[ext_resource type="Script" path="res://Scripts/PlayerShaker.cs" id="34_rlvxs"]
+[ext_resource type="Script" path="res://Scripts/PlayerParticles.cs" id="35_e62x0"]
+[ext_resource type="Texture2D" uid="uid://b0kly854epj2c" path="res://Textures/Smoke/smoke_01.png" id="36_hv26i"]
+[ext_resource type="Script" path="res://Scripts/PlayerPostProcessing.cs" id="37_73sd4"]
+[ext_resource type="Script" path="res://Scripts/NewStepper.cs" id="38_kln8r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih85"]
+custom_solver_bias = 0.1
 radius = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_45p4n"]
+custom_solver_bias = 0.1
 radius = 0.2
 height = 1.2
 
@@ -49,18 +55,14 @@ cull_mode = 2
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_02y88"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xog28"]
-render_priority = -1
-shader = ExtResource("11_e76cg")
-shader_parameter/motion_blur_strength = 0.8
-shader_parameter/num_samples = 25
-shader_parameter/angular_velocity = Vector3(0, 0, 0)
-shader_parameter/linear_velocity = null
+[sub_resource type="SphereShape3D" id="SphereShape3D_u1e10"]
+radius = 1.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ws75k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvuuw"]
+albedo_color = Color(1, 0, 0.129412, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_f244o"]
-font_names = PackedStringArray("Evil Empire")
+[sub_resource type="SphereMesh" id="SphereMesh_v8w6w"]
+material = SubResource("StandardMaterial3D_kvuuw")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q80lt"]
 
@@ -109,7 +111,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [NodePath("Jump"), ExtResource("13_12s1c")],
+"args": [NodePath("Jump"), ExtResource("14_qsgh0")],
 "method": &"PlayAnyAudio"
 }]
 }
@@ -269,11 +271,11 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.2744,
 "start_offset": 0.0,
-"stream": ExtResource("14_4tvqv")
+"stream": ExtResource("15_iq4pg")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("14_4tvqv")
+"stream": ExtResource("15_iq4pg")
 }],
 "times": PackedFloat32Array(0.1, 0.34)
 }
@@ -296,6 +298,22 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_odk61"]
+resource_name = "vault"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamHead:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 0.517632, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.261799, 0, -0.0523599), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_bqt7j"]
 resource_name = "walk"
 loop_mode = 1
@@ -309,11 +327,11 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.157791,
 "start_offset": 0.0,
-"stream": ExtResource("14_4tvqv")
+"stream": ExtResource("15_iq4pg")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("14_4tvqv")
+"stream": ExtResource("15_iq4pg")
 }],
 "times": PackedFloat32Array(0.1, 0.6)
 }
@@ -348,6 +366,7 @@ _data = {
 "slideIn": SubResource("Animation_s1caf"),
 "slideLoop": SubResource("Animation_8fbkp"),
 "sprint": SubResource("Animation_3fs13"),
+"vault": SubResource("Animation_odk61"),
 "walk": SubResource("Animation_bqt7j")
 }
 
@@ -355,56 +374,67 @@ _data = {
 size = Vector3(0.25, 1.005, 0.25)
 
 [sub_resource type="Resource" id="Resource_8pc76"]
-script = ExtResource("17_tab67")
+script = ExtResource("18_hbmcm")
 value = 0.1
 groups = PackedStringArray("Concrete")
-stream = ExtResource("18_huovx")
+stream = ExtResource("19_1k74e")
 
 [sub_resource type="Resource" id="Resource_jblmc"]
-script = ExtResource("17_tab67")
+script = ExtResource("18_hbmcm")
 value = 0.1
 groups = PackedStringArray("Metal")
-stream = ExtResource("19_8in7y")
+stream = ExtResource("20_rrevo")
 
 [sub_resource type="Resource" id="Resource_yks4n"]
-script = ExtResource("17_tab67")
+script = ExtResource("18_hbmcm")
 value = 0.1
 groups = PackedStringArray("Water")
-stream = ExtResource("20_fawe6")
+stream = ExtResource("21_7h2gc")
+
+[sub_resource type="Resource" id="Resource_0ejjm"]
+script = ExtResource("18_hbmcm")
+value = 0.1
+groups = PackedStringArray("Tile")
+stream = ExtResource("27_7yn3y")
 
 [sub_resource type="Resource" id="Resource_svp0c"]
-script = ExtResource("17_tab67")
+script = ExtResource("18_hbmcm")
 value = 7.0
-groups = PackedStringArray("Concrete", "Metal", "Water")
-stream = ExtResource("21_nors6")
+groups = PackedStringArray("Concrete", "Metal", "Water", "Tile")
+stream = ExtResource("20_iht5u")
 
 [sub_resource type="Resource" id="Resource_mcu8n"]
-script = ExtResource("17_tab67")
-value = 10.0
-groups = PackedStringArray("Concrete", "Metal", "Water")
-stream = ExtResource("22_kjy3i")
+script = ExtResource("18_hbmcm")
+value = 50.0
+groups = PackedStringArray("Concrete", "Metal", "Water", "Tile")
+stream = ExtResource("23_emayh")
 
 [sub_resource type="Resource" id="Resource_p2n1p"]
-script = ExtResource("23_ks31y")
+script = ExtResource("24_0sqa6")
 groups = PackedStringArray("Concrete")
-streams = Array[AudioStream]([ExtResource("18_huovx"), ExtResource("24_k3ail")])
+streams = Array[AudioStream]([ExtResource("19_1k74e"), ExtResource("25_t1f3i")])
 
 [sub_resource type="Resource" id="Resource_in3s0"]
-script = ExtResource("23_ks31y")
+script = ExtResource("24_0sqa6")
 groups = PackedStringArray("Metal")
-streams = Array[AudioStream]([ExtResource("19_8in7y"), ExtResource("25_jsbeb")])
+streams = Array[AudioStream]([ExtResource("20_rrevo"), ExtResource("26_1ar2x")])
 
 [sub_resource type="Resource" id="Resource_haxqx"]
-script = ExtResource("23_ks31y")
+script = ExtResource("24_0sqa6")
 groups = PackedStringArray("Water")
-streams = Array[AudioStream]([ExtResource("20_fawe6"), ExtResource("26_mlxnt"), ExtResource("27_faw1b")])
+streams = Array[AudioStream]([ExtResource("21_7h2gc"), ExtResource("27_q3hsv"), ExtResource("28_eu6j0")])
+
+[sub_resource type="Resource" id="Resource_eupbf"]
+script = ExtResource("24_0sqa6")
+groups = PackedStringArray("Tile")
+streams = Array[AudioStream]([ExtResource("27_7yn3y"), ExtResource("29_vufjb"), ExtResource("31_dqg0f")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sp35n"]
 render_priority = 2
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("33_maqri")
+albedo_texture = ExtResource("36_hv26i")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -435,27 +465,27 @@ point_count = 3
 curve = SubResource("Curve_sa8hl")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q7j5n"]
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0.1, 1, 0.1)
-angular_velocity_min = -85.49
-angular_velocity_max = 60.0
 angle_min = -136.0
 angle_max = 57.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+angular_velocity_min = -85.49
+angular_velocity_max = 60.0
+gravity = Vector3(0.1, 1, 0.1)
 scale_min = 3.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_f1t1n")
 color_ramp = SubResource("GradientTexture1D_cvkwj")
 hue_variation_min = -0.02
 hue_variation_max = 0.01
+anim_speed_max = 7.37
+anim_offset_max = 0.5674
 turbulence_enabled = true
 turbulence_noise_scale = 1.0
 turbulence_noise_speed_random = 0.55
 turbulence_influence_min = 0.01
 turbulence_influence_max = 0.03
 turbulence_influence_over_life = SubResource("CurveTexture_cc8b5")
-anim_speed_max = 7.37
-anim_offset_max = 0.5674
 
 [sub_resource type="QuadMesh" id="QuadMesh_s1a8d"]
 
@@ -468,21 +498,23 @@ point_count = 3
 curve = SubResource("Curve_qx1js")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kolqo"]
+angle_min = -136.0
+angle_max = 57.0
 direction = Vector3(0, 0, 0.76)
 spread = 0.0
-gravity = Vector3(0, 0.035, 0.1)
 initial_velocity_min = 1.5
 initial_velocity_max = 2.0
 angular_velocity_min = -85.49
 angular_velocity_max = 60.0
-angle_min = -136.0
-angle_max = 57.0
+gravity = Vector3(0, 0.035, 0.1)
 scale_min = 0.0
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_tauu7")
 color_ramp = SubResource("GradientTexture1D_cvkwj")
 hue_variation_min = -0.02
 hue_variation_max = 0.01
+anim_speed_max = 7.37
+anim_offset_max = 0.5674
 turbulence_enabled = true
 turbulence_noise_strength = 0.32
 turbulence_noise_scale = 0.6
@@ -490,8 +522,6 @@ turbulence_noise_speed_random = 0.55
 turbulence_influence_min = 0.01
 turbulence_influence_max = 0.03
 turbulence_influence_over_life = SubResource("CurveTexture_cc8b5")
-anim_speed_max = 7.37
-anim_offset_max = 0.5674
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kvqnj"]
 radius = 0.225
@@ -520,15 +550,15 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ni3y"]
 priority = 3
 advance_mode = 2
-advance_expression = "abs(_lastVelocity.y) > 0.1 && is_on_floor()"
+advance_expression = "abs(lastVelocity.y) > 0.1 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ypmx6"]
 switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rnysl"]
-advance_mode = 2
-advance_expression = "abs(_lastVelocity.y) > 10 && is_on_floor()"
+advance_mode = 0
+advance_expression = "abs(lastVelocity.y) > 10 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbk3i"]
 switch_mode = 2
@@ -537,7 +567,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4il3p"]
 priority = 2
 advance_mode = 2
-advance_expression = "abs(_lastVelocity.y) > 7 && is_on_floor()"
+advance_expression = "abs(lastVelocity.y) > 7 && is_on_floor()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_adj0t"]
 switch_mode = 2
@@ -562,8 +592,18 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_te1gy"]
 animation = &"jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_inxpx"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eg05j"]
 animation = &"sprint"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3yu6f"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gxh8m"]
+graph_offset = Vector2(-507.265, 176.427)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_eg05j")
+nodes/Animation/position = Vector2(-340, 160)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3yu6f")
+nodes/TimeScale/position = Vector2(-160, 160)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lw5tv"]
 animation = &"walk"
@@ -571,22 +611,21 @@ animation = &"walk"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sjibs"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5movq"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dyoha"]
 advance_mode = 2
-advance_expression = "abs(currentSpeed) >= 9f"
+advance_expression = "abs(currentSpeed) >= 6f"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iygv1"]
-reset = false
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mo5x3"]
 advance_mode = 2
-advance_expression = "abs(currentSpeed) < 7.5f"
+advance_expression = "abs(currentSpeed) < 5.5f"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gayc6"]
-states/sprint/node = SubResource("AnimationNodeAnimation_inxpx")
-states/sprint/position = Vector2(502, 3)
+states/sprint/node = SubResource("AnimationNodeBlendTree_gxh8m")
+states/sprint/position = Vector2(502, 12)
 states/walk/node = SubResource("AnimationNodeAnimation_lw5tv")
 states/walk/position = Vector2(502, 107)
-transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_sjibs"), "walk", "sprint", SubResource("AnimationNodeStateMachineTransition_5movq"), "sprint", "walk", SubResource("AnimationNodeStateMachineTransition_iygv1")]
-graph_offset = Vector2(135, -57)
+transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_sjibs"), "walk", "sprint", SubResource("AnimationNodeStateMachineTransition_dyoha"), "sprint", "walk", SubResource("AnimationNodeStateMachineTransition_mo5x3")]
+graph_offset = Vector2(81, -68)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xj4o0"]
 animation = &"slideIn"
@@ -614,6 +653,9 @@ states/slideLoop/node = SubResource("AnimationNodeAnimation_unu2p")
 states/slideLoop/position = Vector2(629, 91)
 transitions = ["Start", "slideIn", SubResource("AnimationNodeStateMachineTransition_fbfwc"), "slideIn", "slideLoop", SubResource("AnimationNodeStateMachineTransition_h0qug"), "slideLoop", "End", SubResource("AnimationNodeStateMachineTransition_cncgq")]
 graph_offset = Vector2(84, -45)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rht2b"]
+animation = &"vault"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohbtc"]
 advance_mode = 2
@@ -654,8 +696,10 @@ advance_mode = 2
 advance_condition = &"jump"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0e8h0"]
+priority = 2
 switch_mode = 2
 advance_mode = 2
+advance_condition = &"inAir"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jqjf7"]
 advance_mode = 2
@@ -684,6 +728,7 @@ advance_mode = 2
 advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bysxd"]
+priority = 3
 advance_mode = 2
 advance_condition = &"inAir"
 
@@ -698,6 +743,7 @@ advance_mode = 2
 advance_expression = "slideTimer > 0.1f"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2wr2a"]
+priority = 2
 advance_mode = 2
 advance_condition = &"moving"
 advance_expression = "abs(velocity.length()) > 1f"
@@ -706,10 +752,36 @@ advance_expression = "abs(velocity.length()) > 1f"
 advance_mode = 2
 advance_condition = &"jump"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pl3ga"]
+advance_mode = 2
+advance_condition = &"vault"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u4wft"]
+advance_mode = 2
+advance_condition = &"vault"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ljx6"]
+advance_mode = 2
+advance_condition = &"vault"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iep2u"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6105d"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"inAir"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_up3li"]
+advance_mode = 2
+advance_condition = &"vault"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4ibcj"]
 states/Start/position = Vector2(820, -52)
 states/air/node = SubResource("AnimationNodeStateMachine_i7tfk")
-states/air/position = Vector2(403, -172)
+states/air/position = Vector2(403, -247)
 states/idle/node = SubResource("AnimationNodeAnimation_hh0uo")
 states/idle/position = Vector2(672, -52)
 states/jump/node = SubResource("AnimationNodeAnimation_te1gy")
@@ -717,65 +789,91 @@ states/jump/position = Vector2(520, -44)
 states/move/node = SubResource("AnimationNodeStateMachine_gayc6")
 states/move/position = Vector2(403, 81)
 states/sliding/node = SubResource("AnimationNodeStateMachine_m7npm")
-states/sliding/position = Vector2(187, -44)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku")]
-graph_offset = Vector2(-40, -193)
+states/sliding/position = Vector2(7, -44)
+states/vault/node = SubResource("AnimationNodeAnimation_rht2b")
+states/vault/position = Vector2(301, -90)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku"), "air", "vault", SubResource("AnimationNodeStateMachineTransition_pl3ga"), "sliding", "vault", SubResource("AnimationNodeStateMachineTransition_u4wft"), "move", "vault", SubResource("AnimationNodeStateMachineTransition_5ljx6"), "vault", "move", SubResource("AnimationNodeStateMachineTransition_iep2u"), "vault", "air", SubResource("AnimationNodeStateMachineTransition_6105d"), "jump", "vault", SubResource("AnimationNodeStateMachineTransition_up3li")]
+graph_offset = Vector2(37, -135)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_osdti"]
-graph_offset = Vector2(-286.1, 132.4)
+graph_offset = Vector2(-689.621, 124.266)
 nodes/moveState/node = SubResource("AnimationNodeStateMachine_4ibcj")
 nodes/moveState/position = Vector2(-220, 120)
 node_connections = [&"output", 0, &"moveState"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "_ceilingRay", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00932312, 0, 0.212681)
+[sub_resource type="SystemFont" id="SystemFont_36c0q"]
+font_names = PackedStringArray("Evil Empire")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_oj2fi"]
+font = SubResource("SystemFont_36c0q")
+font_size = 45
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_resetPosition", "_standingCollider", "_animator", "_crouchingCollider", "ceilingRay", "_vaultRay", "_vaultCast", "stepCast", "_vaultGizmo", "_camera", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7845, 32.0904, -140.763)
 collision_mask = 15
 floor_max_angle = 1.13446
 floor_snap_length = 0.3
-script = ExtResource("1_5xxt4")
-_resetPosition = NodePath("")
-_standingCollider = NodePath("")
-_animator = NodePath("")
-_sprintingSpeed = 11.0
+script = ExtResource("1_1x2u3")
+_resetPosition = NodePath("ResetPos")
+_standingCollider = NodePath("Standing_collision_shape")
+_animator = NodePath("AnimationTree")
 _jumpVelocity = 5.7
-_zClamp = 3.0
-_crouchingCollider = NodePath("")
-_ceilingRay = NodePath("")
-_slideSpeed = 20.0
+_coyoteTime = 0.25
+_zRotationLerp = 2.0
+_zClamp = 2.0
+_crouchingCollider = NodePath("Crouching_collision_shape")
+ceilingRay = NodePath("CeilingRay")
+slideSpeed = 20.0
+_vaultRay = NodePath("Vaulter/VaultRay")
+_vaultCast = NodePath("Vaulter/VaultRay/VaultCast")
+stepCast = NodePath("Vaulter/StepCast")
+_vaultGizmo = NodePath("Vaulter/VaultRay/VaultCast/VaultGizmo")
+vaultMomentum = 12.0
+vaultJumpVelocity = 5.0
 mouseSensitivityX = 0.25
 mouseSensitivityY = 0.2
 _freeLookTilt = 8.0
-_camera = NodePath("")
+_camera = NodePath("Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D")
 _maxFov = 120.0
 _velocityExponent = 5.0
 _maxPlayerVelocity = 17.0
 _fovLerpSpeed = 3.0
-_speedLabel = NodePath("")
-_momentumLabel = NodePath("")
-_stateLabel = NodePath("")
-_animationLabel = NodePath("")
+_speedLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Velocity")
+_momentumLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Momentum")
+_stateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/State")
+_animationLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Animation")
+_desiredSpeedLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Desired Speed")
+_previousStateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Previous State")
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("CurrentState")]
-script = ExtResource("2_y5fti")
-CurrentState = NodePath("")
+script = ExtResource("2_gl0jx")
+CurrentState = NodePath("PlayerIdle")
 
 [node name="PlayerIdle" type="Node" parent="FSM"]
-script = ExtResource("3_8njn8")
+script = ExtResource("3_f012q")
 
 [node name="PlayerWalk" type="Node" parent="FSM"]
-script = ExtResource("4_tmj1q")
+script = ExtResource("4_rxdow")
 
 [node name="PlayerSprint" type="Node" parent="FSM"]
-script = ExtResource("5_d7mjn")
+script = ExtResource("5_j53fe")
 
 [node name="PlayerAir" type="Node" parent="FSM"]
-script = ExtResource("6_vphjw")
+script = ExtResource("6_8fbnu")
 
 [node name="PlayerCrouch" type="Node" parent="FSM"]
-script = ExtResource("7_ufkh0")
+script = ExtResource("7_1bjap")
 
 [node name="PlayerSlide" type="Node" parent="FSM"]
-script = ExtResource("8_gc75h")
+script = ExtResource("8_fe2ly")
+
+[node name="PlayerVault" type="Node" parent="FSM"]
+script = ExtResource("9_dv1bo")
+
+[node name="PlayerWallrun" type="Node" parent="FSM"]
+script = ExtResource("10_1d7ad")
 
 [node name="Standing_collision_shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -791,6 +889,35 @@ transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_bhevj")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_02y88")
+
+[node name="Vaulter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99505, -0.34816)
+
+[node name="VaultRay" type="RayCast3D" parent="Vaulter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.859077, 0)
+target_position = Vector3(0, -0.66, 0)
+collision_mask = 2
+debug_shape_custom_color = Color(0.976471, 0, 0.396078, 1)
+debug_shape_thickness = 1
+
+[node name="VaultCast" type="ShapeCast3D" parent="Vaulter/VaultRay"]
+shape = SubResource("SphereShape3D_u1e10")
+target_position = Vector3(0, 0, 0)
+collision_mask = 2
+debug_shape_custom_color = Color(0, 1, 0.160784, 1)
+
+[node name="VaultGizmo" type="MeshInstance3D" parent="Vaulter/VaultRay/VaultCast"]
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0, 0, 0)
+mesh = SubResource("SphereMesh_v8w6w")
+skeleton = NodePath("../..")
+
+[node name="StepCast" type="ShapeCast3D" parent="Vaulter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.66592, -0.02211)
+shape = SubResource("SphereShape3D_u1e10")
+target_position = Vector3(0, 0, 0)
+collision_mask = 8
+
+[node name="WallRunner" type="Node3D" parent="."]
 
 [node name="CeilingRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, 2, 0)
@@ -808,44 +935,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 [node name="CamHead" type="Node3D" parent="Mesh/Neck/Head/Eyes"]
 
 [node name="CameraShaker" type="Area3D" parent="Mesh/Neck/Head/Eyes/CamHead"]
-script = ExtResource("9_por22")
+script = ExtResource("10_4skf1")
 
 [node name="Camera3D" type="Camera3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker"]
 unique_name_in_owner = true
 current = true
 fov = 92.0
-script = ExtResource("10_r4gil")
+script = ExtResource("11_kqg4n")
 _smoothSpeed = 50.0
-
-[node name="PostProcessing" type="Node3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D"]
-
-[node name="Motion_Blur" type="MeshInstance3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D/PostProcessing"]
-transform = Transform3D(0.970132, 0, 0, 0, -2.0539e-08, -0.469877, 0, 0.469877, -2.0539e-08, 0, -0.00364721, -0.145425)
-visible = false
-material_override = SubResource("ShaderMaterial_xog28")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_ws75k")
-skeleton = NodePath("")
-script = ExtResource("12_aq12y")
-
-[node name="UI" type="Node3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
-visible = false
-
-[node name="Label3D" type="Label3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D/UI"]
-transform = Transform3D(0.204795, 0, 0.00917431, 0, 0.205, 0, -0.00917431, 0, 0.204795, -1.6109, 2.71061, -0.928886)
-layers = 2
-double_sided = false
-no_depth_test = true
-fixed_size = true
-render_priority = 2
-outline_render_priority = 2
-outline_modulate = Color(0.0196078, 0.0196078, 0.0196078, 1)
-text = "FPS:"
-font = SubResource("SystemFont_f244o")
-font_size = 82
-outline_size = 7
-uppercase = true
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker/Camera3D"]
 current = true
@@ -860,27 +957,30 @@ libraries = {
 
 [node name="CollisionChecker" type="Area3D" parent="."]
 collision_mask = 14
-script = ExtResource("15_370t8")
+script = ExtResource("16_e6y67")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionChecker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293706, 0)
 shape = SubResource("BoxShape3D_dct41")
 
-[node name="PlayerAudio" type="Node3D" parent="." node_paths=PackedStringArray("_windRun", "_slideIn", "_slideLoop", "_land", "_step")]
-script = ExtResource("16_314di")
-_windRun = NodePath("")
+[node name="PlayerAudio" type="Node3D" parent="." node_paths=PackedStringArray("_windRun", "_slideIn", "_slideLoop", "_land", "_step", "_vaultIn", "_vaultOut")]
+script = ExtResource("17_881ph")
+_windRun = NodePath("Run_Wind")
 _maxWindVolume = -10.0
 _minWindPitch = 0.9
 _maxwindPitch = 1.35
-_maxPlayerVelocity = 12.0
+_maxPlayerVelocity = 13.0
 _windLerpSpeed = 1.0
 _velocityExponent = 5.0
-_slideIn = NodePath("")
-_slideLoop = NodePath("")
-_land = NodePath("")
-_landPlayers = Array[Object]([SubResource("Resource_8pc76"), SubResource("Resource_jblmc"), SubResource("Resource_yks4n"), SubResource("Resource_svp0c"), SubResource("Resource_mcu8n")])
-_step = NodePath("")
-_stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resource_in3s0"), SubResource("Resource_haxqx")])
+_maxSpeedScale = 1.0
+_slideIn = NodePath("Slide_Start")
+_slideLoop = NodePath("Slide_Loop")
+_land = NodePath("Landed")
+_landPlayers = Array[Object]([SubResource("Resource_8pc76"), SubResource("Resource_jblmc"), SubResource("Resource_yks4n"), SubResource("Resource_0ejjm"), SubResource("Resource_svp0c"), SubResource("Resource_mcu8n")])
+_step = NodePath("Step")
+_stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resource_in3s0"), SubResource("Resource_haxqx"), SubResource("Resource_eupbf")])
+_vaultIn = NodePath("Vault")
+_vaultOut = NodePath("VaultEnd")
 
 [node name="Step" type="AudioStreamPlayer3D" parent="PlayerAudio"]
 volume_db = -18.158
@@ -898,29 +998,48 @@ bus = &"Movement"
 emission_angle_filter_attenuation_db = -9.5
 attenuation_filter_cutoff_hz = 20500.0
 
+[node name="Vault" type="AudioStreamPlayer3D" parent="PlayerAudio"]
+stream = ExtResource("29_elxjk")
+volume_db = -20.0
+unit_size = 5.0
+max_polyphony = 3
+bus = &"Movement"
+emission_angle_filter_attenuation_db = -9.5
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="VaultEnd" type="AudioStreamPlayer3D" parent="PlayerAudio"]
+stream = ExtResource("30_n01wa")
+volume_db = -20.0
+unit_size = 5.0
+max_polyphony = 3
+bus = &"Movement"
+emission_angle_filter_attenuation_db = -9.5
+attenuation_filter_cutoff_hz = 20500.0
+
 [node name="Landed" type="AudioStreamPlayer3D" parent="PlayerAudio"]
-volume_db = -18.158
+stream = ExtResource("19_1k74e")
+volume_db = -18.0
 unit_size = 5.0
 bus = &"Movement"
 emission_angle_filter_attenuation_db = -9.5
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="Run_Wind" type="AudioStreamPlayer3D" parent="PlayerAudio"]
-stream = ExtResource("28_5skbm")
+stream = ExtResource("31_pndtl")
 volume_db = -80.0
 autoplay = true
 
 [node name="InAir" type="AudioStreamPlayer3D" parent="PlayerAudio"]
 
 [node name="Slide_Start" type="AudioStreamPlayer3D" parent="PlayerAudio"]
-stream = ExtResource("29_ixwj3")
+stream = ExtResource("32_acw0p")
 volume_db = -18.158
 unit_size = 5.0
 emission_angle_filter_attenuation_db = -9.5
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="Slide_Loop" type="AudioStreamPlayer3D" parent="PlayerAudio"]
-stream = ExtResource("30_65dcr")
+stream = ExtResource("33_4p3ts")
 volume_db = -18.158
 unit_size = 5.0
 bus = &"Movement"
@@ -928,13 +1047,13 @@ emission_angle_filter_attenuation_db = -9.5
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="PlayerShaker" type="Node3D" parent="." node_paths=PackedStringArray("_movement")]
-script = ExtResource("31_fyyhm")
-_movement = NodePath("")
+script = ExtResource("34_rlvxs")
+_movement = NodePath("..")
 
 [node name="PlayerParticles" type="Node3D" parent="." node_paths=PackedStringArray("_landParticles", "_slideParticles")]
-script = ExtResource("32_e28gw")
-_landParticles = NodePath("")
-_slideParticles = NodePath("")
+script = ExtResource("35_e62x0")
+_landParticles = NodePath("SmokeLand")
+_slideParticles = NodePath("SmokeSlide")
 
 [node name="SmokeLand" type="GPUParticles3D" parent="PlayerParticles"]
 material_override = SubResource("StandardMaterial3D_sp35n")
@@ -962,7 +1081,7 @@ process_material = SubResource("ParticleProcessMaterial_kolqo")
 draw_pass_1 = SubResource("QuadMesh_s1a8d")
 
 [node name="PlayerPostProcessing" type="Node3D" parent="."]
-script = ExtResource("34_3j242")
+script = ExtResource("37_73sd4")
 _maxVelocity = 15.0
 _pingPongDuration = 0.4
 _pingPongSpeed = 50.0
@@ -977,19 +1096,19 @@ _maxCaStrength = 0.5
 _caExponent = 8.0
 _caSpeed = 2.5
 _maxBlurPower = 0.026
-_blurExponent = 7.0
+_blurExponent = 8.0
 _blurSpeed = 4.0
 
 [node name="Stepper" type="Node3D" parent="." node_paths=PackedStringArray("_stepperRay", "_characterBody", "_playerMovement", "_pointGizmo")]
-script = ExtResource("35_iholh")
-_stepperRay = NodePath("")
-_characterBody = NodePath("")
-_playerMovement = NodePath("")
-_projectionMaxDistance = 0.3
+script = ExtResource("38_kln8r")
+_stepperRay = NodePath("Stepper_Ray")
+_characterBody = NodePath("..")
+_playerMovement = NodePath("..")
+_projectionMaxDistance = 0.4
 _stepHeight = 1.0
 _maxElevation = 0.1
 _smoothingSpeed = 25.0
-_pointGizmo = NodePath("")
+_pointGizmo = NodePath("Step_point_Gizmo")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="Stepper"]
 visible = false
@@ -998,6 +1117,7 @@ collision_mask = 10
 debug_shape_custom_color = Color(1, 0.94902, 0, 1)
 
 [node name="Stepper_Ray" type="RayCast3D" parent="Stepper"]
+target_position = Vector3(0, -2, 0)
 collision_mask = 10
 debug_shape_custom_color = Color(1, 0.94902, 0, 1)
 
@@ -1008,16 +1128,91 @@ material_override = SubResource("StandardMaterial3D_055na")
 mesh = SubResource("SphereMesh_kv8y1")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Mesh/Neck/Head/Eyes")
+libraries = {
+"": SubResource("AnimationLibrary_nnwjw")
+}
 tree_root = SubResource("AnimationNodeBlendTree_osdti")
-anim_player = NodePath("../Mesh/Neck/Head/Eyes/AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
+anim_player = NodePath("../Mesh/Neck/Head/Eyes/AnimationPlayer")
 parameters/moveState/conditions/idle = true
 parameters/moveState/conditions/inAir = false
 parameters/moveState/conditions/jump = false
 parameters/moveState/conditions/moving = false
+parameters/moveState/conditions/vault = false
+parameters/moveState/move/sprint/TimeScale/scale = 0.7
 
-[node name="LensFlareCheck" type="Marker3D" parent="." node_paths=PackedStringArray("_lensFlare")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80323, -0.0818026)
-script = ExtResource("36_qx12e")
-_lensFlare = NodePath("")
+[node name="MovementInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasGroup" type="CanvasGroup" parent="MovementInfo"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MovementInfo/CanvasGroup"]
+layer = 2
+
+[node name="State" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 16.0
+offset_right = 176.0
+offset_bottom = 67.0
+scale = Vector2(0.5, 0.5)
+text = "STATE:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Previous State" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 40.0
+offset_right = 289.0
+offset_bottom = 91.0
+scale = Vector2(0.5, 0.5)
+text = "PREVIOUS STATE:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Desired Speed" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 66.0
+offset_right = 320.0
+offset_bottom = 117.0
+scale = Vector2(0.5, 0.5)
+text = "DESIRED VELOCITY:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Velocity" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 92.0
+offset_right = 176.0
+offset_bottom = 143.0
+scale = Vector2(0.5, 0.5)
+text = "VELOCITY:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Momentum" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 118.0
+offset_right = 220.0
+offset_bottom = 169.0
+scale = Vector2(0.5, 0.5)
+text = "MOMENTUM:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Animation" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 144.0
+offset_right = 220.0
+offset_bottom = 195.0
+scale = Vector2(0.5, 0.5)
+text = "ANIMATION:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="ResetPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7845, -32.0904, 140.763)
+top_level = true

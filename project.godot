@@ -13,7 +13,7 @@ config_version=5
 config/name="First Person Controller"
 config/tags=PackedStringArray("controller")
 run/main_scene="res://Scenes/main.tscn"
-config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://defaults/Underdog_logo.png"
 boot_splash/fullsize=false
@@ -23,11 +23,14 @@ config/icon="res://defaults/channels4_profile.jpg"
 
 buses/default_bus_layout="res://defaults/default_bus_layout.tres"
 
+[autoload]
+
+PostProcessor="*res://Scenes/post_processor.tscn"
+
 [display]
 
 window/size/viewport_width=1366
 window/size/viewport_height=720
-window/size/mode=4
 window/vsync/vsync_mode=0
 window/screen_space_roughness_limiter/enabled=false
 

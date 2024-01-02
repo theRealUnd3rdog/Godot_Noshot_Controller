@@ -1,0 +1,24 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://db0hox3jwesrf"]
+
+[ext_resource type="Texture2D" uid="uid://cm5ifhmt767cb" path="res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_AmbientOcclusion.jpg" id="1_ym7k8"]
+[ext_resource type="Texture2D" uid="uid://bqy6iq8aftgvp" path="res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_NormalGL.jpg" id="2_sdsrt"]
+[ext_resource type="Texture2D" uid="uid://cjnda5be4561h" path="res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_Roughness.jpg" id="3_hs72x"]
+
+[resource]
+albedo_color = Color(0.494118, 0.494118, 0.494118, 1)
+metallic = 0.65
+metallic_specular = 0.66
+roughness = 0.66
+roughness_texture = ExtResource("3_hs72x")
+normal_enabled = true
+normal_scale = 1.54
+normal_texture = ExtResource("2_sdsrt")
+clearcoat_enabled = true
+clearcoat = 0.65
+clearcoat_roughness = 0.37
+anisotropy_enabled = true
+anisotropy = 0.32
+ao_enabled = true
+ao_texture = ExtResource("1_ym7k8")
+uv1_scale = Vector3(0.07, 0.07, 0.07)
+uv1_triplanar = true

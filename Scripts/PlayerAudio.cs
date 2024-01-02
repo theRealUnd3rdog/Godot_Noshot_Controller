@@ -5,6 +5,7 @@ using System;
 public partial class PlayerAudio : Node3D
 {
 	private RandomNumberGenerator _rng = new RandomNumberGenerator();
+	private AnimationTree _animator;
 
 	[ExportCategory("Audio")]
 
@@ -18,6 +19,10 @@ public partial class PlayerAudio : Node3D
 	[Export] private float _windLerpSpeed = 2.0f;
 	[Export] private float _velocityExponent = 2.0f;
 	private Vector3 _playerVelocity;
+
+	[ExportSubgroup("Sprinting")]
+	[Export] private float _minSpeedScale = 0.7f;
+	[Export] private float _maxSpeedScale = 1.1f;
 
 	[ExportSubgroup("Sliding")]
 	[Export] private AudioStreamPlayer3D _slideIn;
@@ -49,6 +54,8 @@ public partial class PlayerAudio : Node3D
 
 		PlayerVault.PlayerVaulted += PlayVaultIn;
 		PlayerVault.PlayerVaultEnded += PlayVaultOut;
+
+		_animator = Owner.GetNode<AnimationTree>("AnimationTree");
     }
 
     public override void _ExitTree()
@@ -80,7 +87,18 @@ public partial class PlayerAudio : Node3D
 
 		_windRun.VolumeDb = Mathf.Lerp(_windRun.VolumeDb, desiredVolume, _windLerpSpeed * (float)delta);
 		_windRun.PitchScale = Mathf.Lerp(_windRun.PitchScale, desiredPitch, _windLerpSpeed * (float)delta);
+
+		ChangeSprintSound(velocityScale);
     }
+
+	private void ChangeSprintSound(float scale)
+	{
+		float desiredSpeed = Mathf.Lerp(_minSpeedScale, _maxSpeedScale, scale * 1.5f);
+
+		desiredSpeed = Mathf.Clamp(desiredSpeed, _minSpeedScale, _maxSpeedScale);
+
+		_animator.Set("parameters/moveState/move/sprint/TimeScale/scale", desiredSpeed);
+	}
     
 	private void PlayVaultIn()
 	{

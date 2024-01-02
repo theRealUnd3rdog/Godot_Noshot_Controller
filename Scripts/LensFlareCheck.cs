@@ -3,7 +3,6 @@ using System;
 
 public partial class LensFlareCheck : Marker3D
 {
-	[Export] private LensFlare _lensFlare;
 	private DirectionalLight3D _directionalLight;
 	private Camera3D _camera;
 
@@ -25,7 +24,7 @@ public partial class LensFlareCheck : Marker3D
 		Vector3 effSunPosition = _directionalLight.GlobalTransform.Basis.Z * _camera.Far;
 		effSunPosition += _camera.GlobalPosition;
 
-		Vector3 rayOrigin = this.GlobalPosition;
+		Vector3 rayOrigin = _camera.GlobalPosition;
 		Vector3 rayEnd = effSunPosition;
 
 		PhysicsRayQueryParameters3D parameters = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
@@ -43,6 +42,6 @@ public partial class LensFlareCheck : Marker3D
 
 	private void CheckForSunVisible()
 	{
-		_lensFlare.sunBlocked = ObjectIsInterectingSun();
+		PostProcessingManager.Instance.lensFlare.sunBlocked = ObjectIsInterectingSun();
 	}
 }

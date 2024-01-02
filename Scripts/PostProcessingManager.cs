@@ -18,8 +18,14 @@ public partial class PostProcessingManager : CanvasGroup
 	{
 		Instance = this;
 
-		mainLight = GetNode<DirectionalLight3D>("%MainLight");
-		mainCamera = GetNode<Camera3D>("%Camera3D");
+		mainLight = GetNode<DirectionalLight3D>("/root/World/Env/MainLight");
+		mainCamera = GetNode<Camera3D>("/root/World/Player/%Camera3D");
+
+		if (mainLight == null)
+			GD.PrintErr("Main light missing in post processor");
+		
+		if (mainCamera == null)
+			GD.PrintErr("Camera missing in post processor");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

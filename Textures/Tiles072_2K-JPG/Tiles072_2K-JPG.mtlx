@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<materialx version="1.38" fileprefix="./">
+  <standard_surface type="surfaceshader" xpos="6.159420" ypos="-1.879310" name="Tiles072_2K_JPG_StandardSurface">
+    <input type="float" value="0" name="specular" />
+    <input type="float" value="1" name="coat" />
+    <input type="color3" value="1, 1, 1" name="coat_color" />
+    <input type="float" value="1" name="base" />
+    <input type="color3" nodename="Tiles072_2K_JPG_Color" name="base_color" />
+    <input type="vector3" nodename="normalmap" name="normal" />
+    <input type="vector3" nodename="normalmap" name="coat_normal" />
+    <input type="float" nodename="Tiles072_2K_JPG_Roughness" name="specular_roughness" />
+    <input type="float" nodename="Tiles072_2K_JPG_Roughness" name="coat_roughness" />
+  </standard_surface>
+  <surfacematerial type="material" xpos="8.695652" ypos="0.000000" name="Tiles072_2K_JPG">
+    <input type="surfaceshader" nodename="Tiles072_2K_JPG_StandardSurface" name="surfaceshader" />
+    <input type="displacementshader" nodename="displacement" name="displacementshader" />
+  </surfacematerial>
+  <tiledimage type="color3" xpos="3.623188" ypos="-3.103448" name="Tiles072_2K_JPG_Color">
+    <input type="filename" value="Tiles072_2K-JPG_Color.jpg" colorspace="srgb_texture" name="file" />
+    <input type="vector2" value="1.0, 1.0" name="uvtiling" />
+  </tiledimage>
+  <tiledimage type="float" xpos="3.623188" ypos="5.163793" name="Tiles072_2K_JPG_Displacement">
+    <input type="filename" value="Tiles072_2K-JPG_Displacement.jpg" name="file" />
+    <input type="vector2" value="1.0, 1.0" name="uvtiling" />
+  </tiledimage>
+  <displacement type="displacementshader" xpos="6.159420" ypos="1.879310" name="displacement">
+    <input type="float" nodename="Tiles072_2K_JPG_Displacement" name="displacement" />
+    <input type="float" value="1.0" name="scale" />
+  </displacement>
+  <tiledimage type="vector3" xpos="1.086957" ypos="0.879310" name="Tiles072_2K_JPG_NormalGL">
+    <input type="filename" value="Tiles072_2K-JPG_NormalGL.jpg" name="file" />
+    <input type="vector2" value="1.0, 1.0" name="uvtiling" />
+  </tiledimage>
+  <normalmap type="vector3" xpos="3.623188" ypos="3.586207" name="normalmap">
+    <input type="vector3" nodename="Tiles072_2K_JPG_NormalGL" name="in" />
+    <input type="float" value="1.0" name="scale" />
+  </normalmap>
+  <tiledimage type="float" xpos="3.623188" ypos="-0.413793" name="Tiles072_2K_JPG_Roughness">
+    <input type="filename" value="Tiles072_2K-JPG_Roughness.jpg" name="file" />
+    <input type="vector2" value="1.0, 1.0" name="uvtiling" />
+  </tiledimage>
+</materialx>
