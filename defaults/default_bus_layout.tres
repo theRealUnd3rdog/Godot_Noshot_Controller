@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://5818bh4opu2b"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://5818bh4opu2b"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ahxpl"]
 resource_name = "Reverb"
@@ -8,6 +8,11 @@ wet = 0.05
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_n6wik"]
 resource_name = "Chorus"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_k2lit"]
+resource_name = "LowPassFilter"
+cutoff_hz = 20500.0
+resonance = 1.0
 
 [resource]
 bus/0/volume_db = -0.328256
@@ -21,3 +26,5 @@ bus/1/effect/0/effect = SubResource("AudioEffectReverb_ahxpl")
 bus/1/effect/0/enabled = true
 bus/1/effect/1/effect = SubResource("AudioEffectChorus_n6wik")
 bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("AudioEffectLowPassFilter_k2lit")
+bus/1/effect/2/enabled = true

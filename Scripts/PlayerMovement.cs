@@ -48,7 +48,7 @@ public partial class PlayerMovement : CharacterBody3D
 	public Vector3 direction = Vector3.Zero;
 	public Vector2 inputDirection = Vector2.Zero;
 	public Vector3 lastVelocity = Vector3.Zero;
-	private Vector3 _playerVelocity = Vector3.Zero;
+	public Vector3 playerVelocity = Vector3.Zero;
 
 	// private rotations
 	private float _rotationX = 0f;
@@ -82,25 +82,33 @@ public partial class PlayerMovement : CharacterBody3D
 	[Export] private RayCast3D _vaultRay;
 	[Export] private ShapeCast3D _vaultCast;
 	[Export] public ShapeCast3D stepCast;
-    [Export] private MeshInstance3D _vaultGizmo;
     [Export] public float vaultMomentum {private set; get;}
 	[Export] public float vaultJumpVelocity {private set; get;}
 	private Vector3 _vaultProjection = Vector3.Zero;
 	private Vector3 _vaultPoint = Vector3.Zero;
 
 	[ExportSubgroup("Wall running")]
-	[Export] private float _wallrunTimer;
-	[Export] private float _wallrunMomentum;
+	[Export] public float wallRunTime {private set; get;} = 3f;
+	[Export] public float wallRunSpeed {private set; get;} = 15f;
+	[Export] public float wallFrictionCoefficient {private set; get;} = 0.5f;
+	[Export] public float wallJumpSpeed {private set; get;} = 4.5f;
+	
+	public float wallRunTimer = 0.0f;
+	private PlayerWallrun _wallRunStateNode;
 
 
 	[ExportSubgroup("Head Bobbing")]
 	[Export] private float _headBobSprintSpeed = 22.0f;
 	[Export] private float _headBobWalkingSpeed = 14.0f;
 	[Export] private float _headBobCrouchSpeed = 10.0f;
+	[Export] private float _headBobWallrunSpeed = 48.0f;
+	
 
 	[Export] private float _headBobSprintIntensity = 0.2f; //in centimetres
 	[Export] private float _headBobWalkIntensity = 0.1f;
 	[Export] private float _headBobCrouchIntensity = 0.05f;
+	[Export] private float _headBobWallrunIntensity = 0.4f;
+	
 
 	private Vector2 _headBobVector = Vector2.Zero; // Keep track of side to side and up and down of bob
 	private float _headBobIndex = 0.0f; // Keep track of our head bob index along the sin wave
@@ -143,6 +151,7 @@ public partial class PlayerMovement : CharacterBody3D
     public override void _Ready()
     {
 		FSM = GetNode<GodotParadiseFiniteStateMachine>("FSM");
+		_wallRunStateNode = (PlayerWallrun)FSM.GetStateByName("PlayerWallrun");
 
 		_head = GetNode<Node3D>("Mesh/Neck/Head");
 		_eyes = GetNode<Node3D>("Mesh/Neck/Head/Eyes");
@@ -284,13 +293,22 @@ public partial class PlayerMovement : CharacterBody3D
 	{
 		if (_animator != null)
 		{
-			_animator.Set("parameters/moveState/conditions/idle", FSM.CurrentState is PlayerIdle || inputDirection.Length() <= 0.1f);
+			_animator.Set("parameters/moveState/conditions/idle", FSM.CurrentState is PlayerIdle || (inputDirection.Length() <= 0.1f && FSM.CurrentState is not PlayerWallrun));
 			_animator.Set("parameters/moveState/conditions/moving", IsOnFloor() && (FSM.CurrentState is PlayerWalk 
 						|| FSM.CurrentState is PlayerSprint || FSM.CurrentState is PlayerCrouch) && Velocity.Length() > 0.1f);
 			
-			_animator.Set("parameters/moveState/conditions/jump", Input.IsActionJustPressed("jump") && airTime < _coyoteTime && _jumpsDone < _jumps && !ceilingRay.IsColliding() && (!stepCast.IsColliding() || FSM.CurrentState is PlayerIdle));
+			_animator.Set("parameters/moveState/conditions/jump", (Input.IsActionJustPressed("jump") && airTime < _coyoteTime && 
+						_jumpsDone < _jumps && !ceilingRay.IsColliding() && (!stepCast.IsColliding() 
+						|| FSM.CurrentState is PlayerIdle)) || 
+						(Input.IsActionJustPressed("jump") && FSM.CurrentState is PlayerWallrun));
+
 			_animator.Set("parameters/moveState/conditions/inAir", FSM.CurrentState is PlayerAir);
 			_animator.Set("parameters/moveState/conditions/vault", FSM.CurrentState is PlayerVault);
+			_animator.Set("parameters/moveState/conditions/wallrun", FSM.CurrentState is PlayerWallrun);
+
+
+			_animator.Set("parameters/moveState/wallrun/conditions/left_wallrun", _wallRunStateNode.wallDirection == "Right" ? true : false);
+			_animator.Set("parameters/moveState/wallrun/conditions/right_wallrun",_wallRunStateNode.wallDirection == "Left" ? true : false);
 
 
 			if (_animationLabel != null)
@@ -345,6 +363,9 @@ public partial class PlayerMovement : CharacterBody3D
 
 		_vaultRay.Position = new Vector3(inputProjectionPoint.X, _vaultRay.Position.Y, inputProjectionPoint.Z);
 
+		Vector3 playerForward = this.GlobalBasis.Z;
+		float angleToFloor = Mathf.RadToDeg(playerForward.AngleTo(GetFloorNormal()));
+
 		if (_vaultRay.IsColliding())
 		{
 			_vaultPoint = _vaultRay.GetCollisionPoint();
@@ -361,10 +382,11 @@ public partial class PlayerMovement : CharacterBody3D
 
 		_vaultCast.GlobalPosition = _vaultPoint;
 
-		if (_vaultCast.IsColliding() && inputDirection.Y < 0f && !ceilingRay.IsColliding() 
-			&& !stepCast.IsColliding() && vaultElevation > minElevation && vaultNormal.Y >= 0.99f)
+		if (inputDirection.Y < 0f && !ceilingRay.IsColliding() && _vaultCast.IsColliding()
+				&& !stepCast.IsColliding() && vaultElevation > minElevation && (angleToFloor > 80f || Mathf.IsZeroApprox(angleToFloor)))
 		{
 			vaultPoint = _vaultPoint;
+			DebugDraw3D.DrawSphere(_vaultPoint, 0.25f, Colors.Red);
 
 			return true;
 		}
@@ -409,16 +431,108 @@ public partial class PlayerMovement : CharacterBody3D
 		{
 			Vector3 velocity = Velocity;
 
-			velocity.Y = jumpSpeed;
+			velocity = jumpSpeed * Vector3.Up;
 
 			Velocity = velocity;
 		}
 		else
 		{
-			_playerVelocity.Y = jumpSpeed;
+			playerVelocity.Y = jumpSpeed;
 		}
 		
 		_jumpsDone++;
+	}
+
+	public void WallJump(Vector3 wallDir)
+	{
+		playerVelocity.Y = wallJumpSpeed / 2; 
+		direction = ((wallDir.Normalized()) + (-_camera.GlobalBasis.Z.Normalized() / 4)) * (wallJumpSpeed / 16);
+	}
+	
+	public bool CheckWall(out KinematicCollision3D collision, out String direction)
+	{
+		int count = GetSlideCollisionCount();
+		direction = String.Empty;
+		collision = default(KinematicCollision3D);
+
+		if (count <= 0)
+			return false;
+		
+		if (inputDirection.Y >= 0)
+			return false;
+		
+		List<KinematicCollision3D> collisions = new List<KinematicCollision3D>();
+		
+		for (int i = 0; i < count; i++)
+		{
+			collisions.Add(GetSlideCollision(i));
+		}
+
+		foreach (KinematicCollision3D c in collisions)
+		{
+			Vector3 collisionNormal = c.GetNormal();
+			Vector3 collisionPoint = c.GetPosition();
+
+			// Check if there's enough elevation
+			if (GlobalPosition.DistanceTo(collisionPoint) > 1.4f)
+			{
+				float dotCollision = Mathf.Abs(collisionNormal.Dot(Vector3.Up)); // Get the dot product to see if the wall is side ways
+
+				if (dotCollision < 0.1f)
+				{
+					Vector3 playerForward = this.GlobalBasis.Z;
+					float angleToWall = Mathf.RadToDeg(playerForward.AngleTo(collisionNormal));
+					float signedAngle = Mathf.RadToDeg(playerForward.SignedAngleTo(collisionNormal, Vector3.Up));			
+
+					// Check if camera is facing somewhat in that direction
+					if (angleToWall < 105f && angleToWall > 25f)
+					{
+						//DebugDraw3D.DrawSquare(c.GetPosition(), 0.1f, Colors.Blue);
+
+						direction = Mathf.Sign(signedAngle) > 0 ? "Left" : "Right";
+						collision = c;
+						
+						//GD.Print(direction);
+						
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public bool SendRayInDirection(Vector3 direction, float range, out Vector3 rayNormal, out Vector3 rayPoint)
+	{
+		// Send ray in direction of wall
+        PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+
+        Vector3 rayOrigin = _camera.GlobalPosition;
+        Vector3 rayEnd = rayOrigin + (direction * range);
+
+		rayNormal = default(Vector3);
+		rayPoint = default(Vector3);
+
+        PhysicsRayQueryParameters3D parameters = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
+
+        var rayArray = spaceState.IntersectRay(parameters);
+
+        if (rayArray.ContainsKey("collider"))
+        {
+			rayArray.TryGetValue("normal", out Variant normal);
+			rayArray.TryGetValue("position", out Variant position);
+			rayArray.TryGetValue("collider", out Variant collider);
+
+			DebugDraw3D.DrawArrow(rayOrigin, rayEnd, Colors.GreenYellow, 0.2f);
+
+			rayNormal = normal.AsVector3();
+			rayPoint = position.AsVector3();
+
+            return true;
+        }
+
+		return false;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -429,17 +543,6 @@ public partial class PlayerMovement : CharacterBody3D
 		VelocityChange?.Invoke(Velocity); // Invoke change in velocity event
 
 		HandleAnimation();
-
-		if (GetLastSlideCollision() != null)
-		{
-			float slideCollisionValue = Mathf.Abs(GetLastSlideCollision().GetNormal().Dot(Vector3.Up));
-
-			if (slideCollisionValue < 0.1f)
-			{
-				GD.Print("Can wall run");
-				GD.Print($"Dot product: {slideCollisionValue}");
-			}
-		}
 
 		sprintAction = _previousSprintAction;
 
@@ -495,11 +598,16 @@ public partial class PlayerMovement : CharacterBody3D
 				_headBobIndex += _headBobCrouchSpeed* (float)delta;
 				break;
 
+			case PlayerWallrun:
+				_headBobCurrentIntensity = _headBobWallrunIntensity;
+				_headBobIndex += _headBobWallrunSpeed * (float)delta;
+				break;
+
 			default:
 				break;
 		}
 
-		if (IsOnFloor() && FSM.CurrentState is not PlayerSlide && inputDir != Vector2.Zero)
+		if ((IsOnFloor() && FSM.CurrentState is not PlayerSlide && inputDir != Vector2.Zero))
 		{
 			Vector2 headBob;
 
@@ -524,11 +632,8 @@ public partial class PlayerMovement : CharacterBody3D
 			_eyes.Position = eyes;
 		}
 
-		 _playerVelocity = Velocity;
+		playerVelocity = Velocity;
 
-		// Add the gravity.
-		if (!IsOnFloor())
-			_playerVelocity.Y -= gravity * (float)delta;
 
 		if (IsOnFloor())
 		{
@@ -537,33 +642,36 @@ public partial class PlayerMovement : CharacterBody3D
 		}
 		else
 		{
-			// Air control
-
-			if (inputDir != Vector2.Zero)
+			if (FSM.CurrentState is not PlayerWallrun)
 			{
-				direction = direction.Lerp((Transform.Basis * new Vector3(inputDir.X, 0f, inputDir.Y)).Normalized(), 
-					1.0f - Mathf.Pow(0.5f, (float)delta * _airLerpSpeed));
+				playerVelocity.Y -= gravity * (float)delta;
+
+				if (inputDir != Vector2.Zero)
+				{
+					direction = direction.Lerp((Transform.Basis * new Vector3(inputDir.X, 0f, inputDir.Y)).Normalized(), 
+						1.0f - Mathf.Pow(0.5f, (float)delta * _airLerpSpeed));
+				}
 			}
 		}
 
-		if (FSM.CurrentState is not PlayerVault)
+		if (FSM.CurrentState is not PlayerVault && FSM.CurrentState is not PlayerWallrun)
 			HandleJump(_jumpVelocity);
 
 		if (direction != Vector3.Zero)
 		{
-			_playerVelocity.X = direction.X * currentSpeed;
-			_playerVelocity.Z = direction.Z * currentSpeed;
+			playerVelocity.X = direction.X * currentSpeed;
+			playerVelocity.Z = direction.Z * currentSpeed;
 		}
 		else
 		{
-			_playerVelocity.X = Mathf.MoveToward(Velocity.X, 0, currentSpeed);
-			_playerVelocity.Z = Mathf.MoveToward(Velocity.Z, 0, currentSpeed);
+			playerVelocity.X = Mathf.MoveToward(Velocity.X, 0, currentSpeed);
+			playerVelocity.Z = Mathf.MoveToward(Velocity.Z, 0, currentSpeed);
 		}
 
-		Velocity = _playerVelocity;
+		Velocity = playerVelocity;
 
 		_lastPhysicsPos = GlobalTransform.Origin;
-		lastVelocity = _playerVelocity;
+		lastVelocity = playerVelocity;
 		
 		_previousSprintAction = sprintAction;
 		MoveAndSlide();

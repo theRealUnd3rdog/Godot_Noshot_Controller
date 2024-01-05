@@ -46,13 +46,13 @@ public partial class LensFlare : ColorRect
 	private void FadeInLensFlare()
 	{
 		Tween tween = CreateTween();
-		tween.TweenProperty(_material, "shader_parameter/tint", new Vector3(0, 0, 0), _adjustTime);
+		tween.TweenProperty(_material, "shader_parameter/tint", new Vector3(1.8f, 1.8f, 1.2f), _adjustTime);
 	}
 
 	private void FadeOutLensFlare()
 	{
 		Tween tween = CreateTween();
-		tween.TweenProperty(_material, "shader_parameter/tint", new Vector3(1.8f, 1.8f, 1.2f), _adjustTime);
+		tween.TweenProperty(_material, "shader_parameter/tint", new Vector3(0f, 0f, 0f), _adjustTime);
 	}
 
 	private void UpdateLensFlareLocation()

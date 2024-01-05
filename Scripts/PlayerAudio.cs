@@ -1,11 +1,17 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using MEC;
 
 public partial class PlayerAudio : Node3D
 {
 	private RandomNumberGenerator _rng = new RandomNumberGenerator();
 	private AnimationTree _animator;
+
+	[Export] public string movementBus;
+	private int _movementBusIndex;
 
 	[ExportCategory("Audio")]
 
@@ -42,6 +48,9 @@ public partial class PlayerAudio : Node3D
 	[Export] private AudioStreamPlayer3D _vaultIn;
 	[Export] private AudioStreamPlayer3D _vaultOut;
 
+	[ExportSubgroup("Wallrun")]
+	[Export] private AudioStreamPlayer3D _wallrun;
+
     public override void _Ready()
     {
 		CollisionChecker.OnGroupChange += GetStepGroup;
@@ -55,7 +64,11 @@ public partial class PlayerAudio : Node3D
 		PlayerVault.PlayerVaulted += PlayVaultIn;
 		PlayerVault.PlayerVaultEnded += PlayVaultOut;
 
+		PlayerWallrun.WallRunStart += PlayWallRun;
+		PlayerWallrun.WallRunEnd += StopWallRun;
+
 		_animator = Owner.GetNode<AnimationTree>("AnimationTree");
+		_movementBusIndex = AudioServer.GetBusIndex(movementBus);
     }
 
     public override void _ExitTree()
@@ -70,6 +83,9 @@ public partial class PlayerAudio : Node3D
 
 		PlayerVault.PlayerVaulted -= PlayVaultIn;
 		PlayerVault.PlayerVaultEnded -= PlayVaultOut;
+
+		PlayerWallrun.WallRunStart -= PlayWallRun;
+		PlayerWallrun.WallRunEnd -= StopWallRun;
     }
 
     public override void _Process(double delta)
@@ -110,6 +126,45 @@ public partial class PlayerAudio : Node3D
 	{
 		_vaultOut.PitchScale = _rng.RandfRange(0.9f, 1.1f);
 		_vaultOut.Play();
+	}
+
+	private void PlayWallRun()
+	{
+		Timing.KillCoroutines("Wallrun");
+
+		_wallrun.PitchScale = 1f;
+		_wallrun.Play();
+
+		AudioEffect lowPass = AudioServer.GetBusEffect(_movementBusIndex, 2);
+		lowPass.Set("cutoff_hz", 200f);
+	}
+
+	private void StopWallRun(Node node)
+	{
+		Timing.RunCoroutine(StopWallRunSound(node).CancelWith(this), "Wallrun");
+	}
+
+	private IEnumerator<double> StopWallRunSound(Node node)
+	{
+		float timeElapsed = 0f;
+		float duration = 0.32f;
+
+		AudioEffect lowPass = AudioServer.GetBusEffect(_movementBusIndex, 2);
+		float initialLowpass = (float)lowPass.Get("cutoff_hz");
+
+		do
+		{
+			timeElapsed += (float)node.GetProcessDeltaTime();
+			float normalizedTime = timeElapsed / duration;
+
+			_wallrun.PitchScale = Mathf.Lerp(_wallrun.PitchScale, 0.5f, normalizedTime);
+			lowPass.Set("cutoff_hz", Mathf.Lerp(initialLowpass, 20500f, normalizedTime));
+
+			yield return Timing.WaitForOneFrame;
+		}
+		while (timeElapsed < duration);
+
+		_wallrun.Stop();
 	}
 
 	private void GetStepGroup(string curGroup)

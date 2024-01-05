@@ -68,6 +68,10 @@ public partial class PlayerShaker : Node
                 ChangeShakeInfluence(_slideShake);
                 break;
 
+            case PlayerWallrun:
+                ChangeShakeInfluence(_slideShake);
+                break;
+
             default:
                 ChangeShakeInfluence(_idleShake);
                 break;

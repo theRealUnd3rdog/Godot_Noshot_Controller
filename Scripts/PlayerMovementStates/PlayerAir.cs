@@ -10,6 +10,15 @@ public partial class PlayerAir : PlayerMovementState
     public override void Enter()
     {
         base.Enter();
+
+        if (Movement.IsOnFloor() && Movement.FSM.PreviousState is PlayerWallrun)
+        {
+            Movement.airTime = 0f;
+            Movement.wallRunTimer = 0f; // Reset the timer
+            
+            EmitSignal(SignalName.StateFinished, "PlayerIdle", new());
+        }
+
     }
 
     public override void Exit()
@@ -35,13 +44,21 @@ public partial class PlayerAir : PlayerMovementState
 		if (Movement.IsOnFloor())
 		{
 			Movement.airTime = 0f;
+            Movement.wallRunTimer = 0f; // Reset the timer
 
             EmitSignal(SignalName.StateFinished, "PlayerIdle", new());
 		}
 
-        if (Movement.CheckVault(delta, out Vector3 vaultPoint))
+        // Wallrun
+        if (Movement.CheckWall(out KinematicCollision3D collision, out String direction) && Movement.wallRunTimer <= Movement.wallRunTime)
+        {
+            Movement.airTime = 0f;
+            EmitSignal(SignalName.StateFinished, "PlayerWallrun", new());
+        }
+
+        /* if (Movement.CheckVault(delta, out Vector3 vaultPoint))
         {
             EmitSignal(SignalName.StateFinished, "PlayerVault", new());
-        }
+        } */
     }
 }

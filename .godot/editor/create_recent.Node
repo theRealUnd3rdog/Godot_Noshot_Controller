@@ -1,7 +1,8 @@
+AudioStreamPlayer3D
+Node3D
 PlayerWallrun
 GodotParadiseState
 RayCast3D
-Node3D
 Marker3D
 Control
 CanvasGroup
@@ -12,4 +13,3 @@ PlayerVault
 PlayerSlide
 PlayerCrouch
 PlayerAir
-PlayerIdle

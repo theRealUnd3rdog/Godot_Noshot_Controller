@@ -1,0 +1,239 @@
+Generation of bindings started, output file: res://addons/debug_draw_3d/gen/csharp/DebugDrawGeneratedAPI.cs
+Log file: res://addons/debug_draw_3d/gen/csharp/log.txt
+Hold Shift to print information on the Output panel when manually starting generation via the 'Project - Tools - Debug Draw' menu
+  Class: DebugDraw2D
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+      clear_all
+      begin_text_group
+      end_text_group
+      set_text
+        color_of_value will be remapped to arg_0
+      clear_texts
+      create_graph
+      create_fps_graph
+      graph_update_data
+      remove_graph
+      clear_graphs
+      get_graph
+      get_graph_names
+      get_render_stats
+    Properties...
+      empty_color
+      debug_enabled
+      config
+      custom_canvas
+  Class: DebugDraw2DStats
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+    Properties...
+      overlay_text_groups
+      overlay_text_lines
+      overlay_graphs_enabled
+      overlay_graphs_total
+  Class: DebugDraw2DConfig
+    Wrapper...
+    Constants...
+    Enums...
+      BlockPosition
+    Methods...
+    Properties...
+      graphs_base_offset
+      text_block_position
+      text_block_offset
+      text_padding
+      text_default_duration
+      text_default_size
+      text_foreground_color
+      text_background_color
+      text_custom_font
+  Class: DebugDraw2DGraph
+    Wrapper...
+    Constants...
+    Enums...
+      GraphPosition
+      GraphSide
+      TextFlags
+    Methods...
+      get_title
+      set_parent
+    Properties...
+      enabled
+      upside_down
+      show_title
+      show_text_flags
+      size
+      buffer_size
+      offset
+      corner
+      line_width
+      line_color
+      background_color
+      border_color
+      text_suffix
+      custom_font
+      title_size
+      text_size
+      title_color
+      text_color
+      text_precision
+      parent_graph
+      parent_graph_side
+      data_getter
+  Class: DebugDraw2DFPSGraph
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+    Properties...
+      frame_time_mode
+  Class: DebugDraw3D
+    Wrapper...
+    Constants...
+    Enums...
+      PointType
+    Methods...
+      regenerate_geometry_meshes
+      clear_all
+      draw_sphere
+        color will be remapped to arg_0
+      draw_sphere_xf
+        color will be remapped to arg_0
+      draw_cylinder
+        color will be remapped to arg_0
+      draw_cylinder_ab
+        color will be remapped to arg_0
+      draw_box
+        color will be remapped to arg_0
+      draw_box_ab
+        color will be remapped to arg_0
+      draw_box_xf
+        color will be remapped to arg_0
+      draw_aabb
+        color will be remapped to arg_0
+      draw_aabb_ab
+        color will be remapped to arg_0
+      draw_line_hit
+        hit_color will be remapped to arg_0
+        after_hit_color will be remapped to arg_0
+      draw_line_hit_offset
+        hit_color will be remapped to arg_0
+        after_hit_color will be remapped to arg_0
+      draw_line
+        color will be remapped to arg_0
+      draw_lines
+        color will be remapped to arg_0
+      draw_ray
+        color will be remapped to arg_0
+      draw_line_path
+        color will be remapped to arg_0
+      draw_arrowhead
+        color will be remapped to arg_0
+      draw_arrow
+        color will be remapped to arg_0
+      draw_arrow_ray
+        color will be remapped to arg_0
+      draw_arrow_path
+        color will be remapped to arg_0
+      draw_point_path
+        points_color will be remapped to arg_0
+        lines_color will be remapped to arg_0
+      draw_square
+        color will be remapped to arg_0
+      draw_plane
+        color will be remapped to arg_0
+      draw_points
+        color will be remapped to arg_0
+      draw_camera_frustum
+        color will be remapped to arg_0
+      draw_camera_frustum_planes
+        color will be remapped to arg_0
+      draw_position
+        color will be remapped to arg_0
+      draw_gizmo
+        color will be remapped to arg_0
+      draw_grid
+        color will be remapped to arg_0
+      draw_grid_xf
+        color will be remapped to arg_0
+      get_render_stats
+      new_scope_config
+      scoped_config
+    Properties...
+      empty_color
+      debug_enabled
+      config
+      custom_viewport
+  Class: DebugDraw3DStats
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+    Properties...
+      instances
+      lines
+      instances_physics
+      lines_physics
+      total_geometry
+      visible_instances
+      visible_lines
+      visible_instances_physics
+      visible_lines_physics
+      total_visible
+      time_filling_buffers_instances_usec
+      time_filling_buffers_lines_usec
+      time_filling_buffers_instances_physics_usec
+      time_filling_buffers_lines_physics_usec
+      total_time_filling_buffers_usec
+      time_culling_instant_usec
+      time_culling_delayed_usec
+      time_culling_instant_physics_usec
+      time_culling_delayed_physics_usec
+      total_time_culling_usec
+      total_time_spent_usec
+      created_scoped_configs
+      orphan_scoped_configs
+  Class: DebugDraw3DConfig
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+    Properties...
+      freeze_3d_render
+      visible_instance_bounds
+      use_frustum_culling
+      culling_distance
+      force_use_camera_from_scene
+      geometry_render_layers
+      line_hit_color
+      line_after_hit_color
+  Class: DebugDraw3DScopeConfig
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+      set_thickness
+      get_thickness
+      set_center_brightness
+      get_center_brightness
+      set_hd_sphere
+      is_hd_sphere
+      set_plane_size
+      get_plane_size
+    Properties...
+  Class: DebugDrawManager
+    Wrapper...
+    Constants...
+    Enums...
+    Methods...
+      clear_all
+    Properties...
+      debug_enabled
+  DebugDraw utilities:
+    Arguments remap...
+    Class factory...
+The generation process is completed!

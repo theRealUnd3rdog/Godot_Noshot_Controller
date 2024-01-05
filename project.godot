@@ -31,6 +31,7 @@ PostProcessor="*res://Scenes/post_processor.tscn"
 
 window/size/viewport_width=1366
 window/size/viewport_height=720
+window/size/mode=4
 window/vsync/vsync_mode=0
 window/screen_space_roughness_limiter/enabled=false
 
