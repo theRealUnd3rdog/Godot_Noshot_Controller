@@ -1,4 +1,4 @@
-[gd_scene load_steps=163 format=3 uid="uid://ddp62lqxgj3c2"]
+[gd_scene load_steps=164 format=3 uid="uid://ddp62lqxgj3c2"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.cs" id="1_1x2u3"]
 [ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="2_gl0jx"]
@@ -184,7 +184,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.3, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, -0.7, 0), Vector3(0, 0, 0)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -628,8 +628,8 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rnysl"]
-advance_mode = 0
-advance_expression = "abs(lastVelocity.y) > 10 && is_on_floor()"
+advance_mode = 2
+advance_condition = &"roll"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbk3i"]
 switch_mode = 2
@@ -655,7 +655,7 @@ states/landing_2/position = Vector2(636, 142)
 states/roll/node = SubResource("AnimationNodeAnimation_5nbb8")
 states/roll/position = Vector2(649, 73)
 transitions = ["Start", "inAir", SubResource("AnimationNodeStateMachineTransition_w7vnc"), "inAir", "landing", SubResource("AnimationNodeStateMachineTransition_5ni3y"), "landing", "End", SubResource("AnimationNodeStateMachineTransition_ypmx6"), "inAir", "roll", SubResource("AnimationNodeStateMachineTransition_rnysl"), "roll", "End", SubResource("AnimationNodeStateMachineTransition_sbk3i"), "inAir", "landing_2", SubResource("AnimationNodeStateMachineTransition_4il3p"), "landing_2", "End", SubResource("AnimationNodeStateMachineTransition_adj0t")]
-graph_offset = Vector2(116, 29)
+graph_offset = Vector2(135, -35)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hh0uo"]
 animation = &"idle"
@@ -921,6 +921,10 @@ xfade_time = 0.13
 advance_mode = 2
 advance_condition = &"wallrun"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3rwk"]
+advance_mode = 2
+advance_condition = &"wallrun"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4ibcj"]
 states/Start/position = Vector2(820, -52)
 states/air/node = SubResource("AnimationNodeStateMachine_i7tfk")
@@ -937,11 +941,11 @@ states/vault/node = SubResource("AnimationNodeAnimation_rht2b")
 states/vault/position = Vector2(184, -174)
 states/wallrun/node = SubResource("AnimationNodeStateMachine_32ios")
 states/wallrun/position = Vector2(672, -247)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku"), "air", "vault", SubResource("AnimationNodeStateMachineTransition_pl3ga"), "sliding", "vault", SubResource("AnimationNodeStateMachineTransition_u4wft"), "move", "vault", SubResource("AnimationNodeStateMachineTransition_5ljx6"), "vault", "move", SubResource("AnimationNodeStateMachineTransition_iep2u"), "vault", "air", SubResource("AnimationNodeStateMachineTransition_6105d"), "jump", "vault", SubResource("AnimationNodeStateMachineTransition_up3li"), "air", "wallrun", SubResource("AnimationNodeStateMachineTransition_sfo1y"), "wallrun", "air", SubResource("AnimationNodeStateMachineTransition_ebtmh"), "wallrun", "jump", SubResource("AnimationNodeStateMachineTransition_et8sg"), "wallrun", "idle", SubResource("AnimationNodeStateMachineTransition_17xna"), "wallrun", "move", SubResource("AnimationNodeStateMachineTransition_jgj5n"), "jump", "wallrun", SubResource("AnimationNodeStateMachineTransition_26t02")]
-graph_offset = Vector2(85, -331)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ohbtc"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_58yxs"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_ok72i"), "move", "jump", SubResource("AnimationNodeStateMachineTransition_onf81"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_g16to"), "jump", "air", SubResource("AnimationNodeStateMachineTransition_0e8h0"), "move", "air", SubResource("AnimationNodeStateMachineTransition_jqjf7"), "idle", "air", SubResource("AnimationNodeStateMachineTransition_osb1d"), "air", "move", SubResource("AnimationNodeStateMachineTransition_nuq7q"), "air", "jump", SubResource("AnimationNodeStateMachineTransition_k00lm"), "air", "idle", SubResource("AnimationNodeStateMachineTransition_kbohn"), "sliding", "air", SubResource("AnimationNodeStateMachineTransition_bysxd"), "air", "sliding", SubResource("AnimationNodeStateMachineTransition_fuksl"), "move", "sliding", SubResource("AnimationNodeStateMachineTransition_x8jey"), "sliding", "move", SubResource("AnimationNodeStateMachineTransition_2wr2a"), "sliding", "jump", SubResource("AnimationNodeStateMachineTransition_8wsku"), "air", "vault", SubResource("AnimationNodeStateMachineTransition_pl3ga"), "sliding", "vault", SubResource("AnimationNodeStateMachineTransition_u4wft"), "move", "vault", SubResource("AnimationNodeStateMachineTransition_5ljx6"), "vault", "move", SubResource("AnimationNodeStateMachineTransition_iep2u"), "vault", "air", SubResource("AnimationNodeStateMachineTransition_6105d"), "jump", "vault", SubResource("AnimationNodeStateMachineTransition_up3li"), "air", "wallrun", SubResource("AnimationNodeStateMachineTransition_sfo1y"), "wallrun", "air", SubResource("AnimationNodeStateMachineTransition_ebtmh"), "wallrun", "jump", SubResource("AnimationNodeStateMachineTransition_et8sg"), "wallrun", "idle", SubResource("AnimationNodeStateMachineTransition_17xna"), "wallrun", "move", SubResource("AnimationNodeStateMachineTransition_jgj5n"), "jump", "wallrun", SubResource("AnimationNodeStateMachineTransition_26t02"), "vault", "wallrun", SubResource("AnimationNodeStateMachineTransition_g3rwk")]
+graph_offset = Vector2(-142, -382)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_osdti"]
-graph_offset = Vector2(-497, 240)
+graph_offset = Vector2(-564, 169)
 nodes/moveState/node = SubResource("AnimationNodeStateMachine_4ibcj")
 nodes/moveState/position = Vector2(-220, 120)
 node_connections = [&"output", 0, &"moveState"]
@@ -1046,8 +1050,8 @@ mesh = SubResource("CapsuleMesh_02y88")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99505, -0.34816)
 
 [node name="VaultRay" type="RayCast3D" parent="Vaulter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.859077, 0)
-target_position = Vector3(0, -0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.359077, 0)
+target_position = Vector3(0, -0.56, 0)
 collision_mask = 2
 debug_shape_custom_color = Color(0.976471, 0, 0.396078, 1)
 debug_shape_thickness = 1
@@ -1083,7 +1087,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 [node name="CamHead" type="Node3D" parent="Mesh/Neck/Head/Eyes"]
 
 [node name="CameraShaker" type="Area3D" parent="Mesh/Neck/Head/Eyes/CamHead"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("10_4skf1")
 
 [node name="Camera3D" type="Camera3D" parent="Mesh/Neck/Head/Eyes/CamHead/CameraShaker"]
@@ -1116,7 +1119,7 @@ shape = SubResource("BoxShape3D_dct41")
 script = ExtResource("17_881ph")
 movementBus = "Movement"
 _windRun = NodePath("Run_Wind")
-_maxWindVolume = -10.0
+_maxWindVolume = -15.0
 _minWindPitch = 0.9
 _maxwindPitch = 1.35
 _maxPlayerVelocity = 13.0
@@ -1303,6 +1306,7 @@ parameters/moveState/conditions/jump = false
 parameters/moveState/conditions/moving = false
 parameters/moveState/conditions/vault = false
 parameters/moveState/conditions/wallrun = false
+parameters/moveState/air/conditions/roll = false
 parameters/moveState/move/sprint/TimeScale/scale = 0.7
 parameters/moveState/wallrun/conditions/left_wallrun = false
 parameters/moveState/wallrun/conditions/right_wallrun = false
@@ -1379,5 +1383,4 @@ label_settings = SubResource("LabelSettings_oj2fi")
 uppercase = true
 
 [node name="ResetPos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7845, -32.0904, 140.763)
 top_level = true

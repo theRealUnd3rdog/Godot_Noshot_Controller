@@ -1,3 +1,7 @@
+res://Models/TubeLight
+res://Models/TubeLight/materials
+res://Models/Windmill
+res://Models/Windmill/material
 res://Materials
 res://Scenes
 res://Scenes/PlayerController

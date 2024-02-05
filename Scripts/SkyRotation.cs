@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class SkyRotation : WorldEnvironment
 {
 	[Export] private float _skyRotationSpeed = 90f;

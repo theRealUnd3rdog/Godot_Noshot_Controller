@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://4xl5v7mn436m"]
+
+[ext_resource type="Texture2D" uid="uid://bgcjq1mph1fle" path="res://Models/TubeLight/textures/TubeLight_Albedo.png" id="1_05o2o"]
+[ext_resource type="Texture2D" uid="uid://bebhmd018jpoo" path="res://Models/TubeLight/textures/TubeLight_Metallic.png" id="2_n7wpd"]
+[ext_resource type="Texture2D" uid="uid://c67lcx1vwloin" path="res://Models/TubeLight/textures/TubeLight_Normal.png" id="3_r8fcw"]
+[ext_resource type="Texture2D" uid="uid://cujak6cxjio7c" path="res://Models/TubeLight/textures/TubeLight_Roughness.png" id="4_4qs0r"]
+
+[resource]
+albedo_texture = ExtResource("1_05o2o")
+metallic = 1.0
+metallic_specular = 0.65
+metallic_texture = ExtResource("2_n7wpd")
+roughness_texture = ExtResource("4_4qs0r")
+normal_enabled = true
+normal_texture = ExtResource("3_r8fcw")
+rim_enabled = true
+rim = 0.65
+clearcoat_enabled = true
+clearcoat = 0.75
+anisotropy_enabled = true
+anisotropy = 0.46
+ao_enabled = true
+ao_light_affect = 1.0

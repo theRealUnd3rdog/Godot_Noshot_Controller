@@ -25,7 +25,7 @@ public partial class PlayerWallrun : PlayerMovementState
         _frictionForce = Movement.wallFrictionCoefficient * Movement.gravity; 
 
         Movement.momentum = Movement.Velocity.Length();
-        //Movement.camState = CameraState.Freelooking;
+        Movement.camState = CameraState.Wallrunning;
 
         Movement.CheckWall(out _collision, out wallDirection);
     }
@@ -33,7 +33,12 @@ public partial class PlayerWallrun : PlayerMovementState
     public override void Exit()
     {
         WallRunEnd?.Invoke(Movement);
-        //Movement.camState = CameraState.Normal;
+        Movement.camState = CameraState.Normal;
+    }
+
+    public override void HandleInput(InputEvent @event)
+    {
+        
     }
 
     public override void PhysicsUpdate(double delta)
@@ -49,7 +54,6 @@ public partial class PlayerWallrun : PlayerMovementState
         {
             // Decrease wall run timer
             Movement.wallRunTimer += (float)delta;
-            GD.Print(Movement.wallRunTimer);
 
             float normalizedTime = Movement.wallRunTimer / Movement.wallRunTime;
 
@@ -61,7 +65,10 @@ public partial class PlayerWallrun : PlayerMovementState
             
 
             // Clamp rotation
-            float angle = Movement.GlobalBasis.Z.SignedAngleTo(-rotatedVector, Vector3.Up);
+            //float angle = Movement.GlobalBasis.Z.SignedAngleTo(-rotatedVector, Vector3.Up);
+            float signedAngle = Mathf.RadToDeg(Movement.GlobalBasis.Z.SignedAngleTo(wallNormal, Vector3.Up));
+            GD.Print(signedAngle);
+            
             //Movement.RotateY(angle);
 
             //DebugDraw3D.DrawArrow(wallPoint, wallPoint + (rotatedVector * 1f), Colors.Aqua, 0.2f);
@@ -94,11 +101,11 @@ public partial class PlayerWallrun : PlayerMovementState
             EmitSignal(SignalName.StateFinished, "PlayerAir", new());
 		}
 
-        if (Movement.CheckVault(delta, out Vector3 vaultPoint))
+        /* if (Movement.CheckVault(delta, out Vector3 vaultPoint))
         {
             Movement.wallRunTimer = 0f; // Reset the timer
             EmitSignal(SignalName.StateFinished, "PlayerVault", new());
-        }
+        } */
 
         Movement.Velocity = Movement.playerVelocity;
     }

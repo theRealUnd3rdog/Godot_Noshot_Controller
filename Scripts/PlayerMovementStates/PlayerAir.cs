@@ -7,6 +7,8 @@ public partial class PlayerAir : PlayerMovementState
     public static event Action<Vector3> LastVelocityChangeLanded; // Event that keeps track of the last velocity when landed
     public static event Action PlayerLanded;
 
+    private Vector3 _initialDirection;
+
     public override void Enter()
     {
         base.Enter();
@@ -56,9 +58,9 @@ public partial class PlayerAir : PlayerMovementState
             EmitSignal(SignalName.StateFinished, "PlayerWallrun", new());
         }
 
-        /* if (Movement.CheckVault(delta, out Vector3 vaultPoint))
+        if (Movement.CheckVault(delta, out Vector3 vaultPoint))
         {
             EmitSignal(SignalName.StateFinished, "PlayerVault", new());
-        } */
+        }
     }
 }

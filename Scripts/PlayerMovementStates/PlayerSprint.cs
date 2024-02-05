@@ -33,14 +33,16 @@ public partial class PlayerSprint : PlayerMovementState
         if (Movement.inputDirection == Vector2.Zero)
             EmitSignal(SignalName.StateFinished, "PlayerIdle", new());
 
+        if (Movement.CheckVault(delta, out Vector3 vaultPoint) && Input.IsActionJustPressed("jump"))
+        {
+            EmitSignal(SignalName.StateFinished, "PlayerVault", new());
+        }
+
         if (!Movement.IsOnFloor() && Mathf.Abs(Movement.Velocity.Y) > 0.1f)
 		{
 			EmitSignal(SignalName.StateFinished, "PlayerAir", new());
 		}
 
-        if (Movement.CheckVault(delta, out Vector3 vaultPoint) && Input.IsActionJustPressed("jump"))
-        {
-            EmitSignal(SignalName.StateFinished, "PlayerVault", new());
-        }
+        
     }
 }

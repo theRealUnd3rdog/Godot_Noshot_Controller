@@ -19,7 +19,8 @@ public partial class PlayerVault : PlayerMovementState
         CamShake.ShakePreset(CamShakePresets.Vault);
         PlayerVaulted?.Invoke();
 
-        Movement.momentum = Movement.vaultMomentum;
+        if (Movement.FSM.PreviousState is not PlayerAir)
+            Movement.momentum = Movement.vaultMomentum;
 
         Vector3 vaultPoint = Vector3.Zero;
         Movement.CheckVault(_deltaTime, out vaultPoint);

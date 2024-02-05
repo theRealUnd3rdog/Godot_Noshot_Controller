@@ -1,5 +1,5 @@
 res://defaults/default_bus_layout.tres
-res://Scenes/PlayerController/player.tscn
+res://Scenes/main.tscn
 res://Shaders/lensFlare.gdshader
 res://Shaders/Vignette.gdshader
 res://Shaders/LensDistortion.gdshader
@@ -13,11 +13,15 @@ res://Materials/Metal_028.tres
 res://Materials/Porcelain_001.tres
 res://Materials/Tiles_072.tres
 res://Scripts/PlayerAudio.cs
+res://Models/Windmill/material/windmill.tres
+res://Models/TubeLight/materials/tubelight.tres
+res://Models/TubeLight/materials/light_emission.tres
 res://Shaders/CustomMotionBlur.gdshader
 res://Shaders/Smoke.tres
 res://addons/vs_plugin/utility/flipbook.gdshader
-res://Scenes/main.tscn
+res://Scenes/PlayerController/player.tscn
 res://Scenes/post_processor.tscn
+res://Models/Windmill/wind_mill.tscn
 res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs
 res://addons/finite_state_machine/GodotParadiseFSMPlugin.cs
 res://addons/finite_state_machine/GodotParadiseState.cs
@@ -47,10 +51,10 @@ res://Scripts/PlayerShaker.cs
 res://Scripts/PostProcessingManager.cs
 res://Scripts/RadialBlur.cs
 res://Scripts/RotateNode.cs
+res://Scripts/RotatorNode3D.cs
 res://Scripts/ScreenShake/CamShake.cs
 res://Scripts/SkyRotation.cs
 res://Scripts/SmoothFollow.cs
 res://Scripts/Spin.cs
 res://Scripts/Stats.cs
 res://Scripts/Vignette.cs
-res://Scenes/PlayerController/player_02.tscn

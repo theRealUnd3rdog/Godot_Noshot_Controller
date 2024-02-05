@@ -29,8 +29,8 @@ PostProcessor="*res://Scenes/post_processor.tscn"
 
 [display]
 
-window/size/viewport_width=1366
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=4
 window/vsync/vsync_mode=0
 window/screen_space_roughness_limiter/enabled=false
@@ -42,6 +42,12 @@ project/assembly_name="FirstGodotProject"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/finite_state_machine/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Models/": "red"
+}
 
 [input]
 
@@ -73,6 +79,7 @@ sprint={
 crouch={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"echo":false,"script":null)
 ]
 }
 free_look={
@@ -110,4 +117,3 @@ common/physics_jitter_fix=5.0
 [rendering]
 
 anti_aliasing/quality/use_taa=true
-occlusion_culling/use_occlusion_culling=true

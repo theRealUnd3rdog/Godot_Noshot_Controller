@@ -136,7 +136,7 @@ public partial class PlayerAudio : Node3D
 		_wallrun.Play();
 
 		AudioEffect lowPass = AudioServer.GetBusEffect(_movementBusIndex, 2);
-		lowPass.Set("cutoff_hz", 200f);
+		lowPass.Set("cutoff_hz", 10000f);
 	}
 
 	private void StopWallRun(Node node)
@@ -147,7 +147,7 @@ public partial class PlayerAudio : Node3D
 	private IEnumerator<double> StopWallRunSound(Node node)
 	{
 		float timeElapsed = 0f;
-		float duration = 0.32f;
+		float duration = 0.3f;
 
 		AudioEffect lowPass = AudioServer.GetBusEffect(_movementBusIndex, 2);
 		float initialLowpass = (float)lowPass.Get("cutoff_hz");
@@ -157,7 +157,7 @@ public partial class PlayerAudio : Node3D
 			timeElapsed += (float)node.GetProcessDeltaTime();
 			float normalizedTime = timeElapsed / duration;
 
-			_wallrun.PitchScale = Mathf.Lerp(_wallrun.PitchScale, 0.5f, normalizedTime);
+			_wallrun.PitchScale = Mathf.Lerp(1f, 0.1f, normalizedTime);
 			lowPass.Set("cutoff_hz", Mathf.Lerp(initialLowpass, 20500f, normalizedTime));
 
 			yield return Timing.WaitForOneFrame;

@@ -10,6 +10,7 @@ public enum CameraState
 {
 	Normal,
 	Freelooking,
+	Wallrunning,
 }
 
 public partial class PlayerMovement : CharacterBody3D
@@ -447,6 +448,15 @@ public partial class PlayerMovement : CharacterBody3D
 	{
 		playerVelocity.Y = wallJumpSpeed / 2; 
 		direction = ((wallDir.Normalized()) + (-_camera.GlobalBasis.Z.Normalized() / 4)) * (wallJumpSpeed / 16);
+	}
+
+	public void RollPlayer(Vector3 directionFromAir)
+	{
+		// Check if current direction from camera is close to the direction from air.
+		
+		// Check if there's some forward velocity
+
+		// Then land and execute animation.
 	}
 	
 	public bool CheckWall(out KinematicCollision3D collision, out String direction)
