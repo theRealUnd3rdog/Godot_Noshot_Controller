@@ -25,7 +25,7 @@ This controller is also featured on my Youtube channel [Underdog](https://www.yo
 
 ## Getting Started
 
-To get started, just clone the project and load it into your Godot Hub.
+To get started, just download one of the versions from the releases tab and open it in the Godot hub.
 You must need a Mono version of Godot 4.2 installed for it to work.
 
 ## Controls
