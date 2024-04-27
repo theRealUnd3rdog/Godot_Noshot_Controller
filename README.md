@@ -1,6 +1,6 @@
 ![Alt text](docs/CoverImage.png?raw=true)
 
-**NOSHOT FIRST PERSON CONTROLLER** is an open source First person movement system made in Godot 4.
+**NOSHOT FIRST PERSON CONTROLLER** is an open source First person movement system made in Godot 4.2.
 
 This controller is also featured on my Youtube channel [Underdog](https://www.youtube.com/channel/UCg6WHXnqqeDSG1hkJ-_8nTw):
 - [Making a 3D Parkour Game in Godot in 14 Days](https://youtu.be/rG3ZGfhmscQ)
@@ -18,7 +18,7 @@ This controller is also featured on my Youtube channel [Underdog](https://www.yo
 
 ![Alt text](docs/Graphics.png?raw=true)
 
-- Utilizes Godot 4.1's SDFGI for lighting
+- Utilizes Godot 4.2's SDFGI for lighting
 - Comes with a Post Processing Stack.
 - Contains Motion Blur, Vignette, Radial Blur, Lens Flares, Lens Distortion and Chromattic Abberation.
 - Contains Audio that dynamically changes over different surfaces and changes pitch and volume depending on speed.
@@ -26,7 +26,7 @@ This controller is also featured on my Youtube channel [Underdog](https://www.yo
 ## Getting Started
 
 To get started, just clone the project and load it into your Godot Hub.
-You must need a Mono version of Godot 4.1 installed for it to work.
+You must need a Mono version of Godot 4.2 installed for it to work.
 
 ## Controls
 
