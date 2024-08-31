@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://k0g8l20jpn5l"]
+[gd_scene load_steps=34 format=3 uid="uid://k0g8l20jpn5l"]
 
 [ext_resource type="Material" uid="uid://ntptsm338blc" path="res://Materials/Brick_023.tres" id="1_0udfd"]
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="2_buung"]
@@ -15,8 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://0by3punu7v0y" path="res://defaults/Underdog_logo.png" id="8_hsa46"]
 [ext_resource type="Material" uid="uid://db0hox3jwesrf" path="res://Materials/Tiles_072.tres" id="9_1aeek"]
 [ext_resource type="Texture2D" uid="uid://dd53cr7ij30yd" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png" id="9_6kb7u"]
+[ext_resource type="Material" uid="uid://ntstl1pd4x5j" path="res://Materials/Prototype.tres" id="9_30m5r"]
 [ext_resource type="Script" path="res://Scripts/Stats.cs" id="10_6u0gq"]
 [ext_resource type="Texture2D" uid="uid://bopb2fir8dyh7" path="res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png" id="10_a7dfo"]
+[ext_resource type="PackedScene" uid="uid://de0m4efhg3n52" path="res://Scenes/Tools/csg_ref.tscn" id="10_pi8do"]
 [ext_resource type="PackedScene" uid="uid://ddp62lqxgj3c2" path="res://Scenes/PlayerController/player.tscn" id="14_qv7ho"]
 [ext_resource type="PackedScene" uid="uid://bqekf67x42h0i" path="res://Models/Windmill/wind_mill.tscn" id="19_l7anu"]
 [ext_resource type="PackedScene" uid="uid://c3n5ryfjyi3h1" path="res://Models/TubeLight/tube_light.tscn" id="20_gox77"]
@@ -25,10 +27,11 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 1.35398, 0)
+sky_rotation = Vector3(0, 0.07502, 0)
 ambient_light_source = 3
 reflected_light_source = 2
-tonemap_mode = 3
+tonemap_mode = 2
+tonemap_white = 4.18
 ssr_enabled = true
 ssr_fade_out = 2.21914
 ssao_enabled = true
@@ -57,7 +60,8 @@ volumetric_fog_emission_energy = 0.0
 volumetric_fog_anisotropy = 0.18
 volumetric_fog_ambient_inject = 7.97
 adjustment_enabled = true
-adjustment_contrast = 1.2
+adjustment_brightness = 1.1
+adjustment_contrast = 1.3
 adjustment_saturation = 1.1
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_12m36"]
@@ -79,6 +83,48 @@ font_names = PackedStringArray("Evil Empire")
 font = SubResource("SystemFont_36c0q")
 font_size = 45
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_ynpba"]
+font_names = PackedStringArray("Jersey M54")
+font_weight = 425
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wadcm"]
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hkgbw"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2.00001, 2.00001, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 6, 0, 4, 0, 0, 0, 2, 0, 6, 0, 3, 0, 6, 0, 2, 0, 3, 0, 7, 0, 6, 0, 7, 0, 4, 0, 6, 0, 7, 0, 5, 0, 4, 0, 5, 0, 3, 0, 1, 0, 5, 0, 7, 0, 3, 0, 1, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0, 5, 0, 0, 0, 4, 0, 5, 0, 1, 0, 0, 0),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(254, 255, 254, 255, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 254, 255, 254, 255, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_61j2x"]
+resource_name = "defaultCube_Cube"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2.00001, 2.00001, 2),
+"attribute_data": PackedByteArray(255, 159, 255, 127, 255, 159, 255, 127, 255, 159, 255, 127, 255, 95, 255, 127, 255, 95, 255, 127, 255, 95, 255, 127, 255, 159, 255, 63, 255, 159, 255, 63, 255, 159, 255, 63, 255, 95, 255, 63, 255, 95, 255, 63, 255, 95, 255, 63, 255, 159, 255, 191, 255, 159, 255, 191, 255, 223, 255, 127, 255, 95, 255, 191, 255, 31, 255, 127, 255, 95, 255, 191, 255, 159, 255, 255, 255, 159, 0, 0, 255, 223, 255, 63, 255, 95, 255, 255, 255, 31, 255, 63, 255, 95, 0, 0),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray(1, 0, 20, 0, 14, 0, 1, 0, 7, 0, 20, 0, 10, 0, 19, 0, 6, 0, 10, 0, 23, 0, 19, 0, 21, 0, 12, 0, 18, 0, 21, 0, 15, 0, 12, 0, 16, 0, 9, 0, 3, 0, 16, 0, 22, 0, 9, 0, 5, 0, 8, 0, 2, 0, 5, 0, 11, 0, 8, 0, 17, 0, 0, 0, 13, 0, 17, 0, 4, 0, 0, 0),
+"material": SubResource("StandardMaterial3D_wadcm"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(254, 255, 254, 255, 0, 0, 255, 255, 254, 255, 254, 255, 0, 0, 255, 255, 254, 255, 254, 255, 0, 0, 84, 213, 254, 255, 0, 0, 0, 0, 255, 191, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 84, 213, 254, 255, 254, 255, 255, 255, 255, 191, 254, 255, 254, 255, 255, 255, 255, 255, 254, 255, 254, 255, 255, 255, 84, 213, 254, 255, 0, 0, 255, 255, 255, 191, 254, 255, 0, 0, 255, 255, 255, 191, 254, 255, 0, 0, 255, 255, 84, 213, 0, 0, 254, 255, 0, 0, 84, 213, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 84, 213, 0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 255, 255, 84, 213, 0, 0, 254, 255, 255, 255, 255, 191, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 84, 213, 0, 0, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 255, 255, 255, 191, 255, 191, 255, 191, 255, 127, 255, 191, 170, 42, 170, 42, 0, 0, 255, 127, 255, 191, 255, 191, 170, 42, 170, 42, 255, 255, 255, 255, 255, 127, 255, 191, 170, 42, 170, 42, 0, 0, 255, 127, 255, 255, 255, 255, 170, 42, 170, 42, 84, 213, 84, 213, 255, 191, 255, 191, 255, 127, 255, 191, 84, 213, 84, 213, 0, 0, 255, 127, 255, 191, 255, 191, 84, 213, 84, 213, 255, 255, 255, 255, 255, 127, 255, 191, 84, 213, 84, 213, 0, 0, 255, 127, 255, 255, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_hkgbw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vh4uj"]
 size = Vector3(14.795, 1, 7.7)
@@ -109,7 +155,7 @@ spot_angle = 13.49
 unique_name_in_owner = true
 transform = Transform3D(0.737991, -0.386425, -0.553213, 0.673873, 0.465215, 0.573995, 0.0355568, -0.796398, 0.603726, 0, 4.64027, 3.57474)
 light_color = Color(0.966428, 0.88712, 0.75687, 1)
-light_energy = 6.756
+light_energy = 6.0
 light_indirect_energy = 5.517
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -193,6 +239,107 @@ use_collision = true
 collision_layer = 2
 size = Vector3(20, 1, 1)
 
+[node name="Measurements" type="Node3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.149, -47.9333, -33.7702)
+
+[node name="ConcreteCSGBox3D" type="CSGBox3D" parent="Stage/Measurements" groups=["Concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.5, 0)
+material_override = ExtResource("1_0udfd")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 50, 20)
+
+[node name="ConcreteCSGBox3D2" type="CSGBox3D" parent="Stage/Measurements" groups=["Concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50, 0.0201721)
+material_override = ExtResource("2_buung")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 20)
+
+[node name="MetalCSGBox3D3" type="CSGBox3D" parent="Stage/Measurements" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50.05, 10.5202)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D4" type="CSGBox3D" parent="Stage/Measurements" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101038, 50.05, -10.4798)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D5" type="CSGBox3D" parent="Stage/Measurements" groups=["Metal"]]
+transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, -10.399, 50.05, -0.0298274)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="MetalCSGBox3D6" type="CSGBox3D" parent="Stage/Measurements" groups=["Metal"]]
+transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, 10.601, 50.05, -0.0298284)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(20, 1, 1)
+
+[node name="Label3D" type="Label3D" parent="Stage/Measurements"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.5, 56.25, 0)
+shaded = true
+double_sided = false
+text = "MEASUREMENTS"
+font = SubResource("SystemFont_ynpba")
+font_size = 335
+outline_size = 1
+
+[node name="BlenderCube" type="MeshInstance3D" parent="Stage/Measurements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12245, 51.5, -4.26763)
+material_override = ExtResource("9_30m5r")
+mesh = SubResource("ArrayMesh_61j2x")
+skeleton = NodePath("")
+
+[node name="CSGRef" parent="Stage/Measurements" instance=ExtResource("10_pi8do")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.00964, 51, 0.46703)
+_refFontOffset = 1.0
+
+[node name="CSGRef2" parent="Stage/Measurements" instance=ExtResource("10_pi8do")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.509644, 51.5, 3.46703)
+size = Vector3(2, 2, 2)
+_refText = "BLENDER CUBE"
+_refFontSize = 150
+_refFontOffset = 1.0
+_measurementFontSize = 70
+
+[node name="CSGRef3" parent="Stage/Measurements" instance=ExtResource("10_pi8do")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.960266, 51.75, -2.28297)
+size = Vector3(1.5, 2.5, 0.1)
+_refText = "DOOR"
+_refFontSize = 150
+_refFontOffset = 1.0
+_measurementFontSize = 70
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stage/Measurements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25, 51.5, -7.25)
+material_override = ExtResource("9_30m5r")
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 2, 1)
+
+[node name="ConcreteCSGBox3D8" type="CSGBox3D" parent="Stage/Measurements" groups=["Tile"]]
+transform = Transform3D(-4.37114e-08, -1, -1.06581e-14, 1, -4.37114e-08, 0, -4.02341e-21, -1.06581e-14, 1, 10.4209, 55.3006, 0.0787621)
+material_override = ExtResource("5_ewlxh")
+use_collision = true
+collision_layer = 2
+size = Vector3(10.1996, 1, 20.7944)
+
+[node name="ConcreteCSGBox3D19" type="CSGBox3D" parent="Stage/Measurements" groups=["Metal"]]
+transform = Transform3D(-4.37114e-08, -1, -1.06581e-14, 1, -4.37114e-08, 0, -4.02341e-21, -1.06581e-14, 1, 10.4064, 60.3313, 0.169338)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(0.441013, 1.18091, 20.7051)
+
 [node name="Node3D10" type="Node3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39896, -50.5, 45.7298)
 
@@ -253,11 +400,11 @@ collision_layer = 2
 size = Vector3(20, 1, 1)
 
 [node name="MetalCSGBox3D10" type="CSGBox3D" parent="Stage/Node3D10" groups=["Metal"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.101038, 50.0273, -20.4798)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.023962, 50.0273, -20.4798)
 material_override = ExtResource("3_kljmn")
 use_collision = true
 collision_layer = 2
-size = Vector3(20, 0.826904, 1)
+size = Vector3(20, 0.826904, 0.25)
 
 [node name="MetalCSGBox3D5" type="CSGBox3D" parent="Stage/Node3D10" groups=["Metal"]]
 transform = Transform3D(-4.85799e-08, 0, 1, 0, 1.1, 0, -1.11138, 0, -4.37114e-08, -10.399, 50.05, -0.0298274)
@@ -692,6 +839,13 @@ use_collision = true
 collision_layer = 2
 size = Vector3(2, 1.44485, 2)
 
+[node name="MetalCSGBox3D80" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.875, 52.4, -35)
+material_override = ExtResource("4_ltx8g")
+use_collision = true
+collision_layer = 2
+size = Vector3(13.75, 1.5, 2)
+
 [node name="MetalCSGBox3D79" type="CSGBox3D" parent="Stage/Node3D9" groups=["Metal"]]
 transform = Transform3D(0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, 0.34202, -1.19878, 51.0733, 4.71198)
 material_override = ExtResource("4_ltx8g")
@@ -712,6 +866,33 @@ material_override = ExtResource("4_ltx8g")
 use_collision = true
 collision_layer = 2
 size = Vector3(2, 3.5, 2)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 46.7937, -35.1682)
+use_collision = true
+collision_layer = 2
+radius = 4.33
+radial_segments = 16
+rings = 16
+material = ExtResource("5_ewlxh")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 46.5437, -30.6682)
+use_collision = true
+collision_layer = 2
+radius = 4.33
+radial_segments = 16
+rings = 16
+material = ExtResource("5_ewlxh")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Stage/Node3D9" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 47.0437, -34.4182)
+use_collision = true
+collision_layer = 2
+radius = 4.33
+radial_segments = 16
+rings = 16
+material = ExtResource("5_ewlxh")
 
 [node name="Node3D7" type="Node3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.351, -18.4101, -139.77)
@@ -1349,6 +1530,20 @@ material_override = ExtResource("4_ltx8g")
 use_collision = true
 collision_layer = 2
 size = Vector3(2, 1.2, 2)
+
+[node name="MetalCSGBox3D75" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.625, 52.525, 1.875)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(0.25, 4.25, 0.25)
+
+[node name="MetalCSGBox3D76" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.62695, 54.525, 1.875)
+material_override = ExtResource("3_kljmn")
+use_collision = true
+collision_layer = 2
+size = Vector3(0.273438, 4.25, 0.25)
 
 [node name="MetalCSGBox3D72" type="CSGBox3D" parent="Stage/Node3D4" groups=["Metal"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 51.5, 6.25)

@@ -72,6 +72,10 @@ public partial class PlayerShaker : Node
                 ChangeShakeInfluence(_slideShake);
                 break;
 
+            case PlayerVerticalWallrun:
+                ChangeShakeInfluence(CamShake.ShakePreset(new CamShakeInstance(0.2f, 0.5f, 25f, 0.5f, 0.5f)));
+                break;
+
             default:
                 ChangeShakeInfluence(_idleShake);
                 break;

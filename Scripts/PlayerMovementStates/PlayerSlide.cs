@@ -6,6 +6,8 @@ public partial class PlayerSlide : PlayerMovementState
 {
     public static event Action SlideStartChange; // Event that fires whenever a slide has started
 	public static event Action<float> SlideCurrentChange; // Event that constantly fires returning the timer
+    private float _slopeTimer = 0f;
+    private float _slopeTimerThreshold = 0.3f;
 
     public override void Enter()
     {
@@ -23,12 +25,16 @@ public partial class PlayerSlide : PlayerMovementState
         Movement.initialRotationY = Movement.Rotation.Y;
 
         Movement.slideTimer = Movement.slideTimerMax;
+
+        _slopeTimer = 0f;
     }
 
     public override void Exit()
     {
         Movement.slideTimer = 0f;
         Movement.camState = CameraState.Normal;
+
+        _slopeTimer = 0f;
     }
 
     public override void PhysicsUpdate(double delta)
@@ -46,7 +52,7 @@ public partial class PlayerSlide : PlayerMovementState
         
         Movement.currentSpeed = (Movement.slideTimer + 0.1f) * Movement.slideSpeed;
 
-        if (floorAngle > 15f && !Movement.IsRunningUpSlope())
+        if (floorAngle > 8f && !Movement.IsRunningUpSlope())
         {
             // Running down slope
             Movement.momentum += (float)delta * Movement.slideSpeed / 4;
@@ -54,7 +60,10 @@ public partial class PlayerSlide : PlayerMovementState
         else
             Movement.slideTimer -= (float)delta;
 
-        if (Movement.IsOnWall() || Movement.IsRunningUpSlope())
+        if (Movement.IsRunningUpSlope())
+            _slopeTimer += (float)delta;
+
+        if (Movement.IsOnWall() || _slopeTimer > _slopeTimerThreshold)
             EmitSignal(SignalName.StateFinished, "PlayerIdle", new());
 
         if (Movement.slideTimer <= 0f)

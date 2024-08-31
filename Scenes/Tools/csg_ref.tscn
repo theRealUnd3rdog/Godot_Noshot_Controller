@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://de0m4efhg3n52"]
+
+[ext_resource type="Material" uid="uid://ntstl1pd4x5j" path="res://Materials/Prototype.tres" id="1_pwwhq"]
+[ext_resource type="Script" path="res://Scripts/Tools/Measurement.cs" id="2_dc28v"]
+
+[sub_resource type="SystemFont" id="SystemFont_klaqd"]
+font_names = PackedStringArray("Calibri")
+font_weight = 425
+subpixel_positioning = 0
+
+[node name="CSGRef" type="CSGBox3D" groups=["Concrete"]]
+material_override = ExtResource("1_pwwhq")
+use_collision = true
+collision_layer = 2
+script = ExtResource("2_dc28v")
+_refFontSize = 125
+_measurementFontSize = 45
+
+[node name="Remote" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../RefControl")
+
+[node name="RefControl" type="Node3D" parent="."]
+
+[node name="Reference" type="Label3D" parent="RefControl"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shaded = true
+double_sided = false
+no_depth_test = true
+font = SubResource("SystemFont_klaqd")
+font_size = 125
+outline_size = 1
+uppercase = true
+
+[node name="Y-height" type="Label3D" parent="RefControl"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0.525)
+shaded = true
+double_sided = false
+no_depth_test = true
+text = "1m"
+font = SubResource("SystemFont_klaqd")
+font_size = 45
+outline_size = 1
+horizontal_alignment = 0
+
+[node name="Z-width" type="Label3D" parent="RefControl"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.453, -0.525)
+shaded = true
+double_sided = false
+no_depth_test = true
+text = "1m"
+font = SubResource("SystemFont_klaqd")
+font_size = 45
+outline_size = 1
+horizontal_alignment = 2
+
+[node name="X-width" type="Label3D" parent="RefControl"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.452, 0.525)
+shaded = true
+double_sided = false
+no_depth_test = true
+text = "1m"
+font = SubResource("SystemFont_klaqd")
+font_size = 45
+outline_size = 1
+horizontal_alignment = 0

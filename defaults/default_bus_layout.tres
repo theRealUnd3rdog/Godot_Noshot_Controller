@@ -2,9 +2,10 @@
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ahxpl"]
 resource_name = "Reverb"
-room_size = 0.0
-spread = 0.0
-wet = 0.05
+room_size = 1.0
+spread = 0.25
+dry = 0.7
+wet = 0.0
 
 [sub_resource type="AudioEffectChorus" id="AudioEffectChorus_n6wik"]
 resource_name = "Chorus"
@@ -20,7 +21,7 @@ bus/1/name = &"Movement"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 3.44248
+bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectReverb_ahxpl")
 bus/1/effect/0/enabled = true

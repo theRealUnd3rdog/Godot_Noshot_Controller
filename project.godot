@@ -29,9 +29,8 @@ PostProcessor="*res://Scenes/post_processor.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/mode=4
+window/size/viewport_width=1366
+window/size/viewport_height=720
 window/vsync/vsync_mode=0
 window/screen_space_roughness_limiter/enabled=false
 
@@ -41,12 +40,13 @@ project/assembly_name="FirstGodotProject"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/finite_state_machine/plugin.cfg")
+enabled=PackedStringArray("res://addons/Asset_Drawer/plugin.cfg", "res://addons/finite_state_machine/plugin.cfg", "res://addons/spatial_audio_3d/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
-"res://Models/": "red"
+"res://Models/": "red",
+"res://Sounds/": "blue"
 }
 
 [input]
@@ -112,8 +112,12 @@ limits/debugger/max_chars_per_second=2000000000
 [physics]
 
 common/physics_jitter_fix=5.0
+3d/physics_engine="JoltPhysics3D"
 3d/physics_ticks_per_second=60
+jolt_3d/collisions/areas_detect_static_bodies=true
+jolt_3d/collisions/report_all_kinematic_contacts=true
 
 [rendering]
 
 anti_aliasing/quality/use_taa=true
+occlusion_culling/use_occlusion_culling=true

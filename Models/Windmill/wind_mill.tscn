@@ -26,21 +26,27 @@ data = PackedVector3Array(18.6764, 69.8857, 3.4019, 18.4196, 69.7977, 3.3684, 18
 [node name="WindMill" instance=ExtResource("1_y5mfv")]
 
 [node name="Bar" parent="windmill_bones/Skeleton3D" index="0"]
+layers = 524288
 material_override = ExtResource("2_ls58o")
 
 [node name="Cuff" parent="windmill_bones/Skeleton3D" index="1"]
+layers = 524288
 material_override = ExtResource("2_ls58o")
 
 [node name="Fins" parent="windmill_bones/Skeleton3D" index="2"]
+layers = 524288
 material_override = ExtResource("2_ls58o")
 
 [node name="Fins_001" parent="windmill_bones/Skeleton3D" index="3"]
+layers = 524288
 material_override = ExtResource("2_ls58o")
 
 [node name="Fins_002" parent="windmill_bones/Skeleton3D" index="4"]
+layers = 524288
 material_override = ExtResource("2_ls58o")
 
 [node name="Fins_003" parent="windmill_bones/Skeleton3D" index="5"]
+layers = 524288
 material_override = ExtResource("2_ls58o")
 
 [node name="Bar_Cuff_Collisions" type="BoneAttachment3D" parent="windmill_bones/Skeleton3D" index="6"]
@@ -60,7 +66,7 @@ collision_layer = 2
 shape = SubResource("ConcavePolygonShape3D_itc3n")
 
 [node name="cuff_collision" type="BoneAttachment3D" parent="windmill_bones/Skeleton3D" index="7"]
-transform = Transform3D(-0.146108, 0, -0.989453, -0.989453, 0, 0.146108, 0, 1, 0, -1.19209e-07, 59.8778, 2.16272)
+transform = Transform3D(0.896129, 0, -0.444837, -0.444837, 0, -0.896129, 0, 1, 0, -1.19209e-07, 59.8778, 2.16272)
 bone_name = "rotator"
 bone_idx = 1
 override_pose = true

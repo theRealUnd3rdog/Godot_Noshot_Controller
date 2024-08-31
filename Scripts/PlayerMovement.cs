@@ -81,6 +81,7 @@ public partial class PlayerMovement : CharacterBody3D
 
 	[ExportSubgroup("Vaulting")]
 	[Export] private RayCast3D _vaultRay;
+	[Export] private RayCast3D _vaultCheck;
 	[Export] private ShapeCast3D _vaultCast;
 	[Export] public ShapeCast3D stepCast;
     [Export] public float vaultMomentum {private set; get;}
@@ -97,6 +98,9 @@ public partial class PlayerMovement : CharacterBody3D
 	public float wallRunTimer = 0.0f;
 	private PlayerWallrun _wallRunStateNode;
 
+
+	[ExportSubgroup("Vertical wallrun")]
+	[Export] public float verticalRunHeight {private set; get;} = 4f; // in metres
 
 	[ExportSubgroup("Head Bobbing")]
 	[Export] private float _headBobSprintSpeed = 22.0f;
@@ -182,21 +186,28 @@ public partial class PlayerMovement : CharacterBody3D
 		// Mouse movement on camera
 		if (@event is InputEventMouseMotion eventMouseMotion)
 		{
-			if (camState == CameraState.Freelooking)
+
+			switch (camState)
 			{
-				if (FSM.CurrentState is PlayerSlide)
-				{
+				case CameraState.Freelooking:
+					if (FSM.CurrentState is PlayerSlide)
+					{
+						RotatePlayer(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y);
+					}
+					else
+					{
+						FreeLookRotation(eventMouseMotion.Relative.X, -120f, 120f);
+					}
+
+					break;
+
+				case CameraState.Wallrunning:
+					break;
+				
+				case CameraState.Normal:
+				
 					RotatePlayer(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y);
-				}
-				else
-				{
-					FreeLookRotation(eventMouseMotion.Relative.X);
-				}
-			}
-			// Rotate player like normal
-			else
-			{
-				RotatePlayer(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y);
+					break;
 			}
 		}
     }
@@ -226,11 +237,39 @@ public partial class PlayerMovement : CharacterBody3D
 		_rotationZ = Mathf.Clamp(_rotationZ, Mathf.DegToRad(-_zClamp), Mathf.DegToRad(_zClamp));
 	}
 
-	private void FreeLookRotation(float mouseX)
+	public void RotatePlayerByConstraint(float mouseX, float mouseY, float leftDeg, float rightDeg)
+	{
+		float rotationY = Mathf.DegToRad(-mouseX * mouseSensitivityX);
+		rotationY = Mathf.Clamp(rotationY, Mathf.DegToRad(leftDeg), Mathf.DegToRad(rightDeg));
+
+		RotateY(rotationY);
+
+		_rotationX += Mathf.DegToRad(-mouseY * mouseSensitivityY);
+		_rotationX = Mathf.Clamp(_rotationX, Mathf.DegToRad(-89f), Mathf.DegToRad(89f));
+
+		_rotationZ += Mathf.DegToRad(mouseX * mouseSensitivityX * inputDirection.Length());
+		_rotationZ = Mathf.Clamp(_rotationZ, Mathf.DegToRad(-_zClamp), Mathf.DegToRad(_zClamp));
+	}
+
+	public void RotatePlayerByConstraintUp(float mouseX, float mouseY, float leftDeg, float rightDeg, float upDeg, float downDeg)
+	{
+		float rotationY = Mathf.DegToRad(-mouseX * mouseSensitivityX);
+		rotationY = Mathf.Clamp(rotationY, Mathf.DegToRad(leftDeg), Mathf.DegToRad(rightDeg));
+
+		RotateY(rotationY);
+
+		_rotationX += Mathf.DegToRad(-mouseY * mouseSensitivityY);
+		_rotationX = Mathf.Clamp(_rotationX, Mathf.DegToRad(downDeg), Mathf.DegToRad(upDeg));
+
+		_rotationZ += Mathf.DegToRad(mouseX * mouseSensitivityX * inputDirection.Length());
+		_rotationZ = Mathf.Clamp(_rotationZ, Mathf.DegToRad(-_zClamp), Mathf.DegToRad(_zClamp));
+	}
+
+	private void FreeLookRotation(float mouseX, float leftDeg, float rightDeg)
 	{
 		_neck.RotateY(Mathf.DegToRad(-mouseX * mouseSensitivityX));
 
-		float neckClampedRotation = Mathf.Clamp(_neck.Rotation.Y, Mathf.DegToRad(-120f), Mathf.DegToRad(120));
+		float neckClampedRotation = Mathf.Clamp(_neck.Rotation.Y, Mathf.DegToRad(leftDeg), Mathf.DegToRad(rightDeg));
 		Vector3 neckRotation = new Vector3(_neck.Rotation.X, neckClampedRotation, _neck.Rotation.Z);
 		_neck.Rotation = neckRotation;
 	}
@@ -294,22 +333,31 @@ public partial class PlayerMovement : CharacterBody3D
 	{
 		if (_animator != null)
 		{
-			_animator.Set("parameters/moveState/conditions/idle", FSM.CurrentState is PlayerIdle || (inputDirection.Length() <= 0.1f && FSM.CurrentState is not PlayerWallrun));
+			_animator.Set("parameters/moveState/conditions/idle", FSM.CurrentState is PlayerIdle 
+						|| (inputDirection.Length() <= 0.1f 
+						&& (FSM.CurrentState is not PlayerWallrun || FSM.CurrentState is not PlayerVerticalWallrun)));
+
 			_animator.Set("parameters/moveState/conditions/moving", IsOnFloor() && (FSM.CurrentState is PlayerWalk 
 						|| FSM.CurrentState is PlayerSprint || FSM.CurrentState is PlayerCrouch) && Velocity.Length() > 0.1f);
 			
 			_animator.Set("parameters/moveState/conditions/jump", (Input.IsActionJustPressed("jump") && airTime < _coyoteTime && 
 						_jumpsDone < _jumps && !ceilingRay.IsColliding() && (!stepCast.IsColliding() 
 						|| FSM.CurrentState is PlayerIdle)) || 
-						(Input.IsActionJustPressed("jump") && FSM.CurrentState is PlayerWallrun));
+						(Input.IsActionJustPressed("jump") && (FSM.CurrentState is PlayerWallrun || FSM.CurrentState is PlayerVerticalWallrun)));
 
 			_animator.Set("parameters/moveState/conditions/inAir", FSM.CurrentState is PlayerAir);
+			
 			_animator.Set("parameters/moveState/conditions/vault", FSM.CurrentState is PlayerVault);
-			_animator.Set("parameters/moveState/conditions/wallrun", FSM.CurrentState is PlayerWallrun);
+
+			_animator.Set("parameters/moveState/conditions/wallrun", FSM.CurrentState is PlayerWallrun 
+						|| FSM.CurrentState is PlayerVerticalWallrun);
 
 
-			_animator.Set("parameters/moveState/wallrun/conditions/left_wallrun", _wallRunStateNode.wallDirection == "Right" ? true : false);
-			_animator.Set("parameters/moveState/wallrun/conditions/right_wallrun",_wallRunStateNode.wallDirection == "Left" ? true : false);
+			_animator.Set("parameters/moveState/wallrun/conditions/left_wallrun",
+						_wallRunStateNode.wallDirection == "Right" ? true : false);
+
+			_animator.Set("parameters/moveState/wallrun/conditions/right_wallrun",
+						_wallRunStateNode.wallDirection == "Left" ? true : false);
 
 
 			if (_animationLabel != null)
@@ -356,7 +404,7 @@ public partial class PlayerMovement : CharacterBody3D
 		_vaultProjection = _vaultProjection.Lerp(rawProjectedXZ, 25f * (float)delta);
 
 		// Get the projected point based on input
-		Vector3 inputProjectionPoint = 2f * _vaultProjection;
+		Vector3 inputProjectionPoint = 3f * _vaultProjection;
 		Vector3 vaultNormal = default(Vector3);
 
 		float vaultElevation = 0f;
@@ -383,7 +431,7 @@ public partial class PlayerMovement : CharacterBody3D
 
 		_vaultCast.GlobalPosition = _vaultPoint;
 
-		if (inputDirection.Y < 0f && !ceilingRay.IsColliding() && _vaultCast.IsColliding()
+		if (inputDirection.Y < 0f && !ceilingRay.IsColliding() && _vaultCast.IsColliding() && _vaultCheck.IsColliding()
 				&& !stepCast.IsColliding() && vaultElevation > minElevation && (angleToFloor > 80f || Mathf.IsZeroApprox(angleToFloor)))
 		{
 			vaultPoint = _vaultPoint;
@@ -400,7 +448,7 @@ public partial class PlayerMovement : CharacterBody3D
 	public bool IsRunningUpSlope()
 	{
 		float dot = GetFloorNormal().Dot(-Transform.Basis.Z);
-
+		
 		if (dot < 0f)
 			return true;
 		else 
@@ -433,7 +481,7 @@ public partial class PlayerMovement : CharacterBody3D
 			Vector3 velocity = Velocity;
 
 			velocity = jumpSpeed * Vector3.Up;
-
+			
 			Velocity = velocity;
 		}
 		else
@@ -483,34 +531,86 @@ public partial class PlayerMovement : CharacterBody3D
 			Vector3 collisionNormal = c.GetNormal();
 			Vector3 collisionPoint = c.GetPosition();
 
-			// Check if there's enough elevation
-			if (GlobalPosition.DistanceTo(collisionPoint) > 1.4f)
+			float dotCollision = Mathf.Abs(collisionNormal.Dot(Vector3.Up)); // Get the dot product to see if the wall is side ways
+
+			if (dotCollision < 0.1f)
 			{
-				float dotCollision = Mathf.Abs(collisionNormal.Dot(Vector3.Up)); // Get the dot product to see if the wall is side ways
+				Vector3 playerForward = this.GlobalBasis.Z;
+				float angleToWall = Mathf.RadToDeg(playerForward.AngleTo(collisionNormal));
+				float signedAngle = Mathf.RadToDeg(playerForward.SignedAngleTo(collisionNormal, Vector3.Up));			
 
-				if (dotCollision < 0.1f)
+				// Check if camera is facing somewhat in that direction
+				if (angleToWall < 105f && angleToWall > 25f)
 				{
-					Vector3 playerForward = this.GlobalBasis.Z;
-					float angleToWall = Mathf.RadToDeg(playerForward.AngleTo(collisionNormal));
-					float signedAngle = Mathf.RadToDeg(playerForward.SignedAngleTo(collisionNormal, Vector3.Up));			
+					//DebugDraw3D.DrawSquare(c.GetPosition(), 0.1f, Colors.Blue);
 
-					// Check if camera is facing somewhat in that direction
-					if (angleToWall < 105f && angleToWall > 25f)
+					direction = Mathf.Sign(signedAngle) > 0 ? "Left" : "Right";
+					collision = c;
+					
+					//GD.Print(direction);
+					
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public bool CheckVerticalWall(out Vector3 wallDirection, out Vector3 wallPoint)
+	{
+		wallDirection = default;
+		wallPoint = default;
+
+		// Get forward ray
+		bool forwardRay = SendRayInDirection(-GlobalBasis.Z, 0.5f, out Vector3 rayNormal, out Vector3 rayPoint);
+
+		if (forwardRay)
+		{
+			float dotCollision = Mathf.Abs(rayNormal.Dot(Vector3.Up));
+
+			// Threshold to how slanted the wall can be
+			if (dotCollision < 0.3f)
+			{
+				Vector3 cameraUp = _camera.GlobalBasis.Y;
+				Vector3 playerForward = GlobalBasis.Z;
+				
+				float upAngleDot = rayNormal.Dot(cameraUp);
+				float forwardAngle = Mathf.RadToDeg(playerForward.AngleTo(rayNormal));
+
+				wallDirection = GlobalBasis.X.Cross(rayNormal).Normalized();
+				wallDirection = new Vector3(
+					Mathf.Abs(wallDirection.X),
+					Mathf.Abs(wallDirection.Y),
+					Mathf.Abs(wallDirection.Z)
+				);
+
+				wallPoint = rayPoint;
+
+				// Check if not facing completely side ways to the wall and in general direction
+				if (forwardAngle > 0 && forwardAngle < 20f)
+				{
+					// Check if camera is facing somewhat upwards
+					if (upAngleDot > 0.2f)
 					{
-						//DebugDraw3D.DrawSquare(c.GetPosition(), 0.1f, Colors.Blue);
-
-						direction = Mathf.Sign(signedAngle) > 0 ? "Left" : "Right";
-						collision = c;
-						
-						//GD.Print(direction);
-						
-						return true;
+						// Check if player velocity is more than or equal to 0
+						if (Velocity.Y >= 0)
+						{
+							DebugDraw3D.DrawArrow(wallPoint, wallPoint + (wallDirection * 1f), Colors.Aqua, 0.2f);
+							return true;
+						}
 					}
 				}
 			}
 		}
 
 		return false;
+
+		// Check if forward ray colliding
+
+		// Check if player is facing upward
+
+		// Check if y velocity is positive or 0
 	}
 
 	public bool SendRayInDirection(Vector3 direction, float range, out Vector3 rayNormal, out Vector3 rayPoint)
@@ -524,7 +624,9 @@ public partial class PlayerMovement : CharacterBody3D
 		rayNormal = default(Vector3);
 		rayPoint = default(Vector3);
 
-        PhysicsRayQueryParameters3D parameters = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
+        PhysicsRayQueryParameters3D parameters = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd, 2);
+		parameters.HitBackFaces = false;
+		parameters.HitFromInside = false;
 
         var rayArray = spaceState.IntersectRay(parameters);
 
@@ -581,13 +683,16 @@ public partial class PlayerMovement : CharacterBody3D
 		// If not free looking return to normal camera state
 		else
 		{
-			camState = CameraState.Normal;
+			if (FSM.CurrentState is not PlayerWallrun)
+			{
+				camState = CameraState.Normal;
 
-			Vector3 neckRot = new Vector3(_neck.Rotation.X, 0f, _neck.Rotation.Z);
-			_neck.Rotation = _neck.Rotation.Lerp(neckRot, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+				Vector3 neckRot = new Vector3(_neck.Rotation.X, 0f, _neck.Rotation.Z);
+				_neck.Rotation = _neck.Rotation.Lerp(neckRot, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
 
-			Vector3 eyeRot = new Vector3(_eyes.Rotation.X, _eyes.Rotation.Y, 0f);
-			_eyes.Rotation = _eyes.Rotation.Lerp(eyeRot, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+				Vector3 eyeRot = new Vector3(_eyes.Rotation.X, _eyes.Rotation.Y, 0f);
+				_eyes.Rotation = _eyes.Rotation.Lerp(eyeRot, 1.0f - Mathf.Pow(0.5f, (float)delta * lerpSpeed));
+			}
 		}
 
 		// Handle head bob

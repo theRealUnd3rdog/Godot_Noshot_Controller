@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://winx64x1soo8"]
+
+[ext_resource type="Script" path="res://addons/spatial_audio_3d/SpatialAudioPlayer3D.cs" id="1_1fhd6"]
+
+[node name="SpatialAudioPlayer" type="AudioStreamPlayer3D" node_paths=PackedStringArray("_raycastDown", "_raycastLeft", "_raycastRight", "_raycastForward", "_raycastForwardLeft", "_raycastForwardRight", "_raycastBackwardRight", "_raycastBackwardLeft", "_raycastBackward", "_raycastUp")]
+script = ExtResource("1_1fhd6")
+_raycastDown = NodePath("RaycastDown")
+_raycastLeft = NodePath("RaycastLeft")
+_raycastRight = NodePath("RaycastRight")
+_raycastForward = NodePath("RaycastForward")
+_raycastForwardLeft = NodePath("RaycastForwardLeft")
+_raycastForwardRight = NodePath("RaycastForwardRight")
+_raycastBackwardRight = NodePath("RaycastBackwardRight")
+_raycastBackwardLeft = NodePath("RaycastBackwardLeft")
+_raycastBackward = NodePath("RaycastBackward")
+_raycastUp = NodePath("RaycastUp")
+
+[node name="RaycastDown" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(0, -100, 0)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastLeft" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(100, 0, 0)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastRight" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(-100, 0, 0)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastForward" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(0, 0, 100)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastForwardLeft" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, 100)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastForwardRight" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, 100)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastBackwardRight" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, -100)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastBackwardLeft" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+exclude_parent = false
+target_position = Vector3(0, 0, -100)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastBackward" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(0, 0, -100)
+collision_mask = 10
+hit_back_faces = false
+
+[node name="RaycastUp" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(0, 100, 0)
+collision_mask = 10
+hit_back_faces = false

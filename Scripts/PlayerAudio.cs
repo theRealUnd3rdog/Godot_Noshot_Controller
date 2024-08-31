@@ -62,10 +62,13 @@ public partial class PlayerAudio : Node3D
 		PlayerMovement.VelocityChange += PlayWindVelocity;
 
 		PlayerVault.PlayerVaulted += PlayVaultIn;
-		PlayerVault.PlayerVaultEnded += PlayVaultOut;
+		//PlayerVault.PlayerVaultEnded += PlayVaultOut;
 
 		PlayerWallrun.WallRunStart += PlayWallRun;
 		PlayerWallrun.WallRunEnd += StopWallRun;
+
+		PlayerVerticalWallrun.VerticalWallRunStart += PlayWallRun;
+		PlayerVerticalWallrun.VerticalWallRunEnd += StopWallRun;
 
 		_animator = Owner.GetNode<AnimationTree>("AnimationTree");
 		_movementBusIndex = AudioServer.GetBusIndex(movementBus);
@@ -82,10 +85,13 @@ public partial class PlayerAudio : Node3D
 		PlayerMovement.VelocityChange -= PlayWindVelocity;
 
 		PlayerVault.PlayerVaulted -= PlayVaultIn;
-		PlayerVault.PlayerVaultEnded -= PlayVaultOut;
+		//PlayerVault.PlayerVaultEnded -= PlayVaultOut;
 
 		PlayerWallrun.WallRunStart -= PlayWallRun;
 		PlayerWallrun.WallRunEnd -= StopWallRun;
+
+		PlayerVerticalWallrun.VerticalWallRunStart -= PlayWallRun;
+		PlayerVerticalWallrun.VerticalWallRunEnd -= StopWallRun;
     }
 
     public override void _Process(double delta)
@@ -133,10 +139,12 @@ public partial class PlayerAudio : Node3D
 		Timing.KillCoroutines("Wallrun");
 
 		_wallrun.PitchScale = 1f;
-		_wallrun.Play();
+
+		if (!_wallrun.Playing)
+			_wallrun.Play();
 
 		AudioEffect lowPass = AudioServer.GetBusEffect(_movementBusIndex, 2);
-		lowPass.Set("cutoff_hz", 10000f);
+		lowPass.Set("cutoff_hz", 3000f);
 	}
 
 	private void StopWallRun(Node node)

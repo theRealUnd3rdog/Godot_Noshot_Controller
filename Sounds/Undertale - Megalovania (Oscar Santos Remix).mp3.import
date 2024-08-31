@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d36m73rmxdb7c"
+path="res://.godot/imported/Undertale - Megalovania (Oscar Santos Remix).mp3-f283dc56317976c201850ee04c31baf5.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Undertale - Megalovania (Oscar Santos Remix).mp3"
+dest_files=["res://.godot/imported/Undertale - Megalovania (Oscar Santos Remix).mp3-f283dc56317976c201850ee04c31baf5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

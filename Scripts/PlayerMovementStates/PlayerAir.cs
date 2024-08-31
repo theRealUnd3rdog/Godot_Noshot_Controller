@@ -52,10 +52,24 @@ public partial class PlayerAir : PlayerMovementState
 		}
 
         // Wallrun
-        if (Movement.CheckWall(out KinematicCollision3D collision, out String direction) && Movement.wallRunTimer <= Movement.wallRunTime)
+        if (Movement.CheckWall(out KinematicCollision3D collision, out String direction) 
+        && Movement.wallRunTimer <= Movement.wallRunTime
+        && Movement.airTime < 2f
+        && !Movement.SendRayInDirection(-Movement.GlobalBasis.Z, 0.5f, out Vector3 normal, out Vector3 point)
+        && Movement.FSM.PreviousState is not PlayerVerticalWallrun)
         {
             Movement.airTime = 0f;
             EmitSignal(SignalName.StateFinished, "PlayerWallrun", new());
+        }
+
+        // Vertical wallrun
+        if (Movement.CheckVerticalWall(out Vector3 verticalWallDir, out Vector3 verticalWallPoint)
+            && !Movement.IsOnFloor()
+            && Movement.FSM.PreviousState is not PlayerWallrun
+            && Movement.FSM.PreviousState is not PlayerVerticalWallrun)
+        {
+            Movement.airTime = 0f;
+            EmitSignal(SignalName.StateFinished, "PlayerVerticalWallrun", new());
         }
 
         if (Movement.CheckVault(delta, out Vector3 vaultPoint))

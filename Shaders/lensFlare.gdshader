@@ -88,5 +88,8 @@ void fragment()
 	color += tint * lensflare(uv, mouse.xy, texResolution);
 	color -= noise_vec2(FRAGCOORD.xy, texResolution)*.015;
 	color = cc(color,.5,.1);
-	COLOR = vec4(color,1.0);
+	
+	// Reduce transparency by multiplying alpha by a factor
+    float alpha = 0.5; // Adjust this value to control transparency
+    COLOR = vec4(color, previousColor.a * alpha);
 }

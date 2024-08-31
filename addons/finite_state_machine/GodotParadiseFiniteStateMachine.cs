@@ -60,7 +60,7 @@ public partial class GodotParadiseFiniteStateMachine : Node
     }
 
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         CurrentState.HandleInput(@event);
     }

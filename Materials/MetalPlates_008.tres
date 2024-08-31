@@ -21,6 +21,7 @@ clearcoat_enabled = true
 clearcoat_roughness = 0.39
 anisotropy_enabled = true
 anisotropy = 0.21
+ao_enabled = true
 ao_light_affect = 1.0
 uv1_scale = Vector3(0.2, 0.2, 0.2)
 uv1_triplanar = true

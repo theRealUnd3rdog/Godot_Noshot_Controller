@@ -38,7 +38,13 @@ public partial class PlayerWallrun : PlayerMovementState
 
     public override void HandleInput(InputEvent @event)
     {
-        
+        if (@event is InputEventMouseMotion eventMouseMotion)
+        {
+            float rotationDegLeft = wallDirection == "Left" ? -60f : 0f;
+            float rotationDegRight = wallDirection == "Right" ? 60f : 0f;
+
+            Movement.RotatePlayerByConstraint(eventMouseMotion.Relative.X, eventMouseMotion.Relative.Y, rotationDegLeft, rotationDegRight);
+        }
     }
 
     public override void PhysicsUpdate(double delta)
@@ -48,7 +54,7 @@ public partial class PlayerWallrun : PlayerMovementState
         if (wallDirection == "Left")
             rayDirection = -Movement.GlobalBasis.X; 
 
-        bool wall = Movement.SendRayInDirection(rayDirection, 0.5f, out Vector3 wallNormal, out Vector3 wallPoint);
+        bool wall = Movement.SendRayInDirection(rayDirection, 1f, out Vector3 wallNormal, out Vector3 wallPoint);
 
         if (wall && Movement.wallRunTimer <= Movement.wallRunTime)
         {
@@ -67,12 +73,12 @@ public partial class PlayerWallrun : PlayerMovementState
             // Clamp rotation
             //float angle = Movement.GlobalBasis.Z.SignedAngleTo(-rotatedVector, Vector3.Up);
             float signedAngle = Mathf.RadToDeg(Movement.GlobalBasis.Z.SignedAngleTo(wallNormal, Vector3.Up));
-            GD.Print(signedAngle);
+            //GD.Print(signedAngle);
             
             //Movement.RotateY(angle);
 
-            //DebugDraw3D.DrawArrow(wallPoint, wallPoint + (rotatedVector * 1f), Colors.Aqua, 0.2f);
-            //DebugDraw3D.DrawArrow(wallPoint + (rotatedVector * 1f), wallPoint + (wallNormal * 1f), Colors.IndianRed, 0.1f);
+            /* DebugDraw3D.DrawArrow(wallPoint, wallPoint + (rotatedVector * 1f), Colors.Aqua, 0.2f);
+            DebugDraw3D.DrawArrow(wallPoint + (rotatedVector * 1f), wallPoint + (wallNormal * 1f), Colors.IndianRed, 0.1f); */
 
             // Decrease gravity with friction force over time
             Movement.playerVelocity.Y -= _frictionForce * (float)delta;
@@ -96,16 +102,17 @@ public partial class PlayerWallrun : PlayerMovementState
         }
         
         // Handle landing
-		if (Movement.IsOnFloor())
+		if (Movement.IsOnFloor() 
+        || (Movement.SendRayInDirection(-Movement.GlobalBasis.Z, 0.5f, out Vector3 normal, out Vector3 point)))
 		{
             EmitSignal(SignalName.StateFinished, "PlayerAir", new());
 		}
 
-        /* if (Movement.CheckVault(delta, out Vector3 vaultPoint))
+        if (Movement.CheckVault(delta, out Vector3 vaultPoint))
         {
             Movement.wallRunTimer = 0f; // Reset the timer
             EmitSignal(SignalName.StateFinished, "PlayerVault", new());
-        } */
+        }
 
         Movement.Velocity = Movement.playerVelocity;
     }
