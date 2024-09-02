@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1725301755
+::res://::1725305624
 export_presets.cfg::TextFile::-1::1707409847::0::1::::<><>::
 Logo.png::CompressedTexture2D::3267961655003416919::1714162935::1714162936::1::::<><>::
 README.md::TextFile::-1::1725088949::0::1::::<><>::
@@ -39,7 +39,7 @@ THIRDPARTY.txt::TextFile::-1::1711795258::0::1::::<><>::
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/::1711795258
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/_CodeSignature/::1711795258
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/Resources/::1711795258
-::res://addons/godot-jolt/windows/::1725301750
+::res://addons/godot-jolt/windows/::1725305608
 ::res://addons/spatial_audio_3d/::1725189431
 plugin.cfg::TextFile::-1::1713120160::0::1::::<><>::
 SpatialAudioPlayer3D.cs::CSharpScript::-1::1713261583::0::1::::<>AudioStreamPlayer3D<>::
@@ -52,9 +52,9 @@ deep_parallax.gdshader::Shader::-1::1696315232::0::1::::<><>::
 ::res://addons/vs_plugin/rgba/::1698815315
 desaturate.gd::GDScript::-1::1696315232::0::1::::VisualShaderNodeDesaturate<>VisualShaderNodeCustom<>::
 desaturate.gdshader::Shader::-1::1696315232::0::1::::<><>::
-::res://addons/vs_plugin/utility/::1725229815
+::res://addons/vs_plugin/utility/::1725305589
 flipbook.gd::GDScript::-1::1713120181::0::1::::VisualShaderNodeFlipbook<>VisualShaderNodeCustom<>::
-flipbook.gdshader::Shader::-1::1725229815::0::1::::<><>::
+flipbook.gdshader::Shader::-1::1725305589::0::1::::<><>::
 lerpframe.gd::GDScript::-1::1696315232::0::1::::VisualShaderNodeLerpFrame<>VisualShaderNodeCustom<>::
 lerpframe.gdshader::Shader::-1::1696315232::0::1::::<><>::
 ::res://addons/vs_plugin/uv/::1698815315
@@ -71,9 +71,9 @@ sunflowers_puresky_4k.hdr::CompressedTexture2D::1853314637613516784::1695464108:
 texture_07.png::CompressedTexture2D::2141205591720249169::1694774097::1694775252::1::::<><>::
 ::res://assets/textures/dev/grids/Orange/::1698815315
 texture_05.png::CompressedTexture2D::2918938402932767141::1694774097::1695230874::1::::<><>::
-::res://defaults/::1725229680
+::res://defaults/::1725301760
 channels4_profile.jpg::CompressedTexture2D::2859451316948692841::1698816958::1701542713::1::::<><>::
-default_bus_layout.tres::AudioBusLayout::2175427412709664415::1725229680::0::1::::<><>::
+default_bus_layout.tres::AudioBusLayout::2175427412709664415::1725301760::0::1::::<><>::
 icon.svg::CompressedTexture2D::3182040453325729669::1694717295::1701542713::1::::<><>::
 Underdog_logo.png::CompressedTexture2D::1758293498125612190::1696157816::1701542713::1::::<><>::
 ::res://docs/::1700423681
@@ -86,18 +86,18 @@ DockedDefault2.png::CompressedTexture2D::8633529217630525220::1714162935::171416
 DockedDefault.png::CompressedTexture2D::8969210776921012631::1714162935::1714162936::1::::<><>::
 FloatingWindow.png::CompressedTexture2D::7093966017613709252::1714162935::1714162936::1::::<><>::
 Tool.png::CompressedTexture2D::4767333395327552109::1714162936::1714162936::1::::<><>::
-::res://Materials/::1725223565
-Brick_023.tres::StandardMaterial3D::952623794866110148::1725223565::0::1::::<><>::uid://cl7ikwq2wxsdh::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_Color.jpg<>uid://wuwmc4v0wtqv::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_AmbientOcclusion.jpg<>uid://dq83dj18xp644::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_NormalGL.jpg<>uid://cubtravu3emci::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_Roughness.jpg
-Brick_069.tres::StandardMaterial3D::699763011281038990::1725223565::0::1::::<><>::uid://brpp3u2k6w52u::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_Color.jpg<>uid://baiwhxejs1br0::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_NormalGL.jpg<>uid://u8qbvj8yc35e::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_AmbientOcclusion.jpg<>uid://yks55bh58nsl::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_Roughness.jpg
+::res://Materials/::1725304703
+Brick_023.tres::StandardMaterial3D::952623794866110148::1725304703::0::1::::<><>::uid://cl7ikwq2wxsdh::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_Color.jpg<>uid://wuwmc4v0wtqv::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_AmbientOcclusion.jpg<>uid://dq83dj18xp644::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_NormalGL.jpg<>uid://cubtravu3emci::::res://Textures/Bricks023_2K-JPG/Bricks023_2K-JPG_Roughness.jpg
+Brick_069.tres::StandardMaterial3D::699763011281038990::1725304703::0::1::::<><>::uid://brpp3u2k6w52u::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_Color.jpg<>uid://baiwhxejs1br0::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_NormalGL.jpg<>uid://u8qbvj8yc35e::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_AmbientOcclusion.jpg<>uid://yks55bh58nsl::::res://Textures/Bricks066_2K-JPG/Bricks066_2K-JPG_Roughness.jpg
 Glow.tres::StandardMaterial3D::6539846575734470154::1698816438::0::1::::<><>::
-MetalPlates_001.tres::StandardMaterial3D::7136680405002417499::1725223565::0::1::::<><>::uid://cbs6yf02kfcxn::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_Color.png<>uid://dw7alammwwbc1::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_Metalness.png<>uid://batvre4csq3xc::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_NormalGL.png<>uid://4qolqap5gqdc::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_Roughness.png
-MetalPlates_008.tres::StandardMaterial3D::358590477230647948::1725223565::0::1::::<><>::uid://c1lgvw5k6b7a5::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Color.jpg<>uid://x8ewwiff1xea::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Metalness.jpg<>uid://koneccwxy6cu::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_NormalGL.jpg<>uid://bpodlkyjcltr4::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Roughness.jpg
-Metal_028.tres::StandardMaterial3D::8268357997823959655::1725223565::0::1::::<><>::uid://xocsyu6ex0n7::::res://Textures/Metal028_2K-PNG/Metal028_2K_Color.png<>uid://xdr7c7dr4bwt::::res://Textures/Metal028_2K-PNG/Metal028_2K_Metalness.png<>uid://b8o5w7tvcxxcf::::res://Textures/Metal028_2K-PNG/Metal028_2K_NormalGL.png<>uid://chw67gmf05qbn::::res://Textures/Metal028_2K-PNG/Metal028_2K_Roughness.png
+MetalPlates_001.tres::StandardMaterial3D::7136680405002417499::1725304703::0::1::::<><>::uid://cbs6yf02kfcxn::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_Color.png<>uid://dw7alammwwbc1::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_Metalness.png<>uid://batvre4csq3xc::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_NormalGL.png<>uid://4qolqap5gqdc::::res://Textures/MetalPlates001_2K-PNG/MetalPlates001_2K-PNG_Roughness.png
+MetalPlates_008.tres::StandardMaterial3D::358590477230647948::1725304703::0::1::::<><>::uid://c1lgvw5k6b7a5::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Color.jpg<>uid://x8ewwiff1xea::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Metalness.jpg<>uid://koneccwxy6cu::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_NormalGL.jpg<>uid://bpodlkyjcltr4::::res://Textures/MetalPlates008_2K-JPG/MetalPlates008_2K_Roughness.jpg
+Metal_028.tres::StandardMaterial3D::8268357997823959655::1725304703::0::1::::<><>::uid://xocsyu6ex0n7::::res://Textures/Metal028_2K-PNG/Metal028_2K_Color.png<>uid://xdr7c7dr4bwt::::res://Textures/Metal028_2K-PNG/Metal028_2K_Metalness.png<>uid://b8o5w7tvcxxcf::::res://Textures/Metal028_2K-PNG/Metal028_2K_NormalGL.png<>uid://chw67gmf05qbn::::res://Textures/Metal028_2K-PNG/Metal028_2K_Roughness.png
 Player.tres::StandardMaterial3D::3017233360889734131::1698816438::0::1::::<><>::
-Porcelain_001.tres::StandardMaterial3D::6879725528838120201::1725223565::0::1::::<><>::uid://c6tiguxappfny::::res://Textures/Porcelain001_2K-JPG/Porcelain001_2K-JPG_Color.jpg<>uid://doi7ercgjuap::::res://Textures/Porcelain001_2K-JPG/Porcelain001_2K-JPG_NormalGL.jpg<>uid://byx1slosbaned::::res://Textures/Porcelain001_2K-JPG/Porcelain001_2K-JPG_Roughness.jpg
-Prototype.tres::StandardMaterial3D::952805599184020313::1725223565::0::1::::<><>::uid://bht7qvk83c6m8::::res://assets/textures/dev/grids/Orange/texture_05.png
-PrototypeBlack.tres::StandardMaterial3D::2593712206904319500::1725223565::0::1::::<><>::uid://5rhlw2s2pkd2::::res://assets/textures/dev/grids/Dark/texture_07.png
-Tiles_072.tres::StandardMaterial3D::7281511610362937519::1725223565::0::1::::<><>::uid://cm5ifhmt767cb::::res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_AmbientOcclusion.jpg<>uid://bqy6iq8aftgvp::::res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_NormalGL.jpg<>uid://cjnda5be4561h::::res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_Roughness.jpg
+Porcelain_001.tres::StandardMaterial3D::6879725528838120201::1725304703::0::1::::<><>::uid://c6tiguxappfny::::res://Textures/Porcelain001_2K-JPG/Porcelain001_2K-JPG_Color.jpg<>uid://doi7ercgjuap::::res://Textures/Porcelain001_2K-JPG/Porcelain001_2K-JPG_NormalGL.jpg<>uid://byx1slosbaned::::res://Textures/Porcelain001_2K-JPG/Porcelain001_2K-JPG_Roughness.jpg
+Prototype.tres::StandardMaterial3D::952805599184020313::1725304703::0::1::::<><>::uid://bht7qvk83c6m8::::res://assets/textures/dev/grids/Orange/texture_05.png
+PrototypeBlack.tres::StandardMaterial3D::2593712206904319500::1725304703::0::1::::<><>::uid://5rhlw2s2pkd2::::res://assets/textures/dev/grids/Dark/texture_07.png
+Tiles_072.tres::StandardMaterial3D::7281511610362937519::1725304703::0::1::::<><>::uid://cm5ifhmt767cb::::res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_AmbientOcclusion.jpg<>uid://bqy6iq8aftgvp::::res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_NormalGL.jpg<>uid://cjnda5be4561h::::res://Textures/Tiles072_2K-JPG/Tiles072_2K-JPG_Roughness.jpg
 Tile_107.tres::StandardMaterial3D::4253721717703976321::1704083245::0::1::::<><>::uid://bki7rsw3uyxhi::::res://Textures/Tiles107_2K-PNG/Tiles107_2K_Color.png<>uid://bpv4fb8yldll1::::res://Textures/Tiles107_2K-PNG/Tiles107_2K_AmbientOcclusion.png<>uid://chego1rkyh5x0::::res://Textures/Tiles107_2K-PNG/Tiles107_2K_NormalGL.png<>uid://ms8i03b1d47x::::res://Textures/Tiles107_2K-PNG/Tiles107_2K_Roughness.png
 ::res://Models/::1708370351
 ::res://Models/Environment/::1709641972
@@ -108,9 +108,9 @@ Env.blend::PackedScene::7205041665317381465::1708894223::1709641972::1::::<><>::
 4_tube_light.tscn::PackedScene::8366660144451804500::1725189431::0::1::::<><>::uid://4xl5v7mn436m::::res://Models/TubeLight/materials/tubelight.tres<>uid://hbk8fg2nx1m4::::res://Models/TubeLight/materials/light_emission.tres
 TubeLight.glb::PackedScene::8971957344210518159::1706525289::1706525289::1::::<><>::
 tube_light.tscn::PackedScene::6766819037059026584::1706687738::0::1::::<><>::uid://4xl5v7mn436m::::res://Models/TubeLight/materials/tubelight.tres<>uid://hbk8fg2nx1m4::::res://Models/TubeLight/materials/light_emission.tres
-::res://Models/TubeLight/materials/::1725223565
-light_emission.tres::StandardMaterial3D::494052657477453189::1725223565::0::1::::<><>::
-tubelight.tres::StandardMaterial3D::2083679767571757010::1725223565::0::1::::<><>::uid://bgcjq1mph1fle::::res://Models/TubeLight/textures/TubeLight_Albedo.png<>uid://bebhmd018jpoo::::res://Models/TubeLight/textures/TubeLight_Metallic.png<>uid://c67lcx1vwloin::::res://Models/TubeLight/textures/TubeLight_Normal.png<>uid://cujak6cxjio7c::::res://Models/TubeLight/textures/TubeLight_Roughness.png
+::res://Models/TubeLight/materials/::1725304703
+light_emission.tres::StandardMaterial3D::494052657477453189::1725304703::0::1::::<><>::
+tubelight.tres::StandardMaterial3D::2083679767571757010::1725304703::0::1::::<><>::uid://bgcjq1mph1fle::::res://Models/TubeLight/textures/TubeLight_Albedo.png<>uid://bebhmd018jpoo::::res://Models/TubeLight/textures/TubeLight_Metallic.png<>uid://c67lcx1vwloin::::res://Models/TubeLight/textures/TubeLight_Normal.png<>uid://cujak6cxjio7c::::res://Models/TubeLight/textures/TubeLight_Roughness.png
 ::res://Models/TubeLight/textures/::1706525475
 TubeLight_Albedo.png::CompressedTexture2D::2812258911503461934::1706524849::1706525424::1::::<><>::
 TubeLight_Metallic.png::CompressedTexture2D::2669687081891466878::1706524849::1706525437::1::::<><>::
@@ -119,20 +119,20 @@ TubeLight_Roughness.png::CompressedTexture2D::6195217130243273514::1706524849::1
 ::res://Models/Windmill/::1725189430
 WindMill.glb::PackedScene::3611565626724515854::1706038690::1706038702::1::::<><>::
 wind_mill.tscn::PackedScene::3518317470557481854::1725189430::0::1::::<><>::uid://brpp7txyjwpny::::res://Models/Windmill/WindMill.glb<>uid://bfx7gdvoa14jk::::res://Models/Windmill/material/windmill.tres<>res://Scripts/RotatorNode3D.cs<>uid://dkxgldmm7r2f6::::res://Sounds/felix_blume_household_fan_turning_could_be_turbine.mp3
-::res://Models/Windmill/material/::1725223565
-windmill.tres::StandardMaterial3D::2786799439406688896::1725223565::0::1::::<><>::uid://by7yff2tvqs8h::::res://Models/Windmill/material/WindMill_Albedo.png<>uid://cwxjp20clsqku::::res://Models/Windmill/material/WindMill_Normal.png<>uid://cbj7hkwxb70k5::::res://Models/Windmill/material/WindMill_Roughness.png
+::res://Models/Windmill/material/::1725304703
+windmill.tres::StandardMaterial3D::2786799439406688896::1725304703::0::1::::<><>::uid://by7yff2tvqs8h::::res://Models/Windmill/material/WindMill_Albedo.png<>uid://cwxjp20clsqku::::res://Models/Windmill/material/WindMill_Normal.png<>uid://cbj7hkwxb70k5::::res://Models/Windmill/material/WindMill_Roughness.png
 WindMill_Albedo.png::CompressedTexture2D::4138479461150167585::1706038922::1706038930::1::::<><>::
 WindMill_Normal.png::CompressedTexture2D::6365051312466622184::1706038922::1706038954::1::::<><>::
 WindMill_Roughness.png::CompressedTexture2D::4863565615403470278::1706038922::1706038970::1::::<><>::
-::res://Scenes/::1725225320
+::res://Scenes/::1725305307
 env_2.tscn::PackedScene::863739447073744633::1725189430::0::1::::<><>::uid://dp2iwbk6t6n6n::::res://Materials/Metal_028.tres
 main2.tscn::PackedScene::7023456077830709950::1725189430::0::1::::<><>::uid://bb73jaefiwfku::::res://Skys/CloudySkyStatic.tres<>res://Scripts/SkyRotation.cs<>res://Scripts/RotateNode.cs<>res://Scripts/Stats.cs<>uid://ntptsm338blc::::res://Materials/Brick_023.tres<>uid://j7782yfgmq8m::::res://Materials/Brick_069.tres<>uid://fdx6yjtfayq3::::res://Materials/MetalPlates_008.tres<>uid://c5aucr6b2khpp::::res://Materials/Porcelain_001.tres<>uid://c3n5ryfjyi3h1::::res://Models/TubeLight/tube_light.tscn<>uid://dp2iwbk6t6n6n::::res://Materials/Metal_028.tres<>uid://db0hox3jwesrf::::res://Materials/Tiles_072.tres<>uid://c8xcc3vmdmxbn::::res://Materials/MetalPlates_001.tres<>uid://d2vbmwo1pkv42::::res://Sounds/ambience-forest-birds-wind-trees.mp3<>uid://cfqac1mv8tg20::::res://Sounds/ambience - air conditioner.wav<>uid://0by3punu7v0y::::res://defaults/Underdog_logo.png<>uid://ca74vr1r8xb2::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png<>uid://dd53cr7ij30yd::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png<>uid://bopb2fir8dyh7::::res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png<>uid://ddp62lqxgj3c2::::res://Scenes/PlayerController/player.tscn<>uid://bqekf67x42h0i::::res://Models/Windmill/wind_mill.tscn<>uid://mknwr3411oi8::::res://Scenes/env_2.tscn
 main.tscn::PackedScene::753921734002367651::1725225207::0::1::::<><>::uid://ntptsm338blc::::res://Materials/Brick_023.tres<>uid://j7782yfgmq8m::::res://Materials/Brick_069.tres<>uid://bb73jaefiwfku::::res://Skys/CloudySkyStatic.tres<>uid://fdx6yjtfayq3::::res://Materials/MetalPlates_008.tres<>res://Scripts/RotateNode.cs<>uid://c8xcc3vmdmxbn::::res://Materials/MetalPlates_001.tres<>uid://dp2iwbk6t6n6n::::res://Materials/Metal_028.tres<>uid://d2vbmwo1pkv42::::res://Sounds/ambience-forest-birds-wind-trees.mp3<>uid://cfqac1mv8tg20::::res://Sounds/ambience - air conditioner.wav<>res://Scripts/SkyRotation.cs<>uid://c5aucr6b2khpp::::res://Materials/Porcelain_001.tres<>uid://ca74vr1r8xb2::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png<>uid://0by3punu7v0y::::res://defaults/Underdog_logo.png<>uid://db0hox3jwesrf::::res://Materials/Tiles_072.tres<>uid://dd53cr7ij30yd::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png<>uid://ntstl1pd4x5j::::res://Materials/Prototype.tres<>res://Scripts/Stats.cs<>uid://bopb2fir8dyh7::::res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png<>uid://de0m4efhg3n52::::res://Scenes/Tools/csg_ref.tscn<>uid://ddp62lqxgj3c2::::res://Scenes/PlayerController/player.tscn<>uid://bqekf67x42h0i::::res://Models/Windmill/wind_mill.tscn<>uid://c3n5ryfjyi3h1::::res://Models/TubeLight/tube_light.tscn
-mock_level.tscn::PackedScene::6807786967144723506::1725225320::0::1::::<><>::uid://bb73jaefiwfku::::res://Skys/CloudySkyStatic.tres<>res://Scripts/SkyRotation.cs<>res://Scripts/RotateNode.cs<>res://Scripts/Stats.cs<>uid://ntptsm338blc::::res://Materials/Brick_023.tres<>uid://j7782yfgmq8m::::res://Materials/Brick_069.tres<>uid://fdx6yjtfayq3::::res://Materials/MetalPlates_008.tres<>uid://bdiowd6eseld2::::res://Scenes/Prototypes/mock.tscn<>uid://de0m4efhg3n52::::res://Scenes/Tools/csg_ref.tscn<>uid://dp2iwbk6t6n6n::::res://Materials/Metal_028.tres<>uid://c5aucr6b2khpp::::res://Materials/Porcelain_001.tres<>uid://c3n5ryfjyi3h1::::res://Models/TubeLight/tube_light.tscn<>uid://db0hox3jwesrf::::res://Materials/Tiles_072.tres<>uid://c8xcc3vmdmxbn::::res://Materials/MetalPlates_001.tres<>uid://d2vbmwo1pkv42::::res://Sounds/ambience-forest-birds-wind-trees.mp3<>uid://cfqac1mv8tg20::::res://Sounds/ambience - air conditioner.wav<>uid://0by3punu7v0y::::res://defaults/Underdog_logo.png<>uid://ca74vr1r8xb2::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png<>uid://dd53cr7ij30yd::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png<>uid://bopb2fir8dyh7::::res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png<>uid://ddp62lqxgj3c2::::res://Scenes/PlayerController/player.tscn<>uid://bqekf67x42h0i::::res://Models/Windmill/wind_mill.tscn
+mock_level.tscn::PackedScene::6807786967144723506::1725305307::0::1::::<><>::uid://bb73jaefiwfku::::res://Skys/CloudySkyStatic.tres<>res://Scripts/SkyRotation.cs<>res://Scripts/RotateNode.cs<>res://Scripts/Stats.cs<>uid://ntptsm338blc::::res://Materials/Brick_023.tres<>uid://j7782yfgmq8m::::res://Materials/Brick_069.tres<>uid://fdx6yjtfayq3::::res://Materials/MetalPlates_008.tres<>uid://bdiowd6eseld2::::res://Scenes/Prototypes/mock.tscn<>uid://de0m4efhg3n52::::res://Scenes/Tools/csg_ref.tscn<>uid://dp2iwbk6t6n6n::::res://Materials/Metal_028.tres<>uid://c5aucr6b2khpp::::res://Materials/Porcelain_001.tres<>uid://c3n5ryfjyi3h1::::res://Models/TubeLight/tube_light.tscn<>uid://db0hox3jwesrf::::res://Materials/Tiles_072.tres<>uid://c8xcc3vmdmxbn::::res://Materials/MetalPlates_001.tres<>uid://d2vbmwo1pkv42::::res://Sounds/ambience-forest-birds-wind-trees.mp3<>uid://cfqac1mv8tg20::::res://Sounds/ambience - air conditioner.wav<>uid://0by3punu7v0y::::res://defaults/Underdog_logo.png<>uid://ca74vr1r8xb2::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png<>uid://dd53cr7ij30yd::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png<>uid://bopb2fir8dyh7::::res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png<>uid://ddp62lqxgj3c2::::res://Scenes/PlayerController/player.tscn<>uid://bqekf67x42h0i::::res://Models/Windmill/wind_mill.tscn
 new_scene.tscn::PackedScene::6541177085405476642::1725225137::0::1::::<><>::uid://bb73jaefiwfku::::res://Skys/CloudySkyStatic.tres<>res://Scripts/SkyRotation.cs<>res://Scripts/RotateNode.cs<>res://Scripts/Stats.cs<>uid://ntptsm338blc::::res://Materials/Brick_023.tres<>uid://j7782yfgmq8m::::res://Materials/Brick_069.tres<>uid://fdx6yjtfayq3::::res://Materials/MetalPlates_008.tres<>uid://bdiowd6eseld2::::res://Scenes/Prototypes/mock.tscn<>uid://de0m4efhg3n52::::res://Scenes/Tools/csg_ref.tscn<>uid://dp2iwbk6t6n6n::::res://Materials/Metal_028.tres<>uid://c5aucr6b2khpp::::res://Materials/Porcelain_001.tres<>uid://c3n5ryfjyi3h1::::res://Models/TubeLight/tube_light.tscn<>uid://db0hox3jwesrf::::res://Materials/Tiles_072.tres<>uid://c8xcc3vmdmxbn::::res://Materials/MetalPlates_001.tres<>uid://d2vbmwo1pkv42::::res://Sounds/ambience-forest-birds-wind-trees.mp3<>uid://cfqac1mv8tg20::::res://Sounds/ambience - air conditioner.wav<>uid://0by3punu7v0y::::res://defaults/Underdog_logo.png<>uid://ca74vr1r8xb2::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png<>uid://dd53cr7ij30yd::::res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png<>uid://bopb2fir8dyh7::::res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png<>uid://bqekf67x42h0i::::res://Models/Windmill/wind_mill.tscn
 post_processor.tscn::PackedScene::4371333325637868570::1725189430::0::1::::<><>::res://Scripts/PostProcessingManager.cs<>res://Shaders/lensFlare.gdshader<>res://Scripts/LensFlare.cs<>res://Scripts/LensFlareCheck.cs<>res://Shaders/Vignette.gdshader<>res://Scripts/Vignette.cs<>res://Shaders/LensDistortion.gdshader<>res://Scripts/LensDistortion.cs<>res://Shaders/ChromaticAbberation.gdshader<>uid://bf081vhyrhce0::::res://Shaders/CCOffset.png<>res://Scripts/ChromaticAbberation.cs<>res://Shaders/RadialBlur.gdshader<>res://Scripts/RadialBlur.cs
-::res://Scenes/PlayerController/::1725225206
-player.tscn::PackedScene::7402725295042630743::1725225206::0::1::::<><>::res://Scripts/PlayerMovement.cs<>res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs<>res://Scripts/PlayerMovementStates/PlayerIdle.cs<>res://Scripts/PlayerMovementStates/PlayerWalk.cs<>res://Scripts/PlayerMovementStates/PlayerSprint.cs<>res://Scripts/PlayerMovementStates/PlayerAir.cs<>res://Scripts/PlayerMovementStates/PlayerCrouch.cs<>res://Scripts/PlayerMovementStates/PlayerSlide.cs<>res://Scripts/PlayerMovementStates/PlayerVault.cs<>res://Scripts/PlayerMovementStates/PlayerWallrun.cs<>res://Scripts/ScreenShake/CamShake.cs<>res://Scripts/SmoothFollow.cs<>res://Scripts/PlayerMovementStates/PlayerVerticalWallrun.cs<>uid://x4uffvia5i1w::::res://Sounds/Jump_01.wav<>uid://o4o1xhqar4vl::::res://Sounds/Footsteps/zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3<>res://Scripts/CollisionChecker.cs<>res://Scripts/PlayerAudio.cs<>res://Scripts/AudioConditionPlayer.cs<>uid://dkomonpu17na4::::res://Sounds/Footsteps/Step_Concrete_01.wav<>uid://cyp44pfj8sft5::::res://Sounds/Footsteps/Step_Rustle_01.wav<>uid://bqqhy63c4hmvj::::res://Sounds/Landing_05.wav<>uid://c7dwgfm61qj0q::::res://Sounds/Footsteps/Step_Metal_01.wav<>uid://bpx40sxd4jsau::::res://Sounds/Footsteps/Step_Water_01.wav<>uid://br4q8mftvwkcm::::res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3<>res://Scripts/AudioGroupPlayer.cs<>uid://c16lvekjgh66y::::res://Sounds/Footsteps/Step_Metal_02.wav<>uid://dw7uy3plubb5g::::res://Sounds/Footsteps/Step_Rustle_02.wav<>uid://cd7wfdhqlk73::::res://Sounds/Footsteps/Step_Tile_01.wav<>uid://bml41r3klesdl::::res://Sounds/Footsteps/Step_Rustle_03.wav<>uid://cvntjafcyfp7m::::res://Sounds/Footsteps/Step_Water_02.wav<>uid://hp3v8gjhbn05::::res://Sounds/Footsteps/Step_Water_03.wav<>uid://cdpym3g5cs7gn::::res://Sounds/Footsteps/Step_Rustle_04.wav<>uid://bdsnqhoxtl0od::::res://Sounds/Footsteps/Step_Rustle_05.wav<>uid://52qihh8ag6yp::::res://Sounds/vault_02.wav<>uid://d2lycoo63he6r::::res://Sounds/Footsteps/Step_Tile_04.wav<>uid://02ti7sdyv444::::res://Sounds/Jump_04.wav<>uid://ogh7udqk2i5q::::res://Sounds/Footsteps/Step_Tile_06.wav<>uid://c128rhd8ppi73::::res://Sounds/Wind_Run.wav<>uid://b8r2advmi4wgo::::res://Sounds/Sliding_Start.wav<>uid://c33tjboynwb3v::::res://Sounds/Sliding_Loop.wav<>uid://winx64x1soo8::::res://addons/spatial_audio_3d/SpatialAudioPlayer3D.tscn<>res://Scripts/PlayerShaker.cs<>res://Scripts/PlayerParticles.cs<>uid://b0kly854epj2c::::res://Textures/Smoke/smoke_01.png<>uid://sl63oq587wq7::::res://Sounds/WallRun_04.wav<>res://Scripts/PlayerPostProcessing.cs<>res://Scripts/NewStepper.cs
+::res://Scenes/PlayerController/::1725305589
+player.tscn::PackedScene::7402725295042630743::1725305589::0::1::::<><>::res://Scripts/PlayerMovement.cs<>res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs<>res://Scripts/PlayerMovementStates/PlayerIdle.cs<>res://Scripts/PlayerMovementStates/PlayerWalk.cs<>res://Scripts/PlayerMovementStates/PlayerSprint.cs<>res://Scripts/PlayerMovementStates/PlayerAir.cs<>res://Scripts/PlayerMovementStates/PlayerCrouch.cs<>res://Scripts/PlayerMovementStates/PlayerSlide.cs<>res://Scripts/PlayerMovementStates/PlayerVault.cs<>res://Scripts/PlayerMovementStates/PlayerWallrun.cs<>res://Scripts/ScreenShake/CamShake.cs<>res://Scripts/SmoothFollow.cs<>res://Scripts/PlayerMovementStates/PlayerVerticalWallrun.cs<>uid://x4uffvia5i1w::::res://Sounds/Jump_01.wav<>uid://o4o1xhqar4vl::::res://Sounds/Footsteps/Step_Concrete_03_zap.mp3<>res://Scripts/CollisionChecker.cs<>res://Scripts/PlayerAudio.cs<>res://Scripts/AudioConditionPlayer.cs<>uid://dkomonpu17na4::::res://Sounds/Footsteps/Step_Concrete_01.wav<>uid://cyp44pfj8sft5::::res://Sounds/Footsteps/Step_Rustle_01.wav<>uid://bqqhy63c4hmvj::::res://Sounds/Landing_05.wav<>uid://c7dwgfm61qj0q::::res://Sounds/Footsteps/Step_Metal_01.wav<>uid://bpx40sxd4jsau::::res://Sounds/Footsteps/Step_Water_01.wav<>uid://br4q8mftvwkcm::::res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3<>res://Scripts/AudioGroupPlayer.cs<>uid://c16lvekjgh66y::::res://Sounds/Footsteps/Step_Metal_02.wav<>uid://dw7uy3plubb5g::::res://Sounds/Footsteps/Step_Rustle_02.wav<>uid://cd7wfdhqlk73::::res://Sounds/Footsteps/Step_Tile_01.wav<>uid://bml41r3klesdl::::res://Sounds/Footsteps/Step_Rustle_03.wav<>uid://cvntjafcyfp7m::::res://Sounds/Footsteps/Step_Water_02.wav<>uid://hp3v8gjhbn05::::res://Sounds/Footsteps/Step_Water_03.wav<>uid://cdpym3g5cs7gn::::res://Sounds/Footsteps/Step_Rustle_04.wav<>uid://bdsnqhoxtl0od::::res://Sounds/Footsteps/Step_Rustle_05.wav<>uid://52qihh8ag6yp::::res://Sounds/vault_02.wav<>uid://d2lycoo63he6r::::res://Sounds/Footsteps/Step_Tile_04.wav<>uid://02ti7sdyv444::::res://Sounds/Jump_04.wav<>uid://ogh7udqk2i5q::::res://Sounds/Footsteps/Step_Tile_06.wav<>uid://c128rhd8ppi73::::res://Sounds/Wind_Run.wav<>uid://b8r2advmi4wgo::::res://Sounds/Sliding_Start.wav<>uid://c33tjboynwb3v::::res://Sounds/Sliding_Loop.wav<>uid://winx64x1soo8::::res://addons/spatial_audio_3d/SpatialAudioPlayer3D.tscn<>res://Scripts/PlayerShaker.cs<>res://Scripts/PlayerParticles.cs<>uid://b0kly854epj2c::::res://Textures/Smoke/smoke_01.png<>uid://sl63oq587wq7::::res://Sounds/WallRun_04.wav<>res://Scripts/PlayerPostProcessing.cs<>res://Scripts/NewStepper.cs
 ::res://Scenes/Prototypes/::1725189431
 mock.gltf::PackedScene::3982066038208456464::1713884728::1713884730::1::::<><>::uid://cyhnh44750dph::::res://Scenes/Prototypes/textures/_albedo000.png<>uid://bbbvrlog7bmpr::::res://Scenes/Prototypes/textures/_orm000.png<>uid://crrytd3jocccb::::res://Scenes/Prototypes/textures/_normal000.png
 mock.tscn::PackedScene::2614391767669267757::1725189431::0::1::::<><>::uid://de0m4efhg3n52::::res://Scenes/Tools/csg_ref.tscn<>uid://bc7occvsj6vfg::::res://Materials/PrototypeBlack.tres<>uid://4xl5v7mn436m::::res://Models/TubeLight/materials/tubelight.tres<>uid://hbk8fg2nx1m4::::res://Models/TubeLight/materials/light_emission.tres<>uid://winx64x1soo8::::res://addons/spatial_audio_3d/SpatialAudioPlayer3D.tscn<>uid://d36m73rmxdb7c::::res://Sounds/Undertale - Megalovania (Oscar Santos Remix).mp3
@@ -142,7 +142,7 @@ _normal000.png::CompressedTexture2D::6002637470214639581::1713884728::1713884730
 _orm000.png::CompressedTexture2D::2459979920129214599::1713884728::1713884730::1::::<><>::
 ::res://Scenes/Tools/::1725189431
 csg_ref.tscn::PackedScene::7492407479563971883::1725189431::0::1::::<><>::uid://ntstl1pd4x5j::::res://Materials/Prototype.tres<>res://Scripts/Tools/Measurement.cs
-::res://Scripts/::1725224984
+::res://Scripts/::1725304703
 AudioConditionPlayer.cs::CSharpScript::-1::1696100413::0::1::::AudioConditionPlayer<>Resource<>::
 AudioGroupPlayer.cs::CSharpScript::-1::1696108800::0::1::::AudioGroupPlayer<>Resource<>::
 ChromaticAbberation.cs::CSharpScript::-1::1697053631::0::1::::<>ColorRect<>::
@@ -152,7 +152,7 @@ LensFlare.cs::CSharpScript::-1::1704173247::0::1::::<>ColorRect<>::
 LensFlareCheck.cs::CSharpScript::-1::1703986853::0::1::::<>Marker3D<>::
 MotionBlur.cs::CSharpScript::-1::1696972746::0::1::::<>MeshInstance3D<>::
 NewStepper.cs::CSharpScript::-1::1706214083::0::1::::<>Node3D<>::
-PlayerAudio.cs::CSharpScript::-1::1725223565::0::1::::<>Node3D<>::
+PlayerAudio.cs::CSharpScript::-1::1725304703::0::1::::<>Node3D<>::
 PlayerMovement.cs::CSharpScript::-1::1725223261::0::1::::<>CharacterBody3D<>::
 PlayerParticles.cs::CSharpScript::-1::1701518863::0::1::::<>Node3D<>::
 PlayerPostProcessing.cs::CSharpScript::-1::1703900730::0::1::::<>Node3D<>::
@@ -185,17 +185,17 @@ CamShakePresets.cs::CSharpScript::-1::1701894550::0::1::::<><>::
 ::res://Scripts/Tools/::1710140087
 LookAtCamera.cs::CSharpScript::-1::1710141013::0::1::::<>Label3D<>::
 Measurement.cs::CSharpScript::-1::1713258807::0::1::::<>CsgBox3D<>::
-::res://Shaders/::1725229815
+::res://Shaders/::1725305589
 CCOffset.png::CompressedTexture2D::2791025552055007409::1697044438::1697044439::1::::<><>::
-ChromaticAbberation.gdshader::Shader::-1::1725229815::0::1::::<><>::
-CustomMotionBlur.gdshader::Shader::-1::1725229815::0::1::::<><>::
-LensDistortion.gdshader::Shader::-1::1725229815::0::1::::<><>::
-lensFlare.gdshader::Shader::-1::1725229815::0::1::::<><>::
-RadialBlur.gdshader::Shader::-1::1725229815::0::1::::<><>::
-Smoke.tres::VisualShader::410070765487914828::1725223565::0::1::::<><>::res://addons/vs_plugin/utility/flipbook.gd
-Vignette.gdshader::Shader::-1::1725229815::0::1::::<><>::
-::res://Skys/::1725223565
-CloudySkyStatic.tres::Sky::2524385769821607628::1725223565::0::1::::<><>::uid://1n026oyti3ia::::res://assets/hdris/sunflowers_puresky_4k.hdr
+ChromaticAbberation.gdshader::Shader::-1::1725305589::0::1::::<><>::
+CustomMotionBlur.gdshader::Shader::-1::1725305589::0::1::::<><>::
+LensDistortion.gdshader::Shader::-1::1725305589::0::1::::<><>::
+lensFlare.gdshader::Shader::-1::1725305589::0::1::::<><>::
+RadialBlur.gdshader::Shader::-1::1725305589::0::1::::<><>::
+Smoke.tres::VisualShader::410070765487914828::1725304703::0::1::::<><>::res://addons/vs_plugin/utility/flipbook.gd
+Vignette.gdshader::Shader::-1::1725305589::0::1::::<><>::
+::res://Skys/::1725304703
+CloudySkyStatic.tres::Sky::2524385769821607628::1725304703::0::1::::<><>::uid://1n026oyti3ia::::res://assets/hdris/sunflowers_puresky_4k.hdr
 ::res://Sounds/::1713190909
 ambience - air conditioner.wav::AudioStreamWAV::5156820586372884623::1696116316::1696116352::1::::<><>::
 ambience-forest-birds-wind-trees.mp3::AudioStreamMP3::9097796087003807433::1695889498::1696080304::1::::<><>::
@@ -226,18 +226,23 @@ WallRun_03.wav::AudioStreamWAV::1017808005133705175::1704452686::1704452689::1::
 WallRun_04.wav::AudioStreamWAV::1288040331236556136::1704452959::1704459397::1::::<><>::
 Wallrun_05.wav::AudioStreamWAV::5579676995104806752::1704477909::1704477911::1::::<><>::
 Wind_Run.wav::AudioStreamWAV::6655523894410212804::1696116637::1696119381::1::::<><>::
-::res://Sounds/Footsteps/::1713884168
+::res://Sounds/Footsteps/::1725305624
 Step_Carpet_01.wav::AudioStreamWAV::5347561334312992412::1696000360::1696000375::1::::<><>::
 Step_Carpet_02.wav::AudioStreamWAV::2485257059347492692::1696000366::1696000375::1::::<><>::
 Step_Carpet_03.wav::AudioStreamWAV::7521438877772330580::1696000373::1696000375::1::::<><>::
 Step_Concrete_01.wav::AudioStreamWAV::7890806087964674097::1696008997::1696009004::1::::<><>::
+Step_Concrete_01_zap.mp3::AudioStreamMP3::1880607985835209472::1695995245::1725305625::1::::<><>::
 Step_Concrete_02.wav::AudioStreamWAV::2043715241405629200::1696008997::1696009004::1::::<><>::
+Step_Concrete_02_zap.mp3::AudioStreamMP3::7626746225627465271::1695796527::1725305608::1::::<><>::
 Step_Concrete_03.wav::AudioStreamWAV::5989955694163704031::1696008997::1696009004::1::::<><>::
+Step_Concrete_03_zap.mp3::AudioStreamMP3::1043408453918798097::1695995540::1725305590::1::::<><>::
 Step_Dirt_01.wav::AudioStreamWAV::8415209236378112627::1696009066::1696009066::1::::<><>::
 Step_Dirt_02.wav::AudioStreamWAV::5214832025675386051::1696009066::1696009066::1::::<><>::
 Step_Dirt_03.wav::AudioStreamWAV::9051659600279020949::1696009066::1696009066::1::::<><>::
 Step_Metal_01.wav::AudioStreamWAV::7026424268267996038::1696009066::1696009066::1::::<><>::
 Step_Metal_02.wav::AudioStreamWAV::6662452626902024682::1696009066::1696009066::1::::<><>::
+Step_Metal_03.mp3::AudioStreamMP3::9211136921334728846::1695796527::1725305567::1::::<><>::
+Step_Metal_04.mp3::AudioStreamMP3::8515638287267750121::1695796527::1725305577::1::::<><>::
 Step_Rustle_01.wav::AudioStreamWAV::6490152657851351480::1713884027::1713884168::1::::<><>::
 Step_Rustle_02.wav::AudioStreamWAV::8770735392507403374::1713884093::1713884168::1::::<><>::
 Step_Rustle_03.wav::AudioStreamWAV::3253203122696610121::1713884124::1713884168::1::::<><>::
@@ -252,11 +257,6 @@ Step_Tile_06.wav::AudioStreamWAV::995513297653951716::1704083954::1704083955::1:
 Step_Water_01.wav::AudioStreamWAV::3488540445371050260::1696171794::1696171821::1::::<><>::
 Step_Water_02.wav::AudioStreamWAV::6274813697442546096::1696171806::1696171821::1::::<><>::
 Step_Water_03.wav::AudioStreamWAV::524026892204296764::1696171819::1696171821::1::::<><>::
-zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_006_50929.mp3::AudioStreamMP3::1880607985835209472::1695995245::1695995248::1::::<><>::
-zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_007_50930.mp3::AudioStreamMP3::7626746225627465271::1695796527::1695796527::1::::<><>::
-zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3::AudioStreamMP3::1043408453918798097::1695995540::1695995540::1::::<><>::
-zapsplat_foley_footstep_single_metal_step_003_41713.mp3::AudioStreamMP3::9211136921334728846::1695796527::1695796527::1::::<><>::
-zapsplat_foley_footstep_single_metal_step_004_41712.mp3::AudioStreamMP3::8515638287267750121::1695796527::1695796527::1::::<><>::
 ::res://Textures/::1704073950
 ::res://Textures/Bricks023_2K-JPG/::1704097387
 Bricks023.png::CompressedTexture2D::1632552914192164632::1695236591::1695236592::1::::<><>::

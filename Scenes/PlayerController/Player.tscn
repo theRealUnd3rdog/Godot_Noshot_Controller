@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/SmoothFollow.cs" id="11_kqg4n"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerVerticalWallrun.cs" id="11_u33ky"]
 [ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="14_qsgh0"]
-[ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/zapsplat_foley_footstep_single_female_leather_shoe_on_concrete_street_008_50931.mp3" id="15_iq4pg"]
+[ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/Step_Concrete_03_zap.mp3" id="15_iq4pg"]
 [ext_resource type="Script" path="res://Scripts/CollisionChecker.cs" id="16_e6y67"]
 [ext_resource type="Script" path="res://Scripts/PlayerAudio.cs" id="17_881ph"]
 [ext_resource type="Script" path="res://Scripts/AudioConditionPlayer.cs" id="18_hbmcm"]
