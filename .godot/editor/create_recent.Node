@@ -1,3 +1,11 @@
+NewPlayerSprint
+NewPlayerIdle
+PlayerIdle
+GodotParadiseFiniteStateMachine
+Camera3D
+Node3D
+CollisionShape3D
+CharacterBody3D
 CSGCombiner3D
 PlayerVerticalWallrun
 PlayerAir
@@ -5,11 +13,3 @@ SpotLight3D
 FogVolume
 Node
 SpatialAudioPlayer3D
-RayCast3D
-Node3D
-OmniLight3D
-EditorPlugin
-RemoteTransform3D
-CSGBox3D
-Label3D
-CollisionShape3D

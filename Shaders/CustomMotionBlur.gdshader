@@ -7,7 +7,7 @@ uniform int num_samples = 16;
 uniform vec3 angular_velocity; // Camera's angular velocity
 uniform vec3 linear_velocity;
 
-void fragment() 
+void fragment()
 {
     vec2 screenUV = SCREEN_UV;
 

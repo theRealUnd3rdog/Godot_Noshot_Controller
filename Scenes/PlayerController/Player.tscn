@@ -1412,9 +1412,6 @@ mesh = SubResource("SphereMesh_kv8y1")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Mesh/Neck/Head/Eyes")
-libraries = {
-"": SubResource("AnimationLibrary_nnwjw")
-}
 tree_root = SubResource("AnimationNodeBlendTree_osdti")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../Mesh/Neck/Head/Eyes/AnimationPlayer")

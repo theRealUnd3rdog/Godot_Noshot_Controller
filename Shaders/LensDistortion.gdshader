@@ -18,21 +18,21 @@ void fragment() {
 vec2 fPixel = SCREEN_PIXEL_SIZE;
 
   if(pDir == false){
-	
+
     fB = 1.0 - (zoom * fPixel.y);
     fC = max(0.02, 1.0 + (fB - 1.0) * 4.0 * pow((uv.x - 0.5), 2.0));
-    
+
     posTex = uv * vec2(1.0, fC) + vec2(0.0, (1.0 - fC) / 2.0);
-    
+
     if(noWrap == false || (posTex.y >= 0.0 && posTex.y <= 1.0)){
       COLOR.rgb = textureLod(SCREEN_TEXTURE, posTex, 0.0).rgb;
     }
   } else {
     fB = 1.0 - (zoom * fPixel.x);
     fC = max(0.05, 1.0 + (fB - 1.0) * 4.0 * pow((uv.y - 0.5), 2.0));
-    
+
     posTex = uv * vec2(fC, 1.0) + vec2((1.0 - fC) / 2.0, 0.0);
-    
+
     if(noWrap == false || (posTex.x >= 0.0 && posTex.x <= 1.0)){
       COLOR.rgb = textureLod(SCREEN_TEXTURE, posTex, 0.0).rgb;
     }

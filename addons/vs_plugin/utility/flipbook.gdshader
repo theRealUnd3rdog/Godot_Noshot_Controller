@@ -60,12 +60,12 @@ void fLiPBook(vec2 _i_uv, float _playback_rate, vec4 _instance_custom, float _ti
 
 	// Scale down the base UV coordinates based on the number of columns and rows
 	_i_uv /= vec2(h_frames, v_frames);
-	
+
 	vec2 next_uv = _i_uv;
 	next_uv += vec2(mod(current_frame + 1.0, h_frames) / h_frames, floor((current_frame + 1.0 + 0.5) / h_frames) / v_frames);
-	
+
 	float lerpfactor = fract(_instance_custom.y * h_frames * v_frames);
-	
+
 	// Adjusts the UV coordinates based on the current frame position in the flipbook texture
 	_i_uv += vec2(mod(current_frame, h_frames) / h_frames, floor((current_frame + 0.5) / h_frames) / v_frames);
 
@@ -78,7 +78,7 @@ void fLiPBook(vec2 _i_uv, float _playback_rate, vec4 _instance_custom, float _ti
 // void lerPframe(vec2 _uv_in, vec4 _color_in, vec3 _lerpframe_data, sampler2D _albedo_in, sampler2D _flow_in, out vec4 _albedo_out) {
 // 	float timer = _lerpframe_data.x;
 // 	vec2 next_uv = _lerpframe_data.yz;
-	
+
 // 	vec4 albedo_tex;
 // 	if (_enable_flowmap) {
 // 		vec2 flow_tex = texture(_flow_in, _uv_in).rg;
@@ -92,7 +92,7 @@ void fLiPBook(vec2 _i_uv, float _playback_rate, vec4 _instance_custom, float _ti
 // 	}
 
 // 	albedo_tex *= _color_in;
-	
+
 // 	_albedo_out.rgb = _albedo.rgb * albedo_tex.rgb;
 // 	_albedo_out.a *= _albedo.a * albedo_tex.a;
 
@@ -111,13 +111,13 @@ void fLiPBook(vec2 _i_uv, float _playback_rate, vec4 _instance_custom, float _ti
 // }
 
 // void fragment() {
-	
+
 // 	vec4 albedo_tex;
 
 // 	lerPframe(UV, COLOR, data, flipbookTex, texture_flow, albedo_tex);
 
 // 	albedo_tex *= COLOR;
-	
+
 // 	ALBEDO = _albedo.rgb * albedo_tex.rgb;
 // 	ALPHA *= _albedo.a * albedo_tex.a;
 // }
