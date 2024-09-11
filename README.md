@@ -5,12 +5,6 @@
 This controller is also featured on my Youtube channel [Underdog](https://www.youtube.com/channel/UCg6WHXnqqeDSG1hkJ-_8nTw):
 - [Making a 3D Parkour Game in Godot in 14 Days](https://youtu.be/rG3ZGfhmscQ)
 
-## Controls
-- Standard WASD movement.
-- Left CTRL or C to slide.
-- Spacebar to jump.
-- R to reset your position.
-
 ## System Features
 
 - Standard First Person Movement mechanics
@@ -34,10 +28,12 @@ This controller is also featured on my Youtube channel [Underdog](https://www.yo
 
 ## Getting Started
 
-To get started, just download one of the versions from the releases tab and open it in the Godot hub.
-You must need a Mono version of Godot 4.2 installed for it to work.
-## Controls
+To get started, just download one of the versions from the releases tab and open it in the Godot hub. (Recommend to download the latest version)
+You must need a Mono version of Godot 4.3 installed for it to work.
 
-The controls are standard WASD Spacebar.
-You press "Left Shift" to sprint and "Left Shift" and "Left Control" at the same to slide.
-If you fall down just press "R" to reset the position.
+## Controls
+- Standard WASD movement.
+- Left CTRL or C to slide.
+- Spacebar to jump.
+- Hold down Left shift to walk.
+- R to reset your position.
