@@ -10,6 +10,7 @@ ALL ASSETS USED IN THE PROJECT ARE CC0.
 ## System Features
 
 - Standard First Person Movement mechanics
+- Utilizes Jolt Physics.
 - Snappy and smooth
 - Can Crouch, Sprint, Slide, Wallrun and Vertical Wallrun.
 - Support for stairs and steps using a ray stepper.
