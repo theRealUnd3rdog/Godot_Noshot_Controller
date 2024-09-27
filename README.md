@@ -5,6 +5,9 @@
 This controller is also featured on my Youtube channel [Underdog](https://www.youtube.com/channel/UCg6WHXnqqeDSG1hkJ-_8nTw):
 - [Making a 3D Parkour Game in Godot in 14 Days](https://youtu.be/rG3ZGfhmscQ)
 
+The controller is also featured on GamesFromScratch channel:
+- [A Powerful New Godot Character Controller](https://youtu.be/LrEbevKY5oY)
+
 ALL ASSETS USED IN THE PROJECT ARE CC0.
 
 ## System Features
