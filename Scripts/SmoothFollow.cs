@@ -21,7 +21,7 @@ public partial class SmoothFollow : Node3D
 	public override void _Process(double delta)
 	{
 		Vector3 targetLoc = _parentNode.GlobalPosition;
-		Position = targetLoc;
+		Position = Position.Lerp(targetLoc, 1.0f - Mathf.Pow(0.5f, (float)delta * _smoothSpeed));
 
 		Transform3D newTransform = GlobalTransform;
 		Quaternion curRot = newTransform.Basis.GetRotationQuaternion();

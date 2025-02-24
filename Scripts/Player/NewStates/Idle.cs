@@ -6,6 +6,9 @@ using MEC;
 [GlobalClass, Icon("res://addons/finite_state_machine/state_icon.png")]
 public partial class Idle : MovementState
 {
+    // Camera shake
+    private CamShakeInstance _idleShake;
+
     public override void Enter()
     {
         base.Enter();
@@ -14,6 +17,9 @@ public partial class Idle : MovementState
         Timing.RunCoroutine(AlignMeshBeforeAutoAlignment(), "AutoMeshAlignment");
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/idle", true);
+
+        // Camera shake
+        _idleShake = CamShake.ShakePreset(CamShakePresets.Idle);
     }
 
     public override void Exit()
@@ -21,6 +27,8 @@ public partial class Idle : MovementState
         StopAutoMeshAlignment();
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/idle", false);
+
+        CamShake.RemoveShake(_idleShake);
     }
 
     public override void PhysicsUpdate(double delta)

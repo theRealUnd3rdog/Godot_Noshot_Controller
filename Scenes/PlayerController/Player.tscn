@@ -25,7 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="20_rrevo"]
 [ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="21_7h2gc"]
 [ext_resource type="AudioStream" uid="uid://br4q8mftvwkcm" path="res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3" id="23_emayh"]
-[ext_resource type="Script" path="res://Scripts/AudioGroupPlayer.cs" id="24_0sqa6"]
+[ext_resource type="Script" path="res://Scripts/Player/Audio/AudioGroupPlayer.cs" id="24_0sqa6"]
 [ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="26_1ar2x"]
 [ext_resource type="AudioStream" uid="uid://dw7uy3plubb5g" path="res://Sounds/Footsteps/Step_Rustle_02.wav" id="26_voec8"]
 [ext_resource type="AudioStream" uid="uid://cd7wfdhqlk73" path="res://Sounds/Footsteps/Step_Tile_01.wav" id="27_7yn3y"]
@@ -1558,6 +1558,7 @@ material_override = SubResource("StandardMaterial3D_055na")
 mesh = SubResource("SphereMesh_kv8y1")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 root_node = NodePath("../Mesh/Neck/Head/Eyes")
 tree_root = SubResource("AnimationNodeBlendTree_osdti")
 advance_expression_base_node = NodePath("..")

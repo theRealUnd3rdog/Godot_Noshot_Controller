@@ -3,6 +3,9 @@ using Godot.Collections;
 using System;
 using System.Linq;
 
+/// <summary>
+/// This class is used to check for collisions and invoke events when the collision group changes.
+/// </summary>
 public partial class CollisionChecker : Godot.Area3D
 {
     public static event Action<string> OnGroupChange; // Event that's invoked whenever the collision group (tag) changes

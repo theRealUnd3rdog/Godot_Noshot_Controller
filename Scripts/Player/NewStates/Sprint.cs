@@ -17,6 +17,9 @@ public partial class Sprint : MovementState
     [Export] private float _headBobSpeed = 22.0f;
     [Export] private float _headBobIntensity = 0.2f; //in centimetres
 
+    // Camera Shake
+    private CamShakeInstance _sprintShake;
+
     public override void Enter()
     {
         base.Enter();
@@ -29,6 +32,8 @@ public partial class Sprint : MovementState
         Movement.SetDirectionControl(_sprintDirectionControl);
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", true);
+
+        _sprintShake = CamShake.ShakePreset(CamShakePresets.Sprinting);
     }
 
     public override void Update(double delta)
@@ -37,11 +42,20 @@ public partial class Sprint : MovementState
         Camera.HeadBob();
 
         Camera.RotateBodyMeshInput();
+
+        float maxVelocity = _sprintingSpeed;
+        float normalizedSpeed = Mathf.Clamp(Movement.Velocity.Length() / maxVelocity, 0f, 1f);
+
+        GD.Print(normalizedSpeed);
+
+        Movement.AnimationPlayer.Set("parameters/Master/Move/sprint_speed/scale", normalizedSpeed);
     }
 
     public override void Exit()
     {
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", false);
+        
+        CamShake.RemoveShake(_sprintShake);
     }
     
     public override void PhysicsUpdate(double delta)

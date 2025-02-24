@@ -101,6 +101,19 @@ public partial class CamShake : Area3D
 		return camShakeInstance;
 	}
 
+	public static void RemoveShake(CamShakeInstance camShakeInstance)
+	{
+		camShakeInstance.influence = 0;
+
+		if (Instance._cameraShakeInstances.Contains(camShakeInstance))
+			Instance._cameraShakeInstances.Remove(camShakeInstance);
+	}
+
+	public static void SetShakeInfluence(CamShakeInstance instance, float influence)
+	{
+		instance.influence = influence;
+	}
+
 	public override void _ExitTree()
     {
         _instanceList.Remove(Name);

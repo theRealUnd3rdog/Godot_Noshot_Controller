@@ -16,6 +16,9 @@ public partial class Air : MovementState
     private float _coyoteTimer = 0.0f;
     [Export] private float _coyoteTime = 0.2f;
 
+    // Camera Shake
+    private CamShakeInstance _airShake;
+
     public override void Enter()
     {
         base.Enter();
@@ -25,11 +28,17 @@ public partial class Air : MovementState
         Movement.SetDirectionControl(_airControl);
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/air", true);
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/land", false);
+
+        _airShake = CamShake.ShakePreset(CamShakePresets.InAir);
     }
 
     public override void Exit()
     {
         Movement.AnimationPlayer.Set("parameters/Master/conditions/air", false);
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/land", true);
+
+        CamShake.RemoveShake(_airShake);
     }
 
     public override void Update(double delta)
@@ -45,6 +54,31 @@ public partial class Air : MovementState
 		{
 			Camera.RotateBodyMeshInput();
 		}
+
+        // Handle landing
+		if (Movement.IsOnFloor())
+		{
+            _airTime = 0.0f;
+            _coyoteTimer = 0.0f;
+
+            //CamShake.ShakePreset(CamShakePresets.Roll);
+
+            if (Movement.GetRawInputDirection() != Vector2.Zero)
+                EmitSignal(SignalName.StateFinished, "Sprint", new());
+            else
+                EmitSignal(SignalName.StateFinished, "Decceleration", new());
+		}
+        else
+        {
+            if (_coyoteTimer <= _coyoteTime)
+            {
+                if (Input.IsActionJustPressed("jump") && Movement.FSM.PreviousState is not Jump)
+                {
+                    EmitSignal(SignalName.StateFinished, "Jump", new());
+                    _coyoteTimer = _coyoteTime + 1; // Prevents multiple jumps
+                }
+            }
+        }
     }
 
     public override void PhysicsUpdate(double delta)
@@ -75,29 +109,6 @@ public partial class Air : MovementState
 
         float airControlChange = Movement.IsPlayerMainlyForward(45) ? _airControl : _airControl * _airChangeFactor;
         Movement.SetDirectionControl(airControlChange);
-
-        // Handle landing
-		if (Movement.IsOnFloor())
-		{
-            _airTime = 0.0f;
-            _coyoteTimer = 0.0f;
-
-            if (Movement.GetRawInputDirection() != Vector2.Zero)
-                EmitSignal(SignalName.StateFinished, "Sprint", new());
-            else
-                EmitSignal(SignalName.StateFinished, "Decceleration", new());
-		}
-        else
-        {
-            if (_coyoteTimer <= _coyoteTime)
-            {
-                if (Input.IsActionJustPressed("jump") && Movement.FSM.PreviousState is not Jump)
-                {
-                    EmitSignal(SignalName.StateFinished, "Jump", new());
-                    _coyoteTimer = _coyoteTime + 1; // Prevents multiple jumps
-                }
-            }
-        }
     }
 
     public float GetAirTime() => _airTime;
