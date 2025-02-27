@@ -46,8 +46,6 @@ public partial class Sprint : MovementState
         float maxVelocity = _sprintingSpeed;
         float normalizedSpeed = Mathf.Clamp(Movement.Velocity.Length() / maxVelocity, 0f, 1f);
 
-        GD.Print(normalizedSpeed);
-
         Movement.AnimationPlayer.Set("parameters/Master/Move/sprint_speed/scale", normalizedSpeed);
     }
 

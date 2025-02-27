@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bno01vmd57gq1"]
+[gd_scene load_steps=78 format=3 uid="uid://bno01vmd57gq1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Movement.cs" id="1_lmf3s"]
 [ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="1_mxrkb"]
@@ -29,10 +29,10 @@
 [ext_resource type="AudioStream" uid="uid://d2lycoo63he6r" path="res://Sounds/Footsteps/Step_Tile_04.wav" id="23_i67h6"]
 [ext_resource type="AudioStream" uid="uid://ogh7udqk2i5q" path="res://Sounds/Footsteps/Step_Tile_06.wav" id="24_ximqp"]
 [ext_resource type="AudioStream" uid="uid://bejbdatnaoy3v" path="res://Sounds/Jump_03.wav" id="29_08xje"]
+[ext_resource type="Script" path="res://Scripts/Player/Stepper.cs" id="29_w4gr6"]
 [ext_resource type="AudioStream" uid="uid://bqqhy63c4hmvj" path="res://Sounds/Landing_05.wav" id="30_0hq6d"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih85"]
-custom_solver_bias = 0.1
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uf8n"]
 radius = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_45p4n"]
@@ -71,6 +71,9 @@ cull_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dct41"]
 size = Vector3(0.25, 1.005, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yrmf5"]
+size = Vector3(0.1, 0, 0.1)
 
 [sub_resource type="SystemFont" id="SystemFont_36c0q"]
 font_names = PackedStringArray("Evil Empire")
@@ -382,15 +385,18 @@ nodes/Master/position = Vector2(-220, 120)
 nodes/output/position = Vector2(320, 220)
 node_connections = [&"output", 0, &"Master"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayer", "_resetPosition", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayer", "_resetPosition", "_stepper", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
 collision_mask = 15
+floor_stop_on_slope = false
+floor_block_on_wall = false
 floor_max_angle = 1.13446
-floor_snap_length = 0.3
+floor_snap_length = 0.5
 script = ExtResource("1_lmf3s")
 AnimationPlayer = NodePath("AnimationTree")
 _resetPosition = NodePath("ResetPos")
 maxSpeed = 13.0
 _physicsInterpolate = true
+_stepper = NodePath("Stepper")
 _speedLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Velocity")
 _momentumLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Momentum")
 _stateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/State")
@@ -438,7 +444,7 @@ _timeToPeak = 0.35
 
 [node name="Standing_collision_shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_yih85")
+shape = SubResource("CapsuleShape3D_6uf8n")
 
 [node name="Crouching_collision_shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -468,6 +474,8 @@ volume_db = -10.0
 target_position = Vector3(0, 2, 0)
 collision_mask = 2
 hit_back_faces = false
+debug_shape_custom_color = Color(1, 0.414594, 0.264389, 1)
+debug_shape_thickness = 1
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -538,6 +546,57 @@ script = ExtResource("6_khvxg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionChecker"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293706, 0)
 shape = SubResource("BoxShape3D_dct41")
+
+[node name="Stepper" type="Node3D" parent="." node_paths=PackedStringArray("_collisionShape", "_movement")]
+script = ExtResource("29_w4gr6")
+_maxStepUp = 1.25
+_maxStepDown = -1.25
+_collisionShape = NodePath("../Standing_collision_shape")
+_movement = NodePath("..")
+
+[node name="CollisionRays" type="Node3D" parent="Stepper"]
+
+[node name="CollisionRay1" type="RayCast3D" parent="Stepper/CollisionRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(0.13211, 0.185471, 1, 1)
+
+[node name="CollisionRay2" type="RayCast3D" parent="Stepper/CollisionRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(0.13211, 0.185471, 1, 1)
+
+[node name="CollisionRay3" type="RayCast3D" parent="Stepper/CollisionRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(0.13211, 0.185471, 1, 1)
+
+[node name="CollisionRay4" type="RayCast3D" parent="Stepper/CollisionRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(0.13211, 0.185471, 1, 1)
+
+[node name="CollisionRay5" type="RayCast3D" parent="Stepper/CollisionRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(0.13211, 0.185471, 1, 1)
+
+[node name="PlayerBottom" type="ShapeCast3D" parent="Stepper"]
+shape = SubResource("BoxShape3D_yrmf5")
+target_position = Vector3(0, 0, 0)
+max_results = 0
+collision_mask = 10
+collide_with_bodies = false
 
 [node name="MovementInfo" type="Control" parent="."]
 layout_mode = 3

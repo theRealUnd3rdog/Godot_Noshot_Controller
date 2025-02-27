@@ -57,6 +57,7 @@ public partial class Movement : CharacterBody3D, IMovement
 
 	[ExportSubgroup("Interpolation")]
 	[Export] private bool _physicsInterpolate;
+	[Export] private Stepper _stepper;
 
 	// For testing
 	[ExportSubgroup("Interface")]
@@ -110,7 +111,11 @@ public partial class Movement : CharacterBody3D, IMovement
 		_lastPhysicsPos = GlobalTransform.Origin;
 		Velocity = _localVelocity;
 
+		_stepper.StairStepUp(delta);
+
 		MoveAndSlide();
+
+		_stepper.StairStepDown();
 	}
 
 	private void PhysicsInterpolation()

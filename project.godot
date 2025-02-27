@@ -122,5 +122,7 @@ jolt_3d/collisions/report_all_kinematic_contacts=true
 
 [rendering]
 
-anti_aliasing/quality/screen_space_aa=1
+environment/volumetric_fog/volume_size=32
+environment/volumetric_fog/volume_depth=32
+environment/volumetric_fog/use_filter=0
 occlusion_culling/use_occlusion_culling=true
