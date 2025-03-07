@@ -27,7 +27,7 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 0.00744806, 0)
+sky_rotation = Vector3(0, 12.0027, 0)
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2

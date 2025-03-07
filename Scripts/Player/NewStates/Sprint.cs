@@ -20,6 +20,8 @@ public partial class Sprint : MovementState
     // Camera Shake
     private CamShakeInstance _sprintShake;
 
+    private float _sprintAirTime = 0.0f;
+
     public override void Enter()
     {
         base.Enter();
@@ -87,7 +89,14 @@ public partial class Sprint : MovementState
             EmitSignal(SignalName.StateFinished, "Decceleration", new());
 
         if (!Movement.IsOnFloor())
+        {
+            _sprintAirTime += (float)GetPhysicsProcessDeltaTime();
+        }
+
+        // If the player is in the air for a certain amount of time (prevents weird changes in state when snapping to different locations), switch to air state
+        if (_sprintAirTime >= 0.05f)
 		{
+            _sprintAirTime = 0.0f;
 			EmitSignal(SignalName.StateFinished, "Air", new());
 		}
 

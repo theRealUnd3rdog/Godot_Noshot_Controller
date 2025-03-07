@@ -168,8 +168,6 @@ public partial class Stepper : Node3D
                 var collisionNormal = _collisionRays[i].GetCollisionNormal().Y;
                 DebugStairStepUp("SSU_COL_NORMAL", collisionNormal.ToString());
 
-                GD.Print("Difference: " + difference);
-
                 // If 1: The step difference is within the margin
 			    // And 2: Slope is walkable (Based on 45° [0.707], must manually change here)
                 if ((0.0 <= difference && difference <= (_maxStepUp + 0.05)) && (0.707f <= collisionNormal)
