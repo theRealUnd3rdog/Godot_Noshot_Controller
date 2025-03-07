@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://de0m4efhg3n52"]
 
 [ext_resource type="Material" uid="uid://ntstl1pd4x5j" path="res://Materials/Prototype.tres" id="1_pwwhq"]
-[ext_resource type="Script" path="res://Scripts/Tools/Measurement.cs" id="2_dc28v"]
+[ext_resource type="Script" uid="uid://i1sew6k4ts7m" path="res://Scripts/Tools/Measurement.cs" id="2_dc28v"]
 
 [sub_resource type="SystemFont" id="SystemFont_klaqd"]
 font_names = PackedStringArray("Calibri")

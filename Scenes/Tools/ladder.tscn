@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://crao2b8jqk2p1"]
 
 [ext_resource type="PackedScene" uid="uid://de0m4efhg3n52" path="res://Scenes/Tools/csg_ref.tscn" id="1_iupdu"]
-[ext_resource type="Script" path="res://Scripts/Tools/Ladder.cs" id="1_wok5e"]
+[ext_resource type="Script" uid="uid://7t53pwiaoic" path="res://Scripts/Tools/Ladder.cs" id="1_wok5e"]
 [ext_resource type="Material" uid="uid://bc7occvsj6vfg" path="res://Materials/PrototypeBlack.tres" id="2_x6qko"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qc8hr"]

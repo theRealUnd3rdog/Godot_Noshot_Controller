@@ -4,19 +4,19 @@
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="2_buung"]
 [ext_resource type="Sky" uid="uid://bb73jaefiwfku" path="res://Skys/CloudySkyStatic.tres" id="2_fb8vh"]
 [ext_resource type="Material" uid="uid://fdx6yjtfayq3" path="res://Materials/MetalPlates_008.tres" id="3_kljmn"]
-[ext_resource type="Script" path="res://Scripts/RotateNode.cs" id="3_le5wj"]
+[ext_resource type="Script" uid="uid://3fq41y2nhk4f" path="res://Scripts/RotateNode.cs" id="3_le5wj"]
 [ext_resource type="Material" uid="uid://c8xcc3vmdmxbn" path="res://Materials/MetalPlates_001.tres" id="4_ltx8g"]
 [ext_resource type="Material" uid="uid://dp2iwbk6t6n6n" path="res://Materials/Metal_028.tres" id="5_ewlxh"]
 [ext_resource type="AudioStream" uid="uid://d2vbmwo1pkv42" path="res://Sounds/ambience-forest-birds-wind-trees.mp3" id="5_ut7sm"]
 [ext_resource type="AudioStream" uid="uid://cfqac1mv8tg20" path="res://Sounds/ambience - air conditioner.wav" id="6_gcwv2"]
-[ext_resource type="Script" path="res://Scripts/SkyRotation.cs" id="6_y41ai"]
+[ext_resource type="Script" uid="uid://d1wqtw20tqhh4" path="res://Scripts/SkyRotation.cs" id="6_y41ai"]
 [ext_resource type="Material" uid="uid://c5aucr6b2khpp" path="res://Materials/Porcelain_001.tres" id="7_2ofnj"]
 [ext_resource type="Texture2D" uid="uid://ca74vr1r8xb2" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_alpa_2k.png" id="8_6mld0"]
 [ext_resource type="Texture2D" uid="uid://0by3punu7v0y" path="res://defaults/Underdog_logo.png" id="8_hsa46"]
 [ext_resource type="Material" uid="uid://db0hox3jwesrf" path="res://Materials/Tiles_072.tres" id="9_1aeek"]
 [ext_resource type="Texture2D" uid="uid://dd53cr7ij30yd" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png" id="9_6kb7u"]
 [ext_resource type="Material" uid="uid://ntstl1pd4x5j" path="res://Materials/Prototype.tres" id="9_30m5r"]
-[ext_resource type="Script" path="res://Scripts/Stats.cs" id="10_6u0gq"]
+[ext_resource type="Script" uid="uid://bhn4v60ivemr" path="res://Scripts/Stats.cs" id="10_6u0gq"]
 [ext_resource type="Texture2D" uid="uid://bopb2fir8dyh7" path="res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png" id="10_a7dfo"]
 [ext_resource type="PackedScene" uid="uid://de0m4efhg3n52" path="res://Scenes/Tools/csg_ref.tscn" id="10_pi8do"]
 [ext_resource type="PackedScene" uid="uid://bqekf67x42h0i" path="res://Models/Windmill/wind_mill.tscn" id="19_l7anu"]
@@ -27,7 +27,7 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 12.0027, 0)
+sky_rotation = Vector3(0, 17.8914, 0)
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2

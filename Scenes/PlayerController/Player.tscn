@@ -1,31 +1,31 @@
 [gd_scene load_steps=185 format=3 uid="uid://ddp62lqxgj3c2"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerMovement.cs" id="1_1x2u3"]
-[ext_resource type="Script" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="2_gl0jx"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerIdle.cs" id="3_f012q"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWalk.cs" id="4_rxdow"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSprint.cs" id="5_j53fe"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerAir.cs" id="6_8fbnu"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="7_1bjap"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="8_fe2ly"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerVault.cs" id="9_dv1bo"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerWallrun.cs" id="10_1d7ad"]
-[ext_resource type="Script" path="res://Scripts/ScreenShake/CamShake.cs" id="10_4skf1"]
-[ext_resource type="Script" path="res://Scripts/SmoothFollow.cs" id="11_kqg4n"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerVerticalWallrun.cs" id="11_u33ky"]
-[ext_resource type="Script" path="res://Scripts/PlayerMovementStates/PlayerLadder.cs" id="12_pefii"]
+[ext_resource type="Script" uid="uid://pmuqrl2s5cr3" path="res://Scripts/PlayerMovement.cs" id="1_1x2u3"]
+[ext_resource type="Script" uid="uid://7vpus8jhnbiq" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="2_gl0jx"]
+[ext_resource type="Script" uid="uid://lva8k0vt36pq" path="res://Scripts/PlayerMovementStates/PlayerIdle.cs" id="3_f012q"]
+[ext_resource type="Script" uid="uid://y0tr224a1w3u" path="res://Scripts/PlayerMovementStates/PlayerWalk.cs" id="4_rxdow"]
+[ext_resource type="Script" uid="uid://mva8cyswgs3y" path="res://Scripts/PlayerMovementStates/PlayerSprint.cs" id="5_j53fe"]
+[ext_resource type="Script" uid="uid://efs4cuungdev" path="res://Scripts/PlayerMovementStates/PlayerAir.cs" id="6_8fbnu"]
+[ext_resource type="Script" uid="uid://7at1ko7x1w5p" path="res://Scripts/PlayerMovementStates/PlayerCrouch.cs" id="7_1bjap"]
+[ext_resource type="Script" uid="uid://c477ufv4i4kj0" path="res://Scripts/PlayerMovementStates/PlayerSlide.cs" id="8_fe2ly"]
+[ext_resource type="Script" uid="uid://coqq6ghewr2d" path="res://Scripts/PlayerMovementStates/PlayerVault.cs" id="9_dv1bo"]
+[ext_resource type="Script" uid="uid://b6001sjlunmy7" path="res://Scripts/PlayerMovementStates/PlayerWallrun.cs" id="10_1d7ad"]
+[ext_resource type="Script" uid="uid://bypr0s3oqdmor" path="res://Scripts/ScreenShake/CamShake.cs" id="10_4skf1"]
+[ext_resource type="Script" uid="uid://dh4v73gere77u" path="res://Scripts/SmoothFollow.cs" id="11_kqg4n"]
+[ext_resource type="Script" uid="uid://dacxqcrjdgd0y" path="res://Scripts/PlayerMovementStates/PlayerVerticalWallrun.cs" id="11_u33ky"]
+[ext_resource type="Script" uid="uid://bpb4q7k8avae2" path="res://Scripts/PlayerMovementStates/PlayerLadder.cs" id="12_pefii"]
 [ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="14_qsgh0"]
 [ext_resource type="AudioStream" uid="uid://o4o1xhqar4vl" path="res://Sounds/Footsteps/Step_Concrete_03_zap.mp3" id="15_iq4pg"]
-[ext_resource type="Script" path="res://Scripts/CollisionChecker.cs" id="16_e6y67"]
-[ext_resource type="Script" path="res://Scripts/PlayerAudio.cs" id="17_881ph"]
-[ext_resource type="Script" path="res://Scripts/AudioConditionPlayer.cs" id="18_hbmcm"]
+[ext_resource type="Script" uid="uid://dyjnmc3vb8xxf" path="res://Scripts/CollisionChecker.cs" id="16_e6y67"]
+[ext_resource type="Script" uid="uid://c08qt587m8uyc" path="res://Scripts/PlayerAudio.cs" id="17_881ph"]
+[ext_resource type="Script" uid="uid://bf40lnvubwrb2" path="res://Scripts/AudioConditionPlayer.cs" id="18_hbmcm"]
 [ext_resource type="AudioStream" uid="uid://dkomonpu17na4" path="res://Sounds/Footsteps/Step_Concrete_01.wav" id="19_1k74e"]
 [ext_resource type="AudioStream" uid="uid://cyp44pfj8sft5" path="res://Sounds/Footsteps/Step_Rustle_01.wav" id="19_3ophw"]
 [ext_resource type="AudioStream" uid="uid://bqqhy63c4hmvj" path="res://Sounds/Landing_05.wav" id="20_iht5u"]
 [ext_resource type="AudioStream" uid="uid://c7dwgfm61qj0q" path="res://Sounds/Footsteps/Step_Metal_01.wav" id="20_rrevo"]
 [ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="21_7h2gc"]
 [ext_resource type="AudioStream" uid="uid://br4q8mftvwkcm" path="res://Sounds/smartsound_IMPACT_BODY_FALL_Concrete_Leather_01.mp3" id="23_emayh"]
-[ext_resource type="Script" path="res://Scripts/Player/Audio/AudioGroupPlayer.cs" id="24_0sqa6"]
+[ext_resource type="Script" uid="uid://bhiv7bxx37qxl" path="res://Scripts/Player/Audio/AudioGroupPlayer.cs" id="24_0sqa6"]
 [ext_resource type="AudioStream" uid="uid://c16lvekjgh66y" path="res://Sounds/Footsteps/Step_Metal_02.wav" id="26_1ar2x"]
 [ext_resource type="AudioStream" uid="uid://dw7uy3plubb5g" path="res://Sounds/Footsteps/Step_Rustle_02.wav" id="26_voec8"]
 [ext_resource type="AudioStream" uid="uid://cd7wfdhqlk73" path="res://Sounds/Footsteps/Step_Tile_01.wav" id="27_7yn3y"]
@@ -42,13 +42,13 @@
 [ext_resource type="AudioStream" uid="uid://b8r2advmi4wgo" path="res://Sounds/Sliding_Start.wav" id="32_acw0p"]
 [ext_resource type="AudioStream" uid="uid://c33tjboynwb3v" path="res://Sounds/Sliding_Loop.wav" id="33_4p3ts"]
 [ext_resource type="PackedScene" uid="uid://winx64x1soo8" path="res://addons/spatial_audio_3d/SpatialAudioPlayer3D.tscn" id="34_0ya74"]
-[ext_resource type="Script" path="res://Scripts/PlayerShaker.cs" id="34_rlvxs"]
-[ext_resource type="Script" path="res://Scripts/PlayerParticles.cs" id="35_e62x0"]
+[ext_resource type="Script" uid="uid://cjopeqb20u4at" path="res://Scripts/PlayerShaker.cs" id="34_rlvxs"]
+[ext_resource type="Script" uid="uid://c4n36epvjpe71" path="res://Scripts/PlayerParticles.cs" id="35_e62x0"]
 [ext_resource type="Texture2D" uid="uid://b0kly854epj2c" path="res://Textures/Smoke/smoke_01.png" id="36_hv26i"]
 [ext_resource type="AudioStream" uid="uid://sl63oq587wq7" path="res://Sounds/WallRun_04.wav" id="36_pvb8y"]
-[ext_resource type="Script" path="res://Scripts/PlayerPostProcessing.cs" id="37_73sd4"]
+[ext_resource type="Script" uid="uid://3f0468moa8rg" path="res://Scripts/PlayerPostProcessing.cs" id="37_73sd4"]
 [ext_resource type="AudioStream" uid="uid://ctyki8eddff1a" path="res://Sounds/Ladder/ladder_start.wav" id="37_v5ein"]
-[ext_resource type="Script" path="res://Scripts/NewStepper.cs" id="38_kln8r"]
+[ext_resource type="Script" uid="uid://dvtciniapy3mb" path="res://Scripts/NewStepper.cs" id="38_kln8r"]
 [ext_resource type="AudioStream" uid="uid://coup4a0c08ytu" path="res://Sounds/Ladder/ladder_move.wav" id="38_m203q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih85"]
@@ -497,24 +497,24 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nnwjw"]
 _data = {
-"RESET": SubResource("Animation_nbwkx"),
-"idle": SubResource("Animation_cnodb"),
-"inAir": SubResource("Animation_fyquc"),
-"jump": SubResource("Animation_s6r41"),
-"ladder_loop_up": SubResource("Animation_pxtj4"),
-"landing": SubResource("Animation_mv1ru"),
-"landing_2": SubResource("Animation_fyqsm"),
-"left_wallrun": SubResource("Animation_hk614"),
-"left_wallrun_loop": SubResource("Animation_o4hp7"),
-"right_wallrun": SubResource("Animation_xlf4n"),
-"right_wallrun_loop": SubResource("Animation_lplyv"),
-"roll": SubResource("Animation_2rrkf"),
-"slideEnd": SubResource("Animation_t5xc0"),
-"slideIn": SubResource("Animation_s1caf"),
-"slideLoop": SubResource("Animation_8fbkp"),
-"sprint": SubResource("Animation_3fs13"),
-"vault": SubResource("Animation_odk61"),
-"walk": SubResource("Animation_bqt7j")
+&"RESET": SubResource("Animation_nbwkx"),
+&"idle": SubResource("Animation_cnodb"),
+&"inAir": SubResource("Animation_fyquc"),
+&"jump": SubResource("Animation_s6r41"),
+&"ladder_loop_up": SubResource("Animation_pxtj4"),
+&"landing": SubResource("Animation_mv1ru"),
+&"landing_2": SubResource("Animation_fyqsm"),
+&"left_wallrun": SubResource("Animation_hk614"),
+&"left_wallrun_loop": SubResource("Animation_o4hp7"),
+&"right_wallrun": SubResource("Animation_xlf4n"),
+&"right_wallrun_loop": SubResource("Animation_lplyv"),
+&"roll": SubResource("Animation_2rrkf"),
+&"slideEnd": SubResource("Animation_t5xc0"),
+&"slideIn": SubResource("Animation_s1caf"),
+&"slideLoop": SubResource("Animation_8fbkp"),
+&"sprint": SubResource("Animation_3fs13"),
+&"vault": SubResource("Animation_odk61"),
+&"walk": SubResource("Animation_bqt7j")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dct41"]
@@ -637,7 +637,7 @@ turbulence_influence_over_life = SubResource("CurveTexture_cc8b5")
 [sub_resource type="QuadMesh" id="QuadMesh_s1a8d"]
 
 [sub_resource type="Curve" id="Curve_qx1js"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.778947), 0.0, 0.0, 0, 0, Vector2(0.477204, 1.01053), 1.61077, 1.61077, 0, 0, Vector2(1, 1.85263), -0.71039, 0.0, 0, 0]
 point_count = 3
 
@@ -1249,7 +1249,7 @@ shape = SubResource("SphereShape3D_q80lt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh/Neck/Head/Eyes"]
 libraries = {
-"": SubResource("AnimationLibrary_nnwjw")
+&"": SubResource("AnimationLibrary_nnwjw")
 }
 
 [node name="CollisionChecker" type="Area3D" parent="."]

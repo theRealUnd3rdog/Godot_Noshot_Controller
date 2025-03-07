@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://winx64x1soo8"]
 
-[ext_resource type="Script" path="res://addons/spatial_audio_3d/SpatialAudioPlayer3D.cs" id="1_1fhd6"]
+[ext_resource type="Script" uid="uid://pnca6is3hxxf" path="res://addons/spatial_audio_3d/SpatialAudioPlayer3D.cs" id="1_1fhd6"]
 
 [node name="SpatialAudioPlayer" type="AudioStreamPlayer3D" node_paths=PackedStringArray("_raycastDown", "_raycastLeft", "_raycastRight", "_raycastForward", "_raycastForwardLeft", "_raycastForwardRight", "_raycastBackwardRight", "_raycastBackwardLeft", "_raycastBackward", "_raycastUp")]
 script = ExtResource("1_1fhd6")

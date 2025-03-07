@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://brpp7txyjwpny" path="res://Models/Windmill/WindMill.glb" id="1_y5mfv"]
 [ext_resource type="Material" uid="uid://bfx7gdvoa14jk" path="res://Models/Windmill/material/windmill.tres" id="2_ls58o"]
-[ext_resource type="Script" path="res://Scripts/RotatorNode3D.cs" id="3_2e4p7"]
+[ext_resource type="Script" uid="uid://5ti828d7th7w" path="res://Scripts/RotatorNode3D.cs" id="3_2e4p7"]
 [ext_resource type="AudioStream" uid="uid://dkxgldmm7r2f6" path="res://Sounds/felix_blume_household_fan_turning_could_be_turbine.mp3" id="4_gxfnp"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_way8q"]

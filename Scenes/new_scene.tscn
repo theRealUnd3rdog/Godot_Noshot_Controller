@@ -1,9 +1,9 @@
 [gd_scene load_steps=30 format=3 uid="uid://c0guh37a734rm"]
 
 [ext_resource type="Sky" uid="uid://bb73jaefiwfku" path="res://Skys/CloudySkyStatic.tres" id="1_qkkxt"]
-[ext_resource type="Script" path="res://Scripts/SkyRotation.cs" id="2_yqqj5"]
-[ext_resource type="Script" path="res://Scripts/RotateNode.cs" id="3_o5h5v"]
-[ext_resource type="Script" path="res://Scripts/Stats.cs" id="4_b3soi"]
+[ext_resource type="Script" uid="uid://d1wqtw20tqhh4" path="res://Scripts/SkyRotation.cs" id="2_yqqj5"]
+[ext_resource type="Script" uid="uid://3fq41y2nhk4f" path="res://Scripts/RotateNode.cs" id="3_o5h5v"]
+[ext_resource type="Script" uid="uid://bhn4v60ivemr" path="res://Scripts/Stats.cs" id="4_b3soi"]
 [ext_resource type="Material" uid="uid://ntptsm338blc" path="res://Materials/Brick_023.tres" id="5_bsa8v"]
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="6_784ah"]
 [ext_resource type="Material" uid="uid://fdx6yjtfayq3" path="res://Materials/MetalPlates_008.tres" id="7_dv441"]

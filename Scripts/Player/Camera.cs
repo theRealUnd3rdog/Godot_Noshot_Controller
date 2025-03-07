@@ -60,7 +60,7 @@ public partial class Camera : Camera3D, ICamera
 
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		//Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		_movement = GetOwner<Movement>();
 		if (_movement == null) GD.PushWarning("Movement script not assigned!");

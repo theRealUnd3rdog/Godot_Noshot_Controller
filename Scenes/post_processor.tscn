@@ -1,18 +1,18 @@
 [gd_scene load_steps=19 format=3 uid="uid://b3jrhrytrsbxi"]
 
-[ext_resource type="Script" path="res://Scripts/PostProcessingManager.cs" id="1_kgm8g"]
-[ext_resource type="Shader" path="res://Shaders/lensFlare.gdshader" id="2_hagg4"]
-[ext_resource type="Script" path="res://Scripts/LensFlare.cs" id="3_cg0db"]
-[ext_resource type="Script" path="res://Scripts/LensFlareCheck.cs" id="4_eh1n0"]
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="4_nt8gm"]
-[ext_resource type="Script" path="res://Scripts/Vignette.cs" id="5_p1pwv"]
-[ext_resource type="Shader" path="res://Shaders/LensDistortion.gdshader" id="6_rhde4"]
-[ext_resource type="Script" path="res://Scripts/LensDistortion.cs" id="7_krdyq"]
-[ext_resource type="Shader" path="res://Shaders/ChromaticAbberation.gdshader" id="8_seycv"]
+[ext_resource type="Script" uid="uid://drktvqkbrsprg" path="res://Scripts/PostProcessingManager.cs" id="1_kgm8g"]
+[ext_resource type="Shader" uid="uid://dgd8mfubp5keo" path="res://Shaders/lensFlare.gdshader" id="2_hagg4"]
+[ext_resource type="Script" uid="uid://wc80kbxdti4" path="res://Scripts/LensFlare.cs" id="3_cg0db"]
+[ext_resource type="Script" uid="uid://bqp3lkmb8bn4w" path="res://Scripts/LensFlareCheck.cs" id="4_eh1n0"]
+[ext_resource type="Shader" uid="uid://btmfc0xgwlp62" path="res://Shaders/Vignette.gdshader" id="4_nt8gm"]
+[ext_resource type="Script" uid="uid://b72ojksdwpdsw" path="res://Scripts/Vignette.cs" id="5_p1pwv"]
+[ext_resource type="Shader" uid="uid://dp7krd88tbpdn" path="res://Shaders/LensDistortion.gdshader" id="6_rhde4"]
+[ext_resource type="Script" uid="uid://bc6l64rldthvb" path="res://Scripts/LensDistortion.cs" id="7_krdyq"]
+[ext_resource type="Shader" uid="uid://bd1qeyyaivd10" path="res://Shaders/ChromaticAbberation.gdshader" id="8_seycv"]
 [ext_resource type="Texture2D" uid="uid://bf081vhyrhce0" path="res://Shaders/CCOffset.png" id="9_5sld4"]
-[ext_resource type="Script" path="res://Scripts/ChromaticAbberation.cs" id="10_h1jgi"]
-[ext_resource type="Shader" path="res://Shaders/RadialBlur.gdshader" id="11_na7qy"]
-[ext_resource type="Script" path="res://Scripts/RadialBlur.cs" id="12_u66uo"]
+[ext_resource type="Script" uid="uid://dsphi4py7a5i8" path="res://Scripts/ChromaticAbberation.cs" id="10_h1jgi"]
+[ext_resource type="Shader" uid="uid://c8dmcpyq8ayhf" path="res://Shaders/RadialBlur.gdshader" id="11_na7qy"]
+[ext_resource type="Script" uid="uid://rmg7vtd6bqe4" path="res://Scripts/RadialBlur.cs" id="12_u66uo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l1ov6"]
 shader = ExtResource("2_hagg4")
@@ -33,8 +33,8 @@ shader_parameter/noWrap = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qnhql"]
 shader = ExtResource("8_seycv")
-shader_parameter/strength = 0.0
 shader_parameter/offset_image = ExtResource("9_5sld4")
+shader_parameter/strength = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l06ac"]
 shader = ExtResource("11_na7qy")
