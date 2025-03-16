@@ -7,6 +7,7 @@ public partial class Movement : CharacterBody3D, IMovement
 {
 	// Finite state machine
 	public GodotParadiseFiniteStateMachine FSM;
+	public GodotParadiseFiniteStateMachine StanceFSM;
 	[Export] public AnimationTree AnimationPlayer;
 
 	// grabbables
@@ -67,17 +68,24 @@ public partial class Movement : CharacterBody3D, IMovement
 	[Export] private Label _animationLabel;
 	[Export] private Label _desiredSpeedLabel;
 	[Export] private Label _previousStateLabel;
+	[Export] private Label _stanceStateLabel;
+
+	public override void _EnterTree()
+	{
+		_collider = GetNode<CollisionShape3D>("Standing_collision_shape");
+	}
 
 	public override void _Ready()
 	{
 		// Get Finite state machine
 		FSM = GetNode<GodotParadiseFiniteStateMachine>("FSM");
+		StanceFSM = GetNode<GodotParadiseFiniteStateMachine>("StanceFSM");
 
 		// Grab all node references
 		_body = GetNode<Node3D>("Body");
 		_neck = GetNode<Node3D>("Body/Neck");
 
-		_collider = GetNode<CollisionShape3D>("Standing_collision_shape");
+		
 	}
 
 	public override void _Process(double delta)
@@ -143,6 +151,7 @@ public partial class Movement : CharacterBody3D, IMovement
 		_stateLabel.Text = $"STATE: {FSM.CurrentState.Name}";
 		_desiredSpeedLabel.Text = $"DESIRED SPEED: {Mathf.Round(_currentSpeed)}";
 		_previousStateLabel.Text = $"PREVIOUS STATE: {FSM.PreviousState.Name}";
+		_stanceStateLabel.Text = $"STANCE STATE: {StanceFSM.CurrentState.Name}";
 
 		AnimationNodeStateMachinePlayback node = (AnimationNodeStateMachinePlayback)AnimationPlayer.Get("parameters/Master/playback");
 		_animationLabel.Text = "ANIMATION: " + node.GetCurrentNode();
@@ -370,6 +379,14 @@ public partial class Movement : CharacterBody3D, IMovement
 	public void SetColliderState(bool state)
 	{
 		_collider.Disabled = !state;
+	}
+
+	public void SetColliderHeight(float height)
+	{
+		CapsuleShape3D shape = (CapsuleShape3D)_collider.Shape;
+		shape.Height = height;
+
+        _collider.Position = new Vector3(0, shape.Height / 2, 0);
 	}
 
 	public static float CalculateT(float v, float k)

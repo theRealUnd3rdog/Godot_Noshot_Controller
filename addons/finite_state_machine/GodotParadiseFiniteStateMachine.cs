@@ -15,7 +15,7 @@ using System.Runtime.Serialization.Formatters;
 using Godot;
 using Godot.Collections;
 
-public partial class GodotParadiseFiniteStateMachine : Node
+public partial class GodotParadiseFiniteStateMachine : Node3D
 {
     [Signal]
     public delegate void StateChangedEventHandler(GodotParadiseState fromState, GodotParadiseState state);

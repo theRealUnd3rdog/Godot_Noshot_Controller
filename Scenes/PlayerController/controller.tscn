@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://bno01vmd57gq1"]
+[gd_scene load_steps=81 format=3 uid="uid://bno01vmd57gq1"]
 
 [ext_resource type="Script" uid="uid://cddu838o8vj2f" path="res://Scripts/Player/Movement.cs" id="1_lmf3s"]
 [ext_resource type="Script" uid="uid://7vpus8jhnbiq" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="1_mxrkb"]
@@ -14,7 +14,10 @@
 [ext_resource type="Script" uid="uid://c1e5ahysihfl8" path="res://Scripts/Player/Camera.cs" id="9_bae87"]
 [ext_resource type="Script" uid="uid://bd413hcxugwx1" path="res://Scripts/Player/Audio/Audio.cs" id="9_jo3el"]
 [ext_resource type="Script" uid="uid://rbw3m123ycd3" path="res://Scripts/Player/Audio/AudioStepper.cs" id="10_8gppd"]
+[ext_resource type="Script" uid="uid://dtnmqg3elxe3q" path="res://Scripts/Player/NewStates/CrouchMove.cs" id="10_h8ih0"]
+[ext_resource type="Script" uid="uid://doy10k47ba7ec" path="res://Scripts/Player/StanceStates/Standing.cs" id="11_jx04b"]
 [ext_resource type="Script" uid="uid://bhiv7bxx37qxl" path="res://Scripts/Player/Audio/AudioGroupPlayer.cs" id="11_p21rx"]
+[ext_resource type="Script" uid="uid://f03rtmo0y76q" path="res://Scripts/Player/StanceStates/Crouching.cs" id="12_2cfib"]
 [ext_resource type="AudioStream" uid="uid://dw7uy3plubb5g" path="res://Sounds/Footsteps/Step_Rustle_02.wav" id="13_xww36"]
 [ext_resource type="AudioStream" uid="uid://bml41r3klesdl" path="res://Sounds/Footsteps/Step_Rustle_03.wav" id="14_24bdp"]
 [ext_resource type="AudioStream" uid="uid://cyp44pfj8sft5" path="res://Sounds/Footsteps/Step_Rustle_01.wav" id="14_yowbf"]
@@ -28,9 +31,9 @@
 [ext_resource type="AudioStream" uid="uid://cd7wfdhqlk73" path="res://Sounds/Footsteps/Step_Tile_01.wav" id="22_rwoe2"]
 [ext_resource type="AudioStream" uid="uid://d2lycoo63he6r" path="res://Sounds/Footsteps/Step_Tile_04.wav" id="23_i67h6"]
 [ext_resource type="AudioStream" uid="uid://ogh7udqk2i5q" path="res://Sounds/Footsteps/Step_Tile_06.wav" id="24_ximqp"]
-[ext_resource type="AudioStream" uid="uid://bejbdatnaoy3v" path="res://Sounds/Jump_03.wav" id="29_08xje"]
 [ext_resource type="Script" uid="uid://dn0tq8e5eo77s" path="res://Scripts/Player/Stepper.cs" id="29_w4gr6"]
 [ext_resource type="AudioStream" uid="uid://bqqhy63c4hmvj" path="res://Sounds/Landing_05.wav" id="30_0hq6d"]
+[ext_resource type="AudioStream" uid="uid://d1nyt6v2xm66y" path="res://Sounds/Jump_05.wav" id="33_rvo8a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uf8n"]
 radius = 0.2
@@ -156,7 +159,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [NodePath("Jump"), ExtResource("29_08xje")],
+"args": [NodePath("../FSM/Jump/Jump"), ExtResource("33_rvo8a")],
 "method": &"PlayAnyAudio"
 }]
 }
@@ -372,7 +375,7 @@ states/Idle/position = Vector2(310, -35)
 states/Jump/node = SubResource("AnimationNodeAnimation_nvofs")
 states/Jump/position = Vector2(161, -154)
 states/Move/node = SubResource("AnimationNodeBlendTree_a2cvh")
-states/Move/position = Vector2(528, -35)
+states/Move/position = Vector2(529, -35)
 states/Start/position = Vector2(-185, -35)
 states/land/node = SubResource("AnimationNodeAnimation_6blsw")
 states/land/position = Vector2(310, 139)
@@ -380,13 +383,13 @@ transitions = ["Jump", "AirCycle", SubResource("AnimationNodeStateMachineTransit
 graph_offset = Vector2(-536, -228)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nqfrr"]
-graph_offset = Vector2(-553, 195)
+graph_offset = Vector2(-1024, 20)
 nodes/Master/node = SubResource("AnimationNodeStateMachine_p6mgb")
 nodes/Master/position = Vector2(-220, 120)
 nodes/output/position = Vector2(320, 220)
 node_connections = [&"output", 0, &"Master"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayer", "_resetPosition", "_stepper", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayer", "_resetPosition", "_stepper", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel", "_stanceStateLabel")]
 collision_mask = 15
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -404,44 +407,85 @@ _stateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/State")
 _animationLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Animation")
 _desiredSpeedLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Desired Speed")
 _previousStateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Previous State")
+_stanceStateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Stance")
 
-[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("CurrentState")]
+[node name="FSM" type="Node3D" parent="." node_paths=PackedStringArray("CurrentState")]
 script = ExtResource("1_mxrkb")
 CurrentState = NodePath("Walk")
+metadata/_custom_type_script = "uid://7vpus8jhnbiq"
 
-[node name="Idle" type="Node" parent="FSM"]
+[node name="Idle" type="Node3D" parent="FSM"]
 script = ExtResource("2_ksvsq")
+metadata/_custom_type_script = "uid://do6a8shsjalxp"
 
-[node name="Air" type="Node" parent="FSM"]
+[node name="Air" type="Node3D" parent="FSM"]
 script = ExtResource("3_lo0x0")
 _airSpeed = 15.0
 _airChangeFactor = 0.1
 _airDirChangeTime = 2.0
 _gravityMultiplier = 1.5
+metadata/_custom_type_script = "uid://ca5pxnje7ukpi"
 
-[node name="Walk" type="Node" parent="FSM"]
-script = ExtResource("4_m58u8")
-_walkingSpeed = 5.0
-
-[node name="Sprint" type="Node" parent="FSM"]
+[node name="Sprint" type="Node3D" parent="FSM"]
 script = ExtResource("5_iut7l")
 _sprintingSpeed = 9.0
 _sprintAccelerationTime = 1.3
 _headBobSpeed = 26.0
 _headBobIntensity = 0.3
+metadata/_custom_type_script = "uid://celula8qdfn0d"
 
 [node name="step" type="AudioStreamPlayer3D" parent="FSM/Sprint"]
 volume_db = 18.203
 bus = &"Movement"
 
-[node name="Decceleration" type="Node" parent="FSM"]
+[node name="Walk" type="Node3D" parent="FSM"]
+script = ExtResource("4_m58u8")
+_walkingSpeed = 5.0
+metadata/_custom_type_script = "uid://qm1l612f0uhy"
+
+[node name="Decceleration" type="Node3D" parent="FSM"]
 script = ExtResource("7_1uwqo")
 _deccelerationTime = 0.3
+metadata/_custom_type_script = "uid://dpo0sr1lgyoqa"
 
-[node name="Jump" type="Node" parent="FSM"]
+[node name="Jump" type="Node3D" parent="FSM"]
 script = ExtResource("7_enr4c")
 _jumpHeight = 1.5
 _timeToPeak = 0.35
+metadata/_custom_type_script = "uid://bt4txkrgpay8u"
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="FSM/Jump"]
+volume_db = -10.0
+
+[node name="CrouchMove" type="Node3D" parent="FSM"]
+script = ExtResource("10_h8ih0")
+_crouchingSpeed = 3.0
+_crouchAccelerationTime = 1.0
+_crouchDirectionControl = 0.3
+_crouchChangeFactor = 1.0
+_headBobSpeed = 10.0
+_headBobIntensity = 0.05
+metadata/_custom_type_script = "uid://dtnmqg3elxe3q"
+
+[node name="StanceFSM" type="Node3D" parent="." node_paths=PackedStringArray("CurrentState")]
+script = ExtResource("1_mxrkb")
+CurrentState = NodePath("Standing")
+metadata/_custom_type_script = "uid://7vpus8jhnbiq"
+
+[node name="Standing" type="Node3D" parent="StanceFSM"]
+script = ExtResource("11_jx04b")
+metadata/_custom_type_script = "uid://doy10k47ba7ec"
+
+[node name="Crouching" type="Node3D" parent="StanceFSM"]
+script = ExtResource("12_2cfib")
+metadata/_custom_type_script = "uid://f03rtmo0y76q"
+
+[node name="CeilingRay" type="RayCast3D" parent="StanceFSM/Crouching"]
+target_position = Vector3(0, 2, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0.414594, 0.264389, 1)
+debug_shape_thickness = 1
 
 [node name="Standing_collision_shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -464,19 +508,9 @@ _stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resour
 volume_db = -16.0
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="Jump" type="AudioStreamPlayer3D" parent="Audio"]
-volume_db = -10.0
-
 [node name="LandStep" type="AudioStreamPlayer3D" parent="Audio"]
 
 [node name="LandHardStep" type="AudioStreamPlayer3D" parent="Audio"]
-
-[node name="CeilingRay" type="RayCast3D" parent="."]
-target_position = Vector3(0, 2, 0)
-collision_mask = 2
-hit_back_faces = false
-debug_shape_custom_color = Color(1, 0.414594, 0.264389, 1)
-debug_shape_thickness = 1
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -667,6 +701,16 @@ offset_right = 220.0
 offset_bottom = 195.0
 scale = Vector2(0.5, 0.5)
 text = "ANIMATION:"
+label_settings = SubResource("LabelSettings_oj2fi")
+uppercase = true
+
+[node name="Stance" type="Label" parent="MovementInfo/CanvasGroup/CanvasLayer"]
+offset_left = 19.0
+offset_top = 170.0
+offset_right = 220.0
+offset_bottom = 221.0
+scale = Vector2(0.5, 0.5)
+text = "STANCE:"
 label_settings = SubResource("LabelSettings_oj2fi")
 uppercase = true
 

@@ -23,7 +23,6 @@ public partial class Air : MovementState
     {
         base.Enter();
 
-        Camera.StartStanding();
         Movement.SetDirectionChangeTime(_airDirChangeTime);
         Movement.SetDirectionControl(_airControl);
 

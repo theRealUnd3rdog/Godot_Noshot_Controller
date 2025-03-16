@@ -23,7 +23,6 @@ public partial class Jump : MovementState
     {
         base.Enter();
 
-        Camera.StartStanding();
         JumpUp(_jumpHeight);
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/jump", true);

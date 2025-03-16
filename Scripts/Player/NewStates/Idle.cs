@@ -13,7 +13,6 @@ public partial class Idle : MovementState
     {
         base.Enter();
 
-        Camera.StartStanding();
         Timing.RunCoroutine(AlignMeshBeforeAutoAlignment(), "AutoMeshAlignment");
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/idle", true);
@@ -33,11 +32,6 @@ public partial class Idle : MovementState
 
     public override void PhysicsUpdate(double delta)
     {
-        if (Input.IsActionPressed("crouch"))
-        {
-            EmitSignal(SignalName.StateFinished, "Crouch", new());
-        }
-
         if (Input.IsActionJustPressed("jump"))
         {
             EmitSignal(SignalName.StateFinished, "Jump", new());
@@ -46,6 +40,11 @@ public partial class Idle : MovementState
         if (Movement.GetRawInputDirection() != Vector2.Zero)
         {
             EmitSignal(SignalName.StateFinished, "Sprint", new());
+        }
+
+        if (Movement.StanceFSM.CurrentState is Crouching && Movement.GetRawInputDirection() != Vector2.Zero)
+        {
+            EmitSignal(SignalName.StateFinished, "CrouchMove", new());
         }
 
 		if (!Movement.IsOnFloor())

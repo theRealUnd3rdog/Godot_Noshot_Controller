@@ -8,13 +8,13 @@ public partial class GodotParadiseFSMPlugin : EditorPlugin
 	public override void _EnterTree()
 	{
 		AddCustomType("GodotParadiseFiniteStateMachine",
-			"Node",
+			"Node3D",
 			GD.Load<Script>("res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs"),
 			GD.Load<Texture2D>("res://addons/finite_state_machine/icon.png")
 		);
 
 		AddCustomType("GodotParadiseState",
-		"Node",
+		"Node3D",
 		GD.Load<Script>("res://addons/finite_state_machine/GodotParadiseState.cs"),
 		GD.Load<Texture2D>("res://addons/finite_state_machine/state_icon.png")
 	);

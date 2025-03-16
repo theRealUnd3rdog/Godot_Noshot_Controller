@@ -27,10 +27,10 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 17.8914, 0)
+sky_rotation = Vector3(0, 4.20587, 0)
 ambient_light_source = 3
 reflected_light_source = 2
-tonemap_mode = 2
+tonemap_mode = 4
 tonemap_white = 4.18
 ssr_enabled = true
 ssr_fade_out = 2.21914
@@ -140,7 +140,7 @@ size = Vector3(14.36, 1, 10.975)
 environment = SubResource("Environment_2lvxy")
 camera_attributes = SubResource("CameraAttributesPractical_12m36")
 script = ExtResource("6_y41ai")
-_skyRotationSpeed = 5.0
+_skyRotationSpeed = 2.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Env"]
 transform = Transform3D(0.670322, -0.49063, -0.556732, 0.731733, 0.561811, 0.385922, 0.123433, -0.666071, 0.735604, -440.325, 303.127, 575.868)

@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public partial class GodotParadiseState : Node
+public partial class GodotParadiseState : Node3D
 {
 	[Signal]
 	public delegate void StateEnteredEventHandler();

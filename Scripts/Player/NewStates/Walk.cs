@@ -12,8 +12,6 @@ public partial class Walk : MovementState
     public override void Enter()
     {
         base.Enter();
-
-        Camera.StartStanding();
     }
 
     public override void Update(double delta)

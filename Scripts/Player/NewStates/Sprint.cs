@@ -29,7 +29,6 @@ public partial class Sprint : MovementState
         _sprintSpeedChange = _sprintingSpeed;
         _sprintAccChange = _sprintAccelerationTime;
 
-        Camera.StartStanding();
         Movement.SetDirectionChangeTime(_sprintDirChangeTime);
         Movement.SetDirectionControl(_sprintDirectionControl);
 
@@ -104,6 +103,16 @@ public partial class Sprint : MovementState
         {
             EmitSignal(SignalName.StateFinished, "Jump", new());
         }
+
+        if (Movement.StanceFSM.CurrentState is Crouching)
+        {
+            EmitSignal(SignalName.StateFinished, "CrouchMove", new());
+        }
+
+        /* if (Input.IsActionJustPressed("crouch") && Movement.IsOnFloor())
+        {
+            EmitSignal(SignalName.StateFinished, "Crouch", new());
+        } */
 
         /* if (Movement.CheckVault(delta, out Vector3 vaultPoint) && Input.IsActionJustPressed("jump"))
         {

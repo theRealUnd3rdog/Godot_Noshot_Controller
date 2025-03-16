@@ -60,7 +60,7 @@ public partial class Camera : Camera3D, ICamera
 
 	public override void _Ready()
 	{
-		//Input.MouseMode = Input.MouseModeEnum.Captured;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		_movement = GetOwner<Movement>();
 		if (_movement == null) GD.PushWarning("Movement script not assigned!");
@@ -217,17 +217,15 @@ public partial class Camera : Camera3D, ICamera
 		return _currentAngle;
 	}
 
-	public void StartStanding() => Timing.RunCoroutine(Stand(standDuration), Segment.PhysicsProcess, "Stand");
-	public void StopStanding() => Timing.KillCoroutines("Stand");
+	public void StartStance(float height) => Timing.RunCoroutine(Stance(standDuration, height), Segment.PhysicsProcess, "Stance");
+	public void StopStance() => Timing.KillCoroutines("Stance");
 
-	private IEnumerator<double> Stand(float duration)
+	private IEnumerator<double> Stance(float duration, float height)
 	{
 		float timeElapsed = 0f;
 		
 		Vector3 depth;
 		float initialDepth = GetHeadPosition().Y;
-
-		_movement.SetColliderState(true);
 
         do
         {
@@ -235,7 +233,7 @@ public partial class Camera : Camera3D, ICamera
 			float normalizedTime = timeElapsed / duration;
 
 			Vector3 headPos = GetHeadPosition();
-			depth = new Vector3(headPos.X, initialDepth, headPos.Z);
+			depth = new Vector3(headPos.X, height, headPos.Z);
 
 			SetHeadPosition(headPos.Lerp(depth, normalizedTime));
 

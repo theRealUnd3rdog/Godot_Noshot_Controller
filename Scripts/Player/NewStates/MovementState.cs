@@ -17,6 +17,6 @@ public partial class MovementState : GodotParadiseState
         }
 
         AnimationNodeStateMachinePlayback node = (AnimationNodeStateMachinePlayback)Movement.AnimationPlayer.Get("parameters/Master/playback");
-		GD.Print(node.GetCurrentNode());
+		//GD.Print(node.GetCurrentNode());
     }
 }

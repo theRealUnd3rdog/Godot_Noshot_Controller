@@ -50,5 +50,10 @@ public partial class Decceleration : MovementState
 
         if (Movement.GetRawInputDirection() != Vector2.Zero)
             EmitSignal(SignalName.StateFinished, "Sprint", new());
+
+        if (Movement.StanceFSM.CurrentState is Crouching && Movement.GetRawInputDirection() != Vector2.Zero)
+        {
+            EmitSignal(SignalName.StateFinished, "CrouchMove", new());
+        }
     }
 }
