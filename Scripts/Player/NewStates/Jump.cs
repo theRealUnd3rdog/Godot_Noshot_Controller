@@ -15,8 +15,6 @@ public partial class Jump : MovementState
 
         float gravity = (-2 * _jumpHeight) / Mathf.Pow(_timeToPeak, 2);
         Movement.gravity = -gravity;
-
-        GD.Print(Movement.gravity);
     }
 
     public override void Enter()

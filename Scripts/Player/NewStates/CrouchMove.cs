@@ -39,12 +39,14 @@ public partial class CrouchMove : MovementState
 
         _crouchShake = CamShake.ShakePreset(CamShakePresets.Sprinting);
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", true);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/conditions/crouch", true);
     }
 
     public override void Exit()
     {
         CamShake.RemoveShake(_crouchShake);
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", false);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/conditions/crouch", false);
     }
 
     public override void Update(double delta)
@@ -53,11 +55,6 @@ public partial class CrouchMove : MovementState
         Camera.HeadBob();
 
         Camera.RotateBodyMeshInput();
-
-        float maxVelocity = _crouchingSpeed * 3f;
-        float normalizedSpeed = Mathf.Clamp(Movement.Velocity.Length() / maxVelocity, 0f, 1f);
-
-        Movement.AnimationPlayer.Set("parameters/Master/Move/sprint_speed/scale", normalizedSpeed);
     }
 
     public override void PhysicsUpdate(double delta)

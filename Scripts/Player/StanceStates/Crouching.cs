@@ -33,7 +33,8 @@ public partial class Crouching : MovementState
 
     public override void PhysicsUpdate(double delta)
     {
-        if (!Input.IsActionPressed("crouch") && !_ceilingRay.IsColliding() || Movement.FSM.CurrentState is Air)
+        if (!Input.IsActionPressed("crouch") && !_ceilingRay.IsColliding() && Movement.FSM.CurrentState is not Sliding
+            || Movement.FSM.CurrentState is Air)
         {
             EmitSignal(SignalName.StateFinished, "Standing", new());
         }

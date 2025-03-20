@@ -38,6 +38,9 @@ public partial class Camera : Camera3D, ICamera
 	private float _headBobCurrentIntensity = 0.0f;
 	private float _headBobLerpSpeed = 5f;
 
+	// FOV
+	private FovModifier _speedModifier;
+
 
 	// Implementing the Camera3D properties directly through the interface
     public float Fov
@@ -73,6 +76,8 @@ public partial class Camera : Camera3D, ICamera
 		_head = GetNode<Node3D>("/root/Mesh/Neck/Head");
 		_neck = GetNode<Node3D>("/root/Mesh/Neck");
  		*/
+
+		_speedModifier = FOVController.Instance.AddFovModifier(90f, 1, -1, 1f);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -99,6 +104,8 @@ public partial class Camera : Camera3D, ICamera
 
 		// Debug arrow to visualize filtered input direction
 		//DebugDraw3D.DrawArrow(_movement.Position, _movement.Position + (desiredDirection * 4f), Colors.Blue, 0.2f);
+
+		UpdateFOVBasedOnSpeed();
 	}
 
 	/// <summary>
@@ -210,6 +217,11 @@ public partial class Camera : Camera3D, ICamera
 	public Vector3 GetHeadPosition()
 	{
 		return _head.Position;
+	}
+
+	public Basis GetNeckBasis()
+	{
+		return _neck.Basis;
 	}
 
 	public float GetCurrentAngle()
@@ -447,5 +459,27 @@ public partial class Camera : Camera3D, ICamera
 		return newTransform;
 	}
 
+	#region FOV
+	private void UpdateFOVBasedOnSpeed()
+	{
+		float maxVelocity = 17.0f;
+		float velocityExponent = 5.0f;
+		float minFov = FOVController.Instance.defaultFov;
+		float maxFov = 120.0f;
 
+		if (_movement != null)
+		{
+			Vector3 playerVelocity = _movement.Velocity;
+
+			float velocityMagnitude = playerVelocity.Length() / maxVelocity;
+			float velocityScale = Mathf.Pow(velocityMagnitude, velocityExponent);
+
+			float desiredFOV = Mathf.Lerp(minFov, maxFov, velocityScale);
+
+			desiredFOV = Mathf.Clamp(desiredFOV, minFov, maxFov);
+
+			_speedModifier.Fov = desiredFOV;
+		}
+	}
+	#endregion
 }

@@ -14,7 +14,7 @@ config/name="First Person Controller"
 config/tags=PackedStringArray("controller")
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-run/max_fps=144
+run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/fullsize=false
 boot_splash/image="res://defaults/Underdog_logo.png"
@@ -116,6 +116,8 @@ limits/debugger/max_chars_per_second=2000000000
 
 common/physics_jitter_fix=5.0
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/areas_detect_static_bodies=true
+jolt_physics_3d/simulation/generate_all_kinematic_contacts=true
 3d/default_gravity=9.81
 3d/physics_ticks_per_second=60
 jolt_3d/collisions/areas_detect_static_bodies=true
@@ -123,7 +125,7 @@ jolt_3d/collisions/report_all_kinematic_contacts=true
 
 [rendering]
 
-environment/volumetric_fog/volume_size=32
-environment/volumetric_fog/volume_depth=32
-environment/volumetric_fog/use_filter=0
+environment/glow/upscale_mode=0
+environment/volumetric_fog/volume_size=16
+environment/volumetric_fog/volume_depth=16
 occlusion_culling/use_occlusion_culling=true

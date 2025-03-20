@@ -19,6 +19,8 @@ public partial class Air : MovementState
     // Camera Shake
     private CamShakeInstance _airShake;
 
+    private RandomNumberGenerator _rng = new RandomNumberGenerator();
+
     public override void Enter()
     {
         base.Enter();
@@ -28,6 +30,7 @@ public partial class Air : MovementState
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/air", true);
         Movement.AnimationPlayer.Set("parameters/Master/conditions/land", false);
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/jump", false);
 
         _airShake = CamShake.ShakePreset(CamShakePresets.InAir);
     }
@@ -111,4 +114,21 @@ public partial class Air : MovementState
     }
 
     public float GetAirTime() => _airTime;
+
+    public void PlayAnyAudioOnVelocity(NodePath player, AudioStream stream, float velocityThreshold)
+	{
+        if (Mathf.Abs(Movement.GetLastVelocity().Y) > velocityThreshold)
+        {
+            AudioStreamPlayer3D streamPlayer = (AudioStreamPlayer3D)GetNode(player);
+		
+            streamPlayer.Stream = stream;
+
+            streamPlayer.PitchScale = _rng.RandfRange(0.9f, 1.1f);
+            streamPlayer.Play();
+
+            PlayLandScreenShake();
+        }
+	}
+
+    private void PlayLandScreenShake() => CamShake.ShakePreset(CamShakePresets.Roll);
 }

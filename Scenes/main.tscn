@@ -27,7 +27,7 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 4.20587, 0)
+sky_rotation = Vector3(0, 9.22878, 0)
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 4
@@ -38,10 +38,9 @@ ssao_enabled = true
 ssao_radius = 0.79
 ssao_intensity = 3.5
 ssil_enabled = true
-sdfgi_enabled = true
-sdfgi_use_occlusion = true
-sdfgi_bounce_feedback = 1.62
 sdfgi_min_cell_size = 0.4
+sdfgi_cascade0_distance = 25.6
+sdfgi_max_distance = 409.6
 sdfgi_energy = 1.395
 sdfgi_normal_bias = 1.595
 glow_enabled = true
@@ -2276,6 +2275,7 @@ transform = Transform3D(-0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, -0.34202, 
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 34.2028, 5.63624, 10.752)
 
 [node name="Player" parent="." instance=ExtResource("22_hnqyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.709, 37.2692, -137.059)
 
 [editable path="Stage/Node3D10/TubeLight"]
 [editable path="Stage/Node3D10/TubeLight2"]

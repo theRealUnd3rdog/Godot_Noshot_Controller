@@ -47,6 +47,7 @@ public partial class PlayerPostProcessing : Node3D
 	[Export] private float _blurSpeed;
 
 	// privates
+	private Movement _movement;
 	private Vector3 _playerVelocity;
 	private float _deltaTime;
 
@@ -54,7 +55,7 @@ public partial class PlayerPostProcessing : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PlayerMovement.VelocityChange += GetPlayerVelocity;
+		_movement = GetOwner<Movement>();
 
 		_vignette = PostProcessingManager.Instance.vignette;
 		_lensDistortion = PostProcessingManager.Instance.lensDistortion;
@@ -73,6 +74,7 @@ public partial class PlayerPostProcessing : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		GetPlayerVelocity(_movement.Velocity);
 		_deltaTime = (float)delta;
 
 		HandleVignette((float)delta);

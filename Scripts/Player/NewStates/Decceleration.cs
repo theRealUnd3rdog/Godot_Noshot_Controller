@@ -13,6 +13,7 @@ public partial class Decceleration : MovementState
         _previousSpeed = Movement.GetCurrentSpeed();
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", true);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/conditions/sprint", true);
     }
 
     public override void Update(double delta)
@@ -23,6 +24,7 @@ public partial class Decceleration : MovementState
     public override void Exit()
     {
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", false);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/conditions/sprint", false);
     }
 
     public override void PhysicsUpdate(double delta)

@@ -1,11 +1,11 @@
-[gd_scene load_steps=81 format=3 uid="uid://bno01vmd57gq1"]
+[gd_scene load_steps=101 format=3 uid="uid://bno01vmd57gq1"]
 
 [ext_resource type="Script" uid="uid://cddu838o8vj2f" path="res://Scripts/Player/Movement.cs" id="1_lmf3s"]
 [ext_resource type="Script" uid="uid://7vpus8jhnbiq" path="res://addons/finite_state_machine/GodotParadiseFiniteStateMachine.cs" id="1_mxrkb"]
 [ext_resource type="Script" uid="uid://do6a8shsjalxp" path="res://Scripts/Player/NewStates/Idle.cs" id="2_ksvsq"]
 [ext_resource type="Script" uid="uid://bypr0s3oqdmor" path="res://Scripts/ScreenShake/CamShake.cs" id="2_t5to1"]
 [ext_resource type="Script" uid="uid://dh4v73gere77u" path="res://Scripts/SmoothFollow.cs" id="3_atyu3"]
-[ext_resource type="Script" uid="uid://ca5pxnje7ukpi" path="res://Scripts/Player/NewStates/Air.cs" id="3_lo0x0"]
+[ext_resource type="Script" uid="uid://ca5pxnje7ukpi" path="res://Scripts/Player/NewStates/Air/Air.cs" id="3_lo0x0"]
 [ext_resource type="Script" uid="uid://qm1l612f0uhy" path="res://Scripts/Player/NewStates/Walk.cs" id="4_m58u8"]
 [ext_resource type="Script" uid="uid://celula8qdfn0d" path="res://Scripts/Player/NewStates/Sprint.cs" id="5_iut7l"]
 [ext_resource type="Script" uid="uid://dyjnmc3vb8xxf" path="res://Scripts/CollisionChecker.cs" id="6_khvxg"]
@@ -15,9 +15,12 @@
 [ext_resource type="Script" uid="uid://bd413hcxugwx1" path="res://Scripts/Player/Audio/Audio.cs" id="9_jo3el"]
 [ext_resource type="Script" uid="uid://rbw3m123ycd3" path="res://Scripts/Player/Audio/AudioStepper.cs" id="10_8gppd"]
 [ext_resource type="Script" uid="uid://dtnmqg3elxe3q" path="res://Scripts/Player/NewStates/CrouchMove.cs" id="10_h8ih0"]
+[ext_resource type="Script" uid="uid://dp6knh2ipyovm" path="res://Scripts/Player/NewStates/Sliding.cs" id="10_jx04b"]
+[ext_resource type="AudioStream" uid="uid://b8r2advmi4wgo" path="res://Sounds/Sliding_Start.wav" id="11_he4ux"]
 [ext_resource type="Script" uid="uid://doy10k47ba7ec" path="res://Scripts/Player/StanceStates/Standing.cs" id="11_jx04b"]
 [ext_resource type="Script" uid="uid://bhiv7bxx37qxl" path="res://Scripts/Player/Audio/AudioGroupPlayer.cs" id="11_p21rx"]
 [ext_resource type="Script" uid="uid://f03rtmo0y76q" path="res://Scripts/Player/StanceStates/Crouching.cs" id="12_2cfib"]
+[ext_resource type="AudioStream" uid="uid://c33tjboynwb3v" path="res://Sounds/Sliding_Loop.wav" id="12_qowt7"]
 [ext_resource type="AudioStream" uid="uid://dw7uy3plubb5g" path="res://Sounds/Footsteps/Step_Rustle_02.wav" id="13_xww36"]
 [ext_resource type="AudioStream" uid="uid://bml41r3klesdl" path="res://Sounds/Footsteps/Step_Rustle_03.wav" id="14_24bdp"]
 [ext_resource type="AudioStream" uid="uid://cyp44pfj8sft5" path="res://Sounds/Footsteps/Step_Rustle_01.wav" id="14_yowbf"]
@@ -28,20 +31,25 @@
 [ext_resource type="AudioStream" uid="uid://bpx40sxd4jsau" path="res://Sounds/Footsteps/Step_Water_01.wav" id="19_b2c6n"]
 [ext_resource type="AudioStream" uid="uid://cvntjafcyfp7m" path="res://Sounds/Footsteps/Step_Water_02.wav" id="20_w26fu"]
 [ext_resource type="AudioStream" uid="uid://hp3v8gjhbn05" path="res://Sounds/Footsteps/Step_Water_03.wav" id="21_cgbk7"]
+[ext_resource type="Script" uid="uid://3f0468moa8rg" path="res://Scripts/PlayerPostProcessing.cs" id="22_qowt7"]
 [ext_resource type="AudioStream" uid="uid://cd7wfdhqlk73" path="res://Sounds/Footsteps/Step_Tile_01.wav" id="22_rwoe2"]
 [ext_resource type="AudioStream" uid="uid://d2lycoo63he6r" path="res://Sounds/Footsteps/Step_Tile_04.wav" id="23_i67h6"]
+[ext_resource type="Script" uid="uid://cie8ipu2m1nti" path="res://Scripts/Player/FOVController.cs" id="24_ailvw"]
 [ext_resource type="AudioStream" uid="uid://ogh7udqk2i5q" path="res://Sounds/Footsteps/Step_Tile_06.wav" id="24_ximqp"]
+[ext_resource type="Script" uid="uid://bwlfnck0nk8ex" path="res://Scripts/Player/NewStates/Air/AirAudio.cs" id="28_ct0df"]
+[ext_resource type="AudioStream" uid="uid://c128rhd8ppi73" path="res://Sounds/Wind_Run.wav" id="29_rptqj"]
 [ext_resource type="Script" uid="uid://dn0tq8e5eo77s" path="res://Scripts/Player/Stepper.cs" id="29_w4gr6"]
 [ext_resource type="AudioStream" uid="uid://bqqhy63c4hmvj" path="res://Sounds/Landing_05.wav" id="30_0hq6d"]
-[ext_resource type="AudioStream" uid="uid://d1nyt6v2xm66y" path="res://Sounds/Jump_05.wav" id="33_rvo8a"]
+[ext_resource type="AudioStream" uid="uid://x4uffvia5i1w" path="res://Sounds/Jump_01.wav" id="38_ailvw"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uf8n"]
-radius = 0.2
+[sub_resource type="SphereShape3D" id="SphereShape3D_q80lt"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_45p4n"]
-custom_solver_bias = 0.1
-radius = 0.2
-height = 1.2
+[sub_resource type="BoxMesh" id="BoxMesh_prxsd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhevj"]
+cull_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_02y88"]
 
 [sub_resource type="Resource" id="Resource_p2n1p"]
 script = ExtResource("11_p21rx")
@@ -63,15 +71,6 @@ script = ExtResource("11_p21rx")
 groups = PackedStringArray("Tile")
 streams = Array[AudioStream]([ExtResource("22_rwoe2"), ExtResource("23_i67h6"), ExtResource("24_ximqp")])
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_q80lt"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_prxsd"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhevj"]
-cull_mode = 2
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_02y88"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_dct41"]
 size = Vector3(0.25, 1.005, 0.25)
 
@@ -86,6 +85,9 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_36c0q")
 font_size = 45
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uf8n"]
+radius = 0.2
 
 [sub_resource type="Animation" id="Animation_benxc"]
 length = 0.001
@@ -117,6 +119,47 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_uoyx4"]
 resource_name = "air"
 loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_2cfib"]
+resource_name = "crouch"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("../../../../FSM/Sprint/step")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.137562,
+"start_offset": 0.0,
+"stream": ExtResource("14_yowbf")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("14_yowbf")
+}],
+"times": PackedFloat32Array(0.0666667, 0.766667)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../Audio/AudioStepper")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667, 0.766667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"PlayStepSound"
+}, {
+"args": [],
+"method": &"PlayStepSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_bff5o"]
 resource_name = "idle"
@@ -159,7 +202,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [NodePath("../FSM/Jump/Jump"), ExtResource("33_rvo8a")],
+"args": [NodePath("../FSM/Jump/Jump"), ExtResource("38_ailvw")],
 "method": &"PlayAnyAudio"
 }]
 }
@@ -207,17 +250,33 @@ tracks/2/keys = {
 }
 tracks/3/type = "method"
 tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("../../../../Audio")
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../FSM/Air")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [NodePath("LandHardStep"), ExtResource("30_0hq6d")],
-"method": &"PlayAnyAudio"
+"args": [NodePath("Land"), ExtResource("30_0hq6d"), 15.0],
+"method": &"PlayAnyAudioOnVelocity"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_jx04b"]
+resource_name = "slide"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CamHead:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.0872665)]
 }
 
 [sub_resource type="Animation" id="Animation_utl6c"]
@@ -265,9 +324,11 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_benxc"),
 &"air": SubResource("Animation_uoyx4"),
+&"crouch": SubResource("Animation_2cfib"),
 &"idle": SubResource("Animation_bff5o"),
 &"jump": SubResource("Animation_wrlwg"),
 &"land": SubResource("Animation_kg3jd"),
+&"slide": SubResource("Animation_jx04b"),
 &"sprint": SubResource("Animation_utl6c")
 }
 
@@ -296,19 +357,76 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvofs"]
 animation = &"jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ufq73"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qowt7"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2cfib"]
+animation = &"crouch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_he4ux"]
+animation = &"slide"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jx04b"]
 animation = &"sprint"
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_aku4r"]
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jx04b"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2cfib"]
+graph_offset = Vector2(-353, -39)
+nodes/sprint/node = SubResource("AnimationNodeAnimation_jx04b")
+nodes/sprint/position = Vector2(-160, 100)
+nodes/sprint_speed/node = SubResource("AnimationNodeTimeScale_jx04b")
+nodes/sprint_speed/position = Vector2(60, 80)
+node_connections = [&"output", 0, &"sprint_speed", &"sprint_speed", 0, &"sprint"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_he4ux"]
+advance_mode = 2
+advance_condition = &"sprint"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qowt7"]
+advance_mode = 2
+advance_condition = &"crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ailvw"]
+advance_mode = 2
+advance_condition = &"crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ct0df"]
+advance_mode = 2
+advance_condition = &"sprint"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rptqj"]
+advance_mode = 2
+advance_condition = &"slide"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xfx40"]
+advance_mode = 2
+advance_condition = &"slide"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jx04b"]
+advance_mode = 2
+advance_condition = &"crouch"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_he4ux"]
+states/End/position = Vector2(986, 92)
+states/RESET/node = SubResource("AnimationNodeAnimation_qowt7")
+states/RESET/position = Vector2(768, 61)
+states/Start/position = Vector2(171, 100)
+states/crouch/node = SubResource("AnimationNodeAnimation_2cfib")
+states/crouch/position = Vector2(668, -40)
+states/slide/node = SubResource("AnimationNodeAnimation_he4ux")
+states/slide/position = Vector2(668, 210)
+states/sprint/node = SubResource("AnimationNodeBlendTree_2cfib")
+states/sprint/position = Vector2(519, 100)
+transitions = ["Start", "sprint", SubResource("AnimationNodeStateMachineTransition_he4ux"), "Start", "crouch", SubResource("AnimationNodeStateMachineTransition_qowt7"), "sprint", "crouch", SubResource("AnimationNodeStateMachineTransition_ailvw"), "crouch", "sprint", SubResource("AnimationNodeStateMachineTransition_ct0df"), "sprint", "slide", SubResource("AnimationNodeStateMachineTransition_rptqj"), "Start", "slide", SubResource("AnimationNodeStateMachineTransition_xfx40"), "slide", "crouch", SubResource("AnimationNodeStateMachineTransition_jx04b")]
+graph_offset = Vector2(-142, -66)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a2cvh"]
-graph_offset = Vector2(-736, -1)
+graph_offset = Vector2(-928, 253)
+nodes/MoveSM/node = SubResource("AnimationNodeStateMachine_he4ux")
+nodes/MoveSM/position = Vector2(-340, 220)
 nodes/output/position = Vector2(300, 160)
-nodes/sprint/node = SubResource("AnimationNodeAnimation_ufq73")
-nodes/sprint/position = Vector2(-220, 140)
-nodes/sprint_speed/node = SubResource("AnimationNodeTimeScale_aku4r")
-nodes/sprint_speed/position = Vector2(20, 120)
-node_connections = [&"output", 0, &"sprint_speed", &"sprint_speed", 0, &"sprint"]
+node_connections = [&"output", 0, &"MoveSM"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6blsw"]
 animation = &"land"
@@ -342,6 +460,7 @@ advance_mode = 2
 advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wl80l"]
+priority = 3
 switch_mode = 1
 advance_mode = 2
 advance_condition = &"jump"
@@ -363,6 +482,7 @@ advance_mode = 2
 advance_condition = &"air"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q7787"]
+xfade_time = 0.2
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"moving"
@@ -380,17 +500,17 @@ states/Start/position = Vector2(-185, -35)
 states/land/node = SubResource("AnimationNodeAnimation_6blsw")
 states/land/position = Vector2(310, 139)
 transitions = ["Jump", "AirCycle", SubResource("AnimationNodeStateMachineTransition_r7w3l"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_uqpcw"), "Idle", "AirCycle", SubResource("AnimationNodeStateMachineTransition_1urjx"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_5hx3t"), "AirCycle", "land", SubResource("AnimationNodeStateMachineTransition_knfrf"), "land", "Idle", SubResource("AnimationNodeStateMachineTransition_km8ed"), "land", "Jump", SubResource("AnimationNodeStateMachineTransition_wl80l"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_2k20c"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_0miic"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_7n21r"), "Move", "AirCycle", SubResource("AnimationNodeStateMachineTransition_530ai"), "land", "Move", SubResource("AnimationNodeStateMachineTransition_q7787")]
-graph_offset = Vector2(-536, -228)
+graph_offset = Vector2(-587, -93)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nqfrr"]
-graph_offset = Vector2(-1024, 20)
+graph_offset = Vector2(-391, 181)
 nodes/Master/node = SubResource("AnimationNodeStateMachine_p6mgb")
 nodes/Master/position = Vector2(-220, 120)
 nodes/output/position = Vector2(320, 220)
 node_connections = [&"output", 0, &"Master"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayer", "_resetPosition", "_stepper", "_speedLabel", "_momentumLabel", "_stateLabel", "_animationLabel", "_desiredSpeedLabel", "_previousStateLabel", "_stanceStateLabel")]
-collision_mask = 15
+collision_mask = 14
 floor_stop_on_slope = false
 floor_block_on_wall = false
 floor_max_angle = 1.13446
@@ -398,7 +518,6 @@ floor_snap_length = 0.5
 script = ExtResource("1_lmf3s")
 AnimationPlayer = NodePath("AnimationTree")
 _resetPosition = NodePath("ResetPos")
-maxSpeed = 13.0
 _physicsInterpolate = true
 _stepper = NodePath("Stepper")
 _speedLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Velocity")
@@ -408,109 +527,6 @@ _animationLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Animation")
 _desiredSpeedLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Desired Speed")
 _previousStateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Previous State")
 _stanceStateLabel = NodePath("MovementInfo/CanvasGroup/CanvasLayer/Stance")
-
-[node name="FSM" type="Node3D" parent="." node_paths=PackedStringArray("CurrentState")]
-script = ExtResource("1_mxrkb")
-CurrentState = NodePath("Walk")
-metadata/_custom_type_script = "uid://7vpus8jhnbiq"
-
-[node name="Idle" type="Node3D" parent="FSM"]
-script = ExtResource("2_ksvsq")
-metadata/_custom_type_script = "uid://do6a8shsjalxp"
-
-[node name="Air" type="Node3D" parent="FSM"]
-script = ExtResource("3_lo0x0")
-_airSpeed = 15.0
-_airChangeFactor = 0.1
-_airDirChangeTime = 2.0
-_gravityMultiplier = 1.5
-metadata/_custom_type_script = "uid://ca5pxnje7ukpi"
-
-[node name="Sprint" type="Node3D" parent="FSM"]
-script = ExtResource("5_iut7l")
-_sprintingSpeed = 9.0
-_sprintAccelerationTime = 1.3
-_headBobSpeed = 26.0
-_headBobIntensity = 0.3
-metadata/_custom_type_script = "uid://celula8qdfn0d"
-
-[node name="step" type="AudioStreamPlayer3D" parent="FSM/Sprint"]
-volume_db = 18.203
-bus = &"Movement"
-
-[node name="Walk" type="Node3D" parent="FSM"]
-script = ExtResource("4_m58u8")
-_walkingSpeed = 5.0
-metadata/_custom_type_script = "uid://qm1l612f0uhy"
-
-[node name="Decceleration" type="Node3D" parent="FSM"]
-script = ExtResource("7_1uwqo")
-_deccelerationTime = 0.3
-metadata/_custom_type_script = "uid://dpo0sr1lgyoqa"
-
-[node name="Jump" type="Node3D" parent="FSM"]
-script = ExtResource("7_enr4c")
-_jumpHeight = 1.5
-_timeToPeak = 0.35
-metadata/_custom_type_script = "uid://bt4txkrgpay8u"
-
-[node name="Jump" type="AudioStreamPlayer3D" parent="FSM/Jump"]
-volume_db = -10.0
-
-[node name="CrouchMove" type="Node3D" parent="FSM"]
-script = ExtResource("10_h8ih0")
-_crouchingSpeed = 3.0
-_crouchAccelerationTime = 1.0
-_crouchDirectionControl = 0.3
-_crouchChangeFactor = 1.0
-_headBobSpeed = 10.0
-_headBobIntensity = 0.05
-metadata/_custom_type_script = "uid://dtnmqg3elxe3q"
-
-[node name="StanceFSM" type="Node3D" parent="." node_paths=PackedStringArray("CurrentState")]
-script = ExtResource("1_mxrkb")
-CurrentState = NodePath("Standing")
-metadata/_custom_type_script = "uid://7vpus8jhnbiq"
-
-[node name="Standing" type="Node3D" parent="StanceFSM"]
-script = ExtResource("11_jx04b")
-metadata/_custom_type_script = "uid://doy10k47ba7ec"
-
-[node name="Crouching" type="Node3D" parent="StanceFSM"]
-script = ExtResource("12_2cfib")
-metadata/_custom_type_script = "uid://f03rtmo0y76q"
-
-[node name="CeilingRay" type="RayCast3D" parent="StanceFSM/Crouching"]
-target_position = Vector3(0, 2, 0)
-collision_mask = 10
-hit_back_faces = false
-debug_shape_custom_color = Color(1, 0.414594, 0.264389, 1)
-debug_shape_thickness = 1
-
-[node name="Standing_collision_shape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_6uf8n")
-
-[node name="Crouching_collision_shape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("CapsuleShape3D_45p4n")
-disabled = true
-
-[node name="Audio" type="Node3D" parent="."]
-script = ExtResource("9_jo3el")
-
-[node name="AudioStepper" type="Node3D" parent="Audio" node_paths=PackedStringArray("_step")]
-script = ExtResource("10_8gppd")
-_step = NodePath("StepPlayer3D")
-_stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resource_in3s0"), SubResource("Resource_haxqx"), SubResource("Resource_eupbf")])
-
-[node name="StepPlayer3D" type="AudioStreamPlayer3D" parent="Audio/AudioStepper"]
-volume_db = -16.0
-attenuation_filter_cutoff_hz = 20500.0
-
-[node name="LandStep" type="AudioStreamPlayer3D" parent="Audio"]
-
-[node name="LandHardStep" type="AudioStreamPlayer3D" parent="Audio"]
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -547,6 +563,7 @@ current = true
 
 [node name="ShakeCollider" type="CollisionShape3D" parent="Body/Neck/Head/Eyes/CamHead/CameraShaker"]
 shape = SubResource("SphereShape3D_q80lt")
+disabled = true
 
 [node name="HeadMesh" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59464, 0)
@@ -574,6 +591,19 @@ size = Vector3(0.158691, 0.0929871, 1.15381)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0297241, 0.00499344, -0.615091)
 size = Vector3(0.452759, 0.104851, 0.11316)
 
+[node name="Audio" type="Node3D" parent="."]
+script = ExtResource("9_jo3el")
+
+[node name="AudioStepper" type="Node3D" parent="Audio" node_paths=PackedStringArray("_step")]
+script = ExtResource("10_8gppd")
+_step = NodePath("StepPlayer3D")
+_stepPlayers = Array[Object]([SubResource("Resource_p2n1p"), SubResource("Resource_in3s0"), SubResource("Resource_haxqx"), SubResource("Resource_eupbf")])
+
+[node name="StepPlayer3D" type="AudioStreamPlayer3D" parent="Audio/AudioStepper"]
+volume_db = -16.0
+bus = &"Movement"
+attenuation_filter_cutoff_hz = 20500.0
+
 [node name="CollisionChecker" type="Area3D" parent="."]
 collision_mask = 30
 script = ExtResource("6_khvxg")
@@ -581,6 +611,28 @@ script = ExtResource("6_khvxg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionChecker"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293706, 0)
 shape = SubResource("BoxShape3D_dct41")
+
+[node name="PostProcessing" type="Node3D" parent="."]
+script = ExtResource("22_qowt7")
+_maxVelocity = 20.0
+_pingPongDuration = 0.4
+_pingPongSpeed = 50.0
+_minVgIntensity = 0.1
+_vgExponent = 8.0
+_vgSpeed = 2.5
+_minLdZoom = 15.0
+_maxLdZoom = 200.0
+_ldExponent = 4.0
+_ldSpeed = 4.0
+_maxCaStrength = 0.5
+_caExponent = 4.0
+_caSpeed = 2.5
+_maxBlurPower = 0.01
+_blurExponent = 4.0
+_blurSpeed = 4.0
+
+[node name="ResetPos" type="Node3D" parent="."]
+top_level = true
 
 [node name="Stepper" type="Node3D" parent="." node_paths=PackedStringArray("_collisionShape", "_movement")]
 script = ExtResource("29_w4gr6")
@@ -627,10 +679,11 @@ hit_back_faces = false
 debug_shape_custom_color = Color(0.13211, 0.185471, 1, 1)
 
 [node name="PlayerBottom" type="ShapeCast3D" parent="Stepper"]
+enabled = false
 shape = SubResource("BoxShape3D_yrmf5")
 target_position = Vector3(0, 0, 0)
 max_results = 0
-collision_mask = 10
+collision_mask = 0
 collide_with_bodies = false
 
 [node name="MovementInfo" type="Control" parent="."]
@@ -714,8 +767,130 @@ text = "STANCE:"
 label_settings = SubResource("LabelSettings_oj2fi")
 uppercase = true
 
-[node name="ResetPos" type="Node3D" parent="."]
-top_level = true
+[node name="FOVController" type="Node" parent="." node_paths=PackedStringArray("_camera")]
+script = ExtResource("24_ailvw")
+_camera = NodePath("../Body/Neck/Head/Eyes/CamHead/CameraShaker/CamFollow/Camera3D")
+defaultFov = 90.0
+
+[node name="FSM" type="Node3D" parent="." node_paths=PackedStringArray("CurrentState")]
+script = ExtResource("1_mxrkb")
+CurrentState = NodePath("Walk")
+metadata/_custom_type_script = "uid://7vpus8jhnbiq"
+
+[node name="Idle" type="Node3D" parent="FSM"]
+script = ExtResource("2_ksvsq")
+metadata/_custom_type_script = "uid://do6a8shsjalxp"
+
+[node name="Air" type="Node3D" parent="FSM"]
+script = ExtResource("3_lo0x0")
+_airSpeed = 15.0
+_airChangeFactor = 0.1
+_airDirChangeTime = 2.0
+_gravityMultiplier = 1.5
+metadata/_custom_type_script = "uid://ca5pxnje7ukpi"
+
+[node name="Land" type="AudioStreamPlayer3D" parent="FSM/Air"]
+volume_db = 18.203
+bus = &"Movement"
+
+[node name="AirAudio" type="Node3D" parent="FSM/Air" node_paths=PackedStringArray("_windRun")]
+script = ExtResource("28_ct0df")
+movementBus = "Movement"
+_windRun = NodePath("Wind")
+_maxWindVolume = -15.0
+_minWindPitch = 0.6
+_maxwindPitch = 1.0
+_maxPlayerVelocity = 13.0
+_windLerpSpeed = 1.0
+_velocityExponent = 5.0
+
+[node name="Wind" type="AudioStreamPlayer3D" parent="FSM/Air/AirAudio"]
+stream = ExtResource("29_rptqj")
+volume_db = -80.0
+bus = &"Movement"
+
+[node name="Sprint" type="Node3D" parent="FSM"]
+script = ExtResource("5_iut7l")
+_sprintingSpeed = 9.0
+_sprintAccelerationTime = 1.3
+_headBobSpeed = 26.0
+_headBobIntensity = 0.3
+metadata/_custom_type_script = "uid://celula8qdfn0d"
+
+[node name="step" type="AudioStreamPlayer3D" parent="FSM/Sprint"]
+volume_db = 18.203
+bus = &"Movement"
+
+[node name="Walk" type="Node3D" parent="FSM"]
+script = ExtResource("4_m58u8")
+_walkingSpeed = 5.0
+metadata/_custom_type_script = "uid://qm1l612f0uhy"
+
+[node name="Decceleration" type="Node3D" parent="FSM"]
+script = ExtResource("7_1uwqo")
+_deccelerationTime = 0.3
+metadata/_custom_type_script = "uid://dpo0sr1lgyoqa"
+
+[node name="Jump" type="Node3D" parent="FSM"]
+script = ExtResource("7_enr4c")
+_jumpHeight = 1.5
+_timeToPeak = 0.35
+metadata/_custom_type_script = "uid://bt4txkrgpay8u"
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="FSM/Jump"]
+volume_db = -10.0
+bus = &"Movement"
+
+[node name="CrouchMove" type="Node3D" parent="FSM"]
+script = ExtResource("10_h8ih0")
+_crouchingSpeed = 3.0
+_crouchAccelerationTime = 1.0
+_crouchDirectionControl = 0.3
+_crouchChangeFactor = 1.0
+_headBobSpeed = 10.0
+_headBobIntensity = 0.05
+metadata/_custom_type_script = "uid://dtnmqg3elxe3q"
+
+[node name="Sliding" type="Node3D" parent="FSM" node_paths=PackedStringArray("_slideIn", "_slideLoop")]
+script = ExtResource("10_jx04b")
+_slideSpeed = 20.0
+_slideIn = NodePath("SlideIn")
+_slideLoop = NodePath("SlideLoop")
+metadata/_custom_type_script = "uid://dp6knh2ipyovm"
+
+[node name="SlideIn" type="AudioStreamPlayer3D" parent="FSM/Sliding"]
+stream = ExtResource("11_he4ux")
+volume_db = -12.0
+bus = &"Movement"
+
+[node name="SlideLoop" type="AudioStreamPlayer3D" parent="FSM/Sliding"]
+stream = ExtResource("12_qowt7")
+volume_db = -12.0
+bus = &"Movement"
+
+[node name="StanceFSM" type="Node3D" parent="." node_paths=PackedStringArray("CurrentState")]
+script = ExtResource("1_mxrkb")
+CurrentState = NodePath("Standing")
+metadata/_custom_type_script = "uid://7vpus8jhnbiq"
+
+[node name="Standing" type="Node3D" parent="StanceFSM"]
+script = ExtResource("11_jx04b")
+metadata/_custom_type_script = "uid://doy10k47ba7ec"
+
+[node name="Crouching" type="Node3D" parent="StanceFSM"]
+script = ExtResource("12_2cfib")
+metadata/_custom_type_script = "uid://f03rtmo0y76q"
+
+[node name="CeilingRay" type="RayCast3D" parent="StanceFSM/Crouching"]
+target_position = Vector3(0, 2, 0)
+collision_mask = 10
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0.414594, 0.264389, 1)
+debug_shape_thickness = 1
+
+[node name="Standing_collision_shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_6uf8n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Body/Neck/Head/Eyes")
@@ -725,14 +900,18 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Body/Neck/Head/Eyes")
+callback_mode_method = 1
 tree_root = SubResource("AnimationNodeBlendTree_nqfrr")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Master/conditions/air = false
-parameters/Master/conditions/idle = true
+parameters/Master/conditions/idle = false
 parameters/Master/conditions/jump = false
-parameters/Master/conditions/land = false
-parameters/Master/conditions/moving = false
-parameters/Master/Move/sprint_speed/scale = 1.0
+parameters/Master/conditions/land = true
+parameters/Master/conditions/moving = true
+parameters/Master/Move/MoveSM/conditions/crouch = false
+parameters/Master/Move/MoveSM/conditions/slide = false
+parameters/Master/Move/MoveSM/conditions/sprint = false
+parameters/Master/Move/MoveSM/sprint/sprint_speed/scale = 1.0
 
-[connection signal="area_entered" from="CollisionChecker" to="." method="OnCollisionCheckerAreaEntered"]
-[connection signal="area_exited" from="CollisionChecker" to="." method="OnCollisionCheckerAreaExited"]
+[connection signal="area_entered" from="CollisionChecker" to="CollisionChecker" method="OnAreaEntered"]
+[connection signal="body_entered" from="CollisionChecker" to="CollisionChecker" method="OnBodyEntered"]

@@ -33,6 +33,7 @@ public partial class Sprint : MovementState
         Movement.SetDirectionControl(_sprintDirectionControl);
 
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", true);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/conditions/sprint", true);
 
         _sprintShake = CamShake.ShakePreset(CamShakePresets.Sprinting);
     }
@@ -47,12 +48,13 @@ public partial class Sprint : MovementState
         float maxVelocity = _sprintingSpeed;
         float normalizedSpeed = Mathf.Clamp(Movement.Velocity.Length() / maxVelocity, 0f, 1f);
 
-        Movement.AnimationPlayer.Set("parameters/Master/Move/sprint_speed/scale", normalizedSpeed);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/sprint/sprint_speed/scale", normalizedSpeed);
     }
 
     public override void Exit()
     {
         Movement.AnimationPlayer.Set("parameters/Master/conditions/moving", false);
+        Movement.AnimationPlayer.Set("parameters/Master/Move/MoveSM/conditions/sprint", false);
         
         CamShake.RemoveShake(_sprintShake);
     }
@@ -71,12 +73,6 @@ public partial class Sprint : MovementState
         {
             Movement.Deccelerate((float)delta, _sprintSpeedChange, _sprintAccChange);
         }
-
-        /* if (Input.IsActionPressed("crouch") && !Movement.IsOnWall() && !Movement.IsRunningUpSlope() && !Movement.stepCast.IsColliding()
-                && Movement.Velocity.Length() >= (Movement.sprintingSpeed - 1) && Movement.inputDirection.Y < 0f)
-        {
-            EmitSignal(SignalName.StateFinished, "PlayerSlide", new());
-        } */
 
         /* if (Movement.IsOnFloor() && !Input.IsActionPressed("sprint"))
         {
@@ -106,22 +102,19 @@ public partial class Sprint : MovementState
 
         if (Movement.StanceFSM.CurrentState is Crouching)
         {
-            EmitSignal(SignalName.StateFinished, "CrouchMove", new());
+            if (Movement.IsRunningUpSlope())
+                EmitSignal(SignalName.StateFinished, "CrouchMove", new());
+            else
+            {
+                float angleBetweenDirection = Camera.GetSignedYAngleBetween(Camera.GetNeckBasis().Z, Movement.GetPlayerDirection());
+
+                // Check if the player is mainly moving forward and not on a slope (prevents from sliding backwards)
+                if (Mathf.Abs(Mathf.RadToDeg(angleBetweenDirection)) > 100)
+                {
+                    EmitSignal(SignalName.StateFinished, "Sliding", new());
+                }
+            }
+                
         }
-
-        /* if (Input.IsActionJustPressed("crouch") && Movement.IsOnFloor())
-        {
-            EmitSignal(SignalName.StateFinished, "Crouch", new());
-        } */
-
-        /* if (Movement.CheckVault(delta, out Vector3 vaultPoint) && Input.IsActionJustPressed("jump"))
-        {
-            EmitSignal(SignalName.StateFinished, "PlayerVault", new());
-        } */
-
-        /* if (Movement.CheckLadder())
-        {
-            EmitSignal(SignalName.StateFinished, "PlayerLadder", new());
-        } */
     }
 }

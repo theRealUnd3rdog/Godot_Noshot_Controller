@@ -37,7 +37,6 @@ public partial class Movement : CharacterBody3D, IMovement
 	[Export] private Node3D _resetPosition;
 
 	[ExportCategory("Movement")]
-	[Export] public float maxSpeed {private set; get;} // metres per second
 	private float _accelerationRate;
 	private float _decelerationRate;
 
@@ -70,6 +69,7 @@ public partial class Movement : CharacterBody3D, IMovement
 	[Export] private Label _previousStateLabel;
 	[Export] private Label _stanceStateLabel;
 
+
 	public override void _EnterTree()
 	{
 		_collider = GetNode<CollisionShape3D>("Standing_collision_shape");
@@ -84,8 +84,6 @@ public partial class Movement : CharacterBody3D, IMovement
 		// Grab all node references
 		_body = GetNode<Node3D>("Body");
 		_neck = GetNode<Node3D>("Body/Neck");
-
-		
 	}
 
 	public override void _Process(double delta)
@@ -106,7 +104,7 @@ public partial class Movement : CharacterBody3D, IMovement
 	public override void _PhysicsProcess(double delta)
 	{
 		_localVelocity = Velocity;
-
+		
 		ChangeDirectionWithInput();
 		ApplyDelayedDirection();
 
@@ -118,6 +116,7 @@ public partial class Movement : CharacterBody3D, IMovement
 
 		_lastPhysicsPos = GlobalTransform.Origin;
 		Velocity = _localVelocity;
+		_lastVelocity = Velocity;
 
 		_stepper.StairStepUp(delta);
 
@@ -341,6 +340,11 @@ public partial class Movement : CharacterBody3D, IMovement
 		return new Vector2(Velocity.X, Velocity.Z);
 	}
 
+	public Vector3 GetLastVelocity()
+	{
+		return _lastVelocity;
+	}
+
 	public float GetCurrentDirChangeTime()
 	{
 		return _dirChangeTime;
@@ -370,6 +374,19 @@ public partial class Movement : CharacterBody3D, IMovement
         bool isMainlyForward = angleToForward <= Mathf.DegToRad(angle);
 
 		return isMainlyForward;
+	}
+
+	/// <summary>
+	/// Method to check if player is running up a slope
+	/// </summary>
+	public bool IsRunningUpSlope()
+	{
+		float dot = GetFloorNormal().Dot(-_neck.Basis.Z);
+		
+		if (dot < 0f)
+			return true;
+		else 
+			return false;
 	}
 
 	/// <summary>
