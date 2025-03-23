@@ -18,8 +18,12 @@ public partial class Air : MovementState
 
     // Camera Shake
     private CamShakeInstance _airShake;
-
     private RandomNumberGenerator _rng = new RandomNumberGenerator();
+    
+
+    // Additional States
+    private Wallrunning _wallrunningState;
+
 
     public override void Enter()
     {
@@ -33,12 +37,15 @@ public partial class Air : MovementState
         Movement.AnimationPlayer.Set("parameters/Master/conditions/jump", false);
 
         _airShake = CamShake.ShakePreset(CamShakePresets.InAir);
+        _wallrunningState = Movement.GetNode<Wallrunning>("FSM/Wallrunning");
     }
 
     public override void Exit()
     {
         Movement.AnimationPlayer.Set("parameters/Master/conditions/air", false);
         Movement.AnimationPlayer.Set("parameters/Master/conditions/land", true);
+
+        _wallrunningState.SetWallRunTimer(0.0f); // Reset wallrun timer;
 
         CamShake.RemoveShake(_airShake);
     }
@@ -80,6 +87,13 @@ public partial class Air : MovementState
                     _coyoteTimer = _coyoteTime + 1; // Prevents multiple jumps
                 }
             }
+
+            if (Wallrunning.CheckWallCollision(Movement, Camera, out KinematicCollision3D col, out Wallrunning.WallDirection direction)
+                && _wallrunningState.GetWallRunTimer() < _wallrunningState.GetWallRunTime()
+                && !Movement.SendRayInDirection(Movement.GetPlayerDirection(), Camera.GlobalPosition, 0.5f, out Vector3 normal, out Vector3 point)) // Check if player is wallrunning
+            {
+                EmitSignal(SignalName.StateFinished, "Wallrunning", new());
+            }
         }
     }
 
@@ -106,7 +120,7 @@ public partial class Air : MovementState
         }
         else
         {
-            Movement.Deccelerate((float)delta, airSpeedChange, _airAccelerationTime * 2f);
+            Movement.Deccelerate((float)delta, airSpeedChange, _airAccelerationTime);
         }
 
         float airControlChange = Movement.IsPlayerMainlyForward(45) ? _airControl : _airControl * _airChangeFactor;
@@ -128,6 +142,8 @@ public partial class Air : MovementState
 
             PlayLandScreenShake();
         }
+
+        GD.Print(Movement.GetLastVelocity().Y);
 	}
 
     private void PlayLandScreenShake() => CamShake.ShakePreset(CamShakePresets.Roll);

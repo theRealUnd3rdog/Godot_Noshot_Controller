@@ -116,7 +116,9 @@ public partial class Movement : CharacterBody3D, IMovement
 
 		_lastPhysicsPos = GlobalTransform.Origin;
 		Velocity = _localVelocity;
-		_lastVelocity = Velocity;
+
+		if (!IsOnFloor())
+			_lastVelocity = Velocity;
 
 		_stepper.StairStepUp(delta);
 
@@ -382,8 +384,10 @@ public partial class Movement : CharacterBody3D, IMovement
 	public bool IsRunningUpSlope()
 	{
 		float dot = GetFloorNormal().Dot(-_neck.Basis.Z);
+
+		GD.Print(dot);
 		
-		if (dot < 0f)
+		if (dot < -0.01f)
 			return true;
 		else 
 			return false;
@@ -405,6 +409,7 @@ public partial class Movement : CharacterBody3D, IMovement
 
         _collider.Position = new Vector3(0, shape.Height / 2, 0);
 	}
+	
 
 	public static float CalculateT(float v, float k)
     {
@@ -412,4 +417,40 @@ public partial class Movement : CharacterBody3D, IMovement
         t = Math.Min(t, 1);
         return t;
     }
+
+	public bool SendRayInDirection(Vector3 direction, Vector3 origin, float range, out Vector3 rayNormal, out Vector3 rayPoint)
+	{
+		// Send ray in direction of wall
+        PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+
+        Vector3 rayOrigin = origin;
+        Vector3 rayEnd = rayOrigin + (direction * range);
+
+		rayNormal = default(Vector3);
+		rayPoint = default(Vector3);
+
+		uint layerMask = (1 << 1)  | (1 << 4);
+
+        PhysicsRayQueryParameters3D parameters = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd, layerMask);
+		parameters.HitBackFaces = false;
+		parameters.HitFromInside = false;
+
+        var rayArray = spaceState.IntersectRay(parameters);
+
+        if (rayArray.ContainsKey("collider"))
+        {
+			rayArray.TryGetValue("normal", out Variant normal);
+			rayArray.TryGetValue("position", out Variant position);
+			rayArray.TryGetValue("collider", out Variant colliderVariant);
+
+			DebugDraw3D.DrawArrow(rayOrigin, rayEnd, Colors.GreenYellow, 0.2f);
+
+			rayNormal = normal.AsVector3();
+			rayPoint = position.AsVector3();
+
+            return true;
+        }
+
+		return false;
+	}
 }

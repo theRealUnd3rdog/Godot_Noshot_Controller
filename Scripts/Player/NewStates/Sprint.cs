@@ -114,7 +114,8 @@ public partial class Sprint : MovementState
                     EmitSignal(SignalName.StateFinished, "Sliding", new());
                 }
             }
-                
         }
+
+        Movement.IsRunningUpSlope();
     }
 }
