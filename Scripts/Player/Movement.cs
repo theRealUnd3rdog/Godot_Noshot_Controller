@@ -384,8 +384,6 @@ public partial class Movement : CharacterBody3D, IMovement
 	public bool IsRunningUpSlope()
 	{
 		float dot = GetFloorNormal().Dot(-_neck.Basis.Z);
-
-		GD.Print(dot);
 		
 		if (dot < -0.01f)
 			return true;

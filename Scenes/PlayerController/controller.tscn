@@ -599,7 +599,6 @@ transitions = ["Jump", "AirCycle", SubResource("AnimationNodeStateMachineTransit
 graph_offset = Vector2(-407, -66)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nqfrr"]
-graph_offset = Vector2(-431, 275)
 nodes/Master/node = SubResource("AnimationNodeStateMachine_p6mgb")
 nodes/Master/position = Vector2(-220, 120)
 nodes/output/position = Vector2(320, 220)
@@ -642,16 +641,17 @@ script = ExtResource("2_t5to1")
 script = ExtResource("3_atyu3")
 _smoothSpeed = 30.0
 
-[node name="Camera3D" type="Camera3D" parent="Body/Neck/Head/Eyes/CamHead/CameraShaker/CamFollow" node_paths=PackedStringArray("_mesh", "_headMesh", "_head", "_neck", "_eyes")]
+[node name="Camera3D" type="Camera3D" parent="Body/Neck/Head/Eyes/CamHead/CameraShaker/CamFollow" node_paths=PackedStringArray("_mesh", "_neck", "_eyes", "_head", "_headMesh")]
 unique_name_in_owner = true
 current = true
 fov = 90.0
+near = 0.135
 script = ExtResource("9_bae87")
 _mesh = NodePath("../../../../../../../CapsuleMesh")
-_headMesh = NodePath("../../../../../../../HeadMesh")
-_head = NodePath("../../../../..")
 _neck = NodePath("../../../../../..")
 _eyes = NodePath("../../../..")
+_head = NodePath("../../../../..")
+_headMesh = NodePath("../../../../../../../HeadMesh")
 standDuration = 0.3
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Body/Neck/Head/Eyes/CamHead/CameraShaker/CamFollow/Camera3D"]
@@ -663,6 +663,7 @@ disabled = true
 
 [node name="HeadMesh" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59464, 0)
+visible = false
 
 [node name="Head" type="CSGMesh3D" parent="Body/HeadMesh"]
 transform = Transform3D(0.309844, 0, 0, 0, 0.215405, 0, 0, 0, 0.54633, 0, 0.0990566, -0.372586)
@@ -675,6 +676,9 @@ material_override = SubResource("StandardMaterial3D_bhevj")
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_02y88")
 skeleton = NodePath("../..")
+script = ExtResource("3_atyu3")
+_smoothSpeed = 30.0
+_enableRotation = false
 
 [node name="Hands" type="Node3D" parent="Body/CapsuleMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.427747, 0)
@@ -686,6 +690,11 @@ size = Vector3(0.158691, 0.0929871, 1.15381)
 [node name="CSGBox3D2" type="CSGBox3D" parent="Body/CapsuleMesh/Hands"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0297241, 0.00499344, -0.615091)
 size = Vector3(0.452759, 0.104851, 0.11316)
+
+[node name="BodyMesh" type="Node3D" parent="Body"]
+script = ExtResource("3_atyu3")
+_smoothSpeed = 30.0
+_enableRotation = false
 
 [node name="Audio" type="Node3D" parent="."]
 script = ExtResource("9_jo3el")

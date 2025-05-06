@@ -10,11 +10,16 @@ public partial class Camera : Camera3D, ICamera
 	private Movement _movement;
 	
 	[Export] private Node3D _mesh;
-	[Export] private Node3D _headMesh;
 	
-	[Export] private Node3D _head;
+
 	[Export] private Node3D _neck;
 	[Export] private Node3D _eyes;
+	
+	[ExportSubgroup("Head")]
+	[Export] private Node3D _head;
+	[Export] private Node3D _headMesh;
+	[Export] private Node3D _headBone; // Bone node for the head mesh
+	
 
 	// private rotations in radians
 	private float _rotationY = 0f;
@@ -106,6 +111,25 @@ public partial class Camera : Camera3D, ICamera
 		//DebugDraw3D.DrawArrow(_movement.Position, _movement.Position + (desiredDirection * 4f), Colors.Blue, 0.2f);
 
 		UpdateFOVBasedOnSpeed();
+
+		// Align head and neck to head bone if head bone is available
+		if (_headBone != null)
+		{
+			// Get the head bone's global transform
+			Vector3 headBonePos = _headBone.GlobalPosition;
+
+			// Set the neck transform's Y to match the headBone's Y
+			Vector3 neckPos = _neck.GlobalPosition;
+			neckPos.Y = headBonePos.Y + 0.08f;
+			_neck.GlobalPosition = neckPos;
+
+			// Get the head bone's transform
+			Vector3 neckPosLocal = _neck.Position;
+
+			Vector3 head = _head.Position;
+			head.Z = neckPosLocal.Z + -0.479f;
+			_head.Position = head;
+		}
 	}
 
 	/// <summary>
@@ -277,14 +301,14 @@ public partial class Camera : Camera3D, ICamera
 			eyes.Y = Mathf.Lerp(eyes.Y, _headBobVector.Y * (_headBobCurrentIntensity / 2.0f), 1.0f - Mathf.Pow(0.5f, (float)delta * _headBobLerpSpeed));
 			eyes.X = Mathf.Lerp(eyes.X, _headBobVector.X * _headBobCurrentIntensity, 1.0f - Mathf.Pow(0.5f, (float)delta * _headBobLerpSpeed));
 
-			_eyes.Position = eyes;
+			//_eyes.Position = eyes;
 		}
 		else
 		{
 			eyes.Y = Mathf.Lerp(eyes.Y, 0.0f, 1.0f - Mathf.Pow(0.5f, (float)delta * _headBobLerpSpeed));
 			eyes.X = Mathf.Lerp(eyes.X, 0.0f, 1.0f - Mathf.Pow(0.5f, (float)delta * _headBobLerpSpeed));
 
-			_eyes.Position = eyes;
+			//_eyes.Position = eyes;
 		}
 	}
 

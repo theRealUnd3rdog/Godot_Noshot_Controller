@@ -5,6 +5,8 @@ public partial class SmoothFollow : Node3D
 {
 	private Node3D _parentNode;
 	[Export] private float _smoothSpeed = 10.0f;
+	[Export] private bool _enableLocation = true;
+	[Export] private bool _enableRotation = true;
 	private Vector3 _currentLocation;
 
 	// Called when the node enters the scene tree for the first time.
@@ -21,7 +23,9 @@ public partial class SmoothFollow : Node3D
 	public override void _Process(double delta)
 	{
 		Vector3 targetLoc = _parentNode.GlobalPosition;
-		Position = Position.Lerp(targetLoc, 1.0f - Mathf.Pow(0.5f, (float)delta * _smoothSpeed));
+
+		if (_enableLocation)
+			Position = Position.Lerp(targetLoc, 1.0f - Mathf.Pow(0.5f, (float)delta * _smoothSpeed));
 
 		Transform3D newTransform = GlobalTransform;
 		Quaternion curRot = newTransform.Basis.GetRotationQuaternion();
@@ -30,6 +34,8 @@ public partial class SmoothFollow : Node3D
 		Quaternion newRot = curRot.Slerp(targetRot, 1.0f - Mathf.Pow(0.5f, (float)delta * _smoothSpeed));
 		
 		newTransform.Basis = new Basis(newRot);
-		Transform = newTransform;
+
+		if (_enableRotation)
+			GlobalBasis = newTransform.Basis;
 	}
 }

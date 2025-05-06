@@ -201,7 +201,7 @@ public partial class Wallrunning : MovementState
     public void WallJump(Vector3 wallDir)
 	{
         Vector3 direction = ((wallDir.Normalized()) + (-Camera.GetNeckBasis().Z / 4)) * (_wallJumpSpeed / 16);
-        Movement.SetCurrentSpeed(_wallJumpSpeed * 3.5f);
+        Movement.SetCurrentSpeed(_wallJumpSpeed * 3f);
         Movement.SetPlayerDirection(direction);
 	}
 

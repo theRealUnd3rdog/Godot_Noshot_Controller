@@ -59,6 +59,7 @@ radialBlur = NodePath("Radial_Blur/RadialBlur")
 [node name="LensFlare" type="CanvasLayer" parent="PostProcessingManager"]
 
 [node name="LensFlare" type="ColorRect" parent="PostProcessingManager/LensFlare"]
+visible = false
 material = SubResource("ShaderMaterial_l1ov6")
 anchors_preset = 15
 anchor_right = 1.0

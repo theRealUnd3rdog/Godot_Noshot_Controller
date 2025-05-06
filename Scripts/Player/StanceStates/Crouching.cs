@@ -20,7 +20,7 @@ public partial class Crouching : MovementState
         base.Enter();
 
         Movement.SetColliderHeight(1.0f);
-        Camera.StartStance(-0.5f);
+        Camera.StartStance(-0.2f);
 
         _crouchShake = CamShake.ShakePreset(CamShakePresets.Idle);
     }

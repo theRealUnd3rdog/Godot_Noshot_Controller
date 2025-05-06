@@ -142,8 +142,6 @@ public partial class Air : MovementState
 
             PlayLandScreenShake();
         }
-
-        GD.Print(Movement.GetLastVelocity().Y);
 	}
 
     private void PlayLandScreenShake() => CamShake.ShakePreset(CamShakePresets.Roll);

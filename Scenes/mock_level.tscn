@@ -24,13 +24,13 @@
 [ext_resource type="Texture2D" uid="uid://dd53cr7ij30yd" path="res://Textures/decals_0006_2k_3VUpnY/decals_0006_normal_opengl_2k.png" id="19_tmh3i"]
 [ext_resource type="Texture2D" uid="uid://bopb2fir8dyh7" path="res://Textures/decals_0006_2k_3VUpnY/decal_channel_pack.png" id="20_ryex7"]
 [ext_resource type="PackedScene" uid="uid://bqekf67x42h0i" path="res://Models/Windmill/wind_mill.tscn" id="22_jfbs0"]
-[ext_resource type="PackedScene" uid="uid://bno01vmd57gq1" path="res://Scenes/PlayerController/controller.tscn" id="25_ev0gu"]
+[ext_resource type="PackedScene" uid="uid://cc270gjfuoacl" path="res://Scenes/PlayerController/controller_animation.tscn" id="25_5nllv"]
 
 [sub_resource type="Environment" id="Environment_751o0"]
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("1_pi757")
-sky_rotation = Vector3(0, 2.18831, 0)
+sky_rotation = Vector3(0, 1.60498, 0)
 ambient_light_source = 3
 ambient_light_sky_contribution = 0.0
 reflected_light_source = 2
@@ -2611,16 +2611,10 @@ transform = Transform3D(2.98023e-08, 0, -1, -8.74228e-08, -1, -2.72005e-15, -1, 
 [node name="TubeLight2" parent="." instance=ExtResource("12_hytm7")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 34.2028, 5.63624, 10.752)
 
-[node name="Player" parent="." instance=ExtResource("25_ev0gu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.9569, 5.27538, -72.0488)
-_inputReponseTime = 0.05
-
-[node name="Sprint" parent="Player/FSM" index="2"]
-_sprintingSpeed = 10.0
+[node name="Player" parent="." instance=ExtResource("25_5nllv")]
 
 [editable path="Stage/Node3D11/Ladder2"]
 [editable path="Stage/Node3D11/Ladder3"]
 [editable path="Stage/Node3D10/TubeLight"]
 [editable path="Stage/Node3D10/TubeLight2"]
 [editable path="Stage/Node3D10/TubeLight3"]
-[editable path="Player"]

@@ -21,13 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://de0m4efhg3n52" path="res://Scenes/Tools/csg_ref.tscn" id="10_pi8do"]
 [ext_resource type="PackedScene" uid="uid://bqekf67x42h0i" path="res://Models/Windmill/wind_mill.tscn" id="19_l7anu"]
 [ext_resource type="PackedScene" uid="uid://c3n5ryfjyi3h1" path="res://Models/TubeLight/tube_light.tscn" id="20_gox77"]
-[ext_resource type="PackedScene" uid="uid://bno01vmd57gq1" path="res://Scenes/PlayerController/controller.tscn" id="22_hnqyf"]
+[ext_resource type="PackedScene" uid="uid://cc270gjfuoacl" path="res://Scenes/PlayerController/controller_animation.tscn" id="22_ee4r6"]
 
 [sub_resource type="Environment" id="Environment_2lvxy"]
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 14.2154, 0)
+sky_rotation = Vector3(0, 1.30348, 0)
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 4
@@ -39,6 +39,7 @@ ssao_radius = 0.79
 ssao_intensity = 3.5
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
 sdfgi_min_cell_size = 0.4
 sdfgi_energy = 1.395
 sdfgi_normal_bias = 1.595
@@ -2275,8 +2276,7 @@ transform = Transform3D(-0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, -0.34202, 
 [node name="TubeLight2" parent="." instance=ExtResource("20_gox77")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 34.2028, 5.63624, 10.752)
 
-[node name="Player" parent="." instance=ExtResource("22_hnqyf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.709, 37.2692, -137.059)
+[node name="Player" parent="." instance=ExtResource("22_ee4r6")]
 
 [editable path="Stage/Node3D10/TubeLight"]
 [editable path="Stage/Node3D10/TubeLight2"]

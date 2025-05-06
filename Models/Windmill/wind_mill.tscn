@@ -27,7 +27,7 @@ data = PackedVector3Array(18.6764, 69.8857, 3.4019, 18.4196, 69.7977, 3.3684, 18
 
 [node name="Skeleton3D" parent="windmill_bones" index="0"]
 bones/1/position = Vector3(-1.19209e-07, 59.8778, 2.16272)
-bones/1/rotation = Quaternion(0.695491, -0.127639, -0.127639, 0.695491)
+bones/1/rotation = Quaternion(-0.209104, 0.675482, 0.675482, -0.209104)
 bones/1/scale = Vector3(1.00138, 1, 1.00138)
 
 [node name="Bar" parent="windmill_bones/Skeleton3D" index="0"]
@@ -71,7 +71,7 @@ collision_layer = 2
 shape = SubResource("ConcavePolygonShape3D_itc3n")
 
 [node name="cuff_collision" type="BoneAttachment3D" parent="windmill_bones/Skeleton3D" index="7"]
-transform = Transform3D(0.936119, 0, -0.355577, -0.355577, 0, -0.936119, 0, 1, 0, -1.19209e-07, 59.8778, 2.16272)
+transform = Transform3D(-0.82624, 0, -0.565763, -0.565763, 0, 0.82624, 0, 1, 0, -1.19209e-07, 59.8778, 2.16272)
 bone_name = "rotator"
 bone_idx = 1
 override_pose = true
@@ -84,7 +84,7 @@ transform = Transform3D(1, -3.25841e-07, 0, 0, 0, 1, -3.25841e-07, -1, 0, 1.9629
 shape = SubResource("ConvexPolygonShape3D_uu8fx")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="windmill_bones/Skeleton3D" index="8"]
-transform = Transform3D(0.928586, -0.37349, -0.0313982, -0.373333, -0.929115, 0.0109322, -0.0331643, 0.00156623, -0.999449, -0.392651, 58.9028, 3.42207)
+transform = Transform3D(-0.836522, -0.549789, 0.0268965, -0.549443, 0.836953, 0.0195434, -0.0331643, 0.00156611, -0.999449, -0.576517, 60.7567, 3.42207)
 bone_name = "fin.001"
 bone_idx = 2
 
@@ -93,7 +93,7 @@ transform = Transform3D(0.998899, -0.0331981, -0.0331643, -0.0331644, -0.999449,
 shape = SubResource("ConcavePolygonShape3D_of5c0")
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="windmill_bones/Skeleton3D" index="9"]
-transform = Transform3D(0.418728, -0.615325, 0.669921, 0.328063, 0.790016, 0.52058, -0.847242, 0.00178955, 0.531205, -0.510185, 60.4172, 3.41682)
+transform = Transform3D(0.0304146, 0.999899, 0.0451407, -0.53107, 0.0544014, -0.847211, -0.847242, 0.00178963, 0.531205, 0.734099, 59.9889, 3.41682)
 bone_name = "fin.002"
 bone_idx = 3
 
@@ -102,7 +102,7 @@ transform = Transform3D(0.280895, 0.450866, -0.847242, -0.847242, 0.531205, 0.00
 shape = SubResource("ConcavePolygonShape3D_d7hg5")
 
 [node name="BoneAttachment3D3" type="BoneAttachment3D" parent="windmill_bones/Skeleton3D" index="10"]
-transform = Transform3D(0.0629769, 0.991836, -0.122669, -0.464528, 0.137879, 0.876331, 0.883658, 0.00178959, 0.46813, 0.722224, 60.0499, 3.41682)
+transform = Transform3D(-0.41739, -0.452837, 0.789611, 0.2134, -0.893138, -0.399406, 0.883658, 0.00178963, 0.46813, -0.270832, 59.1865, 3.41682)
 bone_name = "fin.003"
 bone_idx = 4
 
