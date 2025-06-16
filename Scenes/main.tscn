@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://k0g8l20jpn5l"]
+[gd_scene load_steps=42 format=4 uid="uid://k0g8l20jpn5l"]
 
 [ext_resource type="Material" uid="uid://ntptsm338blc" path="res://Materials/Brick_023.tres" id="1_0udfd"]
 [ext_resource type="Material" uid="uid://j7782yfgmq8m" path="res://Materials/Brick_069.tres" id="2_buung"]
@@ -6,7 +6,9 @@
 [ext_resource type="Material" uid="uid://fdx6yjtfayq3" path="res://Materials/MetalPlates_008.tres" id="3_kljmn"]
 [ext_resource type="Script" uid="uid://3fq41y2nhk4f" path="res://Scripts/RotateNode.cs" id="3_le5wj"]
 [ext_resource type="Material" uid="uid://c8xcc3vmdmxbn" path="res://Materials/MetalPlates_001.tres" id="4_ltx8g"]
+[ext_resource type="Texture2D" uid="uid://dn5gv6ond1ul2" path="res://defaults/NOSHOT_Logo.png" id="5_e6rcu"]
 [ext_resource type="Material" uid="uid://dp2iwbk6t6n6n" path="res://Materials/Metal_028.tres" id="5_ewlxh"]
+[ext_resource type="Script" uid="uid://bisv7ak2kxqu" path="res://Scripts/UI/PauseMenu.cs" id="5_p4gyq"]
 [ext_resource type="AudioStream" uid="uid://d2vbmwo1pkv42" path="res://Sounds/ambience-forest-birds-wind-trees.mp3" id="5_ut7sm"]
 [ext_resource type="AudioStream" uid="uid://cfqac1mv8tg20" path="res://Sounds/ambience - air conditioner.wav" id="6_gcwv2"]
 [ext_resource type="Script" uid="uid://d1wqtw20tqhh4" path="res://Scripts/SkyRotation.cs" id="6_y41ai"]
@@ -27,7 +29,7 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("2_fb8vh")
-sky_rotation = Vector3(0, 1.30348, 0)
+sky_rotation = Vector3(0, 0.109247, 0)
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 4
@@ -74,6 +76,27 @@ auto_exposure_max_sensitivity = 1500.0
 [sub_resource type="FogMaterial" id="FogMaterial_d1576"]
 albedo = Color(0.137255, 0.188235, 0.196078, 1)
 edge_fade = 1.77531
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6rcu"]
+bg_color = Color(0, 0, 0, 0.513726)
+
+[sub_resource type="SystemFont" id="SystemFont_e6rcu"]
+font_names = PackedStringArray("Jersey M54")
+
+[sub_resource type="SystemFont" id="SystemFont_33qc4"]
+font_names = PackedStringArray("Jersey M54")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4gyq"]
+bg_color = Color(0.473976, 0.473976, 0.473976, 1)
+expand_margin_left = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32dfi"]
+bg_color = Color(0.362829, 0.362829, 0.362829, 1)
+expand_margin_left = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33qc4"]
+bg_color = Color(1, 1, 1, 1)
+expand_margin_left = 15.0
 
 [sub_resource type="SystemFont" id="SystemFont_36c0q"]
 font_names = PackedStringArray("Evil Empire")
@@ -169,15 +192,87 @@ material = SubResource("FogMaterial_d1576")
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_fpsLabel")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1373.0
+offset_bottom = 715.0
+mouse_filter = 2
 script = ExtResource("10_6u0gq")
 _fpsLabel = NodePath("Stats/UI/FPS")
+
+[node name="PauseMenu" type="Control" parent="UI" node_paths=PackedStringArray("_pauseMenu")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_p4gyq")
+_pauseMenu = NodePath("CanvasLayer/Panel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI/PauseMenu"]
+layer = 2
+
+[node name="Panel" type="Panel" parent="UI/PauseMenu/CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e6rcu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/PauseMenu/CanvasLayer/Panel"]
+layout_mode = 1
+offset_left = 244.0
+offset_top = 27.0
+offset_right = 779.0
+offset_bottom = 235.0
+theme_override_fonts/normal_font = SubResource("SystemFont_e6rcu")
+theme_override_font_sizes/normal_font_size = 86
+text = "NOSHOT 
+CONTROLLER"
+
+[node name="NoshotLogo" type="Sprite2D" parent="UI/PauseMenu/CanvasLayer/Panel"]
+position = Vector2(125, 130)
+scale = Vector2(0.0675049, 0.0675049)
+texture = ExtResource("5_e6rcu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 280.0
+offset_right = 370.0
+offset_bottom = 448.0
+mouse_filter = 2
+theme_override_constants/separation = 25
+
+[node name="Button" type="Button" parent="UI/PauseMenu/CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_33qc4")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/hover = SubResource("StyleBoxFlat_p4gyq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_32dfi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_33qc4")
+text = "RESET"
+alignment = 0
+
+[node name="Button2" type="Button" parent="UI/PauseMenu/CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_33qc4")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/hover = SubResource("StyleBoxFlat_p4gyq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_32dfi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_33qc4")
+text = "QUIT"
+alignment = 0
 
 [node name="Stats" type="CanvasGroup" parent="UI"]
 
 [node name="UI" type="CanvasLayer" parent="UI/Stats"]
-layer = 2
 
 [node name="FPS" type="Label" parent="UI/Stats/UI"]
 layout_direction = 3
@@ -2277,6 +2372,9 @@ transform = Transform3D(-0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, -0.34202, 
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 34.2028, 5.63624, 10.752)
 
 [node name="Player" parent="." instance=ExtResource("22_ee4r6")]
+
+[connection signal="pressed" from="UI/PauseMenu/CanvasLayer/Panel/VBoxContainer/Button" to="UI/PauseMenu" method="OnResetPressed"]
+[connection signal="pressed" from="UI/PauseMenu/CanvasLayer/Panel/VBoxContainer/Button2" to="UI/PauseMenu" method="OnQuitPressed"]
 
 [editable path="Stage/Node3D10/TubeLight"]
 [editable path="Stage/Node3D10/TubeLight2"]

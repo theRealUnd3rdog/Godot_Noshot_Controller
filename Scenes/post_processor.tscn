@@ -47,6 +47,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="PostProcessingManager" type="CanvasGroup" parent="." node_paths=PackedStringArray("lensFlare", "vignette", "lensDistortion", "chromaticAbberation", "radialBlur")]
 script = ExtResource("1_kgm8g")
@@ -57,6 +58,8 @@ chromaticAbberation = NodePath("Chromatic_Abberation/CA")
 radialBlur = NodePath("Radial_Blur/RadialBlur")
 
 [node name="LensFlare" type="CanvasLayer" parent="PostProcessingManager"]
+layer = -1
+visible = false
 
 [node name="LensFlare" type="ColorRect" parent="PostProcessingManager/LensFlare"]
 visible = false
@@ -66,13 +69,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("3_cg0db")
 
 [node name="LensFlareCheck" type="Marker3D" parent="PostProcessingManager/LensFlare"]
 script = ExtResource("4_eh1n0")
 
 [node name="Vignette" type="CanvasLayer" parent="PostProcessingManager"]
-layer = 0
+layer = -1
+visible = false
 
 [node name="Vignette" type="ColorRect" parent="PostProcessingManager/Vignette"]
 material = SubResource("ShaderMaterial_c3222")
@@ -81,12 +86,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("5_p1pwv")
 vIntensity = 0.56
 vOpacity = 0.1
 vColor = Color(0, 0, 0, 1)
 
 [node name="Lens_Distortion" type="CanvasLayer" parent="PostProcessingManager"]
+layer = -1
+visible = false
 
 [node name="LensDistortion" type="ColorRect" parent="PostProcessingManager/Lens_Distortion"]
 material = SubResource("ShaderMaterial_x8p74")
@@ -95,10 +103,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("7_krdyq")
 zoom = 25.0
 
 [node name="Chromatic_Abberation" type="CanvasLayer" parent="PostProcessingManager"]
+layer = -1
+visible = false
 
 [node name="CA" type="ColorRect" parent="PostProcessingManager/Chromatic_Abberation"]
 material = SubResource("ShaderMaterial_qnhql")
@@ -107,9 +118,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("10_h1jgi")
 
 [node name="Radial_Blur" type="CanvasLayer" parent="PostProcessingManager"]
+layer = -1
+visible = false
 
 [node name="RadialBlur" type="ColorRect" parent="PostProcessingManager/Radial_Blur"]
 material = SubResource("ShaderMaterial_l06ac")
@@ -118,4 +132,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("12_u66uo")

@@ -23,12 +23,15 @@ public partial class Crouching : MovementState
         Camera.StartStance(-0.2f);
 
         _crouchShake = CamShake.ShakePreset(CamShakePresets.Idle);
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/crouch", true);
     }
 
     public override void Exit()
     {
         CamShake.RemoveShake(_crouchShake);
         Camera.StopStance();
+
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/crouch", false);
     }
 
     public override void PhysicsUpdate(double delta)

@@ -456,7 +456,7 @@ transitions = ["Start", "sprint", SubResource("AnimationNodeStateMachineTransiti
 graph_offset = Vector2(-142, -66)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a2cvh"]
-graph_offset = Vector2(-665, 106)
+graph_offset = Vector2(-852, 86)
 nodes/MoveSM/node = SubResource("AnimationNodeStateMachine_he4ux")
 nodes/MoveSM/position = Vector2(-340, 220)
 nodes/output/position = Vector2(300, 160)
@@ -596,9 +596,10 @@ states/Wallrun/position = Vector2(-84, 41)
 states/land/node = SubResource("AnimationNodeAnimation_6blsw")
 states/land/position = Vector2(310, 139)
 transitions = ["Jump", "AirCycle", SubResource("AnimationNodeStateMachineTransition_r7w3l"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_uqpcw"), "Idle", "AirCycle", SubResource("AnimationNodeStateMachineTransition_1urjx"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_5hx3t"), "AirCycle", "land", SubResource("AnimationNodeStateMachineTransition_knfrf"), "land", "Idle", SubResource("AnimationNodeStateMachineTransition_km8ed"), "land", "Jump", SubResource("AnimationNodeStateMachineTransition_wl80l"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_2k20c"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_0miic"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_7n21r"), "Move", "AirCycle", SubResource("AnimationNodeStateMachineTransition_530ai"), "land", "Move", SubResource("AnimationNodeStateMachineTransition_q7787"), "AirCycle", "Wallrun", SubResource("AnimationNodeStateMachineTransition_yn65q"), "Wallrun", "AirCycle", SubResource("AnimationNodeStateMachineTransition_duopu"), "Wallrun", "Jump", SubResource("AnimationNodeStateMachineTransition_chpr7"), "Jump", "Wallrun", SubResource("AnimationNodeStateMachineTransition_u5tne")]
-graph_offset = Vector2(-407, -66)
+graph_offset = Vector2(-486, -147)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nqfrr"]
+graph_offset = Vector2(-472, 174)
 nodes/Master/node = SubResource("AnimationNodeStateMachine_p6mgb")
 nodes/Master/position = Vector2(-220, 120)
 nodes/output/position = Vector2(320, 220)

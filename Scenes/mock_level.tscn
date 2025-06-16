@@ -30,7 +30,7 @@
 background_mode = 2
 background_energy_multiplier = 1.48
 sky = ExtResource("1_pi757")
-sky_rotation = Vector3(0, 1.60498, 0)
+sky_rotation = Vector3(0, 0.523915, 0)
 ambient_light_source = 3
 ambient_light_sky_contribution = 0.0
 reflected_light_source = 2
@@ -359,13 +359,13 @@ MeasurementFontSize = 65
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.73551, 50.778, 2.60903)
 
 [node name="LadderCollider" parent="Stage/Node3D11/Ladder2/LadderArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529266, 3.70221, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529266, 3.79527, 0)
 
 [node name="L_Pillar" parent="Stage/Node3D11/Ladder2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14225, 3.70221, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14225, 3.79527, 0)
 
 [node name="R_Pillar" parent="Stage/Node3D11/Ladder2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083714, 3.70221, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083714, 3.79527, 0)
 
 [node name="Ladder3" parent="Stage/Node3D11" instance=ExtResource("11_c218o")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 55.6519, 48.0151, 72.7296)

@@ -68,7 +68,7 @@ public partial class Camera : Camera3D, ICamera
 
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		//Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		_movement = GetOwner<Movement>();
 		if (_movement == null) GD.PushWarning("Movement script not assigned!");
@@ -110,7 +110,7 @@ public partial class Camera : Camera3D, ICamera
 		// Debug arrow to visualize filtered input direction
 		//DebugDraw3D.DrawArrow(_movement.Position, _movement.Position + (desiredDirection * 4f), Colors.Blue, 0.2f);
 
-		UpdateFOVBasedOnSpeed();
+		//UpdateFOVBasedOnSpeed();
 
 		// Align head and neck to head bone if head bone is available
 		if (_headBone != null)
@@ -120,16 +120,21 @@ public partial class Camera : Camera3D, ICamera
 
 			// Set the neck transform's Y to match the headBone's Y
 			Vector3 neckPos = _neck.GlobalPosition;
-			neckPos.Y = headBonePos.Y + 0.08f;
+			neckPos.Y = (headBonePos.Y - 0.04f);
 			_neck.GlobalPosition = neckPos;
 
 			// Get the head bone's transform
 			Vector3 neckPosLocal = _neck.Position;
 
 			Vector3 head = _head.Position;
-			head.Z = neckPosLocal.Z + -0.479f;
+			head.Z = (neckPosLocal.Z + -0.346f);
 			_head.Position = head;
 		}
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		
 	}
 
 	/// <summary>
@@ -213,10 +218,12 @@ public partial class Camera : Camera3D, ICamera
 				{
 					case -1:
 						GD.Print("Turning left");
+
 						break;
 					
 					case 1:
 						GD.Print("Turning right");
+
 						break;
 				}
 
@@ -226,6 +233,7 @@ public partial class Camera : Camera3D, ICamera
 					: Timing.RunCoroutine(AlignMeshWithDirectionConstant(), Segment.Process, "AlignMeshRotConstant");
 
 				yield return Timing.WaitUntilDone(handle);
+
 			}
 
 			// Wait one frame

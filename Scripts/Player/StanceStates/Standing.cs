@@ -10,6 +10,8 @@ public partial class Standing : MovementState
         
         Camera.StartStance(0f);
         Movement.SetColliderHeight(2f);
+
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/stand", true);
     }
 
     public override void Exit()
@@ -17,6 +19,7 @@ public partial class Standing : MovementState
         base.Enter();
 
         Camera.StopStance();
+        Movement.AnimationPlayer.Set("parameters/Master/conditions/stand", false);
     }
 
     public override void Update(double delta)

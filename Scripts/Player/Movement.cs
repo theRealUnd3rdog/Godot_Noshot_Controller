@@ -84,6 +84,9 @@ public partial class Movement : CharacterBody3D, IMovement
 		// Grab all node references
 		_body = GetNode<Node3D>("Body");
 		_neck = GetNode<Node3D>("Body/Neck");
+
+		// Subscriptions
+		PauseMenu.OnReset += ResetPosition;
 	}
 
 	public override void _Process(double delta)
@@ -125,6 +128,18 @@ public partial class Movement : CharacterBody3D, IMovement
 		MoveAndSlide();
 
 		_stepper.StairStepDown();
+	}
+
+	private void ResetPosition()
+	{
+		if (_resetPosition != null)
+		{
+			GlobalPosition = _resetPosition.GlobalPosition;
+		}
+		else
+		{
+			GD.PrintErr("Reset position not set!");
+		}
 	}
 
 	private void PhysicsInterpolation()

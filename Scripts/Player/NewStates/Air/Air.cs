@@ -90,7 +90,7 @@ public partial class Air : MovementState
 
             if (Wallrunning.CheckWallCollision(Movement, Camera, out KinematicCollision3D col, out Wallrunning.WallDirection direction)
                 && _wallrunningState.GetWallRunTimer() < _wallrunningState.GetWallRunTime()
-                && !Movement.SendRayInDirection(Movement.GetPlayerDirection(), Camera.GlobalPosition, 0.5f, out Vector3 normal, out Vector3 point)) // Check if player is wallrunning
+                /*&& !Movement.SendRayInDirection(Movement.GetPlayerDirection(), Camera.GlobalPosition, 0.5f, out Vector3 normal, out Vector3 point)*/) // Check if player is wallrunning
             {
                 EmitSignal(SignalName.StateFinished, "Wallrunning", new());
             }

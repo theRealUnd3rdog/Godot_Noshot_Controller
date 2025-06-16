@@ -65,7 +65,7 @@ public partial class Wallrunning : MovementState
     {
         Vector3 rayDirection = _wallDirection == WallDirection.Right ? Camera.GetNeckBasis().X : -Camera.GetNeckBasis().X;
 
-        bool wall = Movement.SendRayInDirection(rayDirection, Camera.GlobalPosition, 1f, out Vector3 wallNormal, out Vector3 wallPoint);
+        bool wall = Movement.SendRayInDirection(rayDirection.Normalized(), Camera.GlobalPosition, 1f, out Vector3 wallNormal, out Vector3 wallPoint);
 
         if (wall && _wallRunTimer <= _wallRunTime)
         {
@@ -178,7 +178,7 @@ public partial class Wallrunning : MovementState
 			{
 				Vector3 playerForward = camera.GetNeckBasis().Z;
 				float angleToWall = Mathf.RadToDeg(playerForward.AngleTo(collisionNormal));
-				float signedAngle = Mathf.RadToDeg(playerForward.SignedAngleTo(collisionNormal, Vector3.Up));			
+				float signedAngle = Mathf.RadToDeg(playerForward.SignedAngleTo(collisionNormal, Vector3.Up));	
 
 				// Check if camera is facing somewhat in that direction
 				if (angleToWall < 105f && angleToWall > 25f)
