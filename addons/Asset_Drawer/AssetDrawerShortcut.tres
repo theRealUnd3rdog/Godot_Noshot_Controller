@@ -1,0 +1,7 @@
+[gd_resource type="InputEventKey" format=3 uid="uid://bafyb8y38ahfh"]
+
+[resource]
+device = -1
+ctrl_pressed = true
+keycode = 32
+unicode = 32

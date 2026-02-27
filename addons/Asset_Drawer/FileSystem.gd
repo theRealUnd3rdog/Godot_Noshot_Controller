@@ -4,6 +4,9 @@ extends EditorPlugin
 # Padding from the bottom when popped out
 var padding: int = 20
 
+# Padding from the bottom when not popped out
+var bottompadding: int = 60
+
 # The file system
 var FileDock: Object
 
@@ -25,20 +28,28 @@ func _enter_tree() -> void:
 	await get_tree().create_timer(0.1).timeout
 	FilesToBottom()
 
+	# Prevent file tree from being shrunk on load
+	await get_tree().create_timer(0.1).timeout
+	var file_split_container := FileDock.get_child(3) as SplitContainer
+	file_split_container .split_offset = 175
+
+	# Get shortcut
+	AssetDrawerShortcut = preload("res://addons/Asset_Drawer/AssetDrawerShortcut.tres")
+
 #region show hide filesystem
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if (Input.is_key_pressed(KEY_SPACE) &&
-		Input.is_key_pressed(KEY_CTRL)):
-			if filesBottom == true:
-				match showing:
-					false:
-						make_bottom_panel_item_visible(FileDock)
-						showing = true
-					true:
-						print("hide")
-						hide_bottom_panel()
-						showing = false
+	if (AssetDrawerShortcut.is_match(event) &&
+	event.is_pressed() &&
+	!event.is_echo()):
+		if filesBottom == true:
+			match showing:
+				false:
+					make_bottom_panel_item_visible(FileDock)
+					showing = true
+				true:
+					print("hide")
+					hide_bottom_panel()
+					showing = false
 #endregion
 
 func _exit_tree() -> void:
@@ -60,8 +71,13 @@ func _process(delta: float) -> void:
 	# the drawer has been pulled
 	if FileDock.get_window().name == "root" && filesBottom == true:
 		newSize = FileDock.get_parent().size
-		FileDock.get_child(3).get_child(0).size.y = newSize.y - 60
-		FileDock.get_child(3).get_child(1).size.y = newSize.y - 60
+		var editor = get_editor_interface()
+		var editorsettings = editor.get_editor_settings()
+		var fontsize: int = editorsettings.get_setting("interface/editor/main_font_size")
+		var editorscale = EditorInterface.get_editor_scale()
+		
+		FileDock.get_child(3).get_child(0).size.y = newSize.y - (fontsize * 2) - (bottompadding * EditorInterface.get_editor_scale())
+		FileDock.get_child(3).get_child(1).size.y = newSize.y - (fontsize * 2) - (bottompadding * EditorInterface.get_editor_scale())
 		return
 	
 	# Keeps our systems sized when popped out
@@ -90,4 +106,5 @@ func FilesToBottom() -> void:
 	remove_control_from_docks(FileDock)
 	add_control_to_bottom_panel(FileDock, "File System")
 	filesBottom = true
+
 

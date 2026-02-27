@@ -51,8 +51,8 @@ public partial class PlayerAudio : Node3D
 	[ExportSubgroup("Wallrun")]
 	[Export] private AudioStreamPlayer3D _wallrun;
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		CollisionChecker.OnGroupChange += GetStepGroup;
 		PlayerAir.LastVelocityChangeLanded += PlayAudioLandCondition;
 
@@ -72,13 +72,13 @@ public partial class PlayerAudio : Node3D
 
 		_animator = Owner.GetNode<AnimationTree>("AnimationTree");
 		_movementBusIndex = AudioServer.GetBusIndex(movementBus);
-    }
+	}
 
-    public override void _ExitTree()
-    {
+	public override void _ExitTree()
+	{
 		CollisionChecker.OnGroupChange -= GetStepGroup;
 
-        PlayerAir.LastVelocityChangeLanded -= PlayAudioLandCondition;
+		PlayerAir.LastVelocityChangeLanded -= PlayAudioLandCondition;
 		PlayerSlide.SlideStartChange -= PlaySlideSound;
 		PlayerSlide.SlideCurrentChange -= PlaySlideLoop;
 
@@ -92,11 +92,11 @@ public partial class PlayerAudio : Node3D
 
 		PlayerVerticalWallrun.VerticalWallRunStart -= PlayWallRun;
 		PlayerVerticalWallrun.VerticalWallRunEnd -= StopWallRun;
-    }
+	}
 
-    public override void _Process(double delta)
-    {
-        Vector3 playerVelocity = _playerVelocity;
+	public override void _Process(double delta)
+	{
+		Vector3 playerVelocity = _playerVelocity;
 
 		float velocityMagnitude = playerVelocity.Length() / _maxPlayerVelocity;
 		float velocityScale = Mathf.Pow(velocityMagnitude, _velocityExponent);
@@ -111,7 +111,7 @@ public partial class PlayerAudio : Node3D
 		_windRun.PitchScale = Mathf.Lerp(_windRun.PitchScale, desiredPitch, _windLerpSpeed * (float)delta);
 
 		ChangeSprintSound(velocityScale);
-    }
+	}
 
 	private void ChangeSprintSound(float scale)
 	{
@@ -121,7 +121,7 @@ public partial class PlayerAudio : Node3D
 
 		_animator.Set("parameters/moveState/move/sprint/TimeScale/scale", desiredSpeed);
 	}
-    
+	
 	private void PlayVaultIn()
 	{
 		_vaultIn.PitchScale = _rng.RandfRange(0.9f, 1.1f);
@@ -184,7 +184,7 @@ public partial class PlayerAudio : Node3D
 	{
 		_playerVelocity = velocity;
 	}
-    
+	
 	public void PlayStepSound()
 	{
 		// fail safe default

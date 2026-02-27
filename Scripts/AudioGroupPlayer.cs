@@ -4,6 +4,6 @@ using System;
 [GlobalClass]
 public partial class AudioGroupPlayer : Resource
 {
-    [Export] public string[] groups;
-    [Export] public AudioStream[] streams;
+	[Export] public string[] groups;
+	[Export] public AudioStream[] streams;
 }
